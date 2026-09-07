@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[subsection]
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Lecture 1: Real Numbers}\\[0.25em]
+  {\large AMA3707 Real Analysis}\\[0.15em]
+\end{center}
+
+\section{Real Numbers}
+\subsection{Numbers and Fields}
+
+\begin{definition}[Natural Numbers]
+\label{def:natural-numbers}
+The \emph{natural numbers} are the positive integers:
+\[
+  \mathbb{N}=\{1,2,3,\ldots\}.
+\]
+In these notes, \(0\notin\mathbb{N}\).
+\end{definition}
+
+\begin{definition}[Integers]
+\label{def:integers}
+The \emph{integers} are the whole numbers, including the positive integers,
+the negative integers, and zero:
+\[
+  \mathbb{Z}=\{\ldots,-2,-1,0,1,2,\ldots\}.
+\]
+\end{definition}
+
+\begin{definition}[Rational Numbers]
+\label{def:rational-numbers}
+A real number is called \emph{rational} if it can be expressed as a quotient
+of two integers. The set of rational numbers is
+\[
+  \mathbb{Q}
+  =\left\{\frac{p}{q}:p,q\in\mathbb{Z},\ q\neq0\right\}.
+\]
+\end{definition}
+
+\end{document}
+

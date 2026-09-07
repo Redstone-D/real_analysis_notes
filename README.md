@@ -36,3 +36,4 @@ server's environment.
 The workflow sends an authenticated `POST` request to
 `https://notes.rua.rs/deploy/real-analysis`. The server then updates its own
 checkout from GitHub and publishes the current `latex_target/` tree.
+ 

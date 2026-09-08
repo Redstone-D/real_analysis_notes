@@ -1,4 +1,4 @@
-name: Deploy notes
+name: Push Notes
 
 on:
   push:

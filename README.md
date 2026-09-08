@@ -77,6 +77,17 @@ markup.
 | `ex` | `example` | `ex` |
 | `conv` | `convention` | `conv` |
 
+Proof headings depend on whether a title is supplied:
+
+| Syntax | Printed heading |
+|---|---|
+| `\begin{proof}` | *Proof.* |
+| `\begin{proof}[Existence of Irrational Numbers]` | *Pf. Existence of Irrational Numbers.* |
+
+Reference IDs are shown by default as small gray monospace text after each
+heading, for example `\texttt{[def:field]}`. Control this in the preamble with
+`\notesShowIDs` or `\notesHideIDs`.
+
 Use a default document for short references:
 
 ```tex

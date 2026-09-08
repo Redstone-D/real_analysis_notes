@@ -39,6 +39,16 @@ of two integers. The set of rational numbers is
 \]
 \end{dfn}
 
+\begin{prop}[Unique Reduced Form]{unique-reduced-rational-form}
+For every \(x\in\mathbb{Q}\), there exists a unique pair
+\(p,q\in\mathbb{Z}\) such that
+\[
+  x=\frac{p}{q},
+  \qquad q>0,
+  \qquad \gcd(|p|,q)=1.
+\]
+\end{prop}
+
 \begin{rem}{number-set-inclusions}
 Under the usual identifications,
 \(\mathbb{N}\subsetneq\mathbb{Z}\subsetneq\mathbb{Q}\).
@@ -68,4 +78,62 @@ The rational numbers with their usual addition and multiplication form a
 \xref[field]{def:field}.
 \end{prop}
 
+\begin{rem}[\(\mathbb{N}\) and \(\mathbb{Z}\) Are Not Fields]{natural-and-integers-not-fields}
+The natural numbers and the integers are not fields because they do not have
+multiplicative inverses for every non-zero element. 
+
+For a counter example, consider the integer \(2\). There is no integer \(x\) such that \(2 \cdot x = 1\) 
+\end{rem}
+
+\section{Ordered Set} 
+
+\begin{dfn}[Ordered Set]{ordered-set} 
+A set \(F\) is \emph{ordered} if it is \xref[transitive]{def:transitive} and \xref[reflexive]{def:reflexive} and 
+\[\forall x, y \in F, \text{ either one of the following happens } x \le y, x = y, \text{ or } y \le x\] 
+It is also called partial ordered. 
+\end{dfn}
+
+\begin{dfn}[Transitive]{transitive}
+An ordering on a set is \emph{transitive} if 
+\[ \forall x, y, z \in F, \text{ if } x \le y \text{ and } y \le z, \text{ then } x \le z \]
+\end{dfn}
+
+\begin{dfn}[Reflexive]{reflexive}
+An ordering on a set is \emph{reflexive} if
+\[ \forall x \in F, x = x \]
+\end{dfn} 
+
+\section{Irrational Numbers}
+
+\begin{prop}[No Rational Square Root of \(2\)]{no-rational-square-root-of-two}
+There is no \(q\in\mathbb{Q}\) such that \(q^2=2\).
+\end{prop}
+
+\begin{proof}
+Suppose, for contradiction, that some \(q\in\mathbb{Q}\) satisfies
+\(q^2=2\).
+
+According to the \xref{prop:unique-reduced-rational-form}, and $q\in\mathbb{Q}$ 
+
+\[\exists p, r \in \mathbb{Z}, q = \frac{p}{r}, r > 0, \gcd(|p|, r) = 1\]
+
+\end{proof}
+
+{\color{blue}
+\begin{rem}[Larger Number System]{sqrt-two-larger-number-system}
+Within \(\mathbb{Q}\), the proposition only says that the equation \(q^2=2\)
+has no solution \(q\in\mathbb{Q}\). Writing
+\(\sqrt{2}\notin\mathbb{Q}\) presupposes a larger number system in which
+\(\sqrt{2}\) exists.
+\end{rem}
+
+\begin{rem}[Completeness]{rational-incompleteness}
+The existence, in a larger number system, of some
+\(x\notin\mathbb{Q}\) satisfying \(x^2=2\) does not by itself prove that
+\(\mathbb{Q}\) is incomplete. Incompleteness must be demonstrated
+internally [TODO Pf link to completeness axiom].
+\end{rem}
+}
+
 \end{document}
+  

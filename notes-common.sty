@@ -16,6 +16,7 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{amsmath,amssymb,amsthm}
 \RequirePackage{enumitem}
+\RequirePackage{xcolor}
 \RequirePackage{hyperref}
 \RequirePackage[nameinlink]{cleveref}
 \RequirePackage{xparse}
@@ -66,6 +67,13 @@
 \tl_new:N \l__notesenv_id_tl
 \tl_new:N \l__notesenv_label_tl
 \tl_new:N \l__notesenv_target_tl
+\bool_new:N \g__notesenv_show_ids_bool
+\bool_gset_true:N \g__notesenv_show_ids_bool
+
+\NewDocumentCommand{\notesShowIDs}{}
+  { \bool_gset_true:N \g__notesenv_show_ids_bool }
+\NewDocumentCommand{\notesHideIDs}{}
+  { \bool_gset_false:N \g__notesenv_show_ids_bool }
 
 \cs_new_eq:NN \__notesenv_definition_begin: \definition
 \cs_new_eq:NN \__notesenv_definition_end: \enddefinition
@@ -83,6 +91,8 @@
 \cs_new_eq:NN \__notesenv_convention_end: \endconvention
 \cs_new_eq:NN \__notesenv_remark_begin: \remark
 \cs_new_eq:NN \__notesenv_remark_end: \endremark
+\cs_new_eq:NN \__notesenv_proof_begin: \proof
+\cs_new_eq:NN \__notesenv_proof_end: \endproof
 
 \msg_new:nnn { notes-common } { invalid-semantic-id }
   {
@@ -122,6 +132,14 @@
               { notes.#1.\l__notesenv_id_tl }
             \exp_args:NV \hypertarget \l__notesenv_target_tl { }
             \exp_args:NV \label \l__notesenv_label_tl
+            \bool_if:NT \g__notesenv_show_ids_bool
+              {
+                \group_begin:
+                  \normalfont\scriptsize\color{gray}
+                  \texttt{[\tl_use:N \l__notesenv_label_tl]}
+                \group_end:
+                \nobreak\space
+              }
           }
           {
             \msg_error:nnx
@@ -201,6 +219,16 @@
     \__notesenv_add_label:nnn {rem} {#1} {#2}
   }
   { \__notesenv_remark_end: }
+
+% Keep the standard "Proof." heading when untitled. A descriptive title uses
+% the compact heading "Pf. <title>." while retaining amsthm's QED handling.
+\RenewDocumentEnvironment{proof}{o}
+  {
+    \IfNoValueTF{#1}
+      { \__notesenv_proof_begin: }
+      { \__notesenv_proof_begin: [Pf.\ #1] }
+  }
+  { \__notesenv_proof_end: }
 
 % Compact authoring aliases; full environment names remain available.
 \cs_new_eq:NN \dfn \definition

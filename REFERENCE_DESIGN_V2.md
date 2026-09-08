@@ -72,9 +72,18 @@ use a qualified reference instead.
 | Syntax | Scope |
 |---|---|
 | `\xref{def:integer}` | Current or selected document |
+| `\xref[closed operations]{def:closed-operation}` | Custom clickable words |
 | `\xref{lec01::def:integer}` | Current project |
 | `\xref{topology::lec01::def:open-set}` | Current server |
 | `\xref{https://other.example::topology::lec01::def:open-set}` | Explicit server |
+
+The optional square-bracket argument changes only the visible words; target
+resolution is unchanged. It works at every scope:
+
+```tex
+\xref[closed operations]{def:closed-operation}
+\xref[open sets]{topology::lec03::def:open-set}
+```
 
 For example:
 

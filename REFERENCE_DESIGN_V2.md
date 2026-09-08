@@ -36,9 +36,9 @@ and examples have independent counters under each section:
 Each environment creates its typed label and a stable PDF destination:
 
 ```tex
-\begin{definition}[Open Set]{open-set}
+\begin{dfn}[Open Set]{open-set}
 ...
-\end{definition}
+\end{dfn}
 ```
 
 This produces the LaTeX label `def:open-set` and the PDF destination
@@ -46,7 +46,7 @@ This produces the LaTeX label `def:open-set` and the PDF destination
 present:
 
 ```tex
-\begin{definition}[Open Sets] % automatically uses def:open-sets
+\begin{dfn}[Open Sets] % automatically uses def:open-sets
 ```
 
 Automatic IDs lowercase the title and replace non-alphanumeric runs with a
@@ -88,8 +88,9 @@ is rendered as `definition open set` and points to:
 https://notes.rua.rs/topology/lec03.pdf#notes.def.open-set
 ```
 
-Supported kinds are `def`, `rem`, and `ex`. Comma-separated references and the
-unlinked `\xref*` form are also supported.
+Supported kinds are `def`, `thm`, `prop`, `lem`, `cor`, `rem`, `ex`, and
+`conv`. Comma-separated references and the unlinked `\xref*` form are also
+supported.
 
 ## Number-display tradeoff
 

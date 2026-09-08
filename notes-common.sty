@@ -23,8 +23,24 @@
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
 
-% Every content type has an independent counter beneath the section number:
-% Definition 1.1, Remark 1.1, Example 1.1, and so on.
+% Every content type has an independent counter beneath the section number.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\crefname{theorem}{theorem}{theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+
+\newtheorem{proposition}{Proposition}[section]
+\crefname{proposition}{proposition}{propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+
+\newtheorem{lemma}{Lemma}[section]
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+
+\newtheorem{corollary}{Corollary}[section]
+\crefname{corollary}{corollary}{corollaries}
+\Crefname{corollary}{Corollary}{Corollaries}
+
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \crefname{definition}{definition}{definitions}
@@ -33,6 +49,10 @@
 \newtheorem{example}{Example}[section]
 \crefname{example}{example}{examples}
 \Crefname{example}{Example}{Examples}
+
+\newtheorem{convention}{Convention}[section]
+\crefname{convention}{convention}{conventions}
+\Crefname{convention}{Convention}{Conventions}
 
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}[section]
@@ -49,8 +69,18 @@
 
 \cs_new_eq:NN \__notesenv_definition_begin: \definition
 \cs_new_eq:NN \__notesenv_definition_end: \enddefinition
+\cs_new_eq:NN \__notesenv_theorem_begin: \theorem
+\cs_new_eq:NN \__notesenv_theorem_end: \endtheorem
+\cs_new_eq:NN \__notesenv_proposition_begin: \proposition
+\cs_new_eq:NN \__notesenv_proposition_end: \endproposition
+\cs_new_eq:NN \__notesenv_lemma_begin: \lemma
+\cs_new_eq:NN \__notesenv_lemma_end: \endlemma
+\cs_new_eq:NN \__notesenv_corollary_begin: \corollary
+\cs_new_eq:NN \__notesenv_corollary_end: \endcorollary
 \cs_new_eq:NN \__notesenv_example_begin: \example
 \cs_new_eq:NN \__notesenv_example_end: \endexample
+\cs_new_eq:NN \__notesenv_convention_begin: \convention
+\cs_new_eq:NN \__notesenv_convention_end: \endconvention
 \cs_new_eq:NN \__notesenv_remark_begin: \remark
 \cs_new_eq:NN \__notesenv_remark_end: \endremark
 
@@ -109,6 +139,42 @@
   }
   { \__notesenv_definition_end: }
 
+\RenewDocumentEnvironment{theorem}{o g}
+  {
+    \IfNoValueTF{#1}
+      { \__notesenv_theorem_begin: }
+      { \__notesenv_theorem_begin: [#1] }
+    \__notesenv_add_label:nnn {thm} {#1} {#2}
+  }
+  { \__notesenv_theorem_end: }
+
+\RenewDocumentEnvironment{proposition}{o g}
+  {
+    \IfNoValueTF{#1}
+      { \__notesenv_proposition_begin: }
+      { \__notesenv_proposition_begin: [#1] }
+    \__notesenv_add_label:nnn {prop} {#1} {#2}
+  }
+  { \__notesenv_proposition_end: }
+
+\RenewDocumentEnvironment{lemma}{o g}
+  {
+    \IfNoValueTF{#1}
+      { \__notesenv_lemma_begin: }
+      { \__notesenv_lemma_begin: [#1] }
+    \__notesenv_add_label:nnn {lem} {#1} {#2}
+  }
+  { \__notesenv_lemma_end: }
+
+\RenewDocumentEnvironment{corollary}{o g}
+  {
+    \IfNoValueTF{#1}
+      { \__notesenv_corollary_begin: }
+      { \__notesenv_corollary_begin: [#1] }
+    \__notesenv_add_label:nnn {cor} {#1} {#2}
+  }
+  { \__notesenv_corollary_end: }
+
 \RenewDocumentEnvironment{example}{o g}
   {
     \IfNoValueTF{#1}
@@ -118,6 +184,15 @@
   }
   { \__notesenv_example_end: }
 
+\RenewDocumentEnvironment{convention}{o g}
+  {
+    \IfNoValueTF{#1}
+      { \__notesenv_convention_begin: }
+      { \__notesenv_convention_begin: [#1] }
+    \__notesenv_add_label:nnn {conv} {#1} {#2}
+  }
+  { \__notesenv_convention_end: }
+
 \RenewDocumentEnvironment{remark}{o g}
   {
     \IfNoValueTF{#1}
@@ -126,6 +201,24 @@
     \__notesenv_add_label:nnn {rem} {#1} {#2}
   }
   { \__notesenv_remark_end: }
+
+% Compact authoring aliases; full environment names remain available.
+\cs_new_eq:NN \dfn \definition
+\cs_new_eq:NN \enddfn \enddefinition
+\cs_new_eq:NN \thm \theorem
+\cs_new_eq:NN \endthm \endtheorem
+\cs_new_eq:NN \prop \proposition
+\cs_new_eq:NN \endprop \endproposition
+\cs_new_eq:NN \lem \lemma
+\cs_new_eq:NN \endlem \endlemma
+\cs_new_eq:NN \cor \corollary
+\cs_new_eq:NN \endcor \endcorollary
+\cs_new_eq:NN \rem \remark
+\cs_new_eq:NN \endrem \endremark
+\cs_new_eq:NN \ex \example
+\cs_new_eq:NN \endex \endexample
+\cs_new_eq:NN \conv \convention
+\cs_new_eq:NN \endconv \endconvention
 \ExplSyntaxOff
 
 % Direct PDF references carry their own location and semantic ID. No JSON,
@@ -159,7 +252,10 @@
     ~Qualify~it~with~a~document~name.
   }
 \msg_new:nnn { notes-common } { unsupported-kind }
-  { Unsupported~reference~kind~'#1'.~Use~def,~rem,~or~ex. }
+  {
+    Unsupported~reference~kind~'#1'.
+    ~Use~def,~thm,~prop,~lem,~cor,~rem,~ex,~or~conv.
+  }
 
 \cs_new_protected:Npn \__notesxref_use_one:n #1
   {
@@ -308,6 +404,22 @@
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { definition }
           }
+        {thm}
+          {
+            \tl_set:Nn \l__notesxref_kind_name_tl { theorem }
+          }
+        {prop}
+          {
+            \tl_set:Nn \l__notesxref_kind_name_tl { proposition }
+          }
+        {lem}
+          {
+            \tl_set:Nn \l__notesxref_kind_name_tl { lemma }
+          }
+        {cor}
+          {
+            \tl_set:Nn \l__notesxref_kind_name_tl { corollary }
+          }
         {rem}
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { remark }
@@ -315,6 +427,10 @@
         {ex}
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { example }
+          }
+        {conv}
+          {
+            \tl_set:Nn \l__notesxref_kind_name_tl { convention }
           }
       }
       {

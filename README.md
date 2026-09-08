@@ -27,9 +27,9 @@ Use two-digit, zero-padded filenames. Every file contains one lecture or
 tutorial. Ordinary sections organize its content, such as `1 Numbers` and
 `2 Fields`.
 
-Definitions, remarks, and examples have independent counters within each
-section. Consequently, section 2 may contain Definition 2.1, Remark 2.1, and
-Example 2.1.
+Definitions, theorems, propositions, lemmas, corollaries, remarks, examples,
+and conventions have independent counters within each section. Consequently,
+section 2 may contain Definition 2.1 and Proposition 2.1.
 
 ## Two-layer library
 
@@ -51,20 +51,31 @@ There is no Python build helper, JSON reference index, or remote AUX file.
 Give an item a stable semantic ID directly on its environment:
 
 ```tex
-\begin{definition}[Integers]{integer}
+\begin{dfn}[Integers]{integer}
 ...
-\end{definition}
+\end{dfn}
 ```
 
 This automatically creates `def:integer`. The ID may be omitted; a plain-text
 title is then converted to lowercase kebab-case:
 
 ```tex
-\begin{definition}[Rational Numbers] % def:rational-numbers
+\begin{dfn}[Rational Numbers] % def:rational-numbers
 ```
 
 Use explicit IDs when you want a shorter name or the title contains LaTeX
-markup. Kinds are `def`, `rem`, and `ex`.
+markup.
+
+| Short environment | Full name | Reference kind |
+|---|---|---|
+| `dfn` | `definition` | `def` |
+| `thm` | `theorem` | `thm` |
+| `prop` | `proposition` | `prop` |
+| `lem` | `lemma` | `lem` |
+| `cor` | `corollary` | `cor` |
+| `rem` | `remark` | `rem` |
+| `ex` | `example` | `ex` |
+| `conv` | `convention` | `conv` |
 
 Use a default document for short references:
 
@@ -90,7 +101,7 @@ Or provide the location explicitly:
 These forms mean current project, current server, and explicit server,
 respectively. A local reference uses its numbered `cleveref` text; a
 cross-PDF reference links to its stable semantic PDF destination. See
-`REFERENCE_SYNTAX.md` for the complete compact table.
+`REFERENCE_DESIGN_V2.md` for more detail.
 
 ## Published files
 

@@ -10,46 +10,62 @@
 
 \section{Numbers}
 
-\begin{definition}[Natural Numbers]{natural-number}
+\begin{dfn}[Natural Numbers]{natural-number}
 The \emph{natural numbers} are the positive integers:
 \[
   \mathbb{N}=\{1,2,3,\ldots\}.
 \]
-In these notes, \(0\notin\mathbb{N}\).
-\end{definition}
+\end{dfn}
 
-\begin{definition}[Integers]{integer}
+\begin{conv}[Natural Numbers Exclude Zero]{natural-numbers-exclude-zero}
+In these notes, \(0\notin\mathbb{N}\).
+\end{conv}
+
+\begin{dfn}[Integers]{integer}
 The \emph{integers} are the whole numbers, including the positive integers,
 the negative integers, and zero:
 \[
   \mathbb{Z}=\{\ldots,-2,-1,0,1,2,\ldots\}.
 \]
-\end{definition}
+\end{dfn}
 
 % With no explicit ID, this automatically creates def:rational-numbers.
-\begin{definition}[Rational Numbers]
+\begin{dfn}[Rational Numbers]
 A real number is called \emph{rational} if it can be expressed as a quotient
 of two integers. The set of rational numbers is
 \[
   \mathbb{Q}
   =\left\{\frac{p}{q}:p,q\in\mathbb{Z},\ q\neq0\right\}.
 \]
-\end{definition}
+\end{dfn}
 
-\begin{remark}{number-set-inclusions}
+\begin{rem}{number-set-inclusions}
 Under the usual identifications,
 \(\mathbb{N}\subsetneq\mathbb{Z}\subsetneq\mathbb{Q}\).
-\end{remark}
+\end{rem}
 
 \section{Fields}
 
-\begin{definition}[Closed Operation]
+\begin{dfn}[Closed Operation]
 An operation $\ast$ is said to be \emph{closed} on a set $A$ if for all $a,b \in A$, we have $a \ast b \in A$. 
-\end{definition}
+\end{dfn}
 
-\begin{definition}[Field]{field}
-A \emph{field} is a set of numbers or elements where addition and
-multiplication are \xref[closed operations]{def:closed-operation}.
-\end{definition}
+\begin{dfn}[Field]{field}
+A \emph{field} is a set \(F\) equipped with addition and multiplication such that both operations are
+multiplication are 
+\begin{itemize}[nosep]
+  \item \xref[closed operations]{def:closed-operation} on \(F\),
+  \item associative, meaning for all \(a,b,c \in F\), we have \((a + b) + c = a + (b + c)\) and \((a \cdot b) \cdot c = a \cdot (b \cdot c)\), 
+  \item commutative, meaning for all \(a,b \in F\), we have \(a + b = b + a\) and \(a \cdot b = b \cdot a\), 
+  \item have identity elements $0$ and $1$, 
+  \item each element has an additive inverse, such that for each \(a \in F\), there exists \(-a \in F\) with \(a + (-a) = 0\), 
+  \item each non-zero element has a multiplicative inverse, such that for each \(a \in F\) with \(a \neq 0\), there exists \(a^{-1} \in F\) with \(a \cdot a^{-1} = 1\) 
+\end{itemize}
+\end{dfn}
+
+\begin{prop}[\(\mathbb{Q}\) Is a Field]{rationals-are-a-field}
+The rational numbers with their usual addition and multiplication form a
+\xref[field]{def:field}.
+\end{prop}
 
 \end{document}

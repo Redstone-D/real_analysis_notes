@@ -1,16 +1,5 @@
 \documentclass[12pt]{article}
-\usepackage[a4paper,margin=18mm]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{enumitem}
-\usepackage{hyperref}
-\usepackage[nameinlink]{cleveref}
-
-\setlength{\parindent}{0pt}
-\pagestyle{empty}
-
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[subsection]
+\usepackage{notes-project}
 
 \begin{document}
 
@@ -19,11 +8,9 @@
   {\large AMA3707 Real Analysis}\\[0.15em]
 \end{center}
 
-\section{Real Numbers}
-\subsection{Numbers and Fields}
+\section{Numbers}
 
-\begin{definition}[Natural Numbers]
-\label{def:natural-numbers}
+\begin{definition}[Natural Numbers]{natural-number}
 The \emph{natural numbers} are the positive integers:
 \[
   \mathbb{N}=\{1,2,3,\ldots\}.
@@ -31,8 +18,7 @@ The \emph{natural numbers} are the positive integers:
 In these notes, \(0\notin\mathbb{N}\).
 \end{definition}
 
-\begin{definition}[Integers]
-\label{def:integers}
+\begin{definition}[Integers]{integer}
 The \emph{integers} are the whole numbers, including the positive integers,
 the negative integers, and zero:
 \[
@@ -40,8 +26,8 @@ the negative integers, and zero:
 \]
 \end{definition}
 
+% With no explicit ID, this automatically creates def:rational-numbers.
 \begin{definition}[Rational Numbers]
-\label{def:rational-numbers}
 A real number is called \emph{rational} if it can be expressed as a quotient
 of two integers. The set of rational numbers is
 \[
@@ -50,5 +36,20 @@ of two integers. The set of rational numbers is
 \]
 \end{definition}
 
-\end{document}
+\begin{remark}{number-set-inclusions}
+Under the usual identifications,
+\(\mathbb{N}\subsetneq\mathbb{Z}\subsetneq\mathbb{Q}\).
+\end{remark}
 
+\section{Fields}
+
+\begin{definition}[Closed Operation]
+An operation $\ast$ is said to be \emph{closed} on a set $A$ if for all $a,b \in A$, we have $a \ast b \in A$. 
+\end{definition}
+
+\begin{definition}[Field]{field}
+A \emph{field} is a set of numbers or elements where addition and
+multiplication are \xref[closed operations]{def:closed-operation}.
+\end{definition}
+
+\end{document}

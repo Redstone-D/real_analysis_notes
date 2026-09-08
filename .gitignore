@@ -9,5 +9,6 @@
 *.toc
 .DS_Store
 /.build/
+/v1/
 /*.pdf
-
+.vscode/

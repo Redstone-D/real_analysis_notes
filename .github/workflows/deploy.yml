@@ -53,8 +53,8 @@ jobs:
             --output "$course_page" \
             https://notes.rua.rs/real-analysis
 
-          if ! grep --quiet "lecture01.pdf" "$course_page"; then
-            echo "lecture01.pdf is missing from the course page."
+          if ! grep --quiet "lec01.pdf" "$course_page"; then
+            echo "lec01.pdf is missing from the course page."
             exit 1
           fi
 
@@ -65,4 +65,4 @@ jobs:
             --connect-timeout 15 \
             --max-time 30 \
             --output /dev/null \
-            https://notes.rua.rs/real-analysis/lecture01.pdf
+            https://notes.rua.rs/real-analysis/lec01.pdf

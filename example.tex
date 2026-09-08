@@ -1,0 +1,37 @@
+\documentclass[12pt]{article}
+\usepackage{notes-project}
+\xrefuse{lec01}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Cross-Document Reference Example}\\[0.25em]
+  {\large AMA3707 Real Analysis}\\[0.15em]
+\end{center}
+
+This file demonstrates direct PDF references provided by
+\texttt{notes-common.sty}. Each reference contains enough information to link
+to the corresponding item in the deployed \texttt{lec01.pdf}; no reference
+index is required.
+
+\begin{enumerate}[label=\textbf{Example \arabic*.},leftmargin=*]
+  \item \xref{def:natural-number} uses the document selected by
+  \verb|\xrefuse{lec01}|.
+
+  \item \xref{lec01::def:integer} explicitly names a document in this project.
+
+  \item \xref{real-analysis::lec01::def:rational-numbers} explicitly names the
+  project.
+
+  \item
+  \xref{https://notes.rua.rs::real-analysis::lec01::rem:number-set-inclusions}
+  uses the fully qualified server, project, document, and item.
+
+  \item Multiple items can be linked together using
+  \xref{lec01::def:integer,lec01::def:rational-numbers}.
+
+  \item The starred form \xref*{lec01::def:natural-number} prints without a
+  link.
+\end{enumerate}
+
+\end{document}

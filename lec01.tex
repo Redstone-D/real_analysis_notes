@@ -191,6 +191,18 @@ internally [TODO Pf link to completeness axiom].
 
 \section{Sets}
 
+\begin{rem}[Membership and Classical Logic]{membership-classical-logic}
+  For every set \(A\) and every \(x\) in the chosen universe, exactly one of
+  \(x\in A\) and \(x\notin A\) holds.
+\end{rem}
+
+\begin{proof}
+  Let \(P\) be the proposition \(x\in A\).
+  By the law of excluded middle, \(P\lor\neg P\), while the law of
+  non-contradiction gives \(\neg(P\land\neg P)\).
+  Hence exactly one of \(x\in A\) and \(x\notin A\) holds.
+\end{proof}
+
 \begin{dfn}[Intersection]{intersection}
   For sets \(A\) and \(B\),
   \[

@@ -19,7 +19,97 @@
 \abbottexercise{1.2.3}
 \end{exc}
 
-% Write your answer below this line.
+\textbf{(a)} If $A_1 \supseteq A_2 \supseteq A_3 \supseteq \cdots$ and
+every $A_n$ is infinite, then $\bigcap_{n=1}^{\infty} A_n$ is infinite.
+
+Given that $A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots$ are all containing infinite number of elements. 
+
+This is a nested sequence that 
+\[
+\bigcap_{n=1}^{m} A_n = A_m
+\]
+
+Notice that for all sets $A_n$, it contains infinite number of elements. Meaning that $m \to \infty$, $A_m$ will still contain infinite number of elements. 
+
+Also, 
+\[
+\bigcap_{n=1}^{\infty} A_n = \lim_{m \to \infty}{\bigcap_{n=1}^{m} A_n} = A_m
+\] 
+
+So, 
+\[
+\left| \bigcap_{n=1}^{\infty} A_n \right| = \left| A_m \right| = \infty 
+\] 
+
+Statement (a) is true. 
+
+\medskip
+\noindent\textbf{(b)} If $A_1 \supseteq A_2 \supseteq A_3 \supseteq \cdots$
+and every $A_n$ is finite and nonempty, then
+$\bigcap_{n=1}^{\infty} A_n$ is finite and nonempty.
+
+By the same argument, 
+\[
+\bigcap_{n=1}^{\infty} A_n = \lim_{m \to \infty}{\bigcap_{n=1}^{m} A_n} = A_m, \quad 0 < |A_m| < \infty
+\] 
+
+So, 
+\[
+\bigcap_{n=1}^{\infty} A_n = A_m \quad \text{is finite and nonempty.}
+\] 
+
+Statement (b) is true. 
+
+\medskip
+\noindent\textbf{(c)} $A \cap (B \cup C) = (A \cap B) \cup C$.
+
+By \xref[membership under classical logic]
+{lec01::rem:membership-classical-logic}, every element \(x\) in the chosen
+universe satisfies exactly one of the following eight conditions:
+\begin{enumerate}[nosep] 
+\item $x \in A$ and $x \in B$ and $x \in C$
+\item $x \in A$ and $x \in B$ and $x \notin C$
+\item $x \in A$ and $x \notin B$ and $x \in C$
+\item $x \in A$ and $x \notin B$ and $x \notin C$
+\item $x \notin A$ and $x \in B$ and $x \in C$
+\item $x \notin A$ and $x \in B$ and $x \notin C$
+\item $x \notin A$ and $x \notin B$ and $x \in C$
+\item $x \notin A$ and $x \notin B$ and $x \notin C$
+\end{enumerate} 
+
+Define 
+\[D= A \cap (B \cup C), \quad E = (A \cap B) \cup C\] 
+
+Denote the above 8 conditions as $P_1, P_2, \ldots, P_8$. 
+
+By using definition of \xref{lec01::def:intersection} and \xref{lec01::def:union}, we can see that 
+\begin{itemize}[nosep]
+\item $\forall x \in P_1 \implies x \in D$ and $x \in E$
+\item $\forall x \in P_2 \implies x \in D$ and $x \in E$
+\item $\forall x \in P_3 \implies x \in D$ and $x \in E$
+\item $\forall x \in P_4 \implies x \notin D$ and $x \notin E$
+\item $\forall x \in P_5 \implies x \notin D$ and $x \in E$
+\item $\forall x \in P_6 \implies x \notin D$ and $x \notin E$
+\item $\forall x \in P_7 \implies x \notin D$ and $x \in E$
+\item $\forall x \in P_8 \implies x \notin D$ and $x \notin E$
+\end{itemize}
+
+So, $D = P_1 \cup P_2 \cup P_3$ and $E = P_1 \cup P_2 \cup P_3 \cup P_5 \cup P_7$. 
+
+$\exists x, x \in E \land x \notin D$ such as $x \in P_5$ or $x \in P_7$, meaning that $D \subset E$. 
+
+According to the definition of \xref[set equality]{lec01::def:set-equality}, $D \neq E$. 
+
+Statement (c) is false. 
+
+\medskip
+\noindent\textbf{(d)} $A \cap (B \cap C) = (A \cap B) \cap C$.
+
+
+
+\medskip
+\noindent\textbf{(e)}
+$A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
 
 \begin{exc}{abbott-1-2-7}
 \abbottexercise{1.2.7}

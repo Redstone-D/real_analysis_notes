@@ -189,6 +189,20 @@ internally [TODO Pf link to completeness axiom].
   \end{itemize} 
 \end{rem} 
 
+\begin{rem}[Irrational Numbers Are Not Closed]{irrational-not-closed}
+  The irrational numbers are not closed under addition, multiplication, or
+  exponentiation. For example,
+  \[
+    \sqrt{2}+(-\sqrt{2})=0,\qquad
+    \sqrt{2}\cdot\sqrt{2}=2,\qquad
+    (\sqrt{3})^{\log_3 4}=2,
+  \]
+  where all the inputs are irrational. Although \(\pi,e\in\mathbb{I}\), it
+  is not known whether either \(\pi+e\) or \(\pi e\) is irrational; both are
+  expected to be transcendental. By contrast, \(e^\pi\) has been proved
+  transcendental, and is therefore irrational.
+\end{rem}
+
 \section{Sets}
 
 \begin{rem}[Membership and Classical Logic]{membership-classical-logic}
@@ -386,6 +400,58 @@ If $f: A \to B$ is a bijection mapping, then
     D \subseteq B, \implies f(f^{-1}(D)) = D
   \end{align*} 
 \end{prop} 
+
+\section{The Real Line} 
+
+\begin{dfn}[Distance on the Real Line] 
+  For any two real numbers \(x\) and \(y\), the \emph{distance} between them is
+  \(|x-y|\). 
+\end{dfn}
+
+\begin{lem}[\(\varepsilon\)-Criterion for Equality]{epsilon-equality}
+  For \(a,b\in\mathbb{R}\),
+  \[
+    a=b
+    \iff
+    \forall \varepsilon>0,\quad |a-b|<\varepsilon.
+  \]
+\end{lem}
+
+\begin{proof}In order to proof \xref[lem:epsilon-equality]{lem:epsilon-equality}, we need to prove both directions. 
+
+\noindent\textbf{(a)}: $a=b \implies \forall \varepsilon>0, |a-b|<\varepsilon$
+
+Suppose \(a=b\). Then \(|a-b|=0\). For any \(\varepsilon>0\), we have \(|a-b|=0<\varepsilon\).
+
+\noindent\textbf{(b)}: $\forall \varepsilon>0, |a-b|<\varepsilon \implies a=b$ 
+
+Assume \(a \neq b\). 
+
+Then, this means that \[\exists \varepsilon_0 > 0, |a - b| = \varepsilon_0 \] 
+
+Taking \(\varepsilon=\varepsilon_0\) gives \(\varepsilon_0=|a-b|<\varepsilon_0\), a contradiction.
+
+So, we have \(\forall \varepsilon>0, |a-b|<\varepsilon \implies \lnot a \neq b\) 
+
+Since $\lnot a \neq b \iff a = b$, So, $\forall \varepsilon>0, |a-b|<\varepsilon \implies a=b$ 
+
+Therefore, both implications hold, and hence proven. 
+\end{proof} 
+
+\section{Bounds} 
+
+\begin{dfn}[Bounded Above]
+  A set \(A\) is \emph{bounded above} in the universe $U$ if \[\exists b \in U, \forall a \in A, a \leq b\]  
+  Such $b$ is called an \emph{upper bound} of \(A\). 
+\end{dfn} 
+
+\begin{dfn}[Bounded Below]
+  A set \(A\) is \emph{bounded below} in the universe $U$ if \[\exists b \in U, \forall a \in A, a \geq b\] 
+  Such $b$ is called a \emph{lower bound} of \(A\). 
+\end{dfn} 
+
+\begin{dfn}[Least Upper Bound/Supremum]{supremum} 
+\end{dfn} 
 
 \end{document}
   

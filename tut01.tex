@@ -105,11 +105,60 @@ Statement (c) is false.
 \medskip
 \noindent\textbf{(d)} $A \cap (B \cap C) = (A \cap B) \cap C$.
 
+By \xref[membership under classical logic]
+{lec01::rem:membership-classical-logic}, every element \(x\) in the chosen
+universe satisfies exactly one of the following eight conditions:
+\begin{enumerate}[nosep] 
+\item $x \in A$ and $x \in B$ and $x \in C$
+\item $x \in A$ and $x \in B$ and $x \notin C$
+\item $x \in A$ and $x \notin B$ and $x \in C$
+\item $x \in A$ and $x \notin B$ and $x \notin C$
+\item $x \notin A$ and $x \in B$ and $x \in C$
+\item $x \notin A$ and $x \in B$ and $x \notin C$
+\item $x \notin A$ and $x \notin B$ and $x \in C$
+\item $x \notin A$ and $x \notin B$ and $x \notin C$
+\end{enumerate} 
 
+Define 
+\[D= A \cap (B \cap C), \quad E = (A \cap B) \cap C\] 
+
+Denote the above 8 conditions as $P_1, P_2, \ldots, P_8$.
+
+By using definition of \xref{lec01::def:intersection} and \xref{lec01::def:union}, we can see that
+\begin{itemize}[nosep]
+\item $\forall x \in P_1 \implies x \in D$ and $x \in E$
+\item $\forall x \in P_2 \implies x \notin D$ and $x \notin E$
+\item $\forall x \in P_3 \implies x \notin D$ and $x \notin E$
+\item $\forall x \in P_4 \implies x \notin D$ and $x \notin E$
+\item $\forall x \in P_5 \implies x \notin D$ and $x \notin E$
+\item $\forall x \in P_6 \implies x \notin D$ and $x \notin E$
+\item $\forall x \in P_7 \implies x \notin D$ and $x \notin E$
+\item $\forall x \in P_8 \implies x \notin D$ and $x \notin E$
+\end{itemize}
+
+So, $\forall x \in D \implies x \in E$, ie $D \subseteq E$. Also, $\forall x \in E \implies x \in D$, ie $E \subseteq D$. 
+
+According to the definition of \xref[set equality]{lec01::def:set-equality}, $D = E$. 
+
+Statement (d) is true. 
 
 \medskip
 \noindent\textbf{(e)}
 $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+
+By \xref[membership under classical logic]
+{lec01::rem:membership-classical-logic}, every element \(x\) in the chosen
+universe satisfies exactly one of the following eight conditions:
+\begin{enumerate}[nosep] 
+\item $x \in A$ and $x \in B$ and $x \in C$
+\item $x \in A$ and $x \in B$ and $x \notin C$
+\item $x \in A$ and $x \notin B$ and $x \in C$
+\item $x \in A$ and $x \notin B$ and $x \notin C$
+\item $x \notin A$ and $x \in B$ and $x \in C$
+\item $x \notin A$ and $x \in B$ and $x \notin C$
+\item $x \notin A$ and $x \notin B$ and $x \in C$
+\item $x \notin A$ and $x \notin B$ and $x \notin C$
+\end{enumerate} 
 
 \begin{exc}{abbott-1-2-7}
 \abbottexercise{1.2.7}

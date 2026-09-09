@@ -94,11 +94,11 @@ For example:
 is rendered as `definition open set` and points to:
 
 ```text
-https://notes.rua.rs/topology/lec03.pdf#notes.def.open-set
+https://notes.rua.rs/topology/lec03.pdf#nameddest=notes.def.open-set
 ```
 
-Supported kinds are `def`, `thm`, `prop`, `lem`, `cor`, `rem`, `ex`, `exc`,
-and `conv`. Comma-separated references and the unlinked `\xref*` form are
+Supported kinds are `def`, `thm`, `axm`, `prop`, `lem`, `cor`, `rem`, `ex`,
+`exc`, and `conv`. Comma-separated references and the unlinked `\xref*` form are
 also supported.
 
 ## Number-display tradeoff

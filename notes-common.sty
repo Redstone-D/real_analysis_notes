@@ -30,6 +30,10 @@
 \crefname{theorem}{theorem}{theorems}
 \Crefname{theorem}{Theorem}{Theorems}
 
+\newtheorem{axiom}{Axiom}[section]
+\crefname{axiom}{axiom}{axioms}
+\Crefname{axiom}{Axiom}{Axioms}
+
 \newtheorem{proposition}{Proposition}[section]
 \crefname{proposition}{proposition}{propositions}
 \Crefname{proposition}{Proposition}{Propositions}
@@ -83,6 +87,8 @@
 \cs_new_eq:NN \__notesenv_definition_end: \enddefinition
 \cs_new_eq:NN \__notesenv_theorem_begin: \theorem
 \cs_new_eq:NN \__notesenv_theorem_end: \endtheorem
+\cs_new_eq:NN \__notesenv_axiom_begin: \axiom
+\cs_new_eq:NN \__notesenv_axiom_end: \endaxiom
 \cs_new_eq:NN \__notesenv_proposition_begin: \proposition
 \cs_new_eq:NN \__notesenv_proposition_end: \endproposition
 \cs_new_eq:NN \__notesenv_lemma_begin: \lemma
@@ -172,6 +178,15 @@
   }
   { \__notesenv_theorem_end: }
 
+\RenewDocumentEnvironment{axiom}{o g}
+  {
+    \IfNoValueTF{#1}
+      { \__notesenv_axiom_begin: }
+      { \__notesenv_axiom_begin: [#1] }
+    \__notesenv_add_label:nnn {axm} {#1} {#2}
+  }
+  { \__notesenv_axiom_end: }
+
 \RenewDocumentEnvironment{proposition}{o g}
   {
     \IfNoValueTF{#1}
@@ -250,6 +265,8 @@
 \cs_new_eq:NN \enddfn \enddefinition
 \cs_new_eq:NN \thm \theorem
 \cs_new_eq:NN \endthm \endtheorem
+\cs_new_eq:NN \axm \axiom
+\cs_new_eq:NN \endaxm \endaxiom
 \cs_new_eq:NN \prop \proposition
 \cs_new_eq:NN \endprop \endproposition
 \cs_new_eq:NN \lem \lemma
@@ -299,7 +316,7 @@
 \msg_new:nnn { notes-common } { unsupported-kind }
   {
     Unsupported~reference~kind~'#1'.
-    ~Use~def,~thm,~prop,~lem,~cor,~rem,~ex,~exc,~or~conv.
+    ~Use~def,~thm,~axm,~prop,~lem,~cor,~rem,~ex,~exc,~or~conv.
   }
 
 \cs_new_protected:Npn \__notesxref_use_one:n #1
@@ -453,6 +470,10 @@
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { theorem }
           }
+        {axm}
+          {
+            \tl_set:Nn \l__notesxref_kind_name_tl { axiom }
+          }
         {prop}
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { proposition }
@@ -524,7 +545,7 @@
         \tl_set:Nx \l__notesxref_url_tl
           {
             \l__notesxref_server_tl / \l__notesxref_project_tl /
-            \l__notesxref_document_tl .pdf \c_hash_str
+            \l__notesxref_document_tl .pdf \c_hash_str nameddest=
             notes.\l__notesxref_kind_tl.\l__notesxref_id_tl
           }
       }

@@ -27,8 +27,8 @@ Use two-digit, zero-padded filenames. Every file contains one lecture or
 tutorial. Ordinary sections organize its content, such as `1 Numbers` and
 `2 Fields`.
 
-Definitions, theorems, propositions, lemmas, corollaries, remarks, examples,
-exercises, and conventions have independent counters within each section.
+Definitions, theorems, axioms, propositions, lemmas, corollaries, remarks,
+examples, exercises, and conventions have independent counters within each section.
 Consequently, section 2 may contain Definition 2.1, Proposition 2.1, and
 Exercise 2.1.
 
@@ -71,6 +71,7 @@ markup.
 |---|---|---|
 | `dfn` | `definition` | `def` |
 | `thm` | `theorem` | `thm` |
+| `axm` | `axiom` | `axm` |
 | `prop` | `proposition` | `prop` |
 | `lem` | `lemma` | `lem` |
 | `cor` | `corollary` | `cor` |

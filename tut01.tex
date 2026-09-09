@@ -161,10 +161,84 @@ universe satisfies exactly one of the following eight conditions:
 \end{enumerate} 
 
 \begin{exc}{abbott-1-2-7}
-\abbottexercise{1.2.7}
-\end{exc}
+\abbottexercise{1.2.7} 
+\end{exc} 
 
-% Write your answer below this line.
+For a function \(f\) with domain \(D\) and a set \(A\subseteq D\), use
+\[
+  f(A)=\{f(x):x\in A\}.
+\]
+
+\noindent\textbf{(a)}
+\[
+  f(x)=x^2,\qquad A=[0,2],\qquad B=[1,4].
+\]
+Find \(f(A)\) and \(f(B)\), and determine whether
+\[
+  f(A\cap B)=f(A)\cap f(B)
+  \quad\text{and}\quad
+  f(A\cup B)=f(A)\cup f(B).
+\]
+
+Since $f$ is a \xref[one to one map]{lec01::def:injective-mapping} $[0, 4]$
+
+Where, $A, B \in [0, 4]$. 
+
+We can find the image of $A$ and $B$ by evaluating the function at the endpoints of the intervals. Trivially: 
+
+\[f(A) = [0,4], \quad f(B) = [1,16]\]
+
+Where $A \cap B = [1,2]$, so $f(A \cap B) = [1,4]$. 
+
+We can also find $f(A) \cap f(B) = [0, 4] \cap [1,16] = [1,4]$. 
+
+\fbox{So, $f(A \cap B) = f(A) \cap f(B)$.} 
+
+Where $A \cup B = [0,4]$, so $f(A \cup B) = [0,16]$. 
+
+We can also find $f(A) \cup f(B) = [0,4] \cup [1,16] = [0,16]$. 
+
+\fbox{So, $f(A \cup B) = f(A) \cup f(B)$.} 
+
+According to \xref{lec01::prop:bijection-preimage-image}, 
+
+\medskip
+\noindent\textbf{(b)} Find \(A\) and \(B\) such that
+\[
+  f(A\cap B)\neq f(A)\cap f(B).
+\]
+
+For $f = x^2$, we can have some part which is not one-to-one. 
+
+\begin{align*}
+  A &= [0,1], & B &= [-1,0], \\
+  A\cap B &= \{0\}, & f(A\cap B) &= f(\{0\})=\{0\}, \\
+  f(A)\cap f(B)
+    &= f([0,1])\cap f([-1,0])
+     = [0,1]\cap[0,1]
+     = [0,1], \\
+  [0,1] &\neq \{0\}.
+\end{align*}
+
+\medskip
+\noindent\textbf{(c)} For an arbitrary function \(g:\mathbb{R}\to\mathbb{R}\)
+and all \(A,B\subseteq\mathbb{R}\), prove that
+\[
+  g(A\cap B)\subseteq g(A)\cap g(B).
+\]
+
+% Write your answer to (c) below this line.
+
+\medskip
+\noindent\textbf{(d)} Determine and prove the relationship between
+\[
+  g(A\cup B)
+  \quad\text{and}\quad
+  g(A)\cup g(B)
+\]
+for an arbitrary function \(g\).
+
+% Write your answer to (d) below this line.
 
 \begin{exc}{abbott-1-2-9}
 \abbottexercise{1.2.9}

@@ -51,7 +51,7 @@ For every \(x\in\mathbb{Q}\), there exists a unique pair
 
 \begin{rem}{number-set-inclusions}
 Under the usual identifications,
-\(\mathbb{N}\subsetneq\mathbb{Z}\subsetneq\mathbb{Q}\).
+\(\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\).
 \end{rem}
 
 \section{Fields}
@@ -169,7 +169,7 @@ internally [TODO Pf link to completeness axiom].
   \]
   Also, in normal conventions, we have:
   \[
-    \mathbb{N} \subsetneq \mathbb{Z} \subsetneq \mathbb{Q} \subsetneq \mathbb{R}
+    \mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}
   \]
 \end{rem} 
 
@@ -451,7 +451,67 @@ Therefore, both implications hold, and hence proven.
 \end{dfn} 
 
 \begin{dfn}[Least Upper Bound/Supremum]{supremum} 
+  $s$ is the \emph{least upper bound} or \emph{supremum} of a set \(A\) if 
+  \begin{enumerate}
+    \item $s$ is an upper bound of \(A\)
+    \item $\forall b$ is an upper bound of \(A\), $s \leq b$ 
+  \end{enumerate}
 \end{dfn} 
+
+\begin{dfn}[Greatest Lower Bound/Infimum]{infimum} 
+  $i$ is the \emph{greatest lower bound} or \emph{infimum} of a set \(A\) if 
+  \begin{enumerate}
+    \item $i$ is a lower bound of \(A\)
+    \item $\forall b$ is a lower bound of \(A\), $i \geq b$ 
+  \end{enumerate}
+\end{dfn} 
+
+\begin{conv}
+  We use the notation $\sup A$ to denote the supremum of a set \(A\) and $\inf A$ to denote the infimum of a set \(A\).
+\end{conv} 
+
+\begin{rem}[Supremums and Infimums are unique]{supremum-infimum-uniqueness}
+  If a set \(A\) has a supremum, then it is unique. If a set \(A\) has an infimum, then it is unique. 
+\end{rem} 
+
+\begin{proof}[Supremums are unique]
+  Assume there are 2 supremums for set \(A\), \(s_1, s_2\). Where $s_1 \neq s_2$. 
+
+  Since $\forall s$ is an upper bound of \(A\), $s_1 \leq s$, also $s_2 \leq s$. 
+
+  Notice that $s_1$ is an upper bound of \(A\), and $s_2$ is a least upper bound, so $s_2 \leq s_1$. 
+
+  Also, $s_2$ is an upper bound of \(A\), and $s_1$ is a least upper bound, so $s_1 \leq s_2$. 
+
+  Trivially, $s_1 = s_2$. Contradicts with $s_1 \neq s_2$. 
+
+  So there are no multiple supremum. Supremums are unique for each set. 
+\end{proof} 
+
+\begin{dfn}[Bounded Set]
+  A set \(A\) is \emph{bounded} in the universe $U$ if it is both \xref[bounded above]{def:bounded-above} and \xref[bounded below]{def:bounded-below}. 
+\end{dfn} 
+
+\begin{dfn}[Maximum]{maximum}
+  A have a maximum $m = \max A$ if 
+  \[
+    \text{sup } A \in A 
+  \] 
+\end{dfn} 
+
+\begin{dfn}[Minimum]{minimum}
+  A have a minimum $m = \min A$ if 
+  \[
+    \text{inf } A \in A 
+  \]
+\end{dfn} 
+
+\section{Axiom of Completeness} 
+
+\begin{axm}[Completeness Axiom]{completeness}
+Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bounded-above} has a 
+\xref[least upper bound]{def:supremum} in \(\mathbb{R}\) 
+\end{axm}
 
 \end{document}
   

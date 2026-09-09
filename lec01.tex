@@ -296,5 +296,84 @@ So in the universe $\mathbb N$,
   The codomain is \(\mathbb R\) but the range is \(\mathbb R^+ \cup \{0\}\). 
 \end{rem}
 
+\begin{dfn}[Injective Mapping/One to One Mapping]{injective-mapping}
+  A mapping \(f: A \to B\) is called \emph{injective} or \emph{one to one} if 
+  \[
+    f(x_1) \neq f(x_2) \implies x_1 \neq x_2
+  \] 
+  equivalently,
+  \[
+    x_1 = x_2 \implies f(x_1) = f(x_2)
+  \]
+\end{dfn} 
+  
+\begin{dfn}[Surjective Mapping/onto Mapping]{surjective-mapping}
+  A mapping \(f: A \to B\) is called \emph{surjective} or \emph{onto} if 
+  \[
+    \forall y \in B, \exists x \in A, \text{ st. } f(x) = y
+  \] 
+  equivalently, 
+  \[
+    \text{Range}(f) = B 
+  \]
+\end{dfn} 
+
+\begin{dfn}[Bijective Mapping]{bijective-mapping}
+  A mapping \(f: A \to B\) is called \emph{bijective} if it is both
+  \xref[injective]{def:injective-mapping} and
+  \xref[surjective]{def:surjective-mapping}. 
+\end{dfn} 
+
+\section{Images} 
+
+\begin{dfn}[Image] 
+  For a mapping \(f: A \to B\), we have set $C \subseteq A$. We define \emph{image} as 
+  \[f(C) := {y: f(x), x \in C}. \quad \text{where} \quad f(C) \subseteq B\]  
+\end{dfn} 
+
+\begin{dfn}[Pre-Image] 
+  For a mapping \(f: A \to B\), we have set $D \subseteq B$. We define \emph{pre-image} as 
+  \[f^{-1}(D) := {x: f(x) \in D}. \quad \text{where} \quad f^{-1}(D) \subseteq A\]  
+\end{dfn} 
+
+\begin{rem}[Image of Pre-image] 
+  In general cases, for a mapping $f: A \to B$, 
+  \begin{align*}
+    C \subseteq A, \nRightarrow f^{-1}(f(C)) = C \\ 
+    D \subseteq B, \nRightarrow f(f^{-1}(D)) = D
+  \end{align*} 
+\end{rem} 
+
+\begin{rem}[What to do when a result is not true?]{how-to-treat-false-results}
+  When a result such as the equalities in
+  \xref{rem:image-of-pre-image} is not true, we may:
+  \begin{itemize}[nosep]
+    \item strengthen the assumptions, as in
+      \xref{prop:bijection-preimage-image};
+    \item narrow down the conclusion, as in
+      \xref{prop:preimage-image-subset}.
+  \end{itemize}
+\end{rem} 
+
+\begin{proof}[The Subset Relation for Pre-image of Image]{preimage-image-subset}
+TODO (Counterexample) 
+\end{proof}
+
+\begin{prop}[Subset Relation for Pre-image of Image]{preimage-image-subset}
+  In general cases, for a mapping $f: A \to B$, 
+  \begin{align*}
+    C \subseteq A, f^{-1}(f(C)) \supseteq C \\ 
+    D \subseteq B, f(f^{-1}(D)) \subseteq D
+  \end{align*} 
+\end{prop} 
+
+\begin{prop}[Pre-image of Image for Bijection Mapping]{bijection-preimage-image}
+If $f: A \to B$ is a bijection mapping, then 
+  \begin{align*}
+    C \subseteq A, \implies f^{-1}(f(C)) = C \\ 
+    D \subseteq B, \implies f(f^{-1}(D)) = D
+  \end{align*} 
+\end{prop} 
+
 \end{document}
   

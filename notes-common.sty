@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{notes-common}[2026/09/08 Shared notes style and direct PDF references]
+\ProvidesPackage{notes-common}[2026/09/09 Shared notes style and direct PDF references]
 
 \makeatletter
 \@ifundefined{notesServerRoot}{%
@@ -51,6 +51,10 @@
 \crefname{example}{example}{examples}
 \Crefname{example}{Example}{Examples}
 
+\newtheorem{exercise}{Exercise}[section]
+\crefname{exercise}{exercise}{exercises}
+\Crefname{exercise}{Exercise}{Exercises}
+
 \newtheorem{convention}{Convention}[section]
 \crefname{convention}{convention}{conventions}
 \Crefname{convention}{Convention}{Conventions}
@@ -87,6 +91,8 @@
 \cs_new_eq:NN \__notesenv_corollary_end: \endcorollary
 \cs_new_eq:NN \__notesenv_example_begin: \example
 \cs_new_eq:NN \__notesenv_example_end: \endexample
+\cs_new_eq:NN \__notesenv_exercise_begin: \exercise
+\cs_new_eq:NN \__notesenv_exercise_end: \endexercise
 \cs_new_eq:NN \__notesenv_convention_begin: \convention
 \cs_new_eq:NN \__notesenv_convention_end: \endconvention
 \cs_new_eq:NN \__notesenv_remark_begin: \remark
@@ -202,6 +208,15 @@
   }
   { \__notesenv_example_end: }
 
+\RenewDocumentEnvironment{exercise}{o g}
+  {
+    \IfNoValueTF{#1}
+      { \__notesenv_exercise_begin: }
+      { \__notesenv_exercise_begin: [#1] }
+    \__notesenv_add_label:nnn {exc} {#1} {#2}
+  }
+  { \__notesenv_exercise_end: }
+
 \RenewDocumentEnvironment{convention}{o g}
   {
     \IfNoValueTF{#1}
@@ -245,6 +260,8 @@
 \cs_new_eq:NN \endrem \endremark
 \cs_new_eq:NN \ex \example
 \cs_new_eq:NN \endex \endexample
+\cs_new_eq:NN \exc \exercise
+\cs_new_eq:NN \endexc \endexercise
 \cs_new_eq:NN \conv \convention
 \cs_new_eq:NN \endconv \endconvention
 \ExplSyntaxOff
@@ -282,7 +299,7 @@
 \msg_new:nnn { notes-common } { unsupported-kind }
   {
     Unsupported~reference~kind~'#1'.
-    ~Use~def,~thm,~prop,~lem,~cor,~rem,~ex,~or~conv.
+    ~Use~def,~thm,~prop,~lem,~cor,~rem,~ex,~exc,~or~conv.
   }
 
 \cs_new_protected:Npn \__notesxref_use_one:n #1
@@ -455,6 +472,10 @@
         {ex}
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { example }
+          }
+        {exc}
+          {
+            \tl_set:Nn \l__notesxref_kind_name_tl { exercise }
           }
         {conv}
           {

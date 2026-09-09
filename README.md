@@ -28,8 +28,9 @@ tutorial. Ordinary sections organize its content, such as `1 Numbers` and
 `2 Fields`.
 
 Definitions, theorems, propositions, lemmas, corollaries, remarks, examples,
-and conventions have independent counters within each section. Consequently,
-section 2 may contain Definition 2.1 and Proposition 2.1.
+exercises, and conventions have independent counters within each section.
+Consequently, section 2 may contain Definition 2.1, Proposition 2.1, and
+Exercise 2.1.
 
 ## Two-layer library
 
@@ -75,7 +76,29 @@ markup.
 | `cor` | `corollary` | `cor` |
 | `rem` | `remark` | `rem` |
 | `ex` | `example` | `ex` |
+| `exc` | `exercise` | `exc` |
 | `conv` | `convention` | `conv` |
+
+For tutorial questions, use your own section-based exercise number and print
+the book location at the start of the exercise body. A short local helper keeps
+repeated source information convenient:
+
+```tex
+\newcommand{\abbottexercise}[1]{%
+  \emph{Source:} Stephen Abbott, \emph{Understanding Analysis}, Second
+  Edition, Exercise #1.\par\smallskip
+}
+
+\begin{exc}{abbott-1-2-3}
+\abbottexercise{1.2.3}
+Question text.
+\end{exc}
+
+% Write your answer here.
+```
+
+This prints your local number, such as `Exercise 1.1`, followed by the source
+citation, while creating the reference ID `exc:abbott-1-2-3`.
 
 Proof headings depend on whether a title is supplied:
 

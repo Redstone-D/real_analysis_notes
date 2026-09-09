@@ -156,7 +156,145 @@ The existence, in a larger number system, of some
 \(\mathbb{Q}\) is incomplete. Incompleteness must be demonstrated
 internally [TODO Pf link to completeness axiom].
 \end{rem}
-}
+} 
+
+\begin{conv}[Irrational Numbers]{irrational-numbers}
+  We use \(\mathbb{I}\) to denote the set of \emph{irrational numbers} 
+\end{conv} 
+
+\begin{rem}[Number Sets]{number-sets-inclusions-real}
+  The set of real numbers \(\mathbb{R}\) is the union of the set of rational numbers \(\mathbb{Q}\) and the set of irrational numbers \(\mathbb{I}\):
+  \[
+    \mathbb{R} = \mathbb{Q} \cup \mathbb{I}
+  \]
+  Also, in normal conventions, we have:
+  \[
+    \mathbb{N} \subsetneq \mathbb{Z} \subsetneq \mathbb{Q} \subsetneq \mathbb{R}
+  \]
+\end{rem} 
+
+\begin{prop}[Integer--Irrational Root Dichotomy]{nth-root-dichotomy}
+  For \(x,n\in\mathbb{N}\) with \(n>1\), \(\sqrt[n]{x}\in\mathbb{Z}\) if
+  \(x\) is a perfect \(n\)-th power, and otherwise
+  \(\sqrt[n]{x}\in\mathbb{I}\).
+\end{prop}
+
+\begin{rem}[Sources of Irrational]
+  \begin{itemize}[nosep]
+    \item By \xref{prop:nth-root-dichotomy}, \(\sqrt[n]{x}\) is irrational
+    whenever \(x\in\mathbb{N}\), \(n>1\), and \(x\) is not a perfect
+    \(n\)-th power.
+    \item Taking logarithms 
+    \item Constants defined by taking limits, such as $\pi$ and $e$. 
+  \end{itemize} 
+\end{rem} 
+
+\section{Sets}
+
+\begin{dfn}[Intersection]{intersection}
+  For sets \(A\) and \(B\),
+  \[
+    x\in A\cap B \iff x\in A\text{ and }x\in B.
+  \]
+\end{dfn}
+
+\begin{dfn}[Union]{union}
+  For sets \(A\) and \(B\),
+  \[
+    x\in A\cup B \iff x\in A\text{ or }x\in B.
+  \]
+\end{dfn}
+
+\begin{dfn}[Complement]{complement}
+  Given a universal set \(U\) and \(A\subseteq U\), the complement of \(A\)
+  is \(A^c=U\setminus A\); equivalently,
+  \[
+    x\in A^c \iff x\notin A.
+  \]
+\end{dfn}
+
+\begin{dfn}[Set Difference]{set-difference}
+  For sets \(A\) and \(B\),
+  \[
+    x\in A\setminus B \iff x\in A\text{ and }x\notin B.
+  \]
+\end{dfn}
+
+\begin{dfn}[Subset]{subset}
+  For sets \(A\) and \(B\),
+  \[
+    A\subseteq B \iff \text{for every }x,\quad x\in A\implies x\in B.
+  \]
+\end{dfn}
+
+\begin{dfn}[Set Equality]{set-equality}
+  For sets \(A\) and \(B\),
+  \[
+    A=B \iff A\subseteq B\text{ and }B\subseteq A.
+  \]
+\end{dfn} 
+
+\begin{theorem}[De Morgan's Laws]{de-morgan-laws}
+  For sets \(A\) and \(B\) in a universal set \(U\),
+  \[
+    (A\cap B)^c=A^c\cup B^c
+    \quad\text{and}\quad
+    (A\cup B)^c=A^c\cap B^c.
+  \]
+  Also, 
+  \[
+    \left(\bigcap_{n=1}^{\infty} A_n\right)^c = \bigcup_{n=1}^{\infty} (A_n)^c \quad \text{and} \quad \left(\bigcup_{n=1}^{\infty} A_n\right)^c = \bigcap_{n=1}^{\infty} (A_n)^c 
+  \]
+\end{theorem}
+
+\begin{example}[Nested Sequence]{nested-sequence} 
+Let $A_n = \{n, n+1, n+2, \dots\}, n \in \mathbb N$ 
+
+ie, $A_1 = \{1, 2, 3, \dots\}, A_5 = \{5, 6, 7, \dots\}$ 
+
+Trivially we can get $A_1 \subset A_2 \subset \dots $. This is called a nested sequence. 
+
+Where 
+\[
+\bigcup^{\infty}_{n=1} A_n = A_1 \quad \bigcap^{\infty}_{n=1} = \emptyset 
+\] 
+
+The intersection is $\emptyset$ due to if a number, let's say for any natural number $p$ is in the set, then $A_{p+1}$ does not include that number. 
+
+So in the universe $\mathbb N$, 
+\[\forall p \notin \bigcap^{\infty}_{n=1} \implies \bigcap^{\infty}_{n=1} = \emptyset \] 
+\end{example}
+
+\section{Mapping} 
+
+\begin{dfn}[Mapping]
+  A mapping \(f: A \to B\) is a set of rule st.: 
+  \[\forall x \in A, \exists! y = f(x) \in B \leftrightarrow \forall x \in A, \exists! y \in B \text{ st. } (x,y) \in f\]
+\end{dfn} 
+
+\begin{dfn}[Domain]
+  The \emph{domain} of a mapping \(f: A \to B\) is the set \(A\).
+\end{dfn} 
+
+\begin{dfn}[Codomain]
+  The \emph{codomain} of a mapping \(f: A \to B\) is the set \(B\).
+\end{dfn} 
+
+\begin{dfn}[Range] 
+  The \emph{range} of a mapping \(f: A \to B\) is a set \(C\) such that: 
+  \[
+    C = \{y: \exists x \in A, \text{ st. } y = f(x)\} 
+  \] 
+\end{dfn} 
+
+\begin{rem}[Range and codomains are different]
+  The \xref[range]{def:range} is a subset of \xref[codomain]{def:codomain}. Notice that some of the values in the \xref[codomain]{def:codomain} is not reachable. 
+
+  For example, 
+  \[f = x^2: \mathbb R \to \mathbb R\] 
+
+  The codomain is \(\mathbb R\) but the range is \(\mathbb R^+ \cup \{0\}\). 
+\end{rem}
 
 \end{document}
   

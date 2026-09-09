@@ -18,7 +18,7 @@ The \emph{natural numbers} are the positive integers:
 \end{dfn}
 
 \begin{conv}[Natural Numbers Exclude Zero]{natural-numbers-exclude-zero}
-In these notes, \(0\notin\mathbb{N}\).
+\(0\notin\mathbb{N}\).
 \end{conv}
 
 \begin{dfn}[Integers]{integer}
@@ -105,6 +105,17 @@ An ordering on a set is \emph{reflexive} if
 
 \section{Irrational Numbers}
 
+\begin{lem}[Parity of a Square]{square-parity}
+For every \(n\in\mathbb{Z}\),
+\[
+  n^2\text{ is even}\iff n\text{ is even},
+\]
+and equivalently,
+\[
+  n^2\text{ is odd}\iff n\text{ is odd}.
+\]
+\end{lem}
+
 \begin{prop}[No Rational Square Root of \(2\)]{no-rational-square-root-of-two}
 There is no \(q\in\mathbb{Q}\) such that \(q^2=2\).
 \end{prop}
@@ -114,9 +125,21 @@ Suppose, for contradiction, that some \(q\in\mathbb{Q}\) satisfies
 \(q^2=2\).
 
 According to the \xref{prop:unique-reduced-rational-form}, and $q\in\mathbb{Q}$ 
+\[\exists p, r \in \mathbb{Z}, q = \frac{p}{r}, r > 0, \gcd(|p|, r) = 1\] 
 
-\[\exists p, r \in \mathbb{Z}, q = \frac{p}{r}, r > 0, \gcd(|p|, r) = 1\]
+Then we have
+\[\left(\frac{p}{r}\right)^2 = 2 \implies p^2 = 2r^2\]
 
+Since \(p^2\) is even, the \xref[square-parity lemma]{lem:square-parity}
+implies that \(p\) is even. Therefore,
+\[\exists k \in \mathbb{Z},\quad p = 2k.\]
+
+So, 
+\[(2k)^2 = 2r^2 \implies 2k^2 = r^2\]
+
+By the same argument, \(r\) is also even. Meaning that both \(p\) and \(r\) are even, which contradicts the assumption that \(\gcd(|p|, r) = 1\). 
+
+So, it contradicts the assumption that \(q\in\mathbb{Q}\) satisfies \(q^2=2\). Therefore, there is no \(q\in\mathbb{Q}\) such that \(q^2=2\). 
 \end{proof}
 
 {\color{blue}
@@ -124,7 +147,7 @@ According to the \xref{prop:unique-reduced-rational-form}, and $q\in\mathbb{Q}$
 Within \(\mathbb{Q}\), the proposition only says that the equation \(q^2=2\)
 has no solution \(q\in\mathbb{Q}\). Writing
 \(\sqrt{2}\notin\mathbb{Q}\) presupposes a larger number system in which
-\(\sqrt{2}\) exists.
+\(\sqrt{2}\) exists. 
 \end{rem}
 
 \begin{rem}[Completeness]{rational-incompleteness}

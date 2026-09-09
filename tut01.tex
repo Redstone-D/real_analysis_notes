@@ -1,0 +1,161 @@
+\documentclass[12pt]{article}
+\usepackage{notes-project}
+
+\newcommand{\exercise}[1]{%
+  \par\medskip\noindent\textbf{Exercise #1.}\enspace
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Tutorial 1}\\[0.25em]
+  {\large AMA3707 Real Analysis}\\[0.15em]
+\end{center}
+
+\exercise{1.2.3}
+Decide which of the following represent true statements about the nature of
+sets. For any that are false, provide a specific example where the statement
+in question does not hold.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2.5em,itemsep=0.8em]
+  \item If
+  \[
+    A_1\supseteq A_2\supseteq A_3\supseteq A_4\cdots
+  \]
+  are all sets containing an infinite number of elements, then the
+  intersection \(\bigcap_{n=1}^{\infty}A_n\) is infinite as well.
+
+  \item If
+  \[
+    A_1\supseteq A_2\supseteq A_3\supseteq A_4\cdots
+  \]
+  are all finite, nonempty sets of real numbers, then the intersection
+  \(\bigcap_{n=1}^{\infty}A_n\) is finite and nonempty.
+
+  \item \(A\cap(B\cup C)=(A\cap B)\cup C\).
+
+  \item \(A\cap(B\cap C)=(A\cap B)\cap C\).
+
+  \item \(A\cap(B\cup C)=(A\cap B)\cup(A\cap C)\).
+\end{enumerate}
+
+\exercise{1.2.7}
+Given a function \(f\) and a subset \(A\) of its domain, let \(f(A)\)
+represent the range of \(f\) over the set \(A\); that is,
+\[
+  f(A)=\{f(x):x\in A\}.
+\]
+
+\begin{enumerate}[label=(\alph*),leftmargin=2.5em,itemsep=0.8em]
+  \item Let \(f(x)=x^2\). If \(A=[0,2]\), the closed interval
+  \(\{x\in\mathbb{R}:0\leq x\leq2\}\), and \(B=[1,4]\), find \(f(A)\)
+  and \(f(B)\). Does
+  \[
+    f(A\cap B)=f(A)\cap f(B)
+  \]
+  in this case? Does \(f(A\cup B)=f(A)\cup f(B)\)?
+
+  \item Find two sets \(A\) and \(B\) for which
+  \[
+    f(A\cap B)\neq f(A)\cap f(B).
+  \]
+
+  \item Show that, for an arbitrary function \(g:\mathbb{R}\to\mathbb{R}\),
+  it is always true that
+  \[
+    g(A\cap B)\subseteq g(A)\cap g(B)
+  \]
+  for all sets \(A,B\subseteq\mathbb{R}\).
+
+  \item Form and prove a conjecture about the relationship between
+  \(g(A\cup B)\) and \(g(A)\cup g(B)\) for an arbitrary function \(g\).
+\end{enumerate}
+
+\exercise{1.2.9}
+Given a function \(f:D\to\mathbb{R}\) and a subset \(B\subseteq\mathbb{R}\),
+let \(f^{-1}(B)\) be the set of all points from the domain \(D\) that get
+mapped into \(B\); that is,
+\[
+  f^{-1}(B)=\{x\in D:f(x)\in B\}.
+\]
+This set is called the \emph{preimage} of \(B\).
+
+\begin{enumerate}[label=(\alph*),leftmargin=2.5em,itemsep=0.8em]
+  \item Let \(f(x)=x^2\). If \(A\) is the closed interval \([0,4]\) and \(B\)
+  is the closed interval \([-1,1]\), find \(f^{-1}(A)\) and \(f^{-1}(B)\).
+  Does
+  \[
+    f^{-1}(A\cap B)=f^{-1}(A)\cap f^{-1}(B)
+  \]
+  in this case? Does
+  \[
+    f^{-1}(A\cup B)=f^{-1}(A)\cup f^{-1}(B)?
+  \]
+
+  \item Show that, for an arbitrary function \(g:\mathbb{R}\to\mathbb{R}\),
+  it is always true that
+  \[
+    g^{-1}(A\cap B)=g^{-1}(A)\cap g^{-1}(B)
+    \quad\text{and}\quad
+    g^{-1}(A\cup B)=g^{-1}(A)\cup g^{-1}(B)
+  \]
+  for all sets \(A,B\subseteq\mathbb{R}\).
+\end{enumerate}
+
+\exercise{1.3.3}
+
+\begin{enumerate}[label=(\alph*),leftmargin=2.5em,itemsep=0.8em]
+  \item Let \(A\) be nonempty and bounded below, and define
+  \[
+    B=\{b\in\mathbb{R}:b\text{ is a lower bound for }A\}.
+  \]
+  Show that \(\sup B=\inf A\).
+
+  \item Use part (a) to explain why there is no need to assert that greatest
+  lower bounds exist as part of the Axiom of Completeness.
+\end{enumerate}
+
+\exercise{1.3.4}
+Let \(A_1,A_2,A_3,\ldots\) be a collection of nonempty sets, each of which is
+bounded above.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2.5em,itemsep=0.8em]
+  \item Find a formula for \(\sup(A_1\cup A_2)\). Extend this to
+  \[
+    \sup\left(\bigcup_{k=1}^{n}A_k\right).
+  \]
+
+  \item Consider
+  \[
+    \sup\left(\bigcup_{k=1}^{\infty}A_k\right).
+  \]
+  Does the formula in part (a) extend to the infinite case?
+\end{enumerate}
+
+\exercise{1.3.11}
+Decide if the following statements about suprema and infima are true or false.
+Give a short proof for those that are true. For any that are false, supply an
+example where the claim in question does not appear to hold.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2.5em,itemsep=0.8em]
+  \item If \(A\) and \(B\) are nonempty, bounded, and satisfy \(A\subseteq B\),
+  then
+  \[
+    \sup A\leq\sup B.
+  \]
+
+  \item If \(\sup A<\inf B\) for sets \(A\) and \(B\), then there exists a
+  \(c\in\mathbb{R}\) satisfying
+  \[
+    a<c<b
+  \]
+  for all \(a\in A\) and \(b\in B\).
+
+  \item If there exists a \(c\in\mathbb{R}\) satisfying \(a<c<b\) for all
+  \(a\in A\) and \(b\in B\), then
+  \[
+    \sup A<\inf B.
+  \]
+\end{enumerate}
+
+\end{document}

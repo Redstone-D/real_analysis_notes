@@ -227,7 +227,16 @@ and all \(A,B\subseteq\mathbb{R}\), prove that
   g(A\cap B)\subseteq g(A)\cap g(B).
 \]
 
-% Write your answer to (c) below this line.
+\begin{proof}
+  According to definition of \xref[image]{lec01::def:image}, 
+  \[g(A) = y: g(x), x \in A \quad g(B) = y: g(x), x \in B \quad g(A \cap B) = y: g(x), x \in A \cap B \] 
+
+  Assume \[g(A \cap B) \supset g(A) \cap g(B) \implies \exists y, y \notin g(A) \cap g(B) \land y \in g(A \cap B)\]
+
+  Then, $y \in g(A \cap B)$ means that $\exists x, x \in A \cap B$ and $g(x) = y$. Since $x \in A \cap B$, we have $x \in A$ and $x \in B$. Therefore, $g(x) \in g(A)$ and $g(x) \in g(B)$, which implies $y \in g(A) \cap g(B)$. This is a contradiction. 
+
+  Therefore, $g(A \cap B) \subseteq g(A) \cap g(B)$. 
+\end{proof} 
 
 \medskip
 \noindent\textbf{(d)} Determine and prove the relationship between
@@ -238,7 +247,7 @@ and all \(A,B\subseteq\mathbb{R}\), prove that
 \]
 for an arbitrary function \(g\).
 
-% Write your answer to (d) below this line.
+\[\forall y \in g(A)\cup g(B), \exists x \in A\cup B, g(x) = y \implies y \in g(A\cup B) \implies g(A\cup B) \supseteq g(A)\cup g(B)\]
 
 \begin{exc}{abbott-1-2-9}
 \abbottexercise{1.2.9}

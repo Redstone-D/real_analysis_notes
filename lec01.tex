@@ -508,10 +508,32 @@ Therefore, both implications hold, and hence proven.
 
 \section{Axiom of Completeness} 
 
+\begin{dfn}[Complete Ordered Field]{complete-ordered-field}
+  A \emph{complete ordered field} is a field \(F\) that is an ordered set and 
+  Every nonempty set \(A\subseteq F\) that is \xref[bounded above]{def:bounded-above} has a 
+\xref[least upper bound]{def:supremum} in \(F\) 
+\end{dfn} 
+
 \begin{axm}[Completeness Axiom]{completeness}
 Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bounded-above} has a 
 \xref[least upper bound]{def:supremum} in \(\mathbb{R}\) 
 \end{axm}
+
+\begin{prop}[The Rational Numbers Are Not Complete]
+{rationals-not-complete}
+  The ordered field \(\mathbb{Q}\) is not complete. For example, the set
+  \[
+    A=\{q\in\mathbb{Q}:q^2<2\}
+  \]
+  is nonempty and bounded above in \(\mathbb{Q}\), but it has no supremum
+  in \(\mathbb{Q}\).
+\end{prop}
+
+\begin{rem}[Integers and Natural Numbers]{integers-naturals-not-fields}
+  Neither \(\mathbb{Z}\) nor \(\mathbb{N}\) is a field, so neither can be
+  called a complete ordered field. As ordered sets, however, their nonempty
+  subsets that are bounded above have greatest elements.
+\end{rem}
 
 \end{document}
   

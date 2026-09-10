@@ -253,7 +253,36 @@ for an arbitrary function \(g\).
 \abbottexercise{1.2.9}
 \end{exc}
 
-% Write your answer below this line.
+For a function \(f:D\to\mathbb{R}\) and a set
+\(B\subseteq\mathbb{R}\), use
+\[
+  f^{-1}(B)=\{x\in D:f(x)\in B\}.
+\]
+
+\noindent\textbf{(a)}
+\[
+  f:\mathbb{R}\to\mathbb{R},\qquad
+  f(x)=x^2,\qquad
+  A=[0,4],\qquad
+  B=[-1,1].
+\]
+Find \(f^{-1}(A)\) and \(f^{-1}(B)\), and determine whether
+\[
+  f^{-1}(A\cap B)=f^{-1}(A)\cap f^{-1}(B)
+  \quad\text{and}\quad
+  f^{-1}(A\cup B)=f^{-1}(A)\cup f^{-1}(B).
+\]
+
+\medskip
+\noindent\textbf{(b)} For an arbitrary function
+\(g:\mathbb{R}\to\mathbb{R}\) and all \(A,B\subseteq\mathbb{R}\), prove that
+\[
+  g^{-1}(A\cap B)=g^{-1}(A)\cap g^{-1}(B)
+  \quad\text{and}\quad
+  g^{-1}(A\cup B)=g^{-1}(A)\cup g^{-1}(B).
+\]
+
+% Write your answer to (b) below this line.
 
 \section{Suprema and Infima}
 
@@ -261,18 +290,116 @@ for an arbitrary function \(g\).
 \abbottexercise{1.3.3}
 \end{exc}
 
-% Write your answer below this line.
+\noindent\textbf{(a)} Let \(A\subseteq\mathbb{R}\) be nonempty and bounded
+below, and let
+\[
+  B=\{b\in\mathbb{R}:b\leq a\text{ for every }a\in A\}.
+\]
+Prove that
+\[
+  \sup B=\inf A.
+\]
+
+\begin{proof}
+According to the definition of \xref[bounded below]{lec01::def:bounded-below}, there exists a \xref[lower bound]{lec01::def:lower-bound} $m$ for $A$ st \[\forall x \in A, m \leq x\]
+
+According to the definition of set $B$, we have $m \in B$, or equiv, $B$ is the set of all lower bounds of $A$. 
+
+Which means the biggest item in $B$ is the \xref[infimum]{lec01::def:infimum} of $A$. 
+
+By the same argument, $\inf A$ is the \xref[supremum]{lec01::def:supremum} of $B$. 
+
+So, $\sup B = \inf A$. 
+\end{proof} 
+
+\medskip
+\noindent\textbf{(b)} Using part (a), explain why the Completeness Axiom only
+needs to assert the existence of suprema; the corresponding existence of
+infima follows.
+
+Since $\sup B = \inf A$, if we have the existence of suprema, we can find the infima by finding the supremum of the set of lower bounds. 
 
 \begin{exc}{abbott-1-3-4}
 \abbottexercise{1.3.4}
 \end{exc}
 
-% Write your answer below this line.
+Let \(A_1,A_2,\ldots\) be nonempty subsets of \(\mathbb{R}\), each bounded
+above.
+
+\noindent\textbf{(a)} Determine
+\[
+  \sup(A_1\cup A_2)
+  \quad\text{and}\quad
+  \sup\left(\bigcup_{k=1}^{n}A_k\right).
+\]
+
+\[
+  \sup(A_1\cup A_2) = \max \{\sup A_1, \sup A_2\} \]\[
+  \sup\left(\bigcup_{k=1}^{n}A_k\right) = \sup (\{\sup A_1, \sup A_2, \ldots, \sup A_n\}) 
+\]
+
+\medskip
+\noindent\textbf{(b)} Determine whether the finite-union formula extends to
+\[
+  \sup\left(\bigcup_{k=1}^{\infty}A_k\right).
+\]
+
+\[
+\sup\left(\bigcup_{k=1}^{\infty}A_k\right) = \sup (\{\sup A_1, \sup A_2, \ldots, \sup A_n, \ldots\}) 
+\]
 
 \begin{exc}{abbott-1-3-11}
 \abbottexercise{1.3.11}
 \end{exc}
 
-% Write your answer below this line.
+Decide whether each statement is true or false, and justify the answer.
+
+\noindent\textbf{(a)} If \(A\) and \(B\) are nonempty and bounded, and
+\(A\subseteq B\), then
+\[
+  \sup A\leq\sup B.
+\]
+
+According to the definition of \xref[upper bound]{lec01::def:bounded-above}, the set of upper bound of $A$ and $B$ is 
+\[
+  U_A = \{x \in \mathbb{R}: x \geq a, \forall a \in A\}, \quad U_B = \{x \in \mathbb{R}: x \geq b, \forall b \in B\}
+\]  
+
+Since $A \subseteq B$, every element of $A$ is also an element of $B$. Therefore, any upper bound of $B$ is also an upper bound of $A$. This means that $U_B \subseteq U_A$, and thus $\sup A \leq \sup B$.
+ 
+Statement (a) is true. 
+
+\medskip
+\noindent\textbf{(b)} If \(\sup A<\inf B\), then
+\[
+  \exists c\in\mathbb{R},\quad
+  \forall a\in A,\ \forall b\in B,\qquad a<c<b.
+\]
+
+Notice that $\sup A$ is one of the upper bounds of $A$, meaning that: 
+\[\forall x \in A, x < \sup A \]
+
+Also, for $\inf B$, it is one of the lower bounds of $B$, meaning that: 
+\[\forall x \in B, x > \inf B \] 
+
+Notice that $\sup A < \inf B$, we can choose $c = \frac{\sup A + \inf B}{2}$, which is a number between $\sup A$ and $\inf B$. 
+
+Then, for all $a \in A$, we have $a < \sup A < c$, and for all $b \in B$, we have $c < \inf B < b$. 
+
+Statement (b) is true. 
+
+\medskip
+
+\noindent\textbf{(c)} If
+\[
+  \exists c\in\mathbb{R},\quad
+  \forall a\in A,\ \forall b\in B,\qquad a<c<b,
+\]
+then
+\[
+  \sup A<\inf B.
+\]
+
+
 
 \end{document}

@@ -452,19 +452,51 @@ Therefore, both implications hold, and hence proven.
 
 \begin{dfn}[Least Upper Bound/Supremum]{supremum} 
   $s$ is the \emph{least upper bound} or \emph{supremum} of a set \(A\) if 
-  \begin{enumerate}
+  \begin{enumerate}[nosep]
     \item $s$ is an upper bound of \(A\)
     \item $\forall b$ is an upper bound of \(A\), $s \leq b$ 
   \end{enumerate}
 \end{dfn} 
 
+\begin{prop}[\(\varepsilon\)-Characterization of the Supremum]
+{epsilon-supremum}
+  Let \(A\subseteq\mathbb{R}\) be nonempty and let \(s\in\mathbb{R}\).
+  Then \(s=\sup A\) if and only if
+  \begin{enumerate}[nosep]
+    \item \(s\) is an upper bound of \(A\); and
+    \item for every \(\varepsilon>0\), \(s-\varepsilon\) is not an upper
+      bound of \(A\).
+  \end{enumerate}
+  Equivalently,
+  \[
+    \forall\varepsilon>0,\quad
+    \exists a\in A,\qquad s-\varepsilon<a\leq s.
+  \]
+\end{prop}
+
 \begin{dfn}[Greatest Lower Bound/Infimum]{infimum} 
   $i$ is the \emph{greatest lower bound} or \emph{infimum} of a set \(A\) if 
-  \begin{enumerate}
+  \begin{enumerate}[nosep]
     \item $i$ is a lower bound of \(A\)
     \item $\forall b$ is a lower bound of \(A\), $i \geq b$ 
   \end{enumerate}
 \end{dfn} 
+
+\begin{prop}[\(\varepsilon\)-Characterization of the Infimum]
+{epsilon-infimum}
+  Let \(A\subseteq\mathbb{R}\) be nonempty and let \(i\in\mathbb{R}\).
+  Then \(i=\inf A\) if and only if
+  \begin{enumerate}[nosep]
+    \item \(i\) is a lower bound of \(A\); and
+    \item for every \(\varepsilon>0\), \(i+\varepsilon\) is not a lower
+      bound of \(A\).
+  \end{enumerate}
+  Equivalently,
+  \[
+    \forall\varepsilon>0,\quad
+    \exists a\in A,\qquad i\leq a<i+\varepsilon.
+  \]
+\end{prop}
 
 \begin{conv}
   We use the notation $\sup A$ to denote the supremum of a set \(A\) and $\inf A$ to denote the infimum of a set \(A\).
@@ -527,13 +559,28 @@ Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bou
   \]
   is nonempty and bounded above in \(\mathbb{Q}\), but it has no supremum
   in \(\mathbb{Q}\).
-\end{prop}
+\end{prop} 
 
 \begin{rem}[Integers and Natural Numbers]{integers-naturals-not-fields}
   Neither \(\mathbb{Z}\) nor \(\mathbb{N}\) is a field, so neither can be
   called a complete ordered field. As ordered sets, however, their nonempty
   subsets that are bounded above have greatest elements.
 \end{rem}
+
+\begin{ex}
+If $A = {\frac{1}{n}: n \in \mathbb N}$, then $\sup A = 1$ and $\inf A = 0$. Although it has a infimum, it does not have a minimum since $0 \notin A$. 
+\end{ex} 
+
+\begin{thm}[All Subsets of $\mathbb R$ have Supremums and Infimums]{supremum-infimum-existence}
+  Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bounded-above} has a 
+\xref[least upper bound]{def:supremum} in \(\mathbb{R}\) and every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded below]{def:bounded-below} has a 
+\xref[greatest lower bound]{def:infimum} in \(\mathbb{R}\) 
+\end{thm} 
+
+\begin{proof}[Bounded above in $\mathbb R$ implies exists a supremum in $\mathbb R$] 
+  $A \subseteq \mathbb R$ and $A$ is \xref[bounded above]{def:bounded-above}. 
+\end{proof}
+  
 
 \end{document}
   

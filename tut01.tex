@@ -271,7 +271,21 @@ Find \(f^{-1}(A)\) and \(f^{-1}(B)\), and determine whether
   f^{-1}(A\cap B)=f^{-1}(A)\cap f^{-1}(B)
   \quad\text{and}\quad
   f^{-1}(A\cup B)=f^{-1}(A)\cup f^{-1}(B).
-\]
+\] 
+
+$f^{-1}(A) = [-2, 2], \quad f^{-1}(B) = [-1, 1]$
+
+Where $A \cap B = [0, 1]$, so $f^{-1}(A \cap B) = [-1, 1]$. 
+
+We can also find $f^{-1}(A) \cap f^{-1}(B) = [-2, 2] \cap [-1, 1] = [-1, 1]$. 
+
+\fbox{So, $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$.} 
+
+Where $A \cup B = [-1, 4]$, so $f^{-1}(A \cup B) = [-2, 2]$. 
+
+We can also find $f^{-1}(A) \cup f^{-1}(B) = [-2, 2] \cup [-1, 1] = [-2, 2]$. 
+
+\fbox{So, $f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$.} 
 
 \medskip
 \noindent\textbf{(b)} For an arbitrary function
@@ -282,7 +296,10 @@ Find \(f^{-1}(A)\) and \(f^{-1}(B)\), and determine whether
   g^{-1}(A\cup B)=g^{-1}(A)\cup g^{-1}(B).
 \]
 
-% Write your answer to (b) below this line.
+\begin{proof}
+  IDK 
+  \vspace{5em}
+\end{proof} 
 
 \section{Suprema and Infima}
 
@@ -400,6 +417,14 @@ then
   \sup A<\inf B.
 \]
 
+This is not true due to 
 
+\[
+  \quad A = \{-\frac{1}{n}: n \in \mathbb{N}\}, B = \{\frac{1}{n}: n \in \mathbb{N}\}. \quad \exists c = 0, \forall a \in A, \forall b \in B, a < c < b 
+\]
+
+However, $\sup A = 0$ and $\inf B = 0$, so $\sup A = \inf B$. Does not fulfill the requirement of $\sup A < \inf B$. 
+
+Statement (c) is false. 
 
 \end{document}

@@ -97,8 +97,8 @@ is rendered as `definition open set` and points to:
 https://notes.rua.rs/topology/lec03.pdf#nameddest=notes.def.open-set
 ```
 
-Supported kinds are `def`, `thm`, `axm`, `prop`, `lem`, `cor`, `rem`, `ex`,
-`exc`, and `conv`. Comma-separated references and the unlinked `\xref*` form are
+Supported kinds are `def`, `thm`, `axm`, `prop`, `lem`, `cor`, `rem`, `eg`,
+`ex`, and `conv`. Comma-separated references and the unlinked `\xref*` form are
 also supported.
 
 ## Number-display tradeoff

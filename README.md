@@ -76,8 +76,8 @@ markup.
 | `lem` | `lemma` | `lem` |
 | `cor` | `corollary` | `cor` |
 | `rem` | `remark` | `rem` |
-| `ex` | `example` | `ex` |
-| `exc` | `exercise` | `exc` |
+| `eg` | `example` | `eg` |
+| `ex` | `exercise` | `ex` |
 | `conv` | `convention` | `conv` |
 
 For tutorial questions, use your own section-based exercise number and print
@@ -90,16 +90,16 @@ repeated source information convenient:
   Edition, Exercise #1.\par\smallskip
 }
 
-\begin{exc}{abbott-1-2-3}
+\begin{ex}{abbott-1-2-3}
 \abbottexercise{1.2.3}
 Question text.
-\end{exc}
+\end{ex}
 
 % Write your answer here.
 ```
 
 This prints your local number, such as `Exercise 1.1`, followed by the source
-citation, while creating the reference ID `exc:abbott-1-2-3`.
+citation, while creating the reference ID `ex:abbott-1-2-3`.
 
 Proof headings depend on whether a title is supplied:
 

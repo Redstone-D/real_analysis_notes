@@ -219,7 +219,7 @@
     \IfNoValueTF{#1}
       { \__notesenv_example_begin: }
       { \__notesenv_example_begin: [#1] }
-    \__notesenv_add_label:nnn {ex} {#1} {#2}
+    \__notesenv_add_label:nnn {eg} {#1} {#2}
   }
   { \__notesenv_example_end: }
 
@@ -228,7 +228,7 @@
     \IfNoValueTF{#1}
       { \__notesenv_exercise_begin: }
       { \__notesenv_exercise_begin: [#1] }
-    \__notesenv_add_label:nnn {exc} {#1} {#2}
+    \__notesenv_add_label:nnn {ex} {#1} {#2}
   }
   { \__notesenv_exercise_end: }
 
@@ -275,10 +275,10 @@
 \cs_new_eq:NN \endcor \endcorollary
 \cs_new_eq:NN \rem \remark
 \cs_new_eq:NN \endrem \endremark
-\cs_new_eq:NN \ex \example
-\cs_new_eq:NN \endex \endexample
-\cs_new_eq:NN \exc \exercise
-\cs_new_eq:NN \endexc \endexercise
+\cs_new_eq:NN \eg \example
+\cs_new_eq:NN \endeg \endexample
+\cs_new_eq:NN \ex \exercise
+\cs_new_eq:NN \endex \endexercise
 \cs_new_eq:NN \conv \convention
 \cs_new_eq:NN \endconv \endconvention
 \ExplSyntaxOff
@@ -316,7 +316,7 @@
 \msg_new:nnn { notes-common } { unsupported-kind }
   {
     Unsupported~reference~kind~'#1'.
-    ~Use~def,~thm,~axm,~prop,~lem,~cor,~rem,~ex,~exc,~or~conv.
+    ~Use~def,~thm,~axm,~prop,~lem,~cor,~rem,~eg,~ex,~or~conv.
   }
 
 \cs_new_protected:Npn \__notesxref_use_one:n #1
@@ -490,11 +490,11 @@
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { remark }
           }
-        {ex}
+        {eg}
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { example }
           }
-        {exc}
+        {ex}
           {
             \tl_set:Nn \l__notesxref_kind_name_tl { exercise }
           }

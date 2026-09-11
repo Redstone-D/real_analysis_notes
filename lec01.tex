@@ -5,7 +5,7 @@
 
 \begin{center}
   {\LARGE\bfseries Lecture 1: Real Numbers}\\[0.25em]
-  {\large AMA3707 Real Analysis}\\[0.15em]
+  {\large Mathematical Analysis}\\[0.15em]
 \end{center}
 
 \section{Numbers}
@@ -273,7 +273,7 @@ internally [TODO Pf link to completeness axiom].
   \]
 \end{theorem}
 
-\begin{example}[Nested Sequence]{nested-sequence} 
+\begin{eg}[Nested Sequence]{nested-sequence} 
 Let $A_n = \{n, n+1, n+2, \dots\}, n \in \mathbb N$ 
 
 ie, $A_1 = \{1, 2, 3, \dots\}, A_5 = \{5, 6, 7, \dots\}$ 
@@ -289,7 +289,7 @@ The intersection is $\emptyset$ due to if a number, let's say for any natural nu
 
 So in the universe $\mathbb N$, 
 \[\forall p \notin \bigcap^{\infty}_{n=1} \implies \bigcap^{\infty}_{n=1} = \emptyset \] 
-\end{example}
+\end{eg}
 
 \section{Mapping} 
 
@@ -458,7 +458,7 @@ Therefore, both implications hold, and hence proven.
   \end{enumerate}
 \end{dfn} 
 
-\begin{prop}[\(\varepsilon\)-Characterization of the Supremum]
+\begin{prop}[\(\varepsilon\)-Criterion for the Supremum]
 {epsilon-supremum}
   Let \(A\subseteq\mathbb{R}\) be nonempty and let \(s\in\mathbb{R}\).
   Then \(s=\sup A\) if and only if
@@ -469,10 +469,45 @@ Therefore, both implications hold, and hence proven.
   \end{enumerate}
   Equivalently,
   \[
-    \forall\varepsilon>0,\quad
-    \exists a\in A,\qquad s-\varepsilon<a\leq s.
+    s=\sup A
+    \iff
+    \begin{cases}
+      \forall x\in A,\quad x\leq s,\\
+      \forall\varepsilon>0,\quad
+      \exists x\in A\text{ s.t. }s-\varepsilon<x.
+    \end{cases}
   \]
-\end{prop}
+\end{prop} 
+
+\begin{proof}
+In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to proof both directions are true. 
+
+\textbf{(a)}: 
+  \[
+    s=\sup A
+    \implies
+    \begin{cases}
+      \forall x\in A,\quad x\leq s,\\
+      \forall\varepsilon>0,\quad
+      \exists x\in A\text{ s.t. }s-\varepsilon<x.
+    \end{cases}
+  \] 
+
+  According to the \xref[definition of supremum]{def:supremum}, we know that $s$ is an upper bound of \(A\), ie, $\forall x\in A, x \leq s$. 
+
+  
+
+\textbf{(b)}: 
+  \[
+    \begin{cases}
+      \forall x\in A,\quad x\leq s,\\
+      \forall\varepsilon>0,\quad
+      \exists x\in A\text{ s.t. }s-\varepsilon<x.
+    \end{cases}
+    \implies
+    s=\sup A
+  \] 
+\end{proof}
 
 \begin{dfn}[Greatest Lower Bound/Infimum]{infimum} 
   $i$ is the \emph{greatest lower bound} or \emph{infimum} of a set \(A\) if 
@@ -482,7 +517,7 @@ Therefore, both implications hold, and hence proven.
   \end{enumerate}
 \end{dfn} 
 
-\begin{prop}[\(\varepsilon\)-Characterization of the Infimum]
+\begin{prop}[\(\varepsilon\)-Criterion for the Infimum]
 {epsilon-infimum}
   Let \(A\subseteq\mathbb{R}\) be nonempty and let \(i\in\mathbb{R}\).
   Then \(i=\inf A\) if and only if
@@ -493,8 +528,13 @@ Therefore, both implications hold, and hence proven.
   \end{enumerate}
   Equivalently,
   \[
-    \forall\varepsilon>0,\quad
-    \exists a\in A,\qquad i\leq a<i+\varepsilon.
+    i=\inf A
+    \iff
+    \begin{cases}
+      \forall x\in A,\quad i\leq x,\\
+      \forall\varepsilon>0,\quad
+      \exists x\in A\text{ s.t. }x<i+\varepsilon.
+    \end{cases}
   \]
 \end{prop}
 
@@ -567,9 +607,9 @@ Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bou
   subsets that are bounded above have greatest elements.
 \end{rem}
 
-\begin{ex}
+\begin{eg}
 If $A = {\frac{1}{n}: n \in \mathbb N}$, then $\sup A = 1$ and $\inf A = 0$. Although it has a infimum, it does not have a minimum since $0 \notin A$. 
-\end{ex} 
+\end{eg} 
 
 \begin{thm}[All Subsets of $\mathbb R$ have Supremums and Infimums]{supremum-infimum-existence}
   Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bounded-above} has a 
@@ -580,7 +620,7 @@ If $A = {\frac{1}{n}: n \in \mathbb N}$, then $\sup A = 1$ and $\inf A = 0$. Alt
 \begin{proof}[Bounded above in $\mathbb R$ implies exists a supremum in $\mathbb R$] 
   $A \subseteq \mathbb R$ and $A$ is \xref[bounded above]{def:bounded-above}. 
 \end{proof}
-  
+
 
 \end{document}
   

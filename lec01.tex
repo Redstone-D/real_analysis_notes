@@ -586,7 +586,7 @@ In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to p
 \xref[least upper bound]{def:supremum} in \(F\) 
 \end{dfn} 
 
-\begin{axm}[Completeness Axiom]{completeness}
+\begin{axm}[Axiom of Completeness]{aoc}
 Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bounded-above} has a 
 \xref[least upper bound]{def:supremum} in \(\mathbb{R}\) 
 \end{axm}
@@ -617,9 +617,12 @@ If $A = {\frac{1}{n}: n \in \mathbb N}$, then $\sup A = 1$ and $\inf A = 0$. Alt
 \xref[greatest lower bound]{def:infimum} in \(\mathbb{R}\) 
 \end{thm} 
 
-\begin{proof}[Bounded above in $\mathbb R$ implies exists a supremum in $\mathbb R$] 
-  $A \subseteq \mathbb R$ and $A$ is \xref[bounded above]{def:bounded-above}. 
-\end{proof}
+\begin{rem}[Intuition for Completeness]
+  We can have a set, let's say, \[S = \{r \in \mathbb Q: r^2 < 3\}, \text{where } r \subset \mathbb Q \subset \mathbb R \]
+
+  Although the set $S$ is bounded above in $\mathbb{Q}$, it does not have a supremum in $\mathbb{Q}$. According to the \xref[AoC]{axm:aoc}, we know that $\exists s \in \mathbb R, s = \sup S$. This means we can find a number that can be described as the least upper bound a subset of rational numbers which is not in the rational numbers. 
+
+\end{rem}
 
 
 \end{document}

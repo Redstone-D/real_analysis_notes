@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+\usepackage{notes-project}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Lecture 2: }\\[0.25em]
+  {\large Mathematical Analysis}\\[0.15em]
+\end{center}
+
+\section{Intervals}
+
+\begin{dfn}[Interval]{interval}
+  A set \(I\subseteq\mathbb{R}\) is an \emph{interval} if, whenever
+  \(x,y\in I\) with \(x\le y\), every \(z\in\mathbb{R}\) satisfying
+  \(x\le z\le y\) also belongs to \(I\).
+\end{dfn}
+
+\begin{rem}[Intervals as Sets]{intervals-as-sets}
+  In these notes, every interval is a set contained in \(\mathbb{R}\);
+  that is, every interval \(I\) satisfies \(I\subseteq\mathbb{R}\).
+\end{rem}
+
+\begin{dfn}[Open Interval]{open-interval}
+  For \(a,b\in\mathbb{R}\) with \(a<b\), the \emph{open interval}
+  from \(a\) to \(b\) is
+  \[
+    (a,b)=\{x\in\mathbb{R}:a<x<b\}.
+  \]
+\end{dfn}
+
+\begin{dfn}[Closed Interval]{closed-interval}
+  For \(a,b\in\mathbb{R}\) with \(a\le b\), the \emph{closed interval}
+  from \(a\) to \(b\) is
+  \[
+    [a,b]=\{x\in\mathbb{R}:a\le x\le b\}.
+  \]
+\end{dfn}
+
+\section{Nested Intervals Property}
+
+\begin{dfn}[Nested Intervals Property (NIP)]{nip}
+  Let \(I_n=[a_n,b_n]\) be a sequence of
+  \xref[closed]{def:closed-interval} and \xref[bounded]{lec01::def:bounded-set} \xref[intervals]{def:interval}.
+\end{dfn}
+
+\end{document}

@@ -22,43 +22,30 @@
 \textbf{(a)} If $A_1 \supseteq A_2 \supseteq A_3 \supseteq \cdots$ and
 every $A_n$ is infinite, then $\bigcap_{n=1}^{\infty} A_n$ is infinite.
 
-Given that $A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots$ are all containing infinite number of elements. 
+Counter Example: Let $A_n = \{n, n+1, n+2, \ldots\}$, where $n \in \mathbb N$, then \[\forall x \in \mathbb N, x \notin A_{n+1}\]
 
-This is a nested sequence that 
-\[
-\bigcap_{n=1}^{m} A_n = A_m
-\]
+Which means \[\bigcap_{n=1}^{\infty} A_n = \emptyset\]
 
-Notice that for all sets $A_n$, it contains infinite number of elements. Meaning that $m \to \infty$, $A_m$ will still contain infinite number of elements. 
-
-Also, 
-\[
-\bigcap_{n=1}^{\infty} A_n = \lim_{m \to \infty}{\bigcap_{n=1}^{m} A_n} = A_m
-\] 
-
-So, 
-\[
-\left| \bigcap_{n=1}^{\infty} A_n \right| = \left| A_m \right| = \infty 
-\] 
-
-Statement (a) is true. 
+Statement (a) is false. 
 
 \medskip
 \noindent\textbf{(b)} If $A_1 \supseteq A_2 \supseteq A_3 \supseteq \cdots$
 and every $A_n$ is finite and nonempty, then
 $\bigcap_{n=1}^{\infty} A_n$ is finite and nonempty.
 
-By the same argument, 
-\[
-\bigcap_{n=1}^{\infty} A_n = \lim_{m \to \infty}{\bigcap_{n=1}^{m} A_n} = A_m, \quad 0 < |A_m| < \infty
-\] 
+\begin{proof}
+Since $\forall n \in \mathbb N, A_{n+1} \subseteq A_n$. Which means for any $n$, either $A_n = A_{n+1}$ or $A_{n+1} \subset A_n$.
 
-So, 
-\[
-\bigcap_{n=1}^{\infty} A_n = A_m \quad \text{is finite and nonempty.}
-\] 
+If $A_{n+1} \subset A_n$, then $|A_{n+1}| < |A_n|$. 
+
+Notice that $\forall n \in \mathbb N, A_n$ is finite and nonempty. ie $|A_n|$ must be a positive finite number. 
+
+So, there are only finite steps such that $A_{n+1} \subset A_n$. After that, the nested sequence converges to a finite nonempty set, let's say $A_k$. 
+
+Then, $\bigcap_{n=1}^{\infty} A_n = A_k$, which is finite and nonempty. 
 
 Statement (b) is true. 
+\end{proof}
 
 \medskip
 \noindent\textbf{(c)} $A \cap (B \cup C) = (A \cap B) \cup C$.
@@ -199,8 +186,6 @@ Where $A \cup B = [0,4]$, so $f(A \cup B) = [0,16]$.
 We can also find $f(A) \cup f(B) = [0,4] \cup [1,16] = [0,16]$. 
 
 \fbox{So, $f(A \cup B) = f(A) \cup f(B)$.} 
-
-According to \xref{lec01::prop:bijection-preimage-image}, 
 
 \medskip
 \noindent\textbf{(b)} Find \(A\) and \(B\) such that

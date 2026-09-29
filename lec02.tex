@@ -37,11 +37,58 @@
   \]
 \end{dfn}
 
+\begin{lem}[Endpoints of Contained Closed Intervals]{contained-interval-endpoints}
+  Let \(I_1=[a_1,b_1]\) and \(I_2=[a_2,b_2]\) be closed intervals. If
+  \(I_1\subseteq I_2\), then
+  \[
+    a_2\le a_1\le b_1\le b_2.
+  \]
+\end{lem}
+
+\begin{proof}
+  Since \(a_1,b_1\in I_1\subseteq I_2\),
+  \xref{def:closed-interval} gives \(a_2\le a_1\) and \(b_1\le b_2\).
+
+  Since \(I_1=[a_1,b_1]\) is a closed interval,
+  \xref{def:closed-interval} requires \(a_1\le b_1\).
+
+  Combining these inequalities gives the result.
+\end{proof}
+
 \section{Nested Intervals Property}
 
-\begin{dfn}[Nested Intervals Property (NIP)]{nip}
+\begin{thm}[Nested Intervals Property (NIP)]{nip}
   Let \(I_n=[a_n,b_n]\) be a sequence of
   \xref[closed]{def:closed-interval} and \xref[bounded]{lec01::def:bounded-set} \xref[intervals]{def:interval}.
-\end{dfn}
+  \[
+    I_1\supseteq I_2\supseteq I_3\supseteq\cdots
+    \implies
+    \bigcap_{n=1}^{\infty} I_n\neq\emptyset.
+  \]
+\end{thm}
+
+\begin{proof}
+Take \(A=\{a_n:n\in\mathbb{N}\}\) and
+\(B=\{b_n:n\in\mathbb{N}\}\). Since \(I_n\) is a
+\xref[closed interval]{def:closed-interval}, we have \(a_n\leq b_n\) and
+\[
+  I_n=\{x\in\mathbb{R}:a_n\leq x\leq b_n\}.
+\]
+
+Also,
+\[
+  I_1\supseteq I_2\supseteq I_3\supseteq\cdots,
+  \qquad\text{that is,}\qquad
+  I_{n+1}\subseteq I_n
+\]
+for every \(n\in\mathbb{N}\).
+
+Define set $A$ and $B$, such that \[A = \{a_1, a_2, a_3, \dots\}, \quad B = \{b_1, b_2, b_3 \dots\}\]
+
+Since $A$ is a set in $\mathbb R$, according to \xref[Axiom of Comleteness]{lec01::axm:aoc}, $A$ has a supremum, say $\sup A = \alpha$. Similarly, according to \xref[infimum lemma]{lec01::lem:supremum-infimum-equivalence} $B$ has an infimum, say $\inf B = \beta$. 
+
+According to \xref{lem:contained-interval-endpoints}, 
+\[\bigcap^{n}_{1} I_m = I_m = [\alpha, \beta]\]
+\end{proof}
 
 \end{document}

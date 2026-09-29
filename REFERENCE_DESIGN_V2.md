@@ -101,6 +101,35 @@ Supported kinds are `def`, `thm`, `axm`, `prop`, `lem`, `cor`, `rem`, `eg`,
 `ex`, and `conv`. Comma-separated references and the unlinked `\xref*` form are
 also supported.
 
+## Optional subject notation modules
+
+A course may add a project-specific package such as
+`real-analysis-notations.sty` or `qm-notations.sty`. This is optional and does
+not change the two required library files. Load it from `notes-project.sty`
+after `notes-common`.
+
+Notation macros may place `\xref` around only the stable symbol or operator
+head. Arguments and subscripts remain outside the link, avoiding nested
+hyperlinks. Reference targets may be stored in overridable macros because
+`\xref` expands its mandatory argument before parsing it.
+
+Use a project-qualified default target when another subject may reuse the
+module:
+
+```tex
+\providecommand*{\supremumRef}{real-analysis::lec01::def:supremum}
+\renewcommand*{\sup}{%
+  \mathop{\xref[\mathrm{sup}]{\supremumRef}}\nolimits
+}
+```
+
+A dependent course should vendor or otherwise track the subject package in its
+own repository and then load it normally. Do not rely on `../` paths into a
+sibling checkout; those paths are not portable to another machine or build
+environment. The fully qualified default keeps the link pointing back to the
+owning subject. Override the target before package loading only when the
+definition lives elsewhere.
+
 ## Number-display tradeoff
 
 A local semantic reference is resolved by `cleveref`, so it displays its

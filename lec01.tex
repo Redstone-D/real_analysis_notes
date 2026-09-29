@@ -591,6 +591,41 @@ Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bou
 \xref[least upper bound]{def:supremum} in \(\mathbb{R}\) 
 \end{axm}
 
+\begin{lem}[Supremum--Infimum Equivalence]{supremum-infimum-equivalence}
+  Let \(F\) be an ordered field. The following statements are equivalent:
+  \begin{enumerate}[nosep]
+    \item Every nonempty set \(A\subseteq F\) that is bounded above in
+      \(F\) has a supremum in \(F\).
+    \item Every nonempty set \(A\subseteq F\) that is bounded below in
+      \(F\) has an infimum in \(F\).
+  \end{enumerate}
+  Consequently, the \xref[definition of a complete ordered field]
+  {def:complete-ordered-field} may equivalently use the infimum property.
+  In particular, \xref[the Axiom of Completeness]{axm:aoc} is equivalent
+  to the assertion that every nonempty subset of \(\mathbb{R}\) bounded
+  below has an infimum in \(\mathbb{R}\).
+\end{lem}
+
+\begin{proof}
+  First assume the supremum property, and let \(A\subseteq F\) be nonempty
+  and bounded below. Define
+  \[
+    -A=\{-a:a\in A\}.
+  \]
+  Then \(-A\) is nonempty and bounded above, so let \(s=\sup(-A)\).
+  For every \(a\in A\), we have \(-a\le s\), and hence \(-s\le a\).
+  Thus \(-s\) is a lower bound of \(A\). If \(\ell\) is any lower bound
+  of \(A\), then \(-\ell\) is an upper bound of \(-A\). Therefore
+  \(s\le-\ell\), so \(\ell\le-s\). Hence \(-s=\inf A\).
+
+  Conversely, assume the infimum property, and let \(A\subseteq F\) be
+  nonempty and bounded above. Then \(-A\) is nonempty and bounded below,
+  so let \(i=\inf(-A)\). For every \(a\in A\), we have \(i\le-a\), and
+  hence \(a\le-i\). Thus \(-i\) is an upper bound of \(A\). If \(u\) is
+  any upper bound of \(A\), then \(-u\) is a lower bound of \(-A\).
+  Therefore \(-u\le i\), so \(-i\le u\). Hence \(-i=\sup A\).
+\end{proof}
+
 \begin{prop}[The Rational Numbers Are Not Complete]
 {rationals-not-complete}
   The ordered field \(\mathbb{Q}\) is not complete. For example, the set
@@ -611,11 +646,17 @@ Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bou
 If $A = {\frac{1}{n}: n \in \mathbb N}$, then $\sup A = 1$ and $\inf A = 0$. Although it has a infimum, it does not have a minimum since $0 \notin A$. 
 \end{eg} 
 
-\begin{thm}[All Subsets of $\mathbb R$ have Supremums and Infimums]{supremum-infimum-existence}
+\begin{cor}[Supremum and Infimum Existence in $\mathbb R$]{supremum-infimum-existence}
   Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bounded-above} has a 
 \xref[least upper bound]{def:supremum} in \(\mathbb{R}\) and every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded below]{def:bounded-below} has a 
 \xref[greatest lower bound]{def:infimum} in \(\mathbb{R}\) 
-\end{thm} 
+\end{cor}
+
+\begin{proof}
+  The supremum statement is \xref[the Axiom of Completeness]{axm:aoc},
+  and the infimum statement follows from
+  \xref{lem:supremum-infimum-equivalence}.
+\end{proof}
 
 \begin{rem}[Intuition for Completeness]
   We can have a set, let's say, \[S = \{r \in \mathbb Q: r^2 < 3\}, \text{where } r \subset \mathbb Q \subset \mathbb R \]

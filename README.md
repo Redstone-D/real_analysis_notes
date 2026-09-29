@@ -32,7 +32,7 @@ examples, exercises, and conventions have independent counters within each secti
 Consequently, section 2 may contain Definition 2.1, Proposition 2.1, and
 Exercise 2.1.
 
-## Two-layer library
+## Library layers
 
 Every document loads:
 
@@ -44,8 +44,12 @@ Every document loads:
 |---|---|
 | `notes-common.sty` | Reusable formatting, section-based environments, and direct PDF-reference macros. |
 | `notes-project.sty` | Real Analysis server URL and project name. |
+| `real-analysis-notations.sty` | Optional subject notation; makes `\sup` and `\inf` link to their definitions. |
 
 There is no Python build helper, JSON reference index, or remote AUX file.
+The subject-notation layer is optional. A dependent course may vendor and load
+this `.sty` file to reuse the notation; its project-qualified default targets
+continue to point to the definitions in Real Analysis.
 
 ## References
 
@@ -137,6 +141,10 @@ These forms mean current project, current server, and explicit server,
 respectively. A local reference uses its numbered `cleveref` text; a
 cross-PDF reference links to its stable semantic PDF destination. See
 `REFERENCE_DESIGN_V2.md` for more detail.
+
+The linked operators `\sup` and `\inf` retain their normal mathematical
+behavior, including subscripts. Only the operator head is clickable. Use
+`\raPlainSup` or `\raPlainInf` when an unlinked form is required.
 
 ## Published files
 

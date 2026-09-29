@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{notes-common}[2026/09/09 Shared notes style and direct PDF references]
+\ProvidesPackage{notes-common}[2026/09/28 Shared notes style and direct PDF references]
 
 \makeatletter
 \@ifundefined{notesServerRoot}{%
@@ -554,7 +554,8 @@
 
 \cs_new_protected:Npn \__notesxref_render_one:nnn #1#2#3
   {
-    \tl_set:Nx \l__notesxref_reference_tl { \tl_trim_spaces:n {#3} }
+    \tl_set:Nx \l__notesxref_reference_tl {#3}
+    \tl_trim_spaces:N \l__notesxref_reference_tl
     \cs_if_exist:cTF { r@\l__notesxref_reference_tl }
       {
         \IfNoValueTF{#2}
@@ -576,7 +577,8 @@
           }
       }
       {
-        \__notesxref_make_link:n {#3}
+        \exp_args:NV
+          \__notesxref_make_link:n \l__notesxref_reference_tl
         \IfNoValueF{#2} { \tl_set:Nn \l__notesxref_text_tl {#2} }
         \int_compare:nNnTF {#1} = {1}
           { \tl_use:N \l__notesxref_text_tl }

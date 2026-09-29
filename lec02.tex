@@ -61,9 +61,9 @@
   Let \(I_n=[a_n,b_n]\) be a sequence of
   \xref[closed]{def:closed-interval} and \xref[bounded]{lec01::def:bounded-set} \xref[intervals]{def:interval}.
   \[
-    I_1\supseteq I_2\supseteq I_3\supseteq\cdots
+    I_0\supseteq I_1\supseteq I_2\supseteq\cdots
     \implies
-    \bigcap_{n=1}^{\infty} I_n\neq\emptyset.
+    \bigcap_{n=0}^{\infty} I_n\neq\emptyset.
   \]
 \end{thm}
 
@@ -77,18 +77,27 @@ Take \(A=\{a_n:n\in\mathbb{N}\}\) and
 
 Also,
 \[
-  I_1\supseteq I_2\supseteq I_3\supseteq\cdots,
+  I_0\supseteq I_1\supseteq I_2\supseteq\cdots,
   \qquad\text{that is,}\qquad
   I_{n+1}\subseteq I_n
 \]
 for every \(n\in\mathbb{N}\).
 
-Define set $A$ and $B$, such that \[A = \{a_1, a_2, a_3, \dots\}, \quad B = \{b_1, b_2, b_3 \dots\}\]
+For a fixed \(k\in\mathbb{N}\), suppose
+\[
+  x\in\bigcap_{n=0}^{k}I_n.
+\]
+By the definition of intersection, \(x\in I_n\) for every
+\(0\leq n\leq k\). In particular, taking \(n=k\) gives
+\[
+  x\in I_k=[a_k,b_k],
+\]
+and hence \(a_k\leq x\leq b_k\).
 
-Since $A$ is a set in $\mathbb R$, according to \xref[Axiom of Comleteness]{lec01::axm:aoc}, $A$ has a supremum, say $\sup A = \alpha$. Similarly, according to \xref[infimum lemma]{lec01::lem:supremum-infimum-equivalence} $B$ has an infimum, say $\inf B = \beta$. 
+Since $A$ is a set in $\mathbb R$, according to \xref[Axiom of Comleteness]{lec01::axm:aoc}, $A$ has a supremum, say $\sup A = \alpha$.  
 
-According to \xref{lem:contained-interval-endpoints}, 
-\[\bigcap^{n}_{1} I_m = I_m = [\alpha, \beta]\]
+
+
 \end{proof}
 
 \end{document}

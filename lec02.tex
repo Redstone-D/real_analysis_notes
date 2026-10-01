@@ -182,24 +182,58 @@ I_n=[s_n,s_n+10^{-n}]
 Thus \(x\) is the unique number represented by the digit sequence \(a\).
 \end{proof} 
 
-\section{Archimedian Property} 
+\begin{rem}[Decimal Expansion is not Unique]{decimal-representation-not-unique}
+  The decimal expansion of a real number is not unique. For example, \(0.8999\ldots = 0.9000\ldots\)  
+\end{rem}
 
-\begin{thm}[$\NN$ is not bounded in $\RR$]{nat-not-bounded}
-  $\NN$ is not \xref[bounded]{lec01::def:bounded-set} in $\RR$, in other words, \(\forall x \in \RR, \exists n \in \NN, n > x\)
+\section{Archimedean Property} 
+
+\begin{thm}[Archimedean Property]{archimedean-property}
+  $\NN$ is not \xref[bounded above]{lec01::def:bounded-above} in $\RR$, in other words, \(\forall x \in \RR, \exists n \in \NN, n > x\)
 \end{thm} 
 
 \begin{proof}
-Assume for the sake of contradiction that $\NN$ is bounded in $\RR$. 
+Assume for the sake of contradiction that $\NN$ is bounded above in $\RR$. 
 
-According to the definition of \xref[bounded set]{lec01::def:bounded-set}, if $\NN$ is bounded in $\RR$, then it must be \xref[bounded above]{lec01::def:bounded-above}. By the \xref[Axiom of Completeness]{lec01::axm:aoc}, $\NN$ has a supremum, denoted as $\alpha = \sup \NN$.
+Since \(0\in\NN\), we have \(\NN\neq\emptyset\). By the \xref[Axiom of Completeness]{lec01::axm:aoc}, $\NN$ has a supremum, denoted as $\alpha = \sup \NN$.
 
 By the definition of \xref[epsilon criteria]{lec01::prop:epsilon-supremum}, we have: 
 \[\forall x \in \NN, x \leq \alpha, \quad \forall \varepsilon > 0, \exists x \in \NN, \alpha - \varepsilon < x \] 
 
-Which means that 
-\[\exists n \in \NN, \alpha - 1 < n, \implies \alpha < n + 1\] 
+Taking \(\varepsilon=1\), we obtain
+\[\exists n\in\NN:\quad \alpha-1<n\implies\alpha<n+1.\]
 
-If $n \in \NN, S(n) = n + 1 \in \NN$, then $\alpha < S(n) \in \NN$, contradicting the definition of supremum. Therefore, $\NN$ is not bounded in $\RR$. 
+Since \(n+1=S(n)\in\NN\), this contradicts that \(\alpha\) is an upper bound of \(\NN\), namely
+\[\forall m\in\NN,\quad m\leq\alpha.\]
+Therefore, $\NN$ is not bounded above in $\RR$. 
 \end{proof}
+
+\begin{thm}[Archimedean Property (Reciprocal Form)]{archimedean-reciprocal-form}
+\[\forall y > 0, \, \exists n \in \NN, \, 1/n < y \]
+\end{thm}
+
+\begin{proof}
+Take $x = 1/y$. Since $y > 0$, we have $x > 0$. 
+
+According to definition of Natural Numbers, $\exists n \in \NN, \, n \geq x$, then $1/n \leq 1/x = y$. 
+\end{proof}
+
+\begin{dfn}[Dense Subset]{dense-subset}
+Let \(D\subseteq\RR\). We say that \(D\) is \emph{dense in \(\RR\)} if
+\[
+\forall a,b\in\RR,\quad
+a<b\implies\exists d\in D:\quad a<d<b.
+\]
+\end{dfn}
+
+\begin{thm}[Density of the Rational Numbers]{rationals-dense-in-reals}
+  $\QQ$ is dense in $\RR$. 
+\end{thm}
+
+\begin{thm}[Density of the Irrational Numbers]{irrationals-dense-in-reals}
+  $\RR \setminus \QQ$ (ie, $\II$) is dense in $\RR$. 
+\end{thm} 
+
+\section{Counting} 
 
 \end{document}

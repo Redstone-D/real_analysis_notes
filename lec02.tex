@@ -4,7 +4,7 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Lecture 2: }\\[0.25em]
+  {\LARGE\bfseries Lecture 2: Cardinality}\\[0.25em]
   {\large Mathematical Analysis}\\[0.15em]
 \end{center}
 
@@ -55,8 +55,6 @@
   Combining these inequalities gives the result.
 \end{proof}
 
-\section{Nested Intervals Property}
-
 \begin{thm}[Nested Intervals Property (NIP)]{nip}
   Let \(I_n=[a_n,b_n]\) be a sequence of
   \xref[closed]{def:closed-interval} and \xref[bounded]{lec01::def:bounded-set} \xref[intervals]{def:interval}.
@@ -68,36 +66,132 @@
 \end{thm}
 
 \begin{proof}
-Take \(A=\{a_n:n\in\mathbb{N}\}\) and
-\(B=\{b_n:n\in\mathbb{N}\}\). Since \(I_n\) is a
-\xref[closed interval]{def:closed-interval}, we have \(a_n\leq b_n\) and
+Let \(A=\{a_n:n\in\mathbb{N}\}\). The nesting hypothesis gives
 \[
-  I_n=\{x\in\mathbb{R}:a_n\leq x\leq b_n\}.
+  \forall n\in\mathbb{N},\quad I_{n+1}\subseteq I_n.
 \]
 
-Also,
+For fixed \(p\in\mathbb{N}\), define
 \[
-  I_0\supseteq I_1\supseteq I_2\supseteq\cdots,
-  \qquad\text{that is,}\qquad
-  I_{n+1}\subseteq I_n
+  P_p(r)\iff I_{p+r}\subseteq I_p.
 \]
-for every \(n\in\mathbb{N}\).
-
-For a fixed \(k\in\mathbb{N}\), suppose
 \[
-  x\in\bigcap_{n=0}^{k}I_n.
+  P_p(0),\quad
+  P_p(r)\implies
+  I_{p+r+1}\subseteq I_{p+r}\subseteq I_p
+  \implies P_p(r+1).
 \]
-By the definition of intersection, \(x\in I_n\) for every
-\(0\leq n\leq k\). In particular, taking \(n=k\) gives
+By \xref[Natural Number Induction]{lec01::thm:natural-number-induction}
+and \(p\leq q\iff\exists r\in\mathbb{N}:q=p+r\),
 \[
-  x\in I_k=[a_k,b_k],
+  \forall p,q\in\mathbb{N},\quad
+  p\leq q\implies
+  \exists r\in\mathbb{N}:\quad
+  q=p+r\ \land\ I_q=I_{p+r}\subseteq I_p.
 \]
-and hence \(a_k\leq x\leq b_k\).
 
-Since $A$ is a set in $\mathbb R$, according to \xref[Axiom of Comleteness]{lec01::axm:aoc}, $A$ has a supremum, say $\sup A = \alpha$.  
+By \xref[comparability in an ordered set]{lec01::def:ordered-set},
+\(\forall n,m\in\mathbb{N},\ (n\leq m)\lor(m\leq n)\). Hence
+\xref{lem:contained-interval-endpoints} gives
+\[
+  \begin{aligned}
+    n\leq m &\implies I_m\subseteq I_n
+      \implies a_n\leq a_m\leq b_m,\\
+    m\leq n &\implies I_n\subseteq I_m
+      \implies a_n\leq b_n\leq b_m,
+  \end{aligned}
+\]
+so
+\[
+  \forall n,m\in\mathbb{N},\quad a_n\leq b_m.
+\] 
 
+Consequently,
+\[
+  a_0\in A,\, 
+  \forall n\in\mathbb{N},\ a_n\leq b_0
+  \implies
+  A\neq\emptyset\ \land A\text{ is bounded above}.
+\]
+By the \xref[Axiom of Completeness]{lec01::axm:aoc}, choose
+\(\alpha=\sup A\). The
+\xref[definition of supremum]{lec01::def:supremum} gives
+\[
+  \forall n,m\in\mathbb{N},\quad
+  a_n\leq\alpha\leq b_m.
+\]
+Hence, by the
+\xref[definitions of a closed interval]{def:closed-interval} and
+\xref[indexed intersection]{lec01::def:indexed-intersection},
+\[
+  \left(\forall n\in\mathbb{N},\quad a_n\leq\alpha\leq b_n\right)
+  \implies
+  \left(\forall n\in\mathbb{N},\quad \alpha\in I_n\right)
+  \iff
+  \alpha\in\bigcap_{n=0}^{\infty}I_n.
+\]
+Therefore \(\bigcap_{n=0}^{\infty}I_n\neq\emptyset\).
+\end{proof}
 
+\begin{rem}[Intervals can be Infinitely Small]{inf-small-intervals}
+If a size of the interval is infinitely small, ie \(I=[a,b]\),
+\(\forall\varepsilon>0,\,
+b-a<\varepsilon\), this means that the interval is equivalent to a single point, ie $a = b$. 
+\end{rem}
 
+\section{Decimal Expansion} 
+
+\begin{thm}[Decimal Expansion]{decimal-representation}
+Let \(D=\{0,1,\ldots,9\}\). Every digit sequence
+\(a:\mathbb{N}_{1}\to D\) determines a unique \(x\in[0,1]\):
+\[
+  \forall a:\mathbb{N}_{1}\to D,\quad
+  \exists!x\in[0,1],\qquad
+  x=\sum_{k=1}^{\infty}a_k10^{-k}.
+\]
+\end{thm}
+
+\begin{proof}
+We call the summation of the first $n$ decimals $s_n$, ie \[s_n  = \sum^{n}_{k=1} a_k \, 10^{-k}\]
+
+Since \(\forall k \in \mathbb N_1, 0 \leq a_k \leq 9\), meaning that \[\forall n,m \in \mathbb N_1,\, n \leq m \implies s_m = s_n + \sum_{k=n+1}^{m} a_k 10^{-k} \leq s_n + 9 \sum_{k=n+1}^{m} 10^{-k} = s_n + 10^{-n} - 10^{-m} < s_n + 10^{-n}\]
+
+In other words, \[\forall n,m \in \mathbb N_1,\quad n \leq m \implies s_m \in [s_n, s_n + 10^{-n}]\] 
+
+By the same argument, we can also show that \[\forall n,m \in \mathbb N_1,\quad n \leq m \implies s_m + 10^{-m} \in [s_n, s_n + 10^{-n}]\] 
+
+Where we can construct the following nested intervals
+\[
+I_n=[s_n,s_n+10^{-n}],\qquad
+I_1\supseteq I_2\supseteq\cdots, \qquad x = \sum_{n = \mathbb N_1 }a_n 10^{-k}= \bigcap_{n\in\mathbb N_1}I_n
+\]
+
+According to the \xref[Nested Interval Theorem]{thm:nip}, after reindexing,
+\[
+\bigcap_{n\in\mathbb N_1}I_n\neq\emptyset.
+\]
+
+Also, notice that $I_n = [s_n, s_n + 10^{-n}]$, $s_n + 10^{-n} - s_n = 10^{-n}$. According to the \xref[Remark]{rem:inf-small-intervals}, we can conclude:
+\[
+\forall\varepsilon>0,\ \exists n\in\mathbb N_1:\,
+I_n=[s_n,s_n+10^{-n}]
+\,\text{and}\,
+(s_n+10^{-n})-s_n=10^{-n}<\varepsilon \implies \exists!x\in\bigcap_{n\in\mathbb N_1}I_n
+\]
+
+Thus \(x\) is the unique number represented by the digit sequence \(a\).
+\end{proof} 
+
+\section{Archimedian Property} 
+
+\begin{thm}[$\mathbb N$ is not bounded in $\mathbb R$]{nat-not-bounded}
+  $\mathbb N$ is not \xref[bounded]{lec01::def:bounded-set} in $\mathbb R$, in other words, \(\forall x \in \mathbb R, \exists n \in \mathbb N, n > x\)
+\end{thm} 
+
+\begin{proof}
+According to the definition of \xref[bounded set]{lec01::def:bounded-set}, if $\mathbb N$ is bounded in $\mathbb R$, then it must be \xref[bounded above]{lec01::def:bounded-above}. By the \xref[Axiom of Completeness]{lec01::axm:aoc}, $\mathbb N$ has a supremum, denoted as $\alpha = \sup \mathbb N$.
+
+By the definition of \xref[epsilon criteria]{lec01::prop:epsilon-supremum},
 \end{proof}
 
 \end{document}

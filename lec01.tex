@@ -247,11 +247,60 @@ internally [TODO Pf link to completeness axiom].
   \]
 \end{dfn}
 
+\begin{dfn}[Indexed Intersection]{indexed-intersection}
+  Let \(I\) be a nonempty index type and let
+  \[
+    A:I\to\mathbf{Set}
+  \]
+  be an indexed family of sets. For \(i:I\), write
+  \(A_i\equiv A(i)\). The \emph{indexed intersection} is characterized by
+  \[
+    x\in\bigcap_{i:I}A_i
+    \iff
+    \forall i:I,\quad x\in A_i.
+  \]
+  In particular, for \(a,b\in\mathbb{N}\) with \(a\leq b\),
+  \[
+    \bigcap_{n=a}^{b}A_n
+    \equiv
+    \bigcap_{n\in\{m\in\mathbb{N}:a\leq m\leq b\}}A_n,
+    \qquad
+    \bigcap_{n=0}^{\infty}A_n
+    \equiv
+    \bigcap_{n:\mathbb{N}}A_n.
+  \]
+\end{dfn}
+
 \begin{dfn}[Union]{union}
   For sets \(A\) and \(B\),
   \[
     x\in A\cup B \iff x\in A\text{ or }x\in B.
   \]
+\end{dfn}
+
+\begin{dfn}[Indexed Union]{indexed-union}
+  Let \(I\) be an index type and let
+  \[
+    A:I\to\mathbf{Set}
+  \]
+  be an indexed family of sets. For \(i:I\), write
+  \(A_i\equiv A(i)\). The \emph{indexed union} is characterized by
+  \[
+    x\in\bigcup_{i:I}A_i
+    \iff
+    \exists i:I,\quad x\in A_i.
+  \]
+  In particular, for \(a,b\in\mathbb{N}\) with \(a\leq b\),
+  \[
+    \bigcup_{n=a}^{b}A_n
+    \equiv
+    \bigcup_{n\in\{m\in\mathbb{N}:a\leq m\leq b\}}A_n,
+    \qquad
+    \bigcup_{n=0}^{\infty}A_n
+    \equiv
+    \bigcup_{n:\mathbb{N}}A_n.
+  \]
+  If \(I\) is empty, then \(\bigcup_{i:I}A_i=\emptyset\).
 \end{dfn}
 
 \begin{dfn}[Complement]{complement}
@@ -297,7 +346,7 @@ internally [TODO Pf link to completeness axiom].
 \end{theorem}
 
 \begin{eg}[Nested Sequence]{nested-sequence} 
-Let $A_n = \{n, n+1, n+2, \dots\}, n \in \mathbb N_{>0}$ 
+Let $A_n = \{n, n+1, n+2, \dots\}, n \in \mathbb N_1$ 
 
 ie, $A_1 = \{1, 2, 3, \dots\}, A_5 = \{5, 6, 7, \dots\}$ 
 
@@ -666,7 +715,7 @@ Every nonempty set \(A\subseteq\mathbb{R}\) that is \xref[bounded above]{def:bou
 \end{rem}
 
 \begin{eg}
-If $A = {\frac{1}{n}: n \in \mathbb N_{>0}}$, then $\sup A = 1$ and $\inf A = 0$. Although it has a infimum, it does not have a minimum since $0 \notin A$. 
+If $A = {\frac{1}{n}: n \in \mathbb N_1}$, then $\sup A = 1$ and $\inf A = 0$. Although it has a infimum, it does not have a minimum since $0 \notin A$. 
 \end{eg} 
 
 \begin{cor}[Supremum and Infimum Existence in $\mathbb R$]{supremum-infimum-existence}

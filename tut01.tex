@@ -22,7 +22,7 @@
 \textbf{(a)} If $A_1 \supseteq A_2 \supseteq A_3 \supseteq \cdots$ and
 every $A_n$ is infinite, then $\bigcap_{n=1}^{\infty} A_n$ is infinite.
 
-Counter Example: Let $A_n = \{n, n+1, n+2, \ldots\}$, where $n \in \mathbb N_1$, then \[\forall x \in \mathbb N, x \notin A_{x+1}\]
+Counter Example: Let $A_n = \{n, n+1, n+2, \ldots\}$, where $n \in \NNOne$, then \[\forall x \in \NN, x \notin A_{x+1}\]
 
 Which means \[\bigcap_{n=1}^{\infty} A_n = \emptyset\]
 
@@ -34,11 +34,11 @@ and every $A_n$ is finite and nonempty, then
 $\bigcap_{n=1}^{\infty} A_n$ is finite and nonempty.
 
 \begin{proof}
-Since $\forall n \in \mathbb N_1, A_{n+1} \subseteq A_n$. Which means for any $n$, either $A_n = A_{n+1}$ or $A_{n+1} \subset A_n$.
+Since $\forall n \in \NNOne, A_{n+1} \subseteq A_n$. Which means for any $n$, either $A_n = A_{n+1}$ or $A_{n+1} \subset A_n$.
 
 If $A_{n+1} \subset A_n$, then $|A_{n+1}| < |A_n|$. 
 
-Notice that $\forall n \in \mathbb N_1, A_n$ is finite and nonempty. ie $|A_n|$ must be a positive finite number. 
+Notice that $\forall n \in \NNOne, A_n$ is finite and nonempty. ie $|A_n|$ must be a positive finite number. 
 
 So, there are only finite steps such that $A_{n+1} \subset A_n$. After that, the nested sequence converges to a finite nonempty set, let's say $A_k$. 
 
@@ -206,8 +206,8 @@ For $f = x^2$, we can have some part which is not one-to-one.
 \end{align*}
 
 \medskip
-\noindent\textbf{(c)} For an arbitrary function \(g:\mathbb{R}\to\mathbb{R}\)
-and all \(A,B\subseteq\mathbb{R}\), prove that
+\noindent\textbf{(c)} For an arbitrary function \(g:\RR\to\RR\)
+and all \(A,B\subseteq\RR\), prove that
 \[
   g(A\cap B)\subseteq g(A)\cap g(B).
 \]
@@ -238,15 +238,15 @@ for an arbitrary function \(g\).
 \abbottexercise{1.2.9}
 \end{ex}
 
-For a function \(f:D\to\mathbb{R}\) and a set
-\(B\subseteq\mathbb{R}\), use
+For a function \(f:D\to\RR\) and a set
+\(B\subseteq\RR\), use
 \[
   f^{-1}(B)=\{x\in D:f(x)\in B\}.
 \]
 
 \noindent\textbf{(a)}
 \[
-  f:\mathbb{R}\to\mathbb{R},\qquad
+  f:\RR\to\RR,\qquad
   f(x)=x^2,\qquad
   A=[0,4],\qquad
   B=[-1,1].
@@ -274,7 +274,7 @@ We can also find $f^{-1}(A) \cup f^{-1}(B) = [-2, 2] \cup [-1, 1] = [-2, 2]$.
 
 \medskip
 \noindent\textbf{(b)} For an arbitrary function
-\(g:\mathbb{R}\to\mathbb{R}\) and all \(A,B\subseteq\mathbb{R}\), prove that
+\(g:\RR\to\RR\) and all \(A,B\subseteq\RR\), prove that
 \[
   g^{-1}(A\cap B)=g^{-1}(A)\cap g^{-1}(B)
   \quad\text{and}\quad
@@ -292,10 +292,10 @@ We can also find $f^{-1}(A) \cup f^{-1}(B) = [-2, 2] \cup [-1, 1] = [-2, 2]$.
 \abbottexercise{1.3.3}
 \end{ex}
 
-\noindent\textbf{(a)} Let \(A\subseteq\mathbb{R}\) be nonempty and bounded
+\noindent\textbf{(a)} Let \(A\subseteq\RR\) be nonempty and bounded
 below, and let
 \[
-  B=\{b\in\mathbb{R}:b\leq a\text{ for every }a\in A\}.
+  B=\{b\in\RR:b\leq a\text{ for every }a\in A\}.
 \]
 Prove that
 \[
@@ -325,7 +325,7 @@ Since $\sup B = \inf A$, if we have the existence of suprema, we can find the in
 \abbottexercise{1.3.4}
 \end{ex}
 
-Let \(A_1,A_2,\ldots\) be nonempty subsets of \(\mathbb{R}\), each bounded
+Let \(A_1,A_2,\ldots\) be nonempty subsets of \(\RR\), each bounded
 above.
 
 \noindent\textbf{(a)} Determine
@@ -364,7 +364,7 @@ Decide whether each statement is true or false, and justify the answer.
 
 According to the definition of \xref[upper bound]{lec01::def:bounded-above}, the set of upper bound of $A$ and $B$ is 
 \[
-  U_A = \{x \in \mathbb{R}: x \geq a, \forall a \in A\}, \quad U_B = \{x \in \mathbb{R}: x \geq b, \forall b \in B\}
+  U_A = \{x \in \RR: x \geq a, \forall a \in A\}, \quad U_B = \{x \in \RR: x \geq b, \forall b \in B\}
 \]  
 
 Since $A \subseteq B$, every element of $A$ is also an element of $B$. Therefore, any upper bound of $B$ is also an upper bound of $A$. This means that $U_B \subseteq U_A$, and thus $\sup A \leq \sup B$.
@@ -374,7 +374,7 @@ Statement (a) is true.
 \medskip
 \noindent\textbf{(b)} If \(\sup A<\inf B\), then
 \[
-  \exists c\in\mathbb{R},\quad
+  \exists c\in\RR,\quad
   \forall a\in A,\ \forall b\in B,\qquad a<c<b.
 \]
 
@@ -394,7 +394,7 @@ Statement (b) is true.
 
 \noindent\textbf{(c)} If
 \[
-  \exists c\in\mathbb{R},\quad
+  \exists c\in\RR,\quad
   \forall a\in A,\ \forall b\in B,\qquad a<c<b,
 \]
 then
@@ -405,7 +405,7 @@ then
 This is not true due to 
 
 \[
-  \quad A = \{-\frac{1}{n}: n \in \mathbb{N}_1\}, B = \{\frac{1}{n}: n \in \mathbb{N}_1\}. \quad \exists c = 0, \forall a \in A, \forall b \in B, a < c < b 
+  \quad A = \{-\frac{1}{n}: n \in \NNOne\}, B = \{\frac{1}{n}: n \in \NNOne\}. \quad \exists c = 0, \forall a \in A, \forall b \in B, a < c < b 
 \]
 
 However, $\sup A = 0$ and $\inf B = 0$, so $\sup A = \inf B$. Does not fulfill the requirement of $\sup A < \inf B$. 

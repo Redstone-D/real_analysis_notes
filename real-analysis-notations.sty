@@ -5,6 +5,20 @@
 % vendor and load this package without redirecting the links to itself.
 \providecommand*{\supremumRef}{real-analysis::lec01::def:supremum}
 \providecommand*{\infimumRef}{real-analysis::lec01::def:infimum}
+\providecommand*{\naturalNumbersRef}{real-analysis::lec01::def:natural-number}
+\providecommand*{\positiveNaturalNumbersRef}{real-analysis::lec01::conv:positive-natural-numbers}
+\providecommand*{\integersRef}{real-analysis::lec01::def:integer}
+\providecommand*{\rationalNumbersRef}{real-analysis::lec01::def:rational-numbers}
+\providecommand*{\irrationalNumbersRef}{real-analysis::lec01::conv:irrational-numbers}
+\providecommand*{\realNumbersRef}{real-analysis::lec01::rem:number-sets-inclusions-real}
+
+% Linked number-set notation.
+\newcommand*{\NN}{\xref[\mathbb{N}]{\naturalNumbersRef}}
+\newcommand*{\NNOne}{\xref[\mathbb{N}_{1}]{\positiveNaturalNumbersRef}}
+\newcommand*{\ZZ}{\xref[\mathbb{Z}]{\integersRef}}
+\newcommand*{\QQ}{\xref[\mathbb{Q}]{\rationalNumbersRef}}
+\newcommand*{\II}{\xref[\mathbb{I}]{\irrationalNumbersRef}}
+\newcommand*{\RR}{\xref[\mathbb{R}]{\realNumbersRef}}
 
 % Preserve the standard unlinked operators for exceptional contexts.
 \let\raPlainSup\sup

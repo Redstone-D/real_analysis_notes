@@ -11,29 +11,29 @@
 \section{Intervals}
 
 \begin{dfn}[Interval]{interval}
-  A set \(I\subseteq\mathbb{R}\) is an \emph{interval} if, whenever
-  \(x,y\in I\) with \(x\le y\), every \(z\in\mathbb{R}\) satisfying
+  A set \(I\subseteq\RR\) is an \emph{interval} if, whenever
+  \(x,y\in I\) with \(x\le y\), every \(z\in\RR\) satisfying
   \(x\le z\le y\) also belongs to \(I\).
 \end{dfn}
 
 \begin{rem}[Intervals as Sets]{intervals-as-sets}
-  In these notes, every interval is a set contained in \(\mathbb{R}\);
-  that is, every interval \(I\) satisfies \(I\subseteq\mathbb{R}\).
+  In these notes, every interval is a set contained in \(\RR\);
+  that is, every interval \(I\) satisfies \(I\subseteq\RR\).
 \end{rem}
 
 \begin{dfn}[Open Interval]{open-interval}
-  For \(a,b\in\mathbb{R}\) with \(a<b\), the \emph{open interval}
+  For \(a,b\in\RR\) with \(a<b\), the \emph{open interval}
   from \(a\) to \(b\) is
   \[
-    (a,b)=\{x\in\mathbb{R}:a<x<b\}.
+    (a,b)=\{x\in\RR:a<x<b\}.
   \]
 \end{dfn}
 
 \begin{dfn}[Closed Interval]{closed-interval}
-  For \(a,b\in\mathbb{R}\) with \(a\le b\), the \emph{closed interval}
+  For \(a,b\in\RR\) with \(a\le b\), the \emph{closed interval}
   from \(a\) to \(b\) is
   \[
-    [a,b]=\{x\in\mathbb{R}:a\le x\le b\}.
+    [a,b]=\{x\in\RR:a\le x\le b\}.
   \]
 \end{dfn}
 
@@ -66,12 +66,12 @@
 \end{thm}
 
 \begin{proof}
-Let \(A=\{a_n:n\in\mathbb{N}\}\). The nesting hypothesis gives
+Let \(A=\{a_n:n\in\NN\}\). The nesting hypothesis gives
 \[
-  \forall n\in\mathbb{N},\quad I_{n+1}\subseteq I_n.
+  \forall n\in\NN,\quad I_{n+1}\subseteq I_n.
 \]
 
-For fixed \(p\in\mathbb{N}\), define
+For fixed \(p\in\NN\), define
 \[
   P_p(r)\iff I_{p+r}\subseteq I_p.
 \]
@@ -82,16 +82,16 @@ For fixed \(p\in\mathbb{N}\), define
   \implies P_p(r+1).
 \]
 By \xref[Natural Number Induction]{lec01::thm:natural-number-induction}
-and \(p\leq q\iff\exists r\in\mathbb{N}:q=p+r\),
+and \(p\leq q\iff\exists r\in\NN:q=p+r\),
 \[
-  \forall p,q\in\mathbb{N},\quad
+  \forall p,q\in\NN,\quad
   p\leq q\implies
-  \exists r\in\mathbb{N}:\quad
+  \exists r\in\NN:\quad
   q=p+r\ \land\ I_q=I_{p+r}\subseteq I_p.
 \]
 
 By \xref[comparability in an ordered set]{lec01::def:ordered-set},
-\(\forall n,m\in\mathbb{N},\ (n\leq m)\lor(m\leq n)\). Hence
+\(\forall n,m\in\NN,\ (n\leq m)\lor(m\leq n)\). Hence
 \xref{lem:contained-interval-endpoints} gives
 \[
   \begin{aligned}
@@ -103,13 +103,13 @@ By \xref[comparability in an ordered set]{lec01::def:ordered-set},
 \]
 so
 \[
-  \forall n,m\in\mathbb{N},\quad a_n\leq b_m.
+  \forall n,m\in\NN,\quad a_n\leq b_m.
 \] 
 
 Consequently,
 \[
   a_0\in A,\, 
-  \forall n\in\mathbb{N},\ a_n\leq b_0
+  \forall n\in\NN,\ a_n\leq b_0
   \implies
   A\neq\emptyset\ \land A\text{ is bounded above}.
 \]
@@ -117,16 +117,16 @@ By the \xref[Axiom of Completeness]{lec01::axm:aoc}, choose
 \(\alpha=\sup A\). The
 \xref[definition of supremum]{lec01::def:supremum} gives
 \[
-  \forall n,m\in\mathbb{N},\quad
+  \forall n,m\in\NN,\quad
   a_n\leq\alpha\leq b_m.
 \]
 Hence, by the
 \xref[definitions of a closed interval]{def:closed-interval} and
 \xref[indexed intersection]{lec01::def:indexed-intersection},
 \[
-  \left(\forall n\in\mathbb{N},\quad a_n\leq\alpha\leq b_n\right)
+  \left(\forall n\in\NN,\quad a_n\leq\alpha\leq b_n\right)
   \implies
-  \left(\forall n\in\mathbb{N},\quad \alpha\in I_n\right)
+  \left(\forall n\in\NN,\quad \alpha\in I_n\right)
   \iff
   \alpha\in\bigcap_{n=0}^{\infty}I_n.
 \]
@@ -143,9 +143,9 @@ b-a<\varepsilon\), this means that the interval is equivalent to a single point,
 
 \begin{thm}[Decimal Expansion]{decimal-representation}
 Let \(D=\{0,1,\ldots,9\}\). Every digit sequence
-\(a:\mathbb{N}_{1}\to D\) determines a unique \(x\in[0,1]\):
+\(a:\NNOne\to D\) determines a unique \(x\in[0,1]\):
 \[
-  \forall a:\mathbb{N}_{1}\to D,\quad
+  \forall a:\NNOne\to D,\quad
   \exists!x\in[0,1],\qquad
   x=\sum_{k=1}^{\infty}a_k10^{-k}.
 \]
@@ -154,29 +154,29 @@ Let \(D=\{0,1,\ldots,9\}\). Every digit sequence
 \begin{proof}
 We call the summation of the first $n$ decimals $s_n$, ie \[s_n  = \sum^{n}_{k=1} a_k \, 10^{-k}\]
 
-Since \(\forall k \in \mathbb N_1, 0 \leq a_k \leq 9\), meaning that \[\forall n,m \in \mathbb N_1,\, n \leq m \implies s_m = s_n + \sum_{k=n+1}^{m} a_k 10^{-k} \leq s_n + 9 \sum_{k=n+1}^{m} 10^{-k} = s_n + 10^{-n} - 10^{-m} < s_n + 10^{-n}\]
+Since \(\forall k \in \NNOne, 0 \leq a_k \leq 9\), meaning that \[\forall n,m \in \NNOne,\, n \leq m \implies s_m = s_n + \sum_{k=n+1}^{m} a_k 10^{-k} \leq s_n + 9 \sum_{k=n+1}^{m} 10^{-k} = s_n + 10^{-n} - 10^{-m} < s_n + 10^{-n}\]
 
-In other words, \[\forall n,m \in \mathbb N_1,\quad n \leq m \implies s_m \in [s_n, s_n + 10^{-n}]\] 
+In other words, \[\forall n,m \in \NNOne,\quad n \leq m \implies s_m \in [s_n, s_n + 10^{-n}]\] 
 
-By the same argument, we can also show that \[\forall n,m \in \mathbb N_1,\quad n \leq m \implies s_m + 10^{-m} \in [s_n, s_n + 10^{-n}]\] 
+By the same argument, we can also show that \[\forall n,m \in \NNOne,\quad n \leq m \implies s_m + 10^{-m} \in [s_n, s_n + 10^{-n}]\] 
 
 Where we can construct the following nested intervals
 \[
 I_n=[s_n,s_n+10^{-n}],\qquad
-I_1\supseteq I_2\supseteq\cdots, \qquad x = \sum_{n = \mathbb N_1 }a_n 10^{-k}= \bigcap_{n\in\mathbb N_1}I_n
+I_1\supseteq I_2\supseteq\cdots, \qquad x = \sum_{n = \NNOne }a_n 10^{-k}= \bigcap_{n\in\NNOne}I_n
 \]
 
 According to the \xref[Nested Interval Theorem]{thm:nip}, after reindexing,
 \[
-\bigcap_{n\in\mathbb N_1}I_n\neq\emptyset.
+\bigcap_{n\in\NNOne}I_n\neq\emptyset.
 \]
 
 Also, notice that $I_n = [s_n, s_n + 10^{-n}]$, $s_n + 10^{-n} - s_n = 10^{-n}$. According to the \xref[Remark]{rem:inf-small-intervals}, we can conclude:
 \[
-\forall\varepsilon>0,\ \exists n\in\mathbb N_1:\,
+\forall\varepsilon>0,\ \exists n\in\NNOne:\,
 I_n=[s_n,s_n+10^{-n}]
 \,\text{and}\,
-(s_n+10^{-n})-s_n=10^{-n}<\varepsilon \implies \exists!x\in\bigcap_{n\in\mathbb N_1}I_n
+(s_n+10^{-n})-s_n=10^{-n}<\varepsilon \implies \exists!x\in\bigcap_{n\in\NNOne}I_n
 \]
 
 Thus \(x\) is the unique number represented by the digit sequence \(a\).
@@ -184,14 +184,22 @@ Thus \(x\) is the unique number represented by the digit sequence \(a\).
 
 \section{Archimedian Property} 
 
-\begin{thm}[$\mathbb N$ is not bounded in $\mathbb R$]{nat-not-bounded}
-  $\mathbb N$ is not \xref[bounded]{lec01::def:bounded-set} in $\mathbb R$, in other words, \(\forall x \in \mathbb R, \exists n \in \mathbb N, n > x\)
+\begin{thm}[$\NN$ is not bounded in $\RR$]{nat-not-bounded}
+  $\NN$ is not \xref[bounded]{lec01::def:bounded-set} in $\RR$, in other words, \(\forall x \in \RR, \exists n \in \NN, n > x\)
 \end{thm} 
 
 \begin{proof}
-According to the definition of \xref[bounded set]{lec01::def:bounded-set}, if $\mathbb N$ is bounded in $\mathbb R$, then it must be \xref[bounded above]{lec01::def:bounded-above}. By the \xref[Axiom of Completeness]{lec01::axm:aoc}, $\mathbb N$ has a supremum, denoted as $\alpha = \sup \mathbb N$.
+Assume for the sake of contradiction that $\NN$ is bounded in $\RR$. 
 
-By the definition of \xref[epsilon criteria]{lec01::prop:epsilon-supremum},
+According to the definition of \xref[bounded set]{lec01::def:bounded-set}, if $\NN$ is bounded in $\RR$, then it must be \xref[bounded above]{lec01::def:bounded-above}. By the \xref[Axiom of Completeness]{lec01::axm:aoc}, $\NN$ has a supremum, denoted as $\alpha = \sup \NN$.
+
+By the definition of \xref[epsilon criteria]{lec01::prop:epsilon-supremum}, we have: 
+\[\forall x \in \NN, x \leq \alpha, \quad \forall \varepsilon > 0, \exists x \in \NN, \alpha - \varepsilon < x \] 
+
+Which means that 
+\[\exists n \in \NN, \alpha - 1 < n, \implies \alpha < n + 1\] 
+
+If $n \in \NN, S(n) = n + 1 \in \NN$, then $\alpha < S(n) \in \NN$, contradicting the definition of supremum. Therefore, $\NN$ is not bounded in $\RR$. 
 \end{proof}
 
 \end{document}

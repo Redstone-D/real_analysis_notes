@@ -36,6 +36,13 @@ contains \(0\) and is closed under \(S\). Because the constructors in
 \(A=\NN\).
 \end{proof}
 
+\begin{rem}[Number Systems as Types and Sets]{number-systems-types-and-sets}
+Throughout these notes, a symbol denoting a number system may represent either
+a type of numbers or the set of all numbers of that type. Thus \(n:\NN\) is
+the type-theoretic form, whereas \(n\in\NN\) is the corresponding
+set-theoretic form. The intended interpretation is determined by context.
+\end{rem}
+
 \begin{conv}[Positive Natural Numbers]{positive-natural-numbers}
 We write
 \[
@@ -226,6 +233,43 @@ internally [TODO Pf link to completeness axiom].
   transcendental, and is therefore irrational.
 \end{rem}
 
+\section{Indexed Family}
+
+\begin{dfn}[Indexed Family]{indexed-family}
+  Let \(I\) be an index set or type, and let \(X\) be a set or type. An
+  \emph{\(I\)-indexed family in \(X\)} is a mapping
+  \[
+    a:I\to X.
+  \]
+\end{dfn}
+
+\begin{dfn}[Term]{term}
+  Let \(a:I\to X\) be an indexed family. For each \(i\in I\), the value
+  \[
+    a_i:=a(i)
+  \]
+  is called the \emph{term indexed by \(i\)}. For a sequence, \(a_n\) is
+  called the \emph{\(n\)-th term}.
+\end{dfn}
+
+\begin{conv}[Indexed Family Notation]{indexed-family-notation}
+  We denote an indexed family \(a:I\to X\) by
+  \[
+    (a_i)_{i\in I}.
+  \]
+  We may write simply \((a_i)\) when the index set is clear.
+\end{conv}
+
+\begin{dfn}[Sequence]{sequence}
+  Let \(I=\NN\) or \(I=\NNOne\). An \(I\)-indexed family
+  \(a:I\to X\) is called a \emph{sequence in \(X\)}. For a sequence, we
+  conventionally use \(n\) as the index and write \((a_n)_{n\in I}\).
+\end{dfn}
+
+\begin{eg}
+  \(\left(\frac{1}{n}\right)_{n\in\NNOne}\) is a sequence.
+\end{eg}
+
 \section{Sets}
 
 \begin{rem}[Membership and Classical Logic]{membership-classical-logic}
@@ -252,8 +296,8 @@ internally [TODO Pf link to completeness axiom].
   \[
     A:I\to\mathbf{Set}
   \]
-  be an indexed family of sets. For \(i:I\), write
-  \(A_i\equiv A(i)\). The \emph{indexed intersection} is characterized by
+  be an \xref[indexed family]{def:indexed-family} of sets. The
+  \emph{indexed intersection} is characterized by
   \[
     x\in\bigcap_{i:I}A_i
     \iff
@@ -283,8 +327,8 @@ internally [TODO Pf link to completeness axiom].
   \[
     A:I\to\mathbf{Set}
   \]
-  be an indexed family of sets. For \(i:I\), write
-  \(A_i\equiv A(i)\). The \emph{indexed union} is characterized by
+  be an \xref[indexed family]{def:indexed-family} of sets. The
+  \emph{indexed union} is characterized by
   \[
     x\in\bigcup_{i:I}A_i
     \iff
@@ -394,16 +438,26 @@ So in the universe $\NN$,
   The codomain is \(\RR\) but the range is \(\RR^+ \cup \{0\}\). 
 \end{rem}
 
+Let \(\mathbb B:=\{\mathrm{tt},\mathrm{ff}\}\) denote the set of Boolean values.
+
 \begin{dfn}[Injective Mapping/One to One Mapping]{injective-mapping}
   A mapping \(f: A \to B\) is called \emph{injective} or \emph{one to one} if 
   \[
-    f(x_1) \neq f(x_2) \implies x_1 \neq x_2
+    f(x_1) = f(x_2) \implies x_1 = x_2
   \] 
   equivalently,
   \[
-    x_1 = x_2 \implies f(x_1) = f(x_2)
+    x_1 \neq x_2 \implies f(x_1) \neq f(x_2).
   \]
 \end{dfn} 
+
+\begin{eg}
+  The following is an injective mapping:
+  \[
+    f:\mathbb B\to\ZZ,\qquad
+    \mathrm{tt}\mapsto 0,\quad \mathrm{ff}\mapsto 1.
+  \]
+\end{eg}
   
 \begin{dfn}[Surjective Mapping/onto Mapping]{surjective-mapping}
   A mapping \(f: A \to B\) is called \emph{surjective} or \emph{onto} if 
@@ -416,11 +470,31 @@ So in the universe $\NN$,
   \]
 \end{dfn} 
 
+\begin{eg}
+  The following is a surjective mapping:
+  \[
+    g:\ZZ\to\mathbb B,\qquad
+    g(n)=
+    \begin{cases}
+      \mathrm{tt}, & n=0,\\
+      \mathrm{ff}, & n\neq 0.
+    \end{cases}
+  \]
+\end{eg}
+
 \begin{dfn}[Bijective Mapping]{bijective-mapping}
   A mapping \(f: A \to B\) is called \emph{bijective} if it is both
   \xref[injective]{def:injective-mapping} and
   \xref[surjective]{def:surjective-mapping}. 
 \end{dfn} 
+
+\begin{eg}
+  The following is a bijective mapping, so it is also injective and surjective:
+  \[
+    h:\{0,1\}\to\mathbb B,\qquad
+    0\mapsto\mathrm{tt},\quad 1\mapsto\mathrm{ff}.
+  \]
+\end{eg}
 
 \section{Images} 
 

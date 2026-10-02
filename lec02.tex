@@ -8,6 +8,29 @@
   {\large Mathematical Analysis}\\[0.15em]
 \end{center}
 
+\section{Nested Sequence of Sets} 
+
+\begin{dfn}[Nested Sequence of Sets]{nested-sequence-of-sets}
+  A sequence of sets \((A_n)_{n\in\NN}\) is \emph{nested} if
+  \[
+    \forall n\in\NN,\quad A_{n+1}\subseteq A_n.
+  \] 
+\end{dfn}
+
+
+\begin{thm}[Nested Sequence Containment]{nested-sequence-containment}
+  Let \((A_n)_{n\in\NN}\) be a
+  \xref[nested sequence of sets]{def:nested-sequence-of-sets}. Then
+  \[
+    \forall p,q\in\NN,\qquad
+    p\leq q\implies A_q\subseteq A_p.
+  \]
+\end{thm}
+
+\begin{proof}
+\color{blue}\textbf{TODO} \color{black}
+\end{proof}
+
 \section{Intervals}
 
 \begin{dfn}[Interval]{interval}
@@ -53,6 +76,19 @@
   \xref{def:closed-interval} requires \(a_1\le b_1\).
 
   Combining these inequalities gives the result.
+\end{proof}
+
+\begin{lem}[Endpoint Order of Nested Closed Intervals]{nested-interval-endpoint-order}
+  Let \(I_k=[a_k,b_k]\) be a nested sequence of closed intervals. Then
+  \[
+    n\leq m
+    \implies
+    a_n\leq a_m\leq b_m\leq b_n.
+  \]
+\end{lem}
+
+\begin{proof}
+\color{blue}\textbf{TODO} \color{black}
 \end{proof}
 
 \begin{thm}[Nested Intervals Property (NIP)]{nip}
@@ -154,7 +190,15 @@ Let \(D=\{0,1,\ldots,9\}\). Every digit sequence
 \begin{proof}
 We call the summation of the first $n$ decimals $s_n$, ie \[s_n  = \sum^{n}_{k=1} a_k \, 10^{-k}\]
 
-Since \(\forall k \in \NNOne, 0 \leq a_k \leq 9\), meaning that \[\forall n,m \in \NNOne,\, n \leq m \implies s_m = s_n + \sum_{k=n+1}^{m} a_k 10^{-k} \leq s_n + 9 \sum_{k=n+1}^{m} 10^{-k} = s_n + 10^{-n} - 10^{-m} < s_n + 10^{-n}\]
+Since \(\forall k \in \NNOne, 0 \leq a_k \leq 9\), for all
+\(n,m\in\NNOne\) with \(n\leq m\),
+\begin{align*}
+  s_m
+  &= s_n + \sum_{k=n+1}^{m} a_k 10^{-k} \\
+  &\leq s_n + 9 \sum_{k=n+1}^{m} 10^{-k} \\
+  &= s_n + 10^{-n} - 10^{-m}
+  < s_n + 10^{-n}.
+\end{align*}
 
 In other words, \[\forall n,m \in \NNOne,\quad n \leq m \implies s_m \in [s_n, s_n + 10^{-n}]\] 
 
@@ -185,6 +229,23 @@ Thus \(x\) is the unique number represented by the digit sequence \(a\).
 \begin{rem}[Decimal Expansion is not Unique]{decimal-representation-not-unique}
   The decimal expansion of a real number is not unique. For example, \(0.8999\ldots = 0.9000\ldots\)  
 \end{rem}
+
+\begin{thm}[Uniqueness of Canonical Decimal Expansions]{canonical-decimal-uniqueness}
+Let \(D=\{0,1,\ldots,9\}\). For every \(x\in[0,1)\), there exists a unique
+digit sequence \(a:\NNOne\to D\) which is not eventually equal to \(9\) and
+satisfies
+\[
+  x=\sum_{n=1}^{\infty}a(n)10^{-n}.
+\]
+Here, ``not eventually equal to \(9\)'' means
+\[
+  \neg\exists N\in\NNOne\;\forall n\geq N,\quad a(n)=9.
+\]
+\end{thm}
+
+\begin{proof}
+\color{blue}\textbf{TODO} \color{black}
+\end{proof}
 
 \section{Archimedean Property} 
 
@@ -230,10 +291,177 @@ a<b\implies\exists d\in D:\quad a<d<b.
   $\QQ$ is dense in $\RR$. 
 \end{thm}
 
+\begin{proof}
+\color{blue}\textbf{TODO} \color{black} 
+\end{proof}
+
 \begin{thm}[Density of the Irrational Numbers]{irrationals-dense-in-reals}
   $\RR \setminus \QQ$ (ie, $\II$) is dense in $\RR$. 
 \end{thm} 
 
-\section{Counting} 
+\begin{proof}
+\color{blue}\textbf{TODO} \color{black} 
+\end{proof} 
+
+\begin{rem}
+$\QQ$ and $\II$ are both dense in $\RR$. It does not mean that $\QQ$ and $\II$ are having the same size. The size of infinite sets are defined in 
+\end{rem}
+
+\section{Cardinality} 
+
+\begin{dfn}[Cardinality]{cardinality}
+  The \emph{cardinality} of a set \(A\), denoted by \(\card{A}\), is the number of elements in \(A\).
+\end{dfn}
+
+\begin{dfn}[Equinumerous Sets]{same-cardinality}
+Sets \(A\) and \(B\) are \emph{equinumerous}, written \(A\equinum B\), if and only if there exists a
+\xref[bijective mapping]{lec01::def:bijective-mapping} \(f:A\to B\):
+\[
+A\equinum B
+\iff
+\exists f:A\to B\text{ such that }f\text{ is bijective}.
+\]
+\end{dfn}
+
+\begin{thm}
+  If $\card{A}, \card{B} \in \NN$, ie, $A$ and $B$ are finite sets, then $\card{A} = \card{B} \iff A \equinum B$ 
+\end{thm}
+
+\begin{dfn}[Equivalence Relation]{equivalence-relation}
+  A relation $\sim$ on a set $A$ is called an \emph{equivalence relation} if it satisfies the following properties: 
+  \begin{enumerate}[nosep]
+    \item Reflexive: $\forall a \in A, a \sim a$
+    \item Symmetric: $\forall a,b \in A, a \sim b \implies b \sim a$
+    \item Transitive: $\forall a,b,c \in A, a \sim b, b \sim c \implies a \sim c$
+  \end{enumerate}
+\end{dfn}
+
+\begin{thm}[Cardinality is an Equivalence Relation]{equivalence-relation-cardinality}
+  The Cardinality relation $\equinum$ on the set of all sets is an equivalence relation. 
+\end{thm}
+
+\begin{example}
+$\NN \equinum \NNOne$. Witness: $f: \NN \to \NNOne, f(n) = n + 1$
+\end{example} 
+
+\begin{rem}
+For infinite sets, the cardinality maybe still the same even if we remove some (or a finite number of) elements from the set. 
+\end{rem} 
+
+\begin{thm}[Integers and Natural Numbers are Equinumerous]{integers-natural-equinum}
+  $\ZZ \equinum \NN$. Witness: 
+  \begin{align*}
+    f = \left\{\begin{array}{ll}
+      n/2 & \text{if } n \text{ is even} \\
+      -(n+1)/2 & \text{if } n \text{ is odd}
+    \end{array}\right.
+  \end{align*}
+\end{thm}
+
+\begin{thm}[Countability of the Rationals]{rationals-natural-equinum}
+  $\QQ \equinum \NN$. Arrange the positive rationals in the Calkin--Wilf tree,
+  where each $a/b$ has children $a/(a+b)$ and $(a+b)/b$, and read it
+  level by level:
+  \[
+    \frac11;\qquad
+    \frac12,\frac21;\qquad
+    \frac13,\frac32,\frac23,\frac31;\qquad \ldots
+  \]
+  Thus the levels contain $1,2,4,\ldots$ elements. Let
+  $r_1,r_2,\ldots$ be this enumeration. Since every positive rational occurs
+  exactly once, a witness $f:\NN\to\QQ$ is
+  \[
+    f(n)=
+    \begin{cases}
+      0, & n=0,\\
+      r_{(n+1)/2}, & n\text{ is odd},\\
+      -r_{n/2}, & n\text{ is even and }n>0.
+    \end{cases}
+  \]
+\end{thm}
+
+\begin{thm}[Equinumerosity of Intervals]{interval-equinum}
+Every \xref[interval]{def:interval} which is not a single point is equinumerous to another \xref[interval]{def:interval} which is not a single point. 
+\end{thm} 
+
+\begin{proof}
+Witness: \[f: (a,b) \to (c,d), f(x) = \frac{d-c}{b-a}(x-a)+c\] 
+\end{proof} 
+
+\begin{thm}[Intervals and the Real Line]{interval-real-line-equinum}
+Every \xref[interval]{def:interval} which is not a single point is equinumerous to $\RR$. 
+\end{thm}
+
+\begin{proof}
+  For $(-\pi/2, \pi/2)$, the function $f(x) = \tan(x)$ is a bijection from $(-\pi/2, \pi/2)$ to $\RR$. 
+
+  Notice that for every interval $(a,b)$ which is not a single point, we can find a bijection from $(a,b)$ to $(-\pi/2, \pi/2)$ by
+  \xref[Theorem~\ref*{thm:interval-equinum}]{thm:interval-equinum}. Since \xref[bijections are transitive]{def:equivalence-relation-cardinality}, we can conclude that every interval $(a,b)$ which is not a single point is equinumerous to $\RR$. 
+\end{proof} 
+
+\section{Countability}
+
+\begin{dfn}[Countable Infinite Set]{countable-infinite-set} 
+A set $A$ is called \emph{countably infinite} if $N \equinum A$.  
+\end{dfn} 
+
+\begin{dfn}
+[Countable Set]{countable-set}
+A set $A$ is called \emph{countable} if it is either finite or \xref[countably infinite]{def:countable-infinite-set}.  
+\end{dfn} 
+
+\begin{thm}[$\ZZ, \QQ$ are Countable]{integers-rationals-countable}
+  $\ZZ$ and $\QQ$ are countable since they are equinumerous to $\NN$ according to \xref[Theorem~\ref*{thm:integers-natural-equinum}]{thm:integers-natural-equinum} and \xref[Theorem~\ref*{thm:rationals-natural-equinum}]{thm:rationals-natural-equinum}. 
+\end{thm} 
+
+\begin{thm}[Cantor's Theorem]{cantor-theorem}
+The interval $(0,1)$ is uncountable. 
+\end{thm} 
+
+\begin{proof}
+Since $\NN\equinum\NNOne$, suppose there exists a bijection
+$f:\NNOne\to(0,1)$. By
+\xref[Theorem~\ref*{thm:canonical-decimal-uniqueness}]{thm:canonical-decimal-uniqueness},
+choose the unique decimal expansion of each $f(n)$ which is not eventually
+equal to $9$. This defines a function
+$g:\NNOne\to\NNOne\to\{0,1,2,3,4,5,6,7,8,9\}$.
+
+Then, we can define another function of decimal expansion 
+\begin{align}
+h(n) = \Upsilon(g(n)(n)),\qquad n\in\NNOne \\ 
+\Upsilon = \{(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 1), (9, 1)\} 
+\end{align} 
+
+Then, we can construct
+\[
+x=\sum_{n=1}^{\infty}h(n)10^{-n}.
+\]
+Since $h(n)\in\{1,2,\ldots,8\}$, we have $x\in(0,1)$, and this is its
+unique canonical decimal expansion by
+\xref[Theorem~\ref*{thm:canonical-decimal-uniqueness}]{thm:canonical-decimal-uniqueness}.
+For every $n\in\NNOne$, $h(n)\neq g(n)(n)$, so $x\neq f(n)$. Hence $x$ is
+not in the image of $f$, contradicting the assumption that $f$ is a
+bijection. Therefore, $(0,1)$ is uncountable.
+\end{proof}
+
+\begin{thm}[$\RR$ is Uncountable]{reals-uncountable}
+  $\RR$ is uncountable. 
+\end{thm} 
+
+\begin{proof}
+Assume that $\RR$ is countable. According to \xref[Theorem~\ref*{thm:interval-real-line-equinum}]{thm:interval-real-line-equinum}, we can conclude that $(0,1) \equinum \RR \equinum \NN$. According to \xref[Cantor's Theorem]{thm:cantor-theorem}, $(0,1)$ is uncountable, which contradicts the assumption that $\RR$ is countable. Therefore, $\RR$ is uncountable. 
+\end{proof} 
+
+\begin{thm}[Countable Union of Countable Sets]{countable-union-of-countable-sets}
+  Given $n$ countable sets $A_1, A_2, \ldots, A_n$, the union $\bigcup_{i=1}^{n} A_i$ is countable.
+\end{thm} 
+
+\begin{proof}
+  We can prove this theorem by induction. 
+
+  Let $A$ and $B$ be two countable sets. If $A$ and $B$ are finite, trivially it is countable. 
+\end{proof} 
+
+\section{Power Sets} 
 
 \end{document}

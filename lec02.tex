@@ -8,6 +8,101 @@
   {\large Mathematical Analysis}\\[0.15em]
 \end{center}
 
+\section{Cardinality}
+
+\begin{dfn}[Cardinality]{cardinality}
+  The \emph{cardinality} of a set \(A\), denoted by \(\card{A}\), is the number of elements in \(A\).
+\end{dfn}
+
+\begin{dfn}[Cardinal Inequality]{cardinal-inequality}
+  For sets \(A\) and \(B\),
+  \[
+    \card{A}\leq\card{B}
+    \iff
+    \exists f:A\to B\text{ such that }f\text{ is injective}.
+  \]
+  We write \(\card{A}\geq\card{B}\) if \(\card{B}\leq\card{A}\).
+  Furthermore,
+  \[
+    \card{A}<\card{B}
+    \iff
+    \card{A}\leq\card{B}\text{ and }\card{A}\neq\card{B},
+  \]
+  and \(\card{A}>\card{B}\) if \(\card{B}<\card{A}\).
+\end{dfn}
+
+\begin{dfn}[Equinumerous Sets]{same-cardinality}
+  Sets \(A\) and \(B\) are \emph{equinumerous}, written \(A\equinum B\), if and only if
+  their cardinalities are equal:
+  \[
+    A\equinum B\iff\card{A}=\card{B}.
+  \]
+\end{dfn}
+
+\begin{thm}[Bijection Characterization]{bijection-cardinality}
+  \[
+    \card{A}=\card{B}
+    \iff
+    \exists f:A\to B\text{ such that }f\text{ is bijective}.
+  \]
+\end{thm}
+
+\begin{lem}[Finite Subsets of Equal Cardinality]{finite-subset-equal-cardinality}
+  Let \(A\subseteq B\), where \(B\) is finite. If
+  \(\card{A}=\card{B}\), then \(A=B\).
+\end{lem}
+
+\begin{proof}
+  If \(A\neq B\), choose \(b\in B\setminus A\). Then
+  \(A\subseteq B\setminus\{b\}\), so
+  \(\card{A}\leq\card{B}-1<\card{B}\), a contradiction.
+\end{proof}
+
+\begin{lem}[Mapping Characterization]{cardinal-order-mappings}
+  Assume \(B\neq\emptyset\) and the Axiom of Choice. Then
+  \begin{align*}
+    \card{A}\leq\card{B}
+      &\iff \exists f:A\to B\text{ injective},\\
+    \card{A}<\card{B}
+      &\iff \exists f:A\to B\text{ injective but not bijective},\\
+    \card{A}\geq\card{B}
+      &\iff \exists f:A\to B\text{ surjective},\\
+    \card{A}>\card{B}
+      &\iff \exists f:A\to B\text{ surjective but not bijective}.
+  \end{align*}
+\end{lem}
+
+\begin{dfn}[Equivalence Relation]{equivalence-relation}
+  A relation $\sim$ on a set $A$ is called an \emph{equivalence relation} if it satisfies the following properties:
+  \begin{enumerate}[nosep]
+    \item Reflexive: $\forall a \in A, a \sim a$
+    \item Symmetric: $\forall a,b \in A, a \sim b \implies b \sim a$
+    \item Transitive: $\forall a,b,c \in A, a \sim b, b \sim c \implies a \sim c$
+  \end{enumerate}
+\end{dfn}
+
+\begin{thm}[Cardinality is an Equivalence Relation]{equivalence-relation-cardinality}
+  The Cardinality relation $\equinum$ on the set of all sets is an equivalence relation.
+\end{thm}
+
+\begin{example}
+$\NN \equinum \NNOne$. Witness: $f: \NN \to \NNOne, f(n) = n + 1$
+\end{example}
+
+\begin{rem}
+For infinite sets, the cardinality maybe still the same even if we remove some (or a finite number of) elements from the set.
+\end{rem}
+
+\begin{thm}[Integers and Natural Numbers are Equinumerous]{integers-natural-equinum}
+  $\ZZ \equinum \NN$. Witness:
+  \begin{align*}
+    f = \left\{\begin{array}{ll}
+      n/2 & \text{if } n \text{ is even} \\
+      -(n+1)/2 & \text{if } n \text{ is odd}
+    \end{array}\right.
+  \end{align*}
+\end{thm}
+
 \section{Nested Sequence of Sets} 
 
 \begin{dfn}[Nested Sequence of Sets]{nested-sequence-of-sets}
@@ -16,7 +111,6 @@
     \forall n\in\NN,\quad A_{n+1}\subseteq A_n.
   \] 
 \end{dfn}
-
 
 \begin{thm}[Nested Sequence Containment]{nested-sequence-containment}
   Let \((A_n)_{n\in\NN}\) be a
@@ -28,7 +122,104 @@
 \end{thm}
 
 \begin{proof}
-\color{blue}\textbf{TODO} \color{black}
+  Fix $p$ as any arbitrary natural number. Given that $p \leq q$, it means that $\exists r \in \NN$ such that $q = p + r$. 
+
+  If $r = 0$, then $q = p$ and $A_q = A_p$, which directly implies that $A_q \subseteq A_p$. 
+
+  If for $r - 1$, if $A_{p} \subseteq A_{p + r - 1}$. We can conclude since $A_{p + r} \subseteq A_{p + r - 1}$, we can conclude that $A_{p + r} \subseteq A_{p + r - 1} \subseteq A_p$, ie $A_{p + r} \subseteq A_p$. 
+
+  By \xref[Natural Number Induction]{lec01::thm:natural-number-induction}, we can conclude that $\forall r \in \NN, A_{p + r} \subseteq A_p$. Since $q = p + r$, we can conclude that $\forall p,q \in \NN, p \leq q \implies A_q \subseteq A_p$. 
+\end{proof}
+
+\begin{thm}[Finite Nested Intersection Property]{finite-nested-intersection}
+  Let \((A_n)_{n\in\NNOne}\) be a sequence of finite, nonempty sets satisfying
+  \[
+    \forall n\in\NNOne,\quad A_{n+1}\subseteq A_n.
+  \]
+  Then
+  \[
+    \emptyset\neq\bigcap_{n\in\NNOne}A_n\subseteq A_1.
+  \] 
+\end{thm}
+
+\begin{proof}
+According to the definition of \xref{lec01::def:indexed-intersection}, we want to show that 
+\[\exists x, \forall n\in\NNOne, x \in A_n\] 
+
+Given that $\forall n \in \NNOne, \card{(A_n)} \in \NNOne$ and $\card{(A_1)} \geq \card{(A_2)} \geq \cdots \geq \card{(A_n)} \geq \cdots$ 
+
+We define a sequence of natural numbers $(b_n)_{n\in\NNOne}$ such that $b_n = \card{(A_n)} - \card{(A_{n+1})}$. 
+
+For all \(m,n\in\NNOne\) with \(m\leq n\),
+\begin{align*}
+\sum_{k=m}^{n}b_k
+  &= (\card{A_m}-\card{A_{m+1}})
+     +(\card{A_{m+1}}-\card{A_{m+2}})+\cdots
+     +(\card{A_n}-\card{A_{n+1}}) \\
+  &= \card{A_m}-\card{A_{n+1}} 
+\end{align*}
+Since \(A_{n+1}\neq\emptyset\), we have \(\card{A_{n+1}}\geq1\). Taking \(m=1\),
+\[
+\forall n\in\NNOne,\quad
+\sum_{k=1}^{n}b_k
+=\card{A_1}-\card{A_{n+1}}
+\leq\card{A_1}-1.
+\]
+
+Since every \(b_n\) is a nonnegative integer, only finitely many \(b_n\) can be positive. Hence, 
+\[
+\exists N_0\in\NNOne,\, \forall n\geq N_0,\, b_n=0.
+\]
+
+For every \(n\geq N_0\),
+\[
+b_n=0\implies\card{A_n}=\card{A_{n+1}}.
+\]
+Since \(A_{n+1}\subseteq A_n\) and \(A_n\) is finite,
+\xref[Lemma~\ref*{lem:finite-subset-equal-cardinality}]
+{lem:finite-subset-equal-cardinality} implies that \(A_{n+1}=A_n\).
+Hence
+\[
+\forall n\geq N_0,\quad A_n=A_{N_0}.
+\]
+
+If \(n<N_0\), then \(A_{N_0}\subseteq A_n\) by
+\xref[Theorem~\ref*{thm:nested-sequence-containment}]
+{thm:nested-sequence-containment}. Therefore \(A_{N_0}\subseteq A_n\) for every
+\(n\in\NNOne\), and thus
+\[
+A_{N_0}\subseteq\bigcap_{n\in\NNOne}A_n.
+\]
+The reverse inclusion holds because \(A_{N_0}\) is one of the sets in the
+intersection. Consequently,
+\[
+\bigcap_{n\in\NNOne}A_n=A_{N_0},
+\]
+which is finite and nonempty.
+\end{proof} 
+
+\begin{rem}[Finiteness is Essential]{finite-nested-intersection-finiteness}
+  The conclusion can fail when the sets are infinite. For example, let
+  \[
+    A_n=\{m\in\NNOne:m\geq n\},\qquad n\in\NNOne.
+  \]
+  Every \(A_n\) is infinite and nonempty, and
+  \[
+    A_1\supseteq A_2\supseteq A_3\supseteq\cdots,
+    \qquad
+    \bigcap_{n\in\NNOne}A_n=\emptyset.
+  \]
+\end{rem}
+
+\begin{proof}
+  For each \(n\in\NNOne\), choose \(x=n\). Then
+  \[
+    \forall n\in\NNOne,\quad \exists x\in\NNOne:\ x\in A_n.
+  \]
+  For each \(x\in\NNOne\), choose \(n=x+1\). Then \(x\notin A_n\), so
+  \[
+    \nexists x\in\NNOne,\quad \forall n\in\NNOne:\ x\in A_n.
+  \]
 \end{proof}
 
 \section{Intervals}
@@ -107,23 +298,11 @@ Let \(A=\{a_n:n\in\NN\}\). The nesting hypothesis gives
   \forall n\in\NN,\quad I_{n+1}\subseteq I_n.
 \]
 
-For fixed \(p\in\NN\), define
-\[
-  P_p(r)\iff I_{p+r}\subseteq I_p.
-\]
-\[
-  P_p(0),\quad
-  P_p(r)\implies
-  I_{p+r+1}\subseteq I_{p+r}\subseteq I_p
-  \implies P_p(r+1).
-\]
-By \xref[Natural Number Induction]{lec01::thm:natural-number-induction}
-and \(p\leq q\iff\exists r\in\NN:q=p+r\),
+By
+\xref[Theorem~\ref*{thm:nested-sequence-containment}]{thm:nested-sequence-containment},
 \[
   \forall p,q\in\NN,\quad
-  p\leq q\implies
-  \exists r\in\NN:\quad
-  q=p+r\ \land\ I_q=I_{p+r}\subseteq I_p.
+  p\leq q\implies I_q\subseteq I_p.
 \]
 
 By \xref[comparability in an ordered set]{lec01::def:ordered-set},
@@ -307,56 +486,16 @@ a<b\implies\exists d\in D:\quad a<d<b.
 $\QQ$ and $\II$ are both dense in $\RR$. It does not mean that $\QQ$ and $\II$ are having the same size. The size of infinite sets are defined in 
 \end{rem}
 
-\section{Cardinality} 
+\section{Countability}
 
-\begin{dfn}[Cardinality]{cardinality}
-  The \emph{cardinality} of a set \(A\), denoted by \(\card{A}\), is the number of elements in \(A\).
+\begin{dfn}[Countable Infinite Set]{countable-infinite-set}
+A set $A$ is called \emph{countably infinite} if $N \equinum A$.
 \end{dfn}
 
-\begin{dfn}[Equinumerous Sets]{same-cardinality}
-Sets \(A\) and \(B\) are \emph{equinumerous}, written \(A\equinum B\), if and only if there exists a
-\xref[bijective mapping]{lec01::def:bijective-mapping} \(f:A\to B\):
-\[
-A\equinum B
-\iff
-\exists f:A\to B\text{ such that }f\text{ is bijective}.
-\]
+\begin{dfn}
+[Countable Set]{countable-set}
+A set $A$ is called \emph{countable} if it is either finite or \xref[countably infinite]{def:countable-infinite-set}.
 \end{dfn}
-
-\begin{thm}
-  If $\card{A}, \card{B} \in \NN$, ie, $A$ and $B$ are finite sets, then $\card{A} = \card{B} \iff A \equinum B$ 
-\end{thm}
-
-\begin{dfn}[Equivalence Relation]{equivalence-relation}
-  A relation $\sim$ on a set $A$ is called an \emph{equivalence relation} if it satisfies the following properties: 
-  \begin{enumerate}[nosep]
-    \item Reflexive: $\forall a \in A, a \sim a$
-    \item Symmetric: $\forall a,b \in A, a \sim b \implies b \sim a$
-    \item Transitive: $\forall a,b,c \in A, a \sim b, b \sim c \implies a \sim c$
-  \end{enumerate}
-\end{dfn}
-
-\begin{thm}[Cardinality is an Equivalence Relation]{equivalence-relation-cardinality}
-  The Cardinality relation $\equinum$ on the set of all sets is an equivalence relation. 
-\end{thm}
-
-\begin{example}
-$\NN \equinum \NNOne$. Witness: $f: \NN \to \NNOne, f(n) = n + 1$
-\end{example} 
-
-\begin{rem}
-For infinite sets, the cardinality maybe still the same even if we remove some (or a finite number of) elements from the set. 
-\end{rem} 
-
-\begin{thm}[Integers and Natural Numbers are Equinumerous]{integers-natural-equinum}
-  $\ZZ \equinum \NN$. Witness: 
-  \begin{align*}
-    f = \left\{\begin{array}{ll}
-      n/2 & \text{if } n \text{ is even} \\
-      -(n+1)/2 & \text{if } n \text{ is odd}
-    \end{array}\right.
-  \end{align*}
-\end{thm}
 
 \begin{thm}[Countability of the Rationals]{rationals-natural-equinum}
   $\QQ \equinum \NN$. Arrange the positive rationals in the Calkin--Wilf tree,
@@ -398,17 +537,6 @@ Every \xref[interval]{def:interval} which is not a single point is equinumerous 
   Notice that for every interval $(a,b)$ which is not a single point, we can find a bijection from $(a,b)$ to $(-\pi/2, \pi/2)$ by
   \xref[Theorem~\ref*{thm:interval-equinum}]{thm:interval-equinum}. Since \xref[bijections are transitive]{def:equivalence-relation-cardinality}, we can conclude that every interval $(a,b)$ which is not a single point is equinumerous to $\RR$. 
 \end{proof} 
-
-\section{Countability}
-
-\begin{dfn}[Countable Infinite Set]{countable-infinite-set} 
-A set $A$ is called \emph{countably infinite} if $N \equinum A$.  
-\end{dfn} 
-
-\begin{dfn}
-[Countable Set]{countable-set}
-A set $A$ is called \emph{countable} if it is either finite or \xref[countably infinite]{def:countable-infinite-set}.  
-\end{dfn} 
 
 \begin{thm}[$\ZZ, \QQ$ are Countable]{integers-rationals-countable}
   $\ZZ$ and $\QQ$ are countable since they are equinumerous to $\NN$ according to \xref[Theorem~\ref*{thm:integers-natural-equinum}]{thm:integers-natural-equinum} and \xref[Theorem~\ref*{thm:rationals-natural-equinum}]{thm:rationals-natural-equinum}. 
@@ -463,5 +591,69 @@ Assume that $\RR$ is countable. According to \xref[Theorem~\ref*{thm:interval-re
 \end{proof} 
 
 \section{Power Sets} 
+
+\begin{dfn}[Power Set]{power-set}
+  The \emph{power set} of a set \(A\), denoted by \(\PowerSet(A)\), is the set of all subsets of \(A\):
+  \[
+    \PowerSet(A)=\{B:B\subseteq A\}.
+  \] 
+\end{dfn}
+
+\begin{example}
+  Let \(A=\{1,2,3\}\). Then
+  \[
+    \PowerSet(A)=\{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{1,3\},\{2,3\},A\}.
+  \]
+\end{example}
+
+\begin{thm}[Cardinality of Finite Power Set]{cardinality-finite-power-set}
+  For any finite set \(A\), \(\card{\PowerSet(A)}=2^{\card{A}}\). 
+\end{thm}
+
+\begin{lem}[Singleton in the Power Set]{singleton-in-power-set}
+  For every set \(A\),
+  \[
+    \forall a\in A,\quad \{a\}\in\PowerSet(A).
+  \]
+\end{lem}
+
+\begin{proof}
+  If \(a\in A\), then \(\{a\}\subseteq A\).
+  Hence \(\{a\}\in\PowerSet(A)\).
+\end{proof} 
+
+\begin{thm}[Cantor's Theorem]{cantor-power-set} 
+  There does not exist a \xref[surjective function]{lec01::def:surjective-mapping} \(f:A\to\PowerSet(A)\). 
+\end{thm}
+
+\begin{proof}
+Assume for contradiction that there exists a \xref[surjective function]{lec01::def:surjective-mapping} \(f:A\to\PowerSet(A)\). This means $\forall B \in \PowerSet(A), \exists a \in A$ such that $f(a) = B$. 
+
+We can seperate all elements in $A$ into two groups:
+\begin{align*}
+A_1 = \{a \in A: a \notin f(a)\} \\
+A_2 = \{a \in A: a \in f(a)\}
+\end{align*} 
+
+Notice that $A_1\subseteq A$, so $A_1\in\PowerSet(A)$.  
+
+And, since $f$ is surjective, there exists $\alpha \in A$ such that $f(\alpha) = A_1$. 
+
+According to \xref[PNP Axiom]{lec01::rem:membership-classical-logic}, $\alpha$ must be in either $A_1$ or $A_2$. 
+
+If $\alpha \in A_1$, then by definition $\alpha\notin f(\alpha)=A_1$, contradicting $\alpha\in A_1$. 
+
+If $\alpha \in A_2$, then by definition $\alpha\in f(\alpha)=A_1$. Hence $\alpha\in A_1$, whose definition gives $\alpha\notin f(\alpha)$, also a contradiction. 
+
+Both possible cases lead to a contradiction. Therefore, the assumed surjective function \(f:A\to\PowerSet(A)\) does not exist.
+\end{proof} 
+
+\begin{cor}[Power Set Strictly Larger than Original Set]{power-set-strictly-larger}
+  For any set \(A\), \(\card{A}<\card{\PowerSet(A)}\).  
+\end{cor} 
+
+\begin{rem}[Largest Cardinality does not Exist]{largest-cardinality-does-not-exist}
+  There is no largest cardinality for sets since for any set \(A\), \(\card{A}<\card{\PowerSet(A)}\).  
+\end{rem}
 
 \end{document}

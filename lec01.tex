@@ -117,12 +117,6 @@ For a counter example, consider the integer \(2\). There is no integer \(x\) suc
 
 \section{Ordered Set} 
 
-\begin{dfn}[Ordered Set]{ordered-set} 
-A set \(F\) is \emph{ordered} if it is \xref[transitive]{def:transitive} and \xref[reflexive]{def:reflexive} and 
-\[\forall x, y \in F, \text{ either one of the following happens } x \le y, x = y, \text{ or } y \le x\] 
-It is also called partial ordered. 
-\end{dfn}
-
 \begin{dfn}[Transitive]{transitive}
 An ordering on a set is \emph{transitive} if 
 \[ \forall x, y, z \in F, \text{ if } x \le y \text{ and } y \le z, \text{ then } x \le z \]
@@ -130,108 +124,96 @@ An ordering on a set is \emph{transitive} if
 
 \begin{dfn}[Reflexive]{reflexive}
 An ordering on a set is \emph{reflexive} if
-\[ \forall x \in F, x = x \]
+\[ \forall x \in F, x \leq x \]
 \end{dfn} 
 
-\section{Irrational Numbers}
-
-\begin{lem}[Parity of a Square]{square-parity}
-For every \(n\in\ZZ\),
+\begin{dfn}[Totality]{totality}
+An ordering on a set \(F\) is \emph{total} if every pair of elements is
+comparable:
 \[
-  n^2\text{ is even}\iff n\text{ is even},
+  \forall x,y\in F,\quad x\leq y\lor y\leq x.
 \]
-and equivalently,
+\end{dfn}
+
+\begin{conv}[Reverse Order Notation]{reverse-order-notation}
+For \(a,b\in F\), define
 \[
-  n^2\text{ is odd}\iff n\text{ is odd}.
+  a\geq b\iff b\leq a,
+  \qquad
+  a>b\iff b<a.
 \]
-\end{lem}
+\end{conv}
 
-\begin{prop}[No Rational Square Root of \(2\)]{no-rational-square-root-of-two}
-There is no \(q\in\QQ\) such that \(q^2=2\).
-\end{prop}
-
-\begin{proof}
-Suppose, for contradiction, that some \(q\in\QQ\) satisfies
-\(q^2=2\).
-
-According to the \xref{prop:unique-reduced-rational-form}, and $q\in\QQ$ 
-\[\exists p, r \in \ZZ, q = \frac{p}{r}, r > 0, \gcd(|p|, r) = 1\] 
-
-Then we have
-\[\left(\frac{p}{r}\right)^2 = 2 \implies p^2 = 2r^2\]
-
-Since \(p^2\) is even, the \xref[square-parity lemma]{lem:square-parity}
-implies that \(p\) is even. Therefore,
-\[\exists k \in \ZZ,\quad p = 2k.\]
-
-So, 
-\[(2k)^2 = 2r^2 \implies 2k^2 = r^2\]
-
-By the same argument, \(r\) is also even. Meaning that both \(p\) and \(r\) are even, which contradicts the assumption that \(\gcd(|p|, r) = 1\). 
-
-So, it contradicts the assumption that \(q\in\QQ\) satisfies \(q^2=2\). Therefore, there is no \(q\in\QQ\) such that \(q^2=2\). 
-\end{proof}
-
-{\color{blue}
-\begin{rem}[Larger Number System]{sqrt-two-larger-number-system}
-Within \(\QQ\), the proposition only says that the equation \(q^2=2\)
-has no solution \(q\in\QQ\). Writing
-\(\sqrt{2}\notin\QQ\) presupposes a larger number system in which
-\(\sqrt{2}\) exists. 
-\end{rem}
-
-\begin{rem}[Completeness]{rational-incompleteness}
-The existence, in a larger number system, of some
-\(x\notin\QQ\) satisfying \(x^2=2\) does not by itself prove that
-\(\QQ\) is incomplete. Incompleteness must be demonstrated
-internally [TODO Pf link to completeness axiom].
-\end{rem}
-} 
-
-\begin{conv}[Irrational Numbers]{irrational-numbers}
-  We use \(\II\) to denote the set of \emph{irrational numbers} 
+\begin{conv}[Strict Order Notation]{strict-order-notation}
+For \(a,b\in F\), define 
+\[
+  a<b\iff a\leq b \land a\neq b, \quad a>b\iff a\geq b \land a\neq b 
+\]
 \end{conv} 
 
-\begin{rem}[Number Sets]{number-sets-inclusions-real}
-  The set of real numbers \(\RR\) is the union of the set of rational numbers \(\QQ\) and the set of irrational numbers \(\II\):
-  \[
-    \RR = \QQ \cup \II
-  \]
-  Also, in normal conventions, we have:
-  \[
-    \NN \subset \ZZ \subset \QQ \subset \RR
-  \]
-\end{rem} 
+\begin{dfn}[Ordered Set]{ordered-set} 
+A set \(F\) is \emph{ordered} if there exists an operation \(\leq\) on \(F\) that is \xref[transitive]{def:transitive}, \xref[reflexive]{def:reflexive} and \xref[totality]{def:totality}.
 
-\begin{prop}[Integer--Irrational Root Dichotomy]{nth-root-dichotomy}
-  For \(x,n\in\NN\) with \(n>1\), \(\sqrt[n]{x}\in\ZZ\) if
-  \(x\) is a perfect \(n\)-th power, and otherwise
-  \(\sqrt[n]{x}\in\II\).
-\end{prop}
+It is also called partial ordered. 
+\end{dfn} 
 
-\begin{rem}[Sources of Irrational]
+\begin{dfn}[Antisymmetric]{antisymmetric}
+An ordering on a set is \emph{antisymmetric} if
+\[ \forall x, y \in F, (x \le y) \land (y \le x) \implies x = y \]
+\end{dfn} 
+
+\begin{dfn}[Totally Ordered Set]
+  A set \(F\) is \emph{totally ordered} if it is \xref[ordered]{def:ordered-set} and the ordering is also \xref[antisymmetric]{def:antisymmetric}.
+\end{dfn}
+
+\begin{dfn}
+[Ordered Field]{ordered-field}
+  An \emph{ordered field} is a \xref[field]{def:field} \(F\) that is also a
+  \xref[totally ordered set]{def:totally-ordered-set} such that for all
+  \(x,y,z\in F\),
   \begin{itemize}[nosep]
-    \item By \xref{prop:nth-root-dichotomy}, \(\sqrt[n]{x}\) is irrational
-    whenever \(x\in\NN\), \(n>1\), and \(x\) is not a perfect
-    \(n\)-th power.
-    \item Taking logarithms 
-    \item Constants defined by taking limits, such as $\pi$ and $e$. 
+    \item if \(x\leq y\), then \(x+z\leq y+z\); and
+    \item if \(0\leq x\) and \(0\leq y\), then \(0\leq xy\).
   \end{itemize} 
-\end{rem} 
+\end{dfn}
 
-\begin{rem}[Irrational Numbers Are Not Closed]{irrational-not-closed}
-  The irrational numbers are not closed under addition, multiplication, or
-  exponentiation. For example,
+\begin{lem}[Difference Characterization]{difference-characterization}
+  Let \(F\) be an ordered field. For all \(a,b\in F\),
   \[
-    \sqrt{2}+(-\sqrt{2})=0,\qquad
-    \sqrt{2}\cdot\sqrt{2}=2,\qquad
-    (\sqrt{3})^{\log_3 4}=2,
+    a<b\iff 0<b-a.
   \]
-  where all the inputs are irrational. Although \(\pi,e\in\II\), it
-  is not known whether either \(\pi+e\) or \(\pi e\) is irrational; both are
-  expected to be transcendental. By contrast, \(e^\pi\) has been proved
-  transcendental, and is therefore irrational.
-\end{rem}
+\end{lem}
+
+\begin{proof}
+  Since addition preserves order and is cancellative in an ordered field,
+  \[
+    a<b
+    \iff a-a<b-a
+    \iff 0<b-a.
+  \]
+  Here \(a-a=0\) by the additive-inverse axiom in the
+  \xref[definition of a field]{def:field}.
+\end{proof}
+
+\begin{lem}[Positive Perturbation]{positive-perturbation}
+  Let \(F\) be an ordered field. For all \(s,\varepsilon\in F\),
+  \[
+    \varepsilon>0
+    \implies
+    s-\varepsilon<s<s+\varepsilon.
+  \]
+\end{lem}
+
+\begin{proof}
+  If \(\varepsilon>0\), then
+  \[
+    s-(s-\varepsilon)=\varepsilon>0
+    \quad\text{and}\quad
+    (s+\varepsilon)-s=\varepsilon>0.
+  \]
+  Both inequalities follow from
+  \xref[the difference characterization]{lem:difference-characterization}.
+\end{proof}
 
 \section{Indexed Family}
 
@@ -606,12 +588,13 @@ Therefore, both implications hold, and hence proven.
 
 \begin{prop}[\(\varepsilon\)-Criterion for the Supremum]
 {epsilon-supremum}
-  Let \(A\subseteq\RR\) be nonempty and let \(s\in\RR\).
+  Let \(F\) be an ordered field, let \(A\subseteq F\) be nonempty, and
+  let \(s\in F\).
   Then \(s=\sup A\) if and only if
   \begin{enumerate}[nosep]
     \item \(s\) is an upper bound of \(A\); and
-    \item for every \(\varepsilon>0\), \(s-\varepsilon\) is not an upper
-      bound of \(A\).
+    \item for every \(\varepsilon\in F\) with \(\varepsilon>0\),
+      \(s-\varepsilon\) is not an upper bound of \(A\).
   \end{enumerate}
   Equivalently,
   \[
@@ -619,7 +602,7 @@ Therefore, both implications hold, and hence proven.
     \iff
     \begin{cases}
       \forall x\in A,\quad x\leq s,\\
-      \forall\varepsilon>0,\quad
+      \forall\varepsilon\in F,\quad \varepsilon>0\implies
       \exists x\in A\text{ s.t. }s-\varepsilon<x.
     \end{cases}
   \]
@@ -641,7 +624,17 @@ In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to p
 
   According to the \xref[definition of supremum]{def:supremum}, we know that $s$ is an upper bound of \(A\), ie, $\forall x\in A, x \leq s$. 
 
-  
+  Take arbitrary \(\varepsilon\in F\) with \(\varepsilon>0\). By \xref{lem:positive-perturbation},
+  \(
+  s' := s-\varepsilon, \, s'<s.
+  \)
+
+  Again, according to the \xref[definition of supremum]{def:supremum}, we know $\forall b \text{ is an upper bound of } A, s \leq b$.
+  Since $s' < s$, we have that $s'$ is not an upper bound of $A$. 
+
+  Therefore, $s' = s - \varepsilon$ is not an upper bound of $A$. According to the \xref[definition of upper bound]{def:bounded-above}, $\exists x\in A, \, x > s' \implies \exists x > s - \varepsilon$. 
+
+  So, (a) part is proven. 
 
 \textbf{(b)}: 
   \[
@@ -653,6 +646,14 @@ In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to p
     \implies
     s=\sup A
   \] 
+
+  Assume $\forall x\in A,\quad x\leq s$ and \(\forall\varepsilon>0,\quad \exists x\in A\text{ s.t. }s-\varepsilon<x\), and suppose for contradiction that $s \neq \sup A$. 
+
+  From $\forall x\in A,\quad x\leq s$, it follows that $s$ is an upper bound of \(A\). 
+
+  If $s \neq \sup A$, then there exists an upper bound $b$ of \(A\) such that $b < s$. Which contradicts with \(\forall\varepsilon>0,\quad \exists x\in A\text{ s.t. }s-\varepsilon<x\). 
+
+  So (b) is proven. 
 \end{proof}
 
 \begin{dfn}[Greatest Lower Bound/Infimum]{infimum} 
@@ -665,12 +666,13 @@ In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to p
 
 \begin{prop}[\(\varepsilon\)-Criterion for the Infimum]
 {epsilon-infimum}
-  Let \(A\subseteq\RR\) be nonempty and let \(i\in\RR\).
+  Let \(F\) be an ordered field, let \(A\subseteq F\) be nonempty, and
+  let \(i\in F\).
   Then \(i=\inf A\) if and only if
   \begin{enumerate}[nosep]
     \item \(i\) is a lower bound of \(A\); and
-    \item for every \(\varepsilon>0\), \(i+\varepsilon\) is not a lower
-      bound of \(A\).
+    \item for every \(\varepsilon\in F\) with \(\varepsilon>0\),
+      \(i+\varepsilon\) is not a lower bound of \(A\).
   \end{enumerate}
   Equivalently,
   \[
@@ -678,7 +680,7 @@ In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to p
     \iff
     \begin{cases}
       \forall x\in A,\quad i\leq x,\\
-      \forall\varepsilon>0,\quad
+      \forall\varepsilon\in F,\quad \varepsilon>0\implies
       \exists x\in A\text{ s.t. }x<i+\varepsilon.
     \end{cases}
   \]
@@ -727,9 +729,10 @@ In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to p
 \section{Axiom of Completeness} 
 
 \begin{dfn}[Complete Ordered Field]{complete-ordered-field}
-  A \emph{complete ordered field} is a field \(F\) that is an ordered set and 
-  Every nonempty set \(A\subseteq F\) that is \xref[bounded above]{def:bounded-above} has a 
-\xref[least upper bound]{def:supremum} in \(F\) 
+  A \emph{complete ordered field} is an ordered field \(F\) such that every
+  nonempty set \(A\subseteq F\) that is
+  \xref[bounded above]{def:bounded-above} has a
+  \xref[least upper bound]{def:supremum} in \(F\).
 \end{dfn} 
 
 \begin{axm}[Axiom of Completeness]{aoc}
@@ -772,16 +775,6 @@ Every nonempty set \(A\subseteq\RR\) that is \xref[bounded above]{def:bounded-ab
   Therefore \(-u\le i\), so \(-i\le u\). Hence \(-i=\sup A\).
 \end{proof}
 
-\begin{prop}[The Rational Numbers Are Not Complete]
-{rationals-not-complete}
-  The ordered field \(\QQ\) is not complete. For example, the set
-  \[
-    A=\{q\in\QQ:q^2<2\}
-  \]
-  is nonempty and bounded above in \(\QQ\), but it has no supremum
-  in \(\QQ\).
-\end{prop} 
-
 \begin{rem}[Integers and Natural Numbers]{integers-naturals-not-fields}
   Neither \(\ZZ\) nor \(\NN\) is a field, so neither can be
   called a complete ordered field. As ordered sets, however, their nonempty
@@ -810,6 +803,119 @@ If $A = {\frac{1}{n}: n \in \NNOne}$, then $\sup A = 1$ and $\inf A = 0$. Althou
   Although the set $S$ is bounded above in $\QQ$, it does not have a supremum in $\QQ$. According to the \xref[AoC]{axm:aoc}, we know that $\exists s \in \RR, s = \sup S$. This means we can find a number that can be described as the least upper bound a subset of rational numbers which is not in the rational numbers. 
 
 \end{rem}
+
+\section{Irrational Numbers}
+
+\begin{lem}[Parity of a Square]{square-parity}
+For every \(n\in\ZZ\),
+\[
+  n^2\text{ is even}\iff n\text{ is even},
+\]
+and equivalently,
+\[
+  n^2\text{ is odd}\iff n\text{ is odd}.
+\]
+\end{lem}
+
+\begin{prop}[No Rational Square Root of \(2\)]{no-rational-square-root-of-two}
+There is no \(q\in\QQ\) such that \(q^2=2\).
+\end{prop}
+
+\begin{proof}
+Suppose, for contradiction, that some \(q\in\QQ\) satisfies
+\(q^2=2\).
+
+According to the \xref{prop:unique-reduced-rational-form}, and $q\in\QQ$ 
+\[\exists p, r \in \ZZ, q = \frac{p}{r}, r > 0, \gcd(|p|, r) = 1\] 
+
+Then we have
+\[\left(\frac{p}{r}\right)^2 = 2 \implies p^2 = 2r^2\]
+
+Since \(p^2\) is even, the \xref[square-parity lemma]{lem:square-parity}
+implies that \(p\) is even. Therefore,
+\[\exists k \in \ZZ,\quad p = 2k.\]
+
+So, 
+\[(2k)^2 = 2r^2 \implies 2k^2 = r^2\]
+
+By the same argument, \(r\) is also even. Meaning that both \(p\) and \(r\) are even, which contradicts the assumption that \(\gcd(|p|, r) = 1\). 
+
+So, it contradicts the assumption that \(q\in\QQ\) satisfies \(q^2=2\). Therefore, there is no \(q\in\QQ\) such that \(q^2=2\). 
+\end{proof}
+
+{\color{blue}
+\begin{rem}[Larger Number System]{sqrt-two-larger-number-system}
+Within \(\QQ\), the proposition only says that the equation \(q^2=2\)
+has no solution \(q\in\QQ\). Writing
+\(\sqrt{2}\notin\QQ\) presupposes a larger number system in which
+\(\sqrt{2}\) exists. 
+\end{rem}
+
+\begin{rem}[Completeness]{rational-incompleteness}
+The existence, in a larger number system, of some
+\(x\notin\QQ\) satisfying \(x^2=2\) does not by itself prove that
+\(\QQ\) is incomplete. Incompleteness must be demonstrated
+internally by finding a nonempty subset of \(\QQ\) that is bounded above
+in \(\QQ\) but has no supremum in \(\QQ\), as in
+\xref[Proposition~\ref*{prop:rationals-not-complete}]
+{prop:rationals-not-complete}.
+\end{rem}
+} 
+
+\begin{conv}[Irrational Numbers]{irrational-numbers}
+  We use \(\II\) to denote the set of \emph{irrational numbers} 
+\end{conv} 
+
+\begin{rem}[Number Sets]{number-sets-inclusions-real}
+  The set of real numbers \(\RR\) is the union of the set of rational numbers \(\QQ\) and the set of irrational numbers \(\II\):
+  \[
+    \RR = \QQ \cup \II
+  \]
+  Also, in normal conventions, we have:
+  \[
+    \NN \subset \ZZ \subset \QQ \subset \RR
+  \]
+\end{rem} 
+
+\begin{prop}[Integer--Irrational Root Dichotomy]{nth-root-dichotomy}
+  For \(x,n\in\NN\) with \(n>1\), \(\sqrt[n]{x}\in\ZZ\) if
+  \(x\) is a perfect \(n\)-th power, and otherwise
+  \(\sqrt[n]{x}\in\II\).
+\end{prop}
+
+\begin{rem}[Sources of Irrational]
+  \begin{itemize}[nosep]
+    \item By \xref{prop:nth-root-dichotomy}, \(\sqrt[n]{x}\) is irrational
+    whenever \(x\in\NN\), \(n>1\), and \(x\) is not a perfect
+    \(n\)-th power.
+    \item Taking logarithms 
+    \item Constants defined by taking limits, such as $\pi$ and $e$. 
+  \end{itemize} 
+\end{rem} 
+
+\begin{rem}[Irrational Numbers Are Not Closed]{irrational-not-closed}
+  The irrational numbers are not closed under addition, multiplication, or
+  exponentiation. For example,
+  \[
+    \sqrt{2}+(-\sqrt{2})=0,\qquad
+    \sqrt{2}\cdot\sqrt{2}=2,\qquad
+    (\sqrt{3})^{\log_3 4}=2,
+  \]
+  where all the inputs are irrational. Although \(\pi,e\in\II\), it
+  is not known whether either \(\pi+e\) or \(\pi e\) is irrational; both are
+  expected to be transcendental. By contrast, \(e^\pi\) has been proved
+  transcendental, and is therefore irrational.
+\end{rem}
+
+\begin{prop}[The Rational Numbers Are Not Complete]
+{rationals-not-complete}
+  The ordered field \(\QQ\) is not complete. For example, the set
+  \[
+    A=\{q\in\QQ:q^2<2\}
+  \]
+  is nonempty and bounded above in \(\QQ\), but it has no supremum
+  in \(\QQ\).
+\end{prop}
 
 
 \end{document}

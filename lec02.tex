@@ -4,7 +4,7 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Lecture 2: Cardinality}\\[0.25em]
+  {\LARGE\bfseries Lecture 2: Cardinality and Countability}\\[0.25em]
   {\large Mathematical Analysis}\\[0.15em]
 \end{center}
 
@@ -102,6 +102,198 @@ For infinite sets, the cardinality maybe still the same even if we remove some (
     \end{array}\right.
   \end{align*}
 \end{thm}
+
+\section{Power Sets} 
+
+\begin{dfn}[Power Set]{power-set}
+  The \emph{power set} of a set \(A\), denoted by \(\PowerSet(A)\), is the set of all subsets of \(A\):
+  \[
+    \PowerSet(A)=\{B:B\subseteq A\}.
+  \] 
+\end{dfn}
+
+\begin{example}
+  Let \(A=\{1,2,3\}\). Then
+  \[
+    \PowerSet(A)=\{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{1,3\},\{2,3\},A\}.
+  \]
+\end{example}
+
+\begin{thm}[Cardinality of Finite Power Set]{cardinality-finite-power-set}
+  For any finite set \(A\), \(\card{\PowerSet(A)}=2^{\card{A}}\). 
+\end{thm}
+
+\begin{lem}[Singleton in the Power Set]{singleton-in-power-set}
+  For every set \(A\),
+  \[
+    \forall a\in A,\quad \{a\}\in\PowerSet(A).
+  \]
+\end{lem}
+
+\begin{proof}
+  If \(a\in A\), then \(\{a\}\subseteq A\).
+  Hence \(\{a\}\in\PowerSet(A)\).
+\end{proof} 
+
+\begin{thm}[Cantor's Theorem]{cantor-power-set} 
+  There does not exist a \xref[surjective function]{lec01::def:surjective-mapping} \(f:A\to\PowerSet(A)\). 
+\end{thm}
+
+\begin{proof}
+Assume for contradiction that there exists a \xref[surjective function]{lec01::def:surjective-mapping} \(f:A\to\PowerSet(A)\). This means $\forall B \in \PowerSet(A), \exists a \in A$ such that $f(a) = B$. 
+
+We can seperate all elements in $A$ into two groups:
+\begin{align*}
+A_1 = \{a \in A: a \notin f(a)\} \\
+A_2 = \{a \in A: a \in f(a)\}
+\end{align*} 
+
+Notice that $A_1\subseteq A$, so $A_1\in\PowerSet(A)$.  
+
+And, since $f$ is surjective, there exists $\alpha \in A$ such that $f(\alpha) = A_1$. 
+
+According to \xref[PNP Axiom]{lec01::rem:membership-classical-logic}, $\alpha$ must be in either $A_1$ or $A_2$. 
+
+If $\alpha \in A_1$, then by definition $\alpha\notin f(\alpha)=A_1$, contradicting $\alpha\in A_1$. 
+
+If $\alpha \in A_2$, then by definition $\alpha\in f(\alpha)=A_1$. Hence $\alpha\in A_1$, whose definition gives $\alpha\notin f(\alpha)$, also a contradiction. 
+
+Both possible cases lead to a contradiction. Therefore, the assumed surjective function \(f:A\to\PowerSet(A)\) does not exist.
+\end{proof} 
+
+\begin{cor}[Power Set Strictly Larger than Original Set]{power-set-strictly-larger}
+  For any set \(A\), \(\card{A}<\card{\PowerSet(A)}\).  
+\end{cor} 
+
+\begin{rem}[Largest Cardinality does not Exist]{largest-cardinality-does-not-exist}
+  There is no largest cardinality for sets since for any set \(A\), \(\card{A}<\card{\PowerSet(A)}\).  
+\end{rem}
+
+\section{Images} 
+
+\begin{dfn}[Image Operator]{image}
+  For sets \(A\) and \(B\), the \emph{image operator} is the mapping
+  \[
+    (-)^{\mathrm{img}}:
+    (A\to B)\to\bigl(\PowerSet(A)\to\PowerSet(B)\bigr)
+  \]
+  defined by
+  \[
+    f\mapsto\left(C\mapsto\{f(x):x\in C\}\right).
+  \]
+\end{dfn}
+
+\begin{cor}[Image of a Subset]{image-of-subset}
+  For a mapping \(f:A\to B\) and a set \(C\subseteq A\),
+  \[
+    \img{f}(C)=\{f(x):x\in C\}\subseteq B.
+  \]
+\end{cor}
+
+\begin{lem}[Monotonicity of Images]{image-monotonicity}
+  Let \(g:X\to Y\) and let \(E,F\subseteq X\). Then
+  \[
+    E\subseteq F\implies \img{g}(E)\subseteq \img{g}(F).
+  \]
+\end{lem}
+
+\begin{proof}
+  If \(y\in \img{g}(E)\), then \(y=g(x)\) for some \(x\in E\). Since
+  \(E\subseteq F\), we have \(x\in F\), and therefore \(y\in \img{g}(F)\).
+\end{proof}
+
+\begin{dfn}[Preimage Operator]{pre-image}
+  For sets \(A\) and \(B\), the \emph{preimage operator} is the mapping
+  \[
+    (-)^{\mathrm{preimg}}:
+    (A\to B)\to\bigl(\PowerSet(B)\to\PowerSet(A)\bigr)
+  \]
+  defined by
+  \[
+    f\mapsto\left(D\mapsto\{x\in A:f(x)\in D\}\right).
+  \]
+\end{dfn}
+
+\begin{cor}[Preimage of a Subset]{preimage-of-subset}
+  For a mapping \(f:A\to B\) and a set \(D\subseteq B\),
+  \[
+    \preimg{f}(D)=\{x\in A:f(x)\in D\}\subseteq A.
+  \]
+\end{cor}
+
+\begin{lem}[Monotonicity of Pre-images]{preimage-monotonicity}
+  Let \(g:X\to Y\) and let \(E,F\subseteq Y\). Then
+  \[
+    E\subseteq F\implies \preimg{g}(E)\subseteq \preimg{g}(F).
+  \]
+\end{lem}
+
+\begin{rem}[Image of Pre-image] 
+  In general cases, for a mapping $f: A \to B$, 
+  \begin{align*}
+    C \subseteq A, \nRightarrow \preimg{f}(\img{f}(C)) = C \\ 
+    D \subseteq B, \nRightarrow \img{f}(\preimg{f}(D)) = D
+  \end{align*} 
+\end{rem} 
+
+\begin{proof}[Counterexamples]
+  Define \(f:\NN\to\mathbb B\) by
+  \[
+    f(n)=
+    \begin{cases}
+      \mathrm{ff}, & n=0,\\
+      \mathrm{tt}, & n\in\NNOne.
+    \end{cases}
+  \]
+  Then
+  \[
+    \preimg{f}(\img{f}(\{1\}))
+    =\preimg{f}(\{\mathrm{tt}\})
+    =\NNOne
+    \neq\{1\}.
+  \]
+
+  Define \(g:\mathbb B\to\NN\) by
+  \[
+    g(\mathrm{tt})=0,
+    \qquad
+    g(\mathrm{ff})=1.
+  \]
+  Since \(2\) is not in the range of \(g\),
+  \[
+    \img{g}(\preimg{g}(\{2\}))
+    =\img{g}(\emptyset)
+    =\emptyset
+    \neq\{2\}.
+  \]
+\end{proof}
+
+\begin{rem}[What to do when a result is not true?]{how-to-treat-false-results}
+  When a result such as the equalities in
+  \xref{rem:image-of-pre-image} is not true, we may:
+  \begin{itemize}[nosep]
+    \item strengthen the assumptions, as in
+      \xref{prop:bijection-preimage-image};
+    \item narrow down the conclusion, as in
+      \xref{prop:preimage-image-subset}.
+  \end{itemize}
+\end{rem} 
+
+\begin{prop}[Subset Relation for Pre-image of Image]{preimage-image-subset}
+  In general cases, for a mapping $f: A \to B$, 
+  \begin{align*}
+    C \subseteq A, \preimg{f}(\img{f}(C)) \supseteq C \\ 
+    D \subseteq B, \img{f}(\preimg{f}(D)) \subseteq D
+  \end{align*} 
+\end{prop} 
+
+\begin{prop}[Pre-image of Image for Bijection Mapping]{bijection-preimage-image}
+If $f: A \to B$ is a bijection mapping, then 
+  \begin{align*}
+    C \subseteq A, \implies \preimg{f}(\img{f}(C)) = C \\ 
+    D \subseteq B, \implies \img{f}(\preimg{f}(D)) = D
+  \end{align*} 
+\end{prop} 
 
 \section{Nested Sequence of Sets} 
 
@@ -225,34 +417,38 @@ which is finite and nonempty.
 \section{Intervals}
 
 \begin{dfn}[Interval]{interval}
-  A set \(I\subseteq\RR\) is an \emph{interval} if, whenever
-  \(x,y\in I\) with \(x\le y\), every \(z\in\RR\) satisfying
+  Let \(X\) be a \xref[totally ordered set]{lec01::def:total-order}. A set
+  \(I\subseteq X\) is an \emph{interval} if, whenever
+  \(x,y\in I\) with \(x\le y\), every \(z\in X\) satisfying
   \(x\le z\le y\) also belongs to \(I\).
 \end{dfn}
 
 \begin{rem}[Intervals as Sets]{intervals-as-sets}
-  In these notes, every interval is a set contained in \(\RR\);
-  that is, every interval \(I\) satisfies \(I\subseteq\RR\).
+  Every interval is a set contained in its ambient totally ordered set \(X\);
+  that is, every interval \(I\) satisfies \(I\subseteq X\).
 \end{rem}
 
 \begin{dfn}[Open Interval]{open-interval}
-  For \(a,b\in\RR\) with \(a<b\), the \emph{open interval}
+  Let \(X\) be a totally ordered set. For \(a,b\in X\) with \(a<b\),
+  the \emph{open interval}
   from \(a\) to \(b\) is
   \[
-    (a,b)=\{x\in\RR:a<x<b\}.
+    (a,b)=\{x\in X:a<x<b\}.
   \]
 \end{dfn}
 
 \begin{dfn}[Closed Interval]{closed-interval}
-  For \(a,b\in\RR\) with \(a\le b\), the \emph{closed interval}
+  Let \(X\) be a totally ordered set. For \(a,b\in X\) with \(a\le b\),
+  the \emph{closed interval}
   from \(a\) to \(b\) is
   \[
-    [a,b]=\{x\in\RR:a\le x\le b\}.
+    [a,b]=\{x\in X:a\le x\le b\}.
   \]
 \end{dfn}
 
 \begin{lem}[Endpoints of Contained Closed Intervals]{contained-interval-endpoints}
-  Let \(I_1=[a_1,b_1]\) and \(I_2=[a_2,b_2]\) be closed intervals. If
+  Let \(I_1=[a_1,b_1]\) and \(I_2=[a_2,b_2]\) be closed intervals in the
+  same totally ordered set. If
   \(I_1\subseteq I_2\), then
   \[
     a_2\le a_1\le b_1\le b_2.
@@ -270,7 +466,8 @@ which is finite and nonempty.
 \end{proof}
 
 \begin{lem}[Endpoint Order of Nested Closed Intervals]{nested-interval-endpoint-order}
-  Let \(I_k=[a_k,b_k]\) be a nested sequence of closed intervals. Then
+  Let \(I_k=[a_k,b_k]\) be a nested sequence of closed intervals in the
+  same totally ordered set. Then
   \[
     n\leq m
     \implies
@@ -279,12 +476,14 @@ which is finite and nonempty.
 \end{lem}
 
 \begin{proof}
-\color{blue}\textbf{TODO} \color{black}
+\todo
 \end{proof}
 
 \begin{thm}[Nested Intervals Property (NIP)]{nip}
-  Let \(I_n=[a_n,b_n]\) be a sequence of
-  \xref[closed]{def:closed-interval} and \xref[bounded]{lec01::def:bounded-set} \xref[intervals]{def:interval}.
+  Let \(F\) be a
+  \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let
+  \(I_n=[a_n,b_n]\subseteq F\) be a sequence of
+  \xref[closed]{def:closed-interval} intervals.
   \[
     I_0\supseteq I_1\supseteq I_2\supseteq\cdots
     \implies
@@ -305,7 +504,7 @@ By
   p\leq q\implies I_q\subseteq I_p.
 \]
 
-By \xref[comparability in an ordered set]{lec01::def:ordered-set},
+By \xref[comparability in a total order]{lec01::def:total-order},
 \(\forall n,m\in\NN,\ (n\leq m)\lor(m\leq n)\). Hence
 \xref{lem:contained-interval-endpoints} gives
 \[
@@ -328,7 +527,7 @@ Consequently,
   \implies
   A\neq\emptyset\ \land A\text{ is bounded above}.
 \]
-By the \xref[Axiom of Completeness]{lec01::axm:aoc}, choose
+By the \xref[completeness of \(F\)]{lec01::def:complete-ordered-field}, choose
 \(\alpha=\sup A\). The
 \xref[definition of supremum]{lec01::def:supremum} gives
 \[
@@ -348,11 +547,34 @@ Hence, by the
 Therefore \(\bigcap_{n=0}^{\infty}I_n\neq\emptyset\).
 \end{proof}
 
+\begin{cor}[Nested Intervals Property in \(\RR\)]{nip-real-numbers}
+  Let \(I_n=[a_n,b_n]\subseteq\RR\) be a sequence of closed intervals. Then
+  \[
+    I_0\supseteq I_1\supseteq I_2\supseteq\cdots
+    \implies
+    \bigcap_{n=0}^{\infty}I_n\neq\emptyset.
+  \]
+\end{cor}
+
+\begin{proof}
+  By the \xref[Axiom of Completeness]{lec01::axm:aoc} and the
+  \xref[definition of a complete ordered field]
+  {lec01::def:complete-ordered-field}, \(\RR\) is complete. The conclusion
+  follows from \xref[the Nested Intervals Property]{thm:nip}.
+\end{proof}
+
 \begin{rem}[Intervals can be Infinitely Small]{inf-small-intervals}
 If a size of the interval is infinitely small, ie \(I=[a,b]\),
 \(\forall\varepsilon>0,\,
 b-a<\varepsilon\), this means that the interval is equivalent to a single point, ie $a = b$. 
-\end{rem}
+\end{rem} 
+
+\begin{dfn}[Neighbourhood]{neighbourhood}
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}. For \(x\in F\) and \(\varepsilon\in F\) with \(\varepsilon>0\), the \emph{neighbourhood} of \(x\) with radius \(\varepsilon\) is the \xref[open interval]{def:open-interval}
+  \[
+    V_{\varepsilon}(x) := (x-\varepsilon,\, x+\varepsilon).
+  \]
+\end{dfn}
 
 \section{Decimal Expansion} 
 
@@ -423,7 +645,7 @@ Here, ``not eventually equal to \(9\)'' means
 \end{thm}
 
 \begin{proof}
-\color{blue}\textbf{TODO} \color{black}
+\todo
 \end{proof}
 
 \section{Archimedean Property} 
@@ -471,7 +693,7 @@ a<b\implies\exists d\in D:\quad a<d<b.
 \end{thm}
 
 \begin{proof}
-\color{blue}\textbf{TODO} \color{black} 
+\todo
 \end{proof}
 
 \begin{thm}[Density of the Irrational Numbers]{irrationals-dense-in-reals}
@@ -479,7 +701,7 @@ a<b\implies\exists d\in D:\quad a<d<b.
 \end{thm} 
 
 \begin{proof}
-\color{blue}\textbf{TODO} \color{black} 
+\todo
 \end{proof} 
 
 \begin{rem}
@@ -589,71 +811,5 @@ Assume that $\RR$ is countable. According to \xref[Theorem~\ref*{thm:interval-re
 
   Let $A$ and $B$ be two countable sets. If $A$ and $B$ are finite, trivially it is countable. 
 \end{proof} 
-
-\section{Power Sets} 
-
-\begin{dfn}[Power Set]{power-set}
-  The \emph{power set} of a set \(A\), denoted by \(\PowerSet(A)\), is the set of all subsets of \(A\):
-  \[
-    \PowerSet(A)=\{B:B\subseteq A\}.
-  \] 
-\end{dfn}
-
-\begin{example}
-  Let \(A=\{1,2,3\}\). Then
-  \[
-    \PowerSet(A)=\{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{1,3\},\{2,3\},A\}.
-  \]
-\end{example}
-
-\begin{thm}[Cardinality of Finite Power Set]{cardinality-finite-power-set}
-  For any finite set \(A\), \(\card{\PowerSet(A)}=2^{\card{A}}\). 
-\end{thm}
-
-\begin{lem}[Singleton in the Power Set]{singleton-in-power-set}
-  For every set \(A\),
-  \[
-    \forall a\in A,\quad \{a\}\in\PowerSet(A).
-  \]
-\end{lem}
-
-\begin{proof}
-  If \(a\in A\), then \(\{a\}\subseteq A\).
-  Hence \(\{a\}\in\PowerSet(A)\).
-\end{proof} 
-
-\begin{thm}[Cantor's Theorem]{cantor-power-set} 
-  There does not exist a \xref[surjective function]{lec01::def:surjective-mapping} \(f:A\to\PowerSet(A)\). 
-\end{thm}
-
-\begin{proof}
-Assume for contradiction that there exists a \xref[surjective function]{lec01::def:surjective-mapping} \(f:A\to\PowerSet(A)\). This means $\forall B \in \PowerSet(A), \exists a \in A$ such that $f(a) = B$. 
-
-We can seperate all elements in $A$ into two groups:
-\begin{align*}
-A_1 = \{a \in A: a \notin f(a)\} \\
-A_2 = \{a \in A: a \in f(a)\}
-\end{align*} 
-
-Notice that $A_1\subseteq A$, so $A_1\in\PowerSet(A)$.  
-
-And, since $f$ is surjective, there exists $\alpha \in A$ such that $f(\alpha) = A_1$. 
-
-According to \xref[PNP Axiom]{lec01::rem:membership-classical-logic}, $\alpha$ must be in either $A_1$ or $A_2$. 
-
-If $\alpha \in A_1$, then by definition $\alpha\notin f(\alpha)=A_1$, contradicting $\alpha\in A_1$. 
-
-If $\alpha \in A_2$, then by definition $\alpha\in f(\alpha)=A_1$. Hence $\alpha\in A_1$, whose definition gives $\alpha\notin f(\alpha)$, also a contradiction. 
-
-Both possible cases lead to a contradiction. Therefore, the assumed surjective function \(f:A\to\PowerSet(A)\) does not exist.
-\end{proof} 
-
-\begin{cor}[Power Set Strictly Larger than Original Set]{power-set-strictly-larger}
-  For any set \(A\), \(\card{A}<\card{\PowerSet(A)}\).  
-\end{cor} 
-
-\begin{rem}[Largest Cardinality does not Exist]{largest-cardinality-does-not-exist}
-  There is no largest cardinality for sets since for any set \(A\), \(\card{A}<\card{\PowerSet(A)}\).  
-\end{rem}
 
 \end{document}

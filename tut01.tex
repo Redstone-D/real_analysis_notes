@@ -150,18 +150,18 @@ Statement (e) is true.
 
 For a function \(f\) with domain \(D\) and a set \(A\subseteq D\), use
 \[
-  f(A)=\{f(x):x\in A\}.
+  \img{f}(A)=\{f(x):x\in A\}.
 \]
 
 \noindent\textbf{(a)}
 \[
   f(x)=x^2,\qquad A=[0,2],\qquad B=[1,4].
 \]
-Find \(f(A)\) and \(f(B)\), and determine whether
+Find \(\img{f}(A)\) and \(\img{f}(B)\), and determine whether
 \[
-  f(A\cap B)=f(A)\cap f(B)
+  \img{f}(A\cap B)=\img{f}(A)\cap \img{f}(B)
   \quad\text{and}\quad
-  f(A\cup B)=f(A)\cup f(B).
+  \img{f}(A\cup B)=\img{f}(A)\cup \img{f}(B).
 \]
 
 Since $f$ is a \xref[one to one map]{lec01::def:injective-mapping} $[0, 4]$
@@ -170,33 +170,34 @@ Where, $A, B \in [0, 4]$.
 
 We can find the image of $A$ and $B$ by evaluating the function at the endpoints of the intervals. Trivially: 
 
-\[f(A) = [0,4], \quad f(B) = [1,16]\]
+\[\img{f}(A) = [0,4], \quad \img{f}(B) = [1,16]\]
 
-Where $A \cap B = [1,2]$, so $f(A \cap B) = [1,4]$. 
+Where $A \cap B = [1,2]$, so $\img{f}(A \cap B) = [1,4]$. 
 
-We can also find $f(A) \cap f(B) = [0, 4] \cap [1,16] = [1,4]$. 
+We can also find $\img{f}(A) \cap \img{f}(B) = [0, 4] \cap [1,16] = [1,4]$. 
 
-\fbox{So, $f(A \cap B) = f(A) \cap f(B)$.} 
+\fbox{So, $\img{f}(A \cap B) = \img{f}(A) \cap \img{f}(B)$.} 
 
-Where $A \cup B = [0,4]$, so $f(A \cup B) = [0,16]$. 
+Where $A \cup B = [0,4]$, so $\img{f}(A \cup B) = [0,16]$. 
 
-We can also find $f(A) \cup f(B) = [0,4] \cup [1,16] = [0,16]$. 
+We can also find $\img{f}(A) \cup \img{f}(B) = [0,4] \cup [1,16] = [0,16]$. 
 
-\fbox{So, $f(A \cup B) = f(A) \cup f(B)$.} 
+\fbox{So, $\img{f}(A \cup B) = \img{f}(A) \cup \img{f}(B)$.} 
 
 \medskip
 \noindent\textbf{(b)} Find \(A\) and \(B\) such that
 \[
-  f(A\cap B)\neq f(A)\cap f(B).
+  \img{f}(A\cap B)\neq \img{f}(A)\cap \img{f}(B).
 \]
 
 For $f = x^2$, we can have some part which is not one-to-one. 
 
 \begin{align*}
   A &= [0,1], & B &= [-1,0], \\
-  A\cap B &= \{0\}, & f(A\cap B) &= f(\{0\})=\{0\}, \\
-  f(A)\cap f(B)
-    &= f([0,1])\cap f([-1,0])
+  A\cap B &= \{0\}, \\
+  \img{f}(A\cap B) &= \img{f}(\{0\})=\{0\}, \\
+  \img{f}(A)\cap \img{f}(B)
+    &= \img{f}([0,1])\cap \img{f}([-1,0])
      = [0,1]\cap[0,1]
      = [0,1], \\
   [0,1] &\neq \{0\}.
@@ -206,30 +207,38 @@ For $f = x^2$, we can have some part which is not one-to-one.
 \noindent\textbf{(c)} For an arbitrary function \(g:\RR\to\RR\)
 and all \(A,B\subseteq\RR\), prove that
 \[
-  g(A\cap B)\subseteq g(A)\cap g(B).
+  \img{g}(A\cap B)\subseteq \img{g}(A)\cap \img{g}(B).
 \]
 
 \begin{proof}
-  According to definition of \xref[image]{lec01::def:image}, 
-  \[g(A) = y: g(x), x \in A \quad g(B) = y: g(x), x \in B \quad g(A \cap B) = y: g(x), x \in A \cap B \] 
+  According to definition of \xref[image]{lec02::def:image}, 
+  \[\img{g}(A) = y: g(x), x \in A \quad \img{g}(B) = y: g(x), x \in B \quad \img{g}(A \cap B) = y: g(x), x \in A \cap B \] 
 
-  Assume \[g(A \cap B) \supset g(A) \cap g(B) \implies \exists y, y \notin g(A) \cap g(B) \land y \in g(A \cap B)\]
+  Assume \[\img{g}(A \cap B) \supset \img{g}(A) \cap \img{g}(B) \implies \exists y, y \notin \img{g}(A) \cap \img{g}(B) \land y \in \img{g}(A \cap B)\]
 
-  Then, $y \in g(A \cap B)$ means that $\exists x, x \in A \cap B$ and $g(x) = y$. Since $x \in A \cap B$, we have $x \in A$ and $x \in B$. Therefore, $g(x) \in g(A)$ and $g(x) \in g(B)$, which implies $y \in g(A) \cap g(B)$. This is a contradiction. 
+  Then, $y \in \img{g}(A \cap B)$ means that $\exists x, x \in A \cap B$ and $g(x) = y$. Since $x \in A \cap B$, we have $x \in A$ and $x \in B$. Therefore, $g(x) \in \img{g}(A)$ and $g(x) \in \img{g}(B)$, which implies $y \in \img{g}(A) \cap \img{g}(B)$. This is a contradiction. 
 
-  Therefore, $g(A \cap B) \subseteq g(A) \cap g(B)$. 
+  Therefore, $\img{g}(A \cap B) \subseteq \img{g}(A) \cap \img{g}(B)$. 
 \end{proof} 
 
 \medskip
 \noindent\textbf{(d)} Determine and prove the relationship between
 \[
-  g(A\cup B)
+  \img{g}(A\cup B)
   \quad\text{and}\quad
-  g(A)\cup g(B)
+  \img{g}(A)\cup \img{g}(B)
 \]
 for an arbitrary function \(g\).
 
-\[\forall y \in g(A)\cup g(B), \exists x \in A\cup B, g(x) = y \implies y \in g(A\cup B) \implies g(A\cup B) \supseteq g(A)\cup g(B)\]
+\[
+  \begin{aligned}
+    &\forall y \in \img{g}(A)\cup \img{g}(B),
+      \exists x \in A\cup B, g(x)=y \\
+    &\qquad\implies y \in \img{g}(A\cup B) \\
+    &\qquad\implies \img{g}(A\cup B)
+      \supseteq \img{g}(A)\cup \img{g}(B).
+  \end{aligned}
+\]
 
 \begin{ex}{abbott-1-2-9}
 \abbottexercise{1.2.9}
@@ -238,7 +247,7 @@ for an arbitrary function \(g\).
 For a function \(f:D\to\RR\) and a set
 \(B\subseteq\RR\), use
 \[
-  f^{-1}(B)=\{x\in D:f(x)\in B\}.
+  \preimg{f}(B)=\{x\in D:f(x)\in B\}.
 \]
 
 \noindent\textbf{(a)}
@@ -248,34 +257,34 @@ For a function \(f:D\to\RR\) and a set
   A=[0,4],\qquad
   B=[-1,1].
 \]
-Find \(f^{-1}(A)\) and \(f^{-1}(B)\), and determine whether
+Find \(\preimg{f}(A)\) and \(\preimg{f}(B)\), and determine whether
 \[
-  f^{-1}(A\cap B)=f^{-1}(A)\cap f^{-1}(B)
+  \preimg{f}(A\cap B)=\preimg{f}(A)\cap \preimg{f}(B)
   \quad\text{and}\quad
-  f^{-1}(A\cup B)=f^{-1}(A)\cup f^{-1}(B).
+  \preimg{f}(A\cup B)=\preimg{f}(A)\cup \preimg{f}(B).
 \] 
 
-$f^{-1}(A) = [-2, 2], \quad f^{-1}(B) = [-1, 1]$
+$\preimg{f}(A) = [-2, 2], \quad \preimg{f}(B) = [-1, 1]$
 
-Where $A \cap B = [0, 1]$, so $f^{-1}(A \cap B) = [-1, 1]$. 
+Where $A \cap B = [0, 1]$, so $\preimg{f}(A \cap B) = [-1, 1]$. 
 
-We can also find $f^{-1}(A) \cap f^{-1}(B) = [-2, 2] \cap [-1, 1] = [-1, 1]$. 
+We can also find $\preimg{f}(A) \cap \preimg{f}(B) = [-2, 2] \cap [-1, 1] = [-1, 1]$. 
 
-\fbox{So, $f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B)$.} 
+\fbox{So, $\preimg{f}(A \cap B) = \preimg{f}(A) \cap \preimg{f}(B)$.} 
 
-Where $A \cup B = [-1, 4]$, so $f^{-1}(A \cup B) = [-2, 2]$. 
+Where $A \cup B = [-1, 4]$, so $\preimg{f}(A \cup B) = [-2, 2]$. 
 
-We can also find $f^{-1}(A) \cup f^{-1}(B) = [-2, 2] \cup [-1, 1] = [-2, 2]$. 
+We can also find $\preimg{f}(A) \cup \preimg{f}(B) = [-2, 2] \cup [-1, 1] = [-2, 2]$. 
 
-\fbox{So, $f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$.} 
+\fbox{So, $\preimg{f}(A \cup B) = \preimg{f}(A) \cup \preimg{f}(B)$.} 
 
 \medskip
 \noindent\textbf{(b)} For an arbitrary function
 \(g:\RR\to\RR\) and all \(A,B\subseteq\RR\), prove that
 \[
-  g^{-1}(A\cap B)=g^{-1}(A)\cap g^{-1}(B)
+  \preimg{g}(A\cap B)=\preimg{g}(A)\cap \preimg{g}(B)
   \quad\text{and}\quad
-  g^{-1}(A\cup B)=g^{-1}(A)\cup g^{-1}(B).
+  \preimg{g}(A\cup B)=\preimg{g}(A)\cup \preimg{g}(B).
 \]
 
 \begin{proof}

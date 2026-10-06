@@ -614,3 +614,20 @@
   }
 
 \ExplSyntaxOff
+
+% Authoring markers for work-in-progress notes. Grep-friendly names.
+% \todo              -- inline marker, blue bold "TODO"
+% \todo{text}        -- blue bold "TODO:" + non-bold body
+% \missingprereq{t}  -- purple inline body for prereqs owed from other subjects
+\definecolor{notestodo}{RGB}{30,90,200}
+\definecolor{notesmissingprereq}{RGB}{140,40,180}
+
+\NewDocumentCommand{\todo}{o}{%
+  \IfValueTF{#1}%
+    {\textcolor{notestodo}{\textbf{TODO:}~#1}}%
+    {\textcolor{notestodo}{\textbf{TODO}}}%
+}
+
+\NewDocumentCommand{\missingprereq}{m}{%
+  \textcolor{notesmissingprereq}{#1}%
+}

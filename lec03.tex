@@ -10,6 +10,21 @@
 
 \section{Convergent Sequences} 
 
+\begin{dfn}[Convergent Sequence]{convergent-sequence}
+  A sequence $a: \NNOne \to F$, where $F$ is a \xref[ordered field]{lec01::def:ordered-field}, is said to be \emph{convergent} if
+  \[
+    \exists \ell \in F,\, \forall \varepsilon \in F,\, \varepsilon > 0,\, \exists n \in \NNOne,\, \forall m \in \NNOne,\, m \geq n,\, a_m \in \neighbourhood{\varepsilon}{\ell}.
+  \]
+\end{dfn}
+
+\begin{rem}
+The intuition of convergence is that we can find a value $\ell$ such that we can propose any $\epsilon > 0$, such that there exists an index $n \in \NNOne$, for all $m \in \NNOne$ where $m > n$, 
+\end{rem}
+
+\begin{rem}[Convergence Over a General Ordered Field]{convergence-ordered-field}
+Results in this lecture are stated for a general \xref[ordered field]{lec01::def:ordered-field} $F$ by default; theorems that require a \xref[complete ordered field]{lec01::def:complete-ordered-field} will say so explicitly in their hypotheses. Recall that $\QQ$ is an ordered field and $\RR$ is a complete ordered field.
+\end{rem}
+
 \section{Limit of a Sequence} 
 
 \section{Bounded Sequences} 

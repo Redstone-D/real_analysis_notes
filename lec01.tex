@@ -162,6 +162,50 @@ For \(a,b\in F\), define
 \]
 \end{conv}
 
+\begin{dfn}[Binary Maximum]{binary-max}
+  Let \(X\) be equipped with a \xref[total order]{def:total-order} \(\leq\). For \(a, b \in X\), define
+  \[
+    \max(a, b) :=
+    \begin{cases}
+      a & \text{if } a \geq b, \\
+      b & \text{otherwise.}
+    \end{cases}
+  \]
+\end{dfn}
+
+\begin{dfn}[Binary Minimum]{binary-min}
+  Let \(X\) be equipped with a \xref[total order]{def:total-order} \(\leq\). For \(a, b \in X\), define
+  \[
+    \min(a, b) :=
+    \begin{cases}
+      a & \text{if } a \leq b, \\
+      b & \text{otherwise.}
+    \end{cases}
+  \]
+\end{dfn}
+
+\begin{dfn}[Maximum of a Set]{set-maximum}
+  Let \(X\) be equipped with a \xref[total order]{def:total-order} \(\leq\), and let \(A \subseteq X\) be nonempty. An element \(m \in A\) is a \emph{maximum of \(A\)}, written \(m = \max A\), if
+  \[
+    \forall x \in A,\, m \geq x.
+  \]
+\end{dfn}
+
+\begin{dfn}[Minimum of a Set]{set-minimum}
+  Let \(X\) be equipped with a \xref[total order]{def:total-order} \(\leq\), and let \(A \subseteq X\) be nonempty. An element \(m \in A\) is a \emph{minimum of \(A\)}, written \(m = \min A\), if
+  \[
+    \forall x \in A,\, m \leq x.
+  \]
+\end{dfn}
+
+\begin{prop}[Finite Nonempty Families Have a Maximum and Minimum]{finite-max-min-inductive}
+  Let \(X\) be a totally ordered set. For any nonempty finite family \((a_1, \ldots, a_n)\) in \(X\), the maximum \(\max\{a_1, \ldots, a_n\}\) and minimum \(\min\{a_1, \ldots, a_n\}\) exist. They may be computed inductively:
+  \[
+    \max\{a_1\} = a_1, \qquad \max\{a_1, \ldots, a_k\} = \max\bigl(\max\{a_1, \ldots, a_{k-1}\},\, a_k\bigr) \text{ for } k \geq 2,
+  \]
+  and symmetrically for \(\min\).
+\end{prop}
+
 \begin{dfn}
 [Ordered Field]{ordered-field}
   An \emph{ordered field} is a \xref[field]{def:field} \(F\) equipped with a
@@ -486,19 +530,58 @@ Let \(\mathbb B:=\{\mathrm{tt},\mathrm{ff}\}\) denote the set of Boolean values.
   \]
 \end{eg}
 
-\section{The Real Line} 
+\section{Distance}
 
-\begin{dfn}[Distance on the Real Line] 
-  For any two real numbers \(x\) and \(y\), the \emph{distance} between them is
-  \(\abs{x-y}\).
+\begin{dfn}[Distance]{distance}
+  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For \(x, y \in F\), the \emph{distance} between \(x\) and \(y\) is
+  \[
+    d(x, y) := \abs{x - y}.
+  \]
 \end{dfn}
 
+\begin{lem}[Symmetry of Distance]{distance-symmetry}
+  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For all \(x, y \in F\),
+  \[
+    \dist{x}{y} = \dist{y}{x}.
+  \]
+\end{lem}
+
+\begin{proof}
+  By \xref[definition]{def:distance}, \(\dist{x}{y} = \abs{x - y}\) and \(\dist{y}{x} = \abs{y - x} = \abs{-(x - y)}\). It suffices to show \(\abs{-(x - y)} = \abs{x - y}\); we split on the sign of \(x - y\).
+
+  Case 1: \(x - y \geq 0\). Then \(\abs{x - y} = x - y\). Also \(-(x - y) \leq 0\), so \(\abs{-(x - y)} = -(-(x - y)) = x - y = \abs{x - y}\).
+
+  Case 2: \(x - y < 0\). Then \(\abs{x - y} = -(x - y)\). Also \(-(x - y) > 0\), so \(\abs{-(x - y)} = -(x - y) = \abs{x - y}\).
+\end{proof}
+
+\begin{lem}[Triangle Inequality for Distance]{triangle-inequality-distance}
+  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For all \(x, y, z \in F\),
+  \[
+    \dist{x}{z} \leq \dist{x}{y} + \dist{y}{z}.
+  \]
+\end{lem}
+
+\begin{proof}
+  Let \(a = x - y\) and \(b = y - z\). Then \(x - z = a + b\), so \(\dist{x}{z} = \abs{a + b}\).
+  We split on the sign of \(a + b\).
+
+  Case 1: \(a + b \geq 0\). Then \(\abs{a + b} = a + b\). Since \(a \leq \abs{a}\) and \(b \leq \abs{b}\),
+  \[
+    \abs{a + b} = a + b \leq \abs{a} + \abs{b} = \dist{x}{y} + \dist{y}{z}.
+  \]
+
+  Case 2: \(a + b < 0\). Then \(\abs{a + b} = -(a + b) = -a - b\). Since \(-a \leq \abs{a}\) and \(-b \leq \abs{b}\),
+  \[
+    \abs{a + b} = -a - b \leq \abs{a} + \abs{b} = \dist{x}{y} + \dist{y}{z}.
+  \]
+\end{proof}
+
 \begin{lem}[\(\varepsilon\)-Criterion for Equality]{epsilon-equality}
-  For \(a,b\in\RR\),
+  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For \(a, b \in F\),
   \[
     a=b
     \iff
-    \forall \varepsilon>0,\quad \abs{a-b}<\varepsilon.
+    \forall \varepsilon \in F,\, \varepsilon > 0,\, \abs{a-b}<\varepsilon.
   \]
 \end{lem}
 
@@ -681,19 +764,6 @@ In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to p
   A set \(A\) is \emph{bounded} in the universe $U$ if it is both \xref[bounded above]{def:bounded-above} and \xref[bounded below]{def:bounded-below}. 
 \end{dfn} 
 
-\begin{dfn}[Maximum]{maximum}
-  A have a maximum $m = \max A$ if 
-  \[
-    \text{sup } A \in A 
-  \] 
-\end{dfn} 
-
-\begin{dfn}[Minimum]{minimum}
-  A have a minimum $m = \min A$ if 
-  \[
-    \text{inf } A \in A 
-  \]
-\end{dfn} 
 
 \section{Axiom of Completeness} 
 

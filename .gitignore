@@ -12,3 +12,5 @@
 /v1/
 /*.pdf
 .vscode/
+/textbook/
+/homework/

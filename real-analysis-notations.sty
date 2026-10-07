@@ -17,7 +17,11 @@
 \providecommand*{\imageRef}{real-analysis::lec02::def:image}
 \providecommand*{\preimageRef}{real-analysis::lec02::def:pre-image}
 \providecommand*{\absoluteValueRef}{real-analysis::lec01::def:absolute-value}
+\providecommand*{\distanceRef}{real-analysis::lec01::def:distance}
 \providecommand*{\neighbourhoodRef}{real-analysis::lec02::def:neighbourhood}
+\providecommand*{\binaryMaxRef}{real-analysis::lec01::def:binary-max}
+\providecommand*{\binaryMinRef}{real-analysis::lec01::def:binary-min}
+\providecommand*{\seqLimitRef}{real-analysis::lec03::def:limit-op}
 
 % Linked number-set notation.
 \newcommand*{\NN}{\xref[\mathbb{N}]{\naturalNumbersRef}}
@@ -32,11 +36,23 @@
 \newcommand*{\img}[1]{{#1}^{\xref[\mathrm{img}]{\imageRef}}}
 \newcommand*{\preimg}[1]{{#1}^{\xref[\mathrm{preimg}]{\preimageRef}}}
 \newcommand*{\abs}[1]{\xref[\lvert#1\rvert]{\absoluteValueRef}}
+\newcommand*{\dist}[2]{\xref[d(#1, #2)]{\distanceRef}}
 \newcommand*{\neighbourhood}[2]{\xref[V_{#1}(#2)]{\neighbourhoodRef}}
+\newcommand*{\seqlim}{\mathop{\xref[\mathrm{lim}]{\seqLimitRef}}}
+
+% Signed-subset placeholder notation. Rendered in purple via \missingprereq to
+% flag that the convention block defining these subsets has not yet been
+% written. Replace \missingprereq with a proper \xref once the def exists.
+\newcommand*{\apos}[1]{\missingprereq{#1^{+}}}
+\newcommand*{\aneg}[1]{\missingprereq{#1^{-}}}
+\newcommand*{\agtz}[1]{\missingprereq{#1^{>0}}}
+\newcommand*{\altz}[1]{\missingprereq{#1^{<0}}}
 
 % Preserve the standard unlinked operators for exceptional contexts.
 \let\raPlainSup\sup
 \let\raPlainInf\inf
+\let\raPlainMax\max
+\let\raPlainMin\min
 
 % Link only the operator head. Sets, subscripts, and other arguments remain
 % outside the hyperlink and may contain linked notation of their own.
@@ -45,4 +61,10 @@
 }
 \renewcommand*{\inf}{%
   \mathop{\xref[\mathrm{inf}]{\infimumRef}}\nolimits
+}
+\renewcommand*{\max}{%
+  \mathop{\xref[\mathrm{max}]{\binaryMaxRef}}\nolimits
+}
+\renewcommand*{\min}{%
+  \mathop{\xref[\mathrm{min}]{\binaryMinRef}}\nolimits
 }

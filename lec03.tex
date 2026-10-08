@@ -253,7 +253,14 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
   \[
     \seqlim\left(\frac{a_n}{b_n}\right) = \frac{\seqlim a_n}{\seqlim b_n}.
   \] 
-\end{thm} 
+\end{thm}
+
+\begin{thm}[Order Preservation of Limits]{limit-order-preservation}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \xref[\mathrm{Conv}(F)]{def:convergent-sequences-set}$ with $\forall n \in \NNOne,\, a_n \leq b_n$. Then
+  \[
+    \seqlim a_n \leq \seqlim b_n.
+  \]
+\end{thm}
 
 \section{Bounded Sequences}
 
@@ -308,15 +315,50 @@ For example, the sequence $a_n = (-1)^n$ is bounded (since $\dist{a_n}{0} = 1$ f
 \begin{dfn}[Strictly Decreasing Sequence]{strictly-decreasing-sequence}
   A sequence $a: \NNOne \to F$ is said to be \emph{strictly decreasing} if
   \[\forall n \in \NNOne, a_n > a_{n+1}\]
-\end{dfn} 
+\end{dfn}
+
+\begin{lem}[Strictly Increasing Extends to All Indices]{strictly-increasing-extends}
+  Let $a: \NNOne \to F$ be \xref[strictly increasing]{def:strictly-increasing-sequence}. Then $\forall n, m \in \NNOne,\, n > m \implies a_n > a_m$.
+\end{lem}
+
+\begin{lem}[Increasing Extends to All Indices]{increasing-extends}
+  Let $a: \NNOne \to F$ be \xref[increasing]{def:increasing-sequence}. Then $\forall n, m \in \NNOne,\, n \geq m \implies a_n \geq a_m$.
+\end{lem}
+
+\begin{lem}[Strictly Decreasing Extends to All Indices]{strictly-decreasing-extends}
+  Let $a: \NNOne \to F$ be \xref[strictly decreasing]{def:strictly-decreasing-sequence}. Then $\forall n, m \in \NNOne,\, n > m \implies a_n < a_m$.
+\end{lem}
+
+\begin{lem}[Decreasing Extends to All Indices]{decreasing-extends}
+  Let $a: \NNOne \to F$ be \xref[decreasing]{def:decreasing-sequence}. Then $\forall n, m \in \NNOne,\, n \geq m \implies a_n \leq a_m$.
+\end{lem}
 
 \begin{dfn}[Monotone Sequence]{monotone-sequence}
   A sequence $a: \NNOne \to F$ is said to be \emph{monotone} if it is either \xref[increasing]{def:increasing-sequence} or \xref[decreasing]{def:decreasing-sequence}.
 \end{dfn} 
 
 \begin{thm}[Monotone Convergence Theorem]{mct}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a: \NNOne \to F$ be a \xref[monotone sequence]{def:monotone-sequence}. If $a$ is \xref[bounded]{def:bounded-sequence}, then $a$ is \xref[convergent]{def:convergent-sequence}. 
+  Let $F$ be an \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let $a: \NNOne \to F$ be a \xref[monotone sequence]{def:monotone-sequence}. If $a$ is \xref[bounded]{def:bounded-sequence}, then $a$ is \xref[convergent]{def:convergent-sequence}. 
 
 \end{thm}
+
+\begin{proof}
+Suppose $a$ is a \xref[bounded sequence]{def:bounded-sequence} in $F$ and \xref[increasing sequence]{def:increasing-sequence}, which means exist $x = \sup a$ (by the \xref[Axiom of Completeness]{lec01::axm:aoc}, applied to the nonempty set $\{a_n : n \in \NNOne\}$ bounded above in $F$), and $\forall n, m \in \NNOne, \, n \leq m \implies a_n \leq a_m $.
+
+According to the \xref[$\varepsilon$ criterion for supremum]{lec01::prop:epsilon-supremum}, $\forall n \in \NNOne, \, a_n \leq x $ and $\forall \varepsilon \in F, \, \varepsilon > 0, \, \exists N \in \NNOne, \, a_N > x - \varepsilon$ 
+
+Adding the increasing property, ie \[N \leq n \implies a_N \leq a_n \leq x \implies (a_N > x - \varepsilon \implies a_n \geq a_N > x - \varepsilon)\]
+
+We can have \[\forall \varepsilon \in F, \, \varepsilon > 0, \, \exists N \in \NNOne, \, \forall n \in \NNOne \geq N, \, a_n > x - \varepsilon\]
+
+Also, \[a_n \leq x \, \land\, \varepsilon > 0 \implies a_n < x + \varepsilon \]
+\[a_n > x - \varepsilon \, \land\,  a_n < x + \varepsilon \implies x - \varepsilon < a_n < x + \varepsilon \implies \dist{a_n}{x} < \varepsilon\] 
+Notice that such $x$ is the \xref[supremum]{lec01::def:supremum} of the upper bounded sequence $a$, it exists. 
+\[\exists x \in F, \, \forall \varepsilon \in F, \, \varepsilon > 0, \, \exists N \in \NNOne, \, \forall n \in \NNOne \geq N, \, \dist{a_n}{x} < \varepsilon\] 
+
+Which means it is a convergent sequence and its limit is $x$.
+
+If instead $a$ is \xref[decreasing]{def:decreasing-sequence}, the same argument applies with $x := \inf a$ (which exists by the \xref[Axiom of Completeness]{lec01::axm:aoc}, since $\{a_n : n \in \NNOne\}$ is nonempty and bounded below), using the dual $\varepsilon$-criterion for the infimum.
+\end{proof}
 
 \end{document}

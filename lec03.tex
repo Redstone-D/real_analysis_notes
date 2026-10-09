@@ -339,7 +339,6 @@ For example, the sequence $a_n = (-1)^n$ is bounded (since $\dist{a_n}{0} = 1$ f
 
 \begin{thm}[Monotone Convergence Theorem]{mct}
   Let $F$ be an \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let $a: \NNOne \to F$ be a \xref[monotone sequence]{def:monotone-sequence}. If $a$ is \xref[bounded]{def:bounded-sequence}, then $a$ is \xref[convergent]{def:convergent-sequence}. 
-
 \end{thm}
 
 \begin{proof}
@@ -359,6 +358,40 @@ Notice that such $x$ is the \xref[supremum]{lec01::def:supremum} of the upper bo
 Which means it is a convergent sequence and its limit is $x$.
 
 If instead $a$ is \xref[decreasing]{def:decreasing-sequence}, the same argument applies with $x := \inf a$ (which exists by the \xref[Axiom of Completeness]{lec01::axm:aoc}, since $\{a_n : n \in \NNOne\}$ is nonempty and bounded below), using the dual $\varepsilon$-criterion for the infimum.
+\end{proof}
+
+\section{Comparison of Sequences}
+
+\begin{thm}[Comparison for Monotone Sequences]{monotone-comparison-increasing}
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let $(s_n), (t_n) : \NNOne \to F$ be \xref[increasing]{def:increasing-sequence} with $s_n \leq t_n$ for all $n \in \NNOne$. If $(t_n)$ is \xref[convergent]{def:convergent-sequence}, then 
+  \[
+    (s_n) \text{ convergent and }\seqlim s_n \leq \seqlim t_n.
+  \]
+\end{thm}
+
+\begin{proof}
+\todo
+\end{proof}
+
+\begin{thm}[Comparison for Decreasing Sequences]{monotone-comparison-decreasing}
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let $(s_n), (t_n) : \NNOne \to F$ be \xref[decreasing]{def:decreasing-sequence} with $s_n \leq t_n$ for all $n \in \NNOne$. If $(s_n)$ is convergent, then 
+  \[
+    (t_n) \text{ convergent and }\seqlim s_n \leq \seqlim t_n.
+  \]
+\end{thm}
+
+\begin{proof}
+Apply \xref{thm:monotone-comparison-increasing} to the increasing sequences $(-t_n), (-s_n)$.
+\end{proof}
+
+\section{Squeeze Theorem}
+
+\begin{thm}[Squeeze Theorem]{squeeze-theorem}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, x, b : \NNOne \to F$ with $a_n \leq x_n \leq b_n$ for all $n \in \NNOne$. If $a$ and $b$ are \xref[convergent]{def:convergent-sequence} with $\seqlim a_n = \seqlim b_n = L$, then $x$ is convergent and $\seqlim x_n = L$.
+\end{thm}
+
+\begin{proof}
+\todo
 \end{proof}
 
 \end{document}

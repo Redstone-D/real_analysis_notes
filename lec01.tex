@@ -84,6 +84,32 @@ Under the usual identifications,
 \(\NN\subset\ZZ\subset\QQ\).
 \end{rem}
 
+\begin{dfn}[Floor]{floor}
+  For \(x \in \RR\), the \emph{floor} \(\lfloor x \rfloor\) is the unique \(m \in \ZZ\) satisfying
+  \[
+    m \leq x < m + 1.
+  \]
+\end{dfn}
+
+\begin{dfn}[Ceiling]{ceiling}
+  For \(x \in \RR\), the \emph{ceiling} \(\lceil x \rceil\) is the unique \(m \in \ZZ\) satisfying
+  \[
+    m - 1 < x \leq m.
+  \]
+\end{dfn}
+
+\begin{thm}[Well-Definedness of Floor and Ceiling]{floor-ceiling-well-defined}
+  For every \(x \in \RR\):
+  \begin{itemize}[nosep]
+    \item there exists a unique \(m \in \ZZ\) satisfying \(m \leq x < m + 1\), namely \(\lfloor x \rfloor\);
+    \item there exists a unique \(m \in \ZZ\) satisfying \(m - 1 < x \leq m\), namely \(\lceil x \rceil\).
+  \end{itemize}
+\end{thm}
+
+\begin{proof}
+\missingprereq{Existence and uniqueness are deferred. Sketch: existence follows from the \xref[Archimedean property]{lec02::thm:archimedean-property} combined with the well-ordering of \(\NN\) (equivalent to \xref[Natural Number Induction]{thm:natural-number-induction}); uniqueness is immediate from the strict inequalities. A rigorous proof belongs in abstract algebra / order-theory prerequisites.}
+\end{proof}
+
 \section{Fields}
 
 \begin{dfn}[Closed Operation]
@@ -303,6 +329,73 @@ For \(a,b\in F\), define
 \begin{eg}
   \(\left(\frac{1}{n}\right)_{n\in\NNOne}\) is a sequence.
 \end{eg}
+
+\section{Finite Sums and Products}
+
+\begin{dfn}[Finite Summation]{finite-summation}
+  Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, n \in \NNOne\). The \emph{finite summation} \(\sum_{k = m}^{n} a_k\) is defined recursively:
+  \[
+    \sum_{k = m}^{n} a_k =
+    \begin{cases}
+      0 & \text{if } m > n, \\
+      \left(\sum_{k = m}^{n - 1} a_k\right) + a_n & \text{if } m \leq n.
+    \end{cases}
+  \]
+\end{dfn}
+
+\begin{dfn}[Finite Product]{finite-product}
+  Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, n \in \NNOne\). The \emph{finite product} \(\prod_{k = m}^{n} a_k\) is defined recursively:
+  \[
+    \prod_{k = m}^{n} a_k =
+    \begin{cases}
+      1 & \text{if } m > n, \\
+      \left(\prod_{k = m}^{n - 1} a_k\right) \cdot a_n & \text{if } m \leq n.
+    \end{cases}
+  \]
+\end{dfn}
+
+\begin{prop}[Linearity of Summation]{summation-linearity}
+  Let \(F\) be a \xref[field]{def:field}, \(a, b : \NNOne \to F\), \(c, d \in F\), and \(m, n \in \NNOne\). Then
+  \[
+    \sum_{k = m}^{n} (c \cdot a_k + d \cdot b_k)
+    = c \cdot \sum_{k = m}^{n} a_k + d \cdot \sum_{k = m}^{n} b_k.
+  \]
+\end{prop}
+
+\begin{prop}[Index Shift for Summation]{summation-shift}
+  Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, n, p \in \NNOne\) with \(m + p, n + p \in \NNOne\). Then
+  \[
+    \sum_{k = m}^{n} a_k = \sum_{k = m + p}^{n + p} a_{k - p}.
+  \]
+\end{prop}
+
+\begin{prop}[Splitting of Summation]{summation-split}
+  Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, p, n \in \NNOne\) with \(m \leq p \leq n\). Then
+  \[
+    \sum_{k = m}^{n} a_k = \sum_{k = m}^{p} a_k + \sum_{k = p + 1}^{n} a_k.
+  \]
+\end{prop}
+
+\begin{prop}[Multiplicativity of Product]{product-multiplicativity}
+  Let \(F\) be a \xref[field]{def:field}, \(a, b : \NNOne \to F\), and \(m, n \in \NNOne\). Then
+  \[
+    \prod_{k = m}^{n} (a_k \cdot b_k) = \left(\prod_{k = m}^{n} a_k\right) \cdot \left(\prod_{k = m}^{n} b_k\right).
+  \]
+\end{prop}
+
+\begin{prop}[Index Shift for Product]{product-shift}
+  Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, n, p \in \NNOne\) with \(m + p, n + p \in \NNOne\). Then
+  \[
+    \prod_{k = m}^{n} a_k = \prod_{k = m + p}^{n + p} a_{k - p}.
+  \]
+\end{prop}
+
+\begin{prop}[Splitting of Product]{product-split}
+  Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, p, n \in \NNOne\) with \(m \leq p \leq n\). Then
+  \[
+    \prod_{k = m}^{n} a_k = \left(\prod_{k = m}^{p} a_k\right) \cdot \left(\prod_{k = p + 1}^{n} a_k\right).
+  \]
+\end{prop}
 
 \section{Sets}
 

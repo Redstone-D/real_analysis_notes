@@ -4,12 +4,177 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Lecture 4}\\[0.25em]
+  {\LARGE\bfseries Lecture 4: Series}\\[0.25em]
   {\large Mathematical Analysis}\\[0.15em]
-\end{center} 
+\end{center}
 
-\section{Subsequence} 
+\section{Subsequence}
 
-\section{Cauchy Sequences} 
+\begin{dfn}[Subsequence]{subsequence}
+If a sequence $n: \NNOne \to \NNOne$ is \xref[strictly increasing]{lec03::def:strictly-increasing-sequence}, then the sequence $b: \NNOne \to F = a(n(k))$ is called a \emph{subsequence} of $a: \NNOne \to F$.
+\end{dfn}
+
+\begin{thm}[Subsequence Index Grows]{subsequence-index-grows}
+If $b: \NNOne \to F = a(n(k))$ is a subsequence of $a: \NNOne \to F$, then $\forall k \in \NNOne, n(k) \geq k$.
+\end{thm}
+
+\begin{proof}
+Since $n: \NNOne \to \NNOne$ is strictly increasing, we have $n(1) < n(2) < n(3) < \cdots$.
+
+Notice that $n(1) \geq 1$, since $n(1) \in \NNOne$.
+
+Also, if $n(k) \geq k$, then $n(k + 1) > n(k) \geq k$, so $n(k + 1) \geq k + 1$.
+
+By induction, we have $\forall k \in \NNOne, n(k) \geq k$.
+\end{proof}
+
+\begin{thm}[Subsequence of a Subsequence]{subsequence-of-subsequence}
+A subsequence of a subsequence is still a subsequence of the original sequence.
+\end{thm}
+
+\begin{rem}[Intuition: Picking Forward]{subsequence-intuition}
+A subsequence can be understand as picking element from a sequence, however during picking we can only go forward, cannot go back to pick an element or pick an element twice
+\end{rem}
+
+\begin{thm}[Limit of a Convergent Subsequence]{convergent-subsequence-limit}
+The limit of a subsequence is the same as the limit of the original sequence.
+\end{thm}
+
+\begin{proof}
+\todo
+\end{proof}
+
+\begin{cor}[Diverges via Two Limits]{divergence-via-subsequences}
+If a sequence have two subsequences with different limits, then the sequence diverges.
+\end{cor}
+
+\begin{proof}
+\todo
+\end{proof}
+
+\section{Bolzano-Weierstrass Theorem}
+
+\begin{thm}[Bolzano-Weierstrass Theorem]{bw}
+  Every \xref[bounded sequence]{lec03::def:bounded-sequence} $a: \NNOne \to F$ where $F$ is a \xref[complete ordered field]{lec01::def:complete-ordered-field} has a convergent subsequence.
+\end{thm}
+
+\begin{proof}
+\todo
+\end{proof}
+
+\section{Cauchy Criterion}
+
+\begin{dfn}[Cauchy Sequence]{cauchy-sequence}
+$a: \NNOne \to F$ is a \emph{Cauchy sequence} if
+\[\forall \varepsilon > 0, \, \exists N \in \NNOne, \, \forall n, m \in \NNOne \, n > N \text{ and } m > N \implies \dist{a_n}{a_m} < \varepsilon \]
+\end{dfn}
+
+\begin{thm}[Cauchy Criterion]{cauchy-criterion}
+If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then $a: \NNOne \to F$ is a Cauchy sequence if and only if it converges.
+\end{thm}
+
+\begin{proof}
+\todo
+\end{proof}
+
+\begin{thm}[Cauchy Implies Bounded]{cauchy-bounded}
+\xref[Cauchy sequence]{def:cauchy-sequence} are \xref[bounded]{lec03::def:bounded-sequence}.
+\end{thm}
+
+\begin{proof}
+\todo
+\end{proof} 
+
+\section{Series}
+
+\begin{dfn}[Series Operator]{series-operator}
+  Let $F$ be a \xref[field]{lec01::def:field}. The \emph{series operator}
+  \[
+    \mathrm{series} : (\NNOne \to F) \to (\NNOne \to F)
+  \]
+  is defined recursively by
+  \[
+    \mathrm{series}(a)(1) := a(1),
+    \qquad
+    \mathrm{series}(a)(n + 1) := \mathrm{series}(a)(n) + a(n + 1).
+  \]
+\end{dfn}
+
+\begin{dfn}[Series]{series}
+  Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$. The \emph{series of $a$} is the sequence
+  \[
+    \mathrm{series}(a) : \NNOne \to F,
+  \]
+  obtained by applying the \xref[series operator]{def:series-operator} to $a$. Its $n$-th term is the partial sum $\sum_{1}^{n} a$.
+\end{dfn} 
+
+\begin{dfn}[Convergent Series]{convergent-series}
+  Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$. The \xref[series of $a$]{def:series} is \emph{convergent} if $\mathrm{series}(a)$ is a \xref[convergent sequence]{lec03::def:convergent-sequence}.
+\end{dfn}
+
+\begin{dfn}[Infinite Summation]{infinite-series}
+  Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$ with a \xref[convergent series]{def:convergent-series}. The \emph{infinite summation} of $a$ is
+  \[
+    \infsum a := \seqlim(\mathrm{series}(a)).
+  \]
+\end{dfn} 
+
+\begin{thm}[Linearity of Infinite Summation]{linearity-of-infinite-summation}
+  Let $F$ be a \xref[field]{lec01::def:field} and $a, b : \NNOne \to F$ with convergent series. Then
+  \[
+    \infsum (a + b) = \infsum a + \infsum b,
+    \qquad
+    \infsum (\lambda a) = \lambda \infsum a.
+  \]
+\end{thm} 
+
+\begin{thm}
+A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered field]{lec01::def:complete-ordered-field} converges only if $a$ converges to $0$.
+\end{thm}
+
+\begin{proof}
+  \todo
+  (Use cauchy criterion to prove this theorem)
+\end{proof} 
+
+\section{Comparison Test for Sequence}
+
+\begin{lem}[Series with Non-Negative Terms is Increasing]{series-nonneg-increasing}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and $a : \NNOne \to F$ with $a(n) \geq 0$ for all $n \in \NNOne$. Then $\mathrm{series}(a)$ is an \xref[increasing sequence]{lec03::def:increasing-sequence}.
+\end{lem}
+
+\begin{lem}[Series with Positive Terms is Strictly Increasing]{series-positive-strictly-increasing}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and $a : \NNOne \to F$ with $a(n) > 0$ for all $n \in \NNOne$. Then $\mathrm{series}(a)$ is a \xref[strictly increasing sequence]{lec03::def:strictly-increasing-sequence}.
+\end{lem}
+
+\begin{cor}[Comparison Test for Series]{comparison-test}
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, $a, b : \NNOne \to F$ with $0 \leq a_n \leq b_n$ for all $n \in \NNOne$. If the \xref[series of $b$]{def:series} is \xref[convergent]{def:convergent-series}, then the series of $a$ is convergent and $\infsum a \leq \infsum b$. Follows by applying \xref{lec03::thm:monotone-comparison-increasing} to the partial sum sequences $\mathrm{series}(a)$ and $\mathrm{series}(b)$, both of which are increasing by \xref{lem:series-nonneg-increasing}.
+\end{cor}
+
+\begin{thm}[Absolute Convergence Implies Convergence]{absolute-convergence}
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field} and $a : \NNOne \to F$. If the series of $|a|$ (where $|a|(n) := \abs{a(n)}$) is \xref[convergent]{def:convergent-series}, then the \xref[series of $a$]{def:series} is convergent.
+\end{thm}
+
+\begin{proof}
+\todo
+\end{proof}
+
+\begin{rem}[Two Methods for Checking Series Convergence]{two-methods-series}
+  Depending on the sign structure of the terms of $a$:
+  \begin{itemize}[nosep]
+    \item \emph{Single-sign} (all $a(n) \geq 0$ or all $a(n) \leq 0$): apply the \xref[Comparison Test for Series]{cor:comparison-test} directly. Monotonicity of $\mathrm{series}(a)$ comes from \xref{lem:series-nonneg-increasing} (or the sign-flipped version).
+    \item \emph{Mixed-sign}: apply \xref[Absolute Convergence]{thm:absolute-convergence} first, reducing the question to $\mathrm{series}(|a|)$ (non-negative), where the Comparison Test applies.
+  \end{itemize}
+\end{rem} 
+
+\section{Special Series}
+
+\begin{thm}[Harmonic Series Diverges]{harmonic-series-diverges}
+  The \xref[series of the harmonic sequence]{def:series} $a(n) := 1/n$ is divergent. 
+\end{thm}
+
+\begin{proof}
+\todo 
+\end{proof}
 
 \end{document}

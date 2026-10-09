@@ -671,13 +671,11 @@ Therefore, $\NN$ is not bounded above in $\RR$.
 \end{proof}
 
 \begin{thm}[Archimedean Property (Reciprocal Form)]{archimedean-reciprocal-form}
-\[\forall y > 0, \, \exists n \in \NN, \, 1/n < y \]
+\[\forall y > 0, \, \exists n \in \NNOne, \, 1/n < y \]
 \end{thm}
 
 \begin{proof}
-Take $x = 1/y$. Since $y > 0$, we have $x > 0$. 
-
-According to definition of Natural Numbers, $\exists n \in \NN, \, n \geq x$, then $1/n \leq 1/x = y$. 
+Take $x = 1/y$. Since $y > 0$, we have $x > 0$. By the \xref[Archimedean Property]{thm:archimedean-property}, there exists $n \in \NN$ with $n > x$. Since $x > 0$, we have $n > 0$, hence $n \in \NNOne$. Then $1/n < 1/x = y$.
 \end{proof}
 
 \begin{dfn}[Dense Subset]{dense-subset}
@@ -689,15 +687,32 @@ a<b\implies\exists d\in D:\quad a<d<b.
 \end{dfn}
 
 \begin{thm}[Density of the Rational Numbers]{rationals-dense-in-reals}
-  $\QQ$ is dense in $\RR$. 
+  $\QQ$ is \xref[dense]{def:dense-subset} in $\RR$.
 \end{thm}
 
 \begin{proof}
-\todo
+Let $a, b \in \RR$ with $a < b$. Then $b - a > 0$, so by the \xref[Archimedean property (reciprocal form)]{thm:archimedean-reciprocal-form} there exists $n \in \NNOne$ with
+\[
+  \frac{1}{n} < b - a \iff 1 < n(b - a) \iff 1 < nb - na.
+\]
+
+Let $m = \floor{na}$, so that
+\(
+  m \leq na < m + 1.
+\)
+
+Set $r := (m + 1)/n \in \QQ$. 
+
+Notice that 
+\[na < m + 1 \implies \frac{na}{n} < \frac{m + 1}{n} \implies a < r\]
+\[1 < nb - na \implies 1 + na < nb \implies 1 + m \leq 1 + na < nb \implies \frac{m + 1}{n} < b \implies r < b\]
+Therefore $r \in \QQ \cap (a, b)$. 
+
+So, \(\forall a, b \in \RR, a < b, \exists r \in \QQ: a < r < b\)
 \end{proof}
 
 \begin{thm}[Density of the Irrational Numbers]{irrationals-dense-in-reals}
-  $\RR \setminus \QQ$ (ie, $\II$) is dense in $\RR$. 
+  $\RR \setminus \QQ$ (ie, $\II$) is \xref[dense]{def:dense-subset} in $\RR$. 
 \end{thm} 
 
 \begin{proof}

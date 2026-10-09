@@ -18,10 +18,16 @@
 \providecommand*{\preimageRef}{real-analysis::lec02::def:pre-image}
 \providecommand*{\absoluteValueRef}{real-analysis::lec01::def:absolute-value}
 \providecommand*{\distanceRef}{real-analysis::lec01::def:distance}
+\providecommand*{\floorRef}{real-analysis::lec01::def:floor}
+\providecommand*{\ceilRef}{real-analysis::lec01::def:ceiling}
 \providecommand*{\neighbourhoodRef}{real-analysis::lec02::def:neighbourhood}
 \providecommand*{\binaryMaxRef}{real-analysis::lec01::def:binary-max}
 \providecommand*{\binaryMinRef}{real-analysis::lec01::def:binary-min}
 \providecommand*{\seqLimitRef}{real-analysis::lec03::def:limit-op}
+\providecommand*{\finiteSumRef}{real-analysis::lec01::def:finite-summation}
+\providecommand*{\finiteProductRef}{real-analysis::lec01::def:finite-product}
+\providecommand*{\infiniteSumRef}{real-analysis::lec04::def:infinite-series}
+\providecommand*{\infiniteProductRef}{real-analysis::lec04::def:infinite-product}
 
 % Linked number-set notation.
 \newcommand*{\NN}{\xref[\mathbb{N}]{\naturalNumbersRef}}
@@ -37,6 +43,8 @@
 \newcommand*{\preimg}[1]{{#1}^{\xref[\mathrm{preimg}]{\preimageRef}}}
 \newcommand*{\abs}[1]{\xref[\lvert#1\rvert]{\absoluteValueRef}}
 \newcommand*{\dist}[2]{\xref[d(#1, #2)]{\distanceRef}}
+\newcommand*{\floor}[1]{\xref[\lfloor #1 \rfloor]{\floorRef}}
+\newcommand*{\ceil}[1]{\xref[\lceil #1 \rceil]{\ceilRef}}
 \newcommand*{\neighbourhood}[2]{\xref[V_{#1}(#2)]{\neighbourhoodRef}}
 \newcommand*{\seqlim}{\mathop{\xref[\mathrm{lim}]{\seqLimitRef}}}
 
@@ -53,6 +61,8 @@
 \let\raPlainInf\inf
 \let\raPlainMax\max
 \let\raPlainMin\min
+\let\raPlainSum\sum
+\let\raPlainProd\prod
 
 % Link only the operator head. Sets, subscripts, and other arguments remain
 % outside the hyperlink and may contain linked notation of their own.
@@ -67,4 +77,21 @@
 }
 \renewcommand*{\min}{%
   \mathop{\xref[\mathrm{min}]{\binaryMinRef}}\nolimits
+}
+\renewcommand*{\sum}{%
+  \mathop{\xref[\raPlainSum]{\finiteSumRef}}\limits
+}
+\renewcommand*{\prod}{%
+  \mathop{\xref[\raPlainProd]{\finiteProductRef}}\limits
+}
+
+% Infinite sum/product: operator with no decoration, taking the full sequence
+% as its argument. Convention: if the operator has a top limit, it's finite
+% (\sum_{k=m}^{n}); if it has no top, it's infinite (\infsum a). The
+% sequence's domain fixes the starting index implicitly.
+\newcommand*{\infsum}{%
+  \mathop{\xref[\raPlainSum]{\infiniteSumRef}}\limits
+}
+\newcommand*{\infprod}{%
+  \mathop{\xref[\raPlainProd]{\infiniteProductRef}}\limits
 }

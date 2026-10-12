@@ -27,7 +27,7 @@ index is required.
   \xref[rationals form a field]{lec01::prop:rationals-are-a-field}.
 
   \item Convention link:
-  \xref[zero is not natural]{lec01::conv:natural-numbers-exclude-zero}.
+  \xref[zero is excluded from $\NNOne$]{lec01::conv:positive-natural-numbers}.
 
   \item
   \xref{https://notes.rua.rs::real-analysis::lec01::rem:number-set-inclusions}
@@ -38,6 +38,64 @@ index is required.
 
   \item The starred form \xref*{lec01::def:natural-number} prints without a
   link.
+
+  \item Redirect link: an original ID that has been moved renders as a visible
+  tombstone pointing to the new location. For example,
+  \xref{lec03::def:converges-to} resolves through the redirect added when
+  the predicate was renamed to \texttt{def:limit}.
+\end{enumerate}
+
+\section*{Function Definition Style}
+
+Functions are defined in Lean-4 style: name, then type, then body, joined by \(\defeq\). Multi-argument functions use the product type.
+
+\begin{enumerate}[label=\textbf{Example \arabic*.},leftmargin=*]
+  \item Simple inline function:
+  \[
+    f : \RR \to \RR \defeq x \map x^2.
+  \]
+
+  \item Multi-argument function via product type:
+  \[
+    g : \RR \times \RR \to \RR \defeq (x, y) \map x + y.
+  \]
+
+  \item Identity function (parametric type):
+  \[
+    \mathrm{id} : A \to A \defeq x \map x.
+  \]
+
+  \item Function with cases:
+  \[
+    \mathrm{sign} : \RR \to \{-1, 0, 1\} \defeq x \map
+    \begin{cases}
+      1,  & x > 0, \\
+      0,  & x = 0, \\
+      -1, & x < 0.
+    \end{cases}
+  \]
+
+  \item Restricted codomain (positive outputs only):
+  \[
+    \mathrm{sq} : \RR \to \RR_{\geq 0} \defeq x \map x^2.
+  \]
+
+  \item Partial operator (subset-type domain):
+  \[
+    \mathrm{half} : \{n \in \ZZ \mid n \text{ even}\} \to \ZZ
+    \defeq n \map n / 2.
+  \]
+
+  \item Application of an anonymous mapsto (parens needed):
+  \[
+    (x \map x^2)(3) = 9.
+  \]
+
+  \item Nested application (direct, preferred over $\circ$ composition):
+  \[
+    h \defeq x \map f(g(x)),
+    \qquad f(y) \defeq y + 1,\ g(y) \defeq y^2.
+  \]
 \end{enumerate}
 
 \end{document}

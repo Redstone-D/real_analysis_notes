@@ -194,6 +194,8 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
   \]
 \end{dfn}
 
+\redirect[Converges To]{def}{converges-to}{def:limit}
+
 \begin{dfn}[Set of Convergent Sequences]{convergent-sequences-set}
   Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. The \emph{set of convergent sequences in $F$} is
   \[
@@ -204,13 +206,15 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \begin{dfn}[Limit Operator]{limit-op}
   Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. The \emph{limit operator} is the function
   \[
-    \seqlim : \xref[\mathrm{Conv}(F)]{def:convergent-sequences-set} \to F, \quad a \mapsto \text{the unique } \ell \in F \text{ such that } a \xref[\text{has a limit of}]{def:limit} \ell.
+    \seqlim : \xref[\mathrm{Conv}(F)]{def:convergent-sequences-set} \to F, \quad a \map \text{the unique } \ell \in F \text{ such that } a \xref[\text{has a limit of}]{def:limit} \ell.
   \]
   We write
   \[
     \seqlim a_n = \ell.
   \]
 \end{dfn}
+
+\redirect[Limit of a Sequence]{def}{limit-of-sequence}{def:limit-op}
 
 \begin{rem}[Well-Definedness of the Limit]{limit-well-defined}
   The function $\seqlim$ in \xref{def:limit-op} is well-defined for two reasons:

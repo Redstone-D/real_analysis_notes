@@ -244,16 +244,19 @@ For \(a,b\in F\), define
 \end{dfn}
 
 \begin{dfn}[Absolute Value]{absolute-value}
-  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For \(a\in F\),
-  the \emph{absolute value} of \(a\) is
+  Let \(F\) be an \xref[ordered field]{def:ordered-field}. The \emph{absolute value} is the function
   \[
-    \abs{a}:=
+    \mathrm{abs} : F \to F \defeq a \map
     \begin{cases}
-      a,  & a\geq0,\\
-      -a, & a<0.
+      a,  & a \geq 0, \\
+      -a, & a < 0.
     \end{cases}
   \]
 \end{dfn}
+
+\begin{conv}[Absolute Value Notation]{absolute-value-notation}
+  For readability, we write \(|a|\) in place of the function application \(\mathrm{abs}(a)\), where \(\mathrm{abs}\) is defined in \xref{def:absolute-value}. The two forms are interchangeable.
+\end{conv}
 
 \begin{lem}[Difference Characterization]{difference-characterization}
   Let \(F\) be an ordered field. For all \(a,b\in F\),
@@ -582,7 +585,7 @@ Let \(\mathbb B:=\{\mathrm{tt},\mathrm{ff}\}\) denote the set of Boolean values.
   The following is an injective mapping:
   \[
     f:\mathbb B\to\ZZ,\qquad
-    \mathrm{tt}\mapsto 0,\quad \mathrm{ff}\mapsto 1.
+    \mathrm{tt}\map 0,\quad \mathrm{ff}\map 1.
   \]
 \end{eg}
   
@@ -619,7 +622,7 @@ Let \(\mathbb B:=\{\mathrm{tt},\mathrm{ff}\}\) denote the set of Boolean values.
   The following is a bijective mapping, so it is also injective and surjective:
   \[
     h:\{0,1\}\to\mathbb B,\qquad
-    0\mapsto\mathrm{tt},\quad 1\mapsto\mathrm{ff}.
+    0\map\mathrm{tt},\quad 1\map\mathrm{ff}.
   \]
 \end{eg}
 
@@ -628,7 +631,7 @@ Let \(\mathbb B:=\{\mathrm{tt},\mathrm{ff}\}\) denote the set of Boolean values.
 \begin{dfn}[Distance]{distance}
   Let \(F\) be an \xref[ordered field]{def:ordered-field}. For \(x, y \in F\), the \emph{distance} between \(x\) and \(y\) is
   \[
-    d(x, y) := \abs{x - y}.
+    d(x, y) \defeq \abs{x - y}.
   \]
 \end{dfn}
 

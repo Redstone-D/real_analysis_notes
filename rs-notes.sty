@@ -1,0 +1,27 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rs-notes}[2026/10/12 Rua's math notes authoring macros]
+
+% Scope:
+%   This package is for Rua's personal cross-project authoring style for
+%   mathematical notes written with the Academy Notes Toolchain. It is
+%   intentionally kept distinct from:
+%
+%     * notes-common.sty    (shared toolchain Core; project-neutral)
+%     * notes-project.sty   (per-course identity: server root, project ID,
+%                             notation-package loading)
+%
+%   Load this package AFTER notes-common via notes-project.sty:
+%
+%     \RequirePackage{notes-common}
+%     \RequirePackage{rs-notes}
+%     \RequirePackage{<course>-notations}
+
+% Definition marker. Renders as the triple-bar \equiv, following the physics
+% convention and matching the existing use of \equiv for notational
+% equivalence. Reads "LHS is defined to be RHS" with the newly-introduced
+% symbol on the left (direction implicit).
+\newcommand*{\defeq}{\equiv}
+
+% Short alias for the mapsto arrow. Preserves the "maps to" semantic reading
+% while reducing keystrokes in function definitions like `a \map a^2`.
+\newcommand*{\map}{\mapsto}

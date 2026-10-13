@@ -26,6 +26,13 @@
 \providecommand*{\seqLimitRef}{real-analysis::lec03::def:limit-op}
 \providecommand*{\finiteSumRef}{real-analysis::lec01::def:finite-summation}
 \providecommand*{\finiteProductRef}{real-analysis::lec01::def:finite-product}
+\providecommand*{\termNotationRef}{real-analysis::lec01::conv:term-notation}
+\providecommand*{\finiteSumNotationRef}{real-analysis::lec01::conv:finite-summation-notation}
+\providecommand*{\finiteProductNotationRef}{real-analysis::lec01::conv:finite-product-notation}
+\providecommand*{\indexedIntersectionRef}{real-analysis::lec01::def:indexed-intersection}
+\providecommand*{\indexedUnionRef}{real-analysis::lec01::def:indexed-union}
+\providecommand*{\indexedIntersectionNotationRef}{real-analysis::lec01::conv:indexed-intersection-notation}
+\providecommand*{\indexedUnionNotationRef}{real-analysis::lec01::conv:indexed-union-notation}
 \providecommand*{\infiniteSumRef}{real-analysis::lec04::def:infinite-series}
 \providecommand*{\infiniteProductRef}{real-analysis::lec04::def:infinite-product}
 
@@ -47,6 +54,11 @@
 \newcommand*{\ceil}[1]{\xref[\lceil #1 \rceil]{\ceilRef}}
 \newcommand*{\neighbourhood}[2]{\xref[V_{#1}(#2)]{\neighbourhoodRef}}
 \newcommand*{\seqlim}{\mathop{\xref[\mathrm{lim}]{\seqLimitRef}}}
+\newcommand*{\term}[2]{{#1}_{\xref[#2]{\termNotationRef}}}
+\newcommand*{\finsum}{\mathop{\xref[\mathrm{sum}]{\finiteSumRef}}\nolimits}
+\newcommand*{\finprod}{\mathop{\xref[\mathrm{prod}]{\finiteProductRef}}\nolimits}
+\newcommand*{\idxinter}{\mathop{\xref[\mathrm{inter}]{\indexedIntersectionRef}}\nolimits}
+\newcommand*{\idxunion}{\mathop{\xref[\mathrm{union}]{\indexedUnionRef}}\nolimits}
 
 % Signed-subset placeholder notation. Rendered in purple via \missingprereq to
 % flag that the convention block defining these subsets has not yet been
@@ -63,6 +75,8 @@
 \let\raPlainMin\min
 \let\raPlainSum\sum
 \let\raPlainProd\prod
+\let\raPlainBigcap\bigcap
+\let\raPlainBigcup\bigcup
 
 % Link only the operator head. Sets, subscripts, and other arguments remain
 % outside the hyperlink and may contain linked notation of their own.
@@ -79,15 +93,21 @@
   \mathop{\xref[\mathrm{min}]{\binaryMinRef}}\nolimits
 }
 \renewcommand*{\sum}{%
-  \mathop{\xref[\raPlainSum]{\finiteSumRef}}\limits
+  \mathop{\xref[\raPlainSum]{\finiteSumNotationRef}}\limits
 }
 \renewcommand*{\prod}{%
-  \mathop{\xref[\raPlainProd]{\finiteProductRef}}\limits
+  \mathop{\xref[\raPlainProd]{\finiteProductNotationRef}}\limits
+}
+\renewcommand*{\bigcap}{%
+  \mathop{\xref[\raPlainBigcap]{\indexedIntersectionNotationRef}}\limits
+}
+\renewcommand*{\bigcup}{%
+  \mathop{\xref[\raPlainBigcup]{\indexedUnionNotationRef}}\limits
 }
 
 % Infinite sum/product: operator with no decoration, taking the full sequence
 % as its argument. Convention: if the operator has a top limit, it's finite
-% (\sum_{k=m}^{n}); if it has no top, it's infinite (\infsum a). The
+% (\sum_m^n(a)); if it has no top, it's infinite (\infsum(a)). The
 % sequence's domain fixes the starting index implicitly.
 \newcommand*{\infsum}{%
   \mathop{\xref[\raPlainSum]{\infiniteSumRef}}\limits

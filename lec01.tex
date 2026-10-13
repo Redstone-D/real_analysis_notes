@@ -307,96 +307,145 @@ For \(a,b\in F\), define
 \end{dfn}
 
 \begin{dfn}[Term]{term}
-  Let \(a:I\to X\) be an indexed family. For each \(i\in I\), the value
+  Let \(a:I\to X\) be an \xref[indexed family]{def:indexed-family}.
+  For each \(i\in I\), the value
   \[
-    a_i:=a(i)
+    a(i)
   \]
-  is called the \emph{term indexed by \(i\)}. For a sequence, \(a_n\) is
-  called the \emph{\(n\)-th term}.
+  is called the \emph{term indexed by \(i\)}.
 \end{dfn}
 
-\begin{conv}[Indexed Family Notation]{indexed-family-notation}
-  We denote an indexed family \(a:I\to X\) by
+\begin{conv}[Term Notation]{term-notation}
+  For an \xref[indexed family]{def:indexed-family} \(a:I\to X\) and
+  \(i\in I\), we write
   \[
-    (a_i)_{i\in I}.
+    \term{a}{i} \defeq a(i).
   \]
-  We may write simply \((a_i)\) when the index set is clear.
+  This denotes the \xref[term indexed by \(i\)]{def:term}.
+  The family itself is \(a\).
 \end{conv}
 
 \begin{dfn}[Sequence]{sequence}
-  Let \(I=\NN\) or \(I=\NNOne\). An \(I\)-indexed family
-  \(a:I\to X\) is called a \emph{sequence in \(X\)}. For a sequence, we
-  conventionally use \(n\) as the index and write \((a_n)_{n\in I}\).
+  Let \(I=\NN\) or \(I=\NNOne\). An
+  \xref[\(I\)-indexed family]{def:indexed-family} \(a:I\to X\) is called
+  a \emph{sequence in \(X\)}. Its \xref[term]{def:term} \(a(n)\), also
+  written \(\term{a}{n}\), is called the \emph{\(n\)-th term}.
 \end{dfn}
 
 \begin{eg}
-  \(\left(\frac{1}{n}\right)_{n\in\NNOne}\) is a sequence.
+  The function
+  \[
+    a : \NNOne \to \RR \defeq n \map \frac{1}{n}
+  \]
+  is a \xref[sequence]{def:sequence}. For example,
+  \(a(1)=1\) and \(\term{a}{2}=a(2)=\frac{1}{2}\).
 \end{eg}
 
 \section{Finite Sums and Products}
 
 \begin{dfn}[Finite Summation]{finite-summation}
-  Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, n \in \NNOne\). The \emph{finite summation} \(\sum_{k = m}^{n} a_k\) is defined recursively:
+  Let \(F\) be a \xref[field]{def:field}. The \emph{finite summation}
+  function is defined recursively by
   \[
-    \sum_{k = m}^{n} a_k =
+    \finsum : \NNOne \times \NN \times (\NNOne \to F) \to F
+    \defeq (m,n,a) \map
     \begin{cases}
       0 & \text{if } m > n, \\
-      \left(\sum_{k = m}^{n - 1} a_k\right) + a_n & \text{if } m \leq n.
+      \finsum(m,n-1,a)+a(n) & \text{if } m \leq n.
     \end{cases}
   \]
+  The upper bound may be \(0\), so the recursion reaches the empty sum
+  \(\finsum(1,0,a)=0\) when \(m=n=1\).
 \end{dfn}
 
-\begin{dfn}[Finite Product]{finite-product}
-  Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, n \in \NNOne\). The \emph{finite product} \(\prod_{k = m}^{n} a_k\) is defined recursively:
+\begin{conv}[Finite Summation Notation]{finite-summation-notation}
+  For the \xref[finite summation function]{def:finite-summation}, we write
   \[
-    \prod_{k = m}^{n} a_k =
+    \sum_m^n(a) \defeq \finsum(m,n,a).
+  \]
+  The bounds \(m,n\) are inclusive, and the input \(a\) is the whole
+  sequence. For an explicit rule, write, for example,
+  \[
+    \begin{aligned}
+      \sum_1^3(k\map k^2)
+      &= (k\map k^2)(1)+(k\map k^2)(2)+(k\map k^2)(3) \\
+      &= 1+4+9=14.
+    \end{aligned}
+  \]
+\end{conv}
+
+\begin{dfn}[Finite Product]{finite-product}
+  Let \(F\) be a \xref[field]{def:field}. The \emph{finite product}
+  function is defined recursively by
+  \[
+    \finprod : \NNOne \times \NN \times (\NNOne \to F) \to F
+    \defeq (m,n,a) \map
     \begin{cases}
       1 & \text{if } m > n, \\
-      \left(\prod_{k = m}^{n - 1} a_k\right) \cdot a_n & \text{if } m \leq n.
+      \finprod(m,n-1,a)\cdot a(n) & \text{if } m \leq n.
     \end{cases}
   \]
+  The upper bound may be \(0\), so the recursion reaches the empty product
+  \(\finprod(1,0,a)=1\) when \(m=n=1\).
 \end{dfn}
+
+\begin{conv}[Finite Product Notation]{finite-product-notation}
+  For the \xref[finite product function]{def:finite-product}, we write
+  \[
+    \prod_m^n(a) \defeq \finprod(m,n,a).
+  \]
+  The bounds \(m,n\) are inclusive, and the input \(a\) is the whole
+  sequence. For example,
+  \[
+    \begin{aligned}
+      \prod_1^3(k\map k+1)
+      &= (k\map k+1)(1)\cdot(k\map k+1)(2)\cdot(k\map k+1)(3) \\
+      &= 2\cdot3\cdot4=24.
+    \end{aligned}
+  \]
+\end{conv}
 
 \begin{prop}[Linearity of Summation]{summation-linearity}
   Let \(F\) be a \xref[field]{def:field}, \(a, b : \NNOne \to F\), \(c, d \in F\), and \(m, n \in \NNOne\). Then
   \[
-    \sum_{k = m}^{n} (c \cdot a_k + d \cdot b_k)
-    = c \cdot \sum_{k = m}^{n} a_k + d \cdot \sum_{k = m}^{n} b_k.
+    \sum_m^n(k\map c\cdot a(k)+d\cdot b(k))
+    = c\cdot\sum_m^n(a)+d\cdot\sum_m^n(b).
   \]
 \end{prop}
 
 \begin{prop}[Index Shift for Summation]{summation-shift}
   Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, n, p \in \NNOne\) with \(m + p, n + p \in \NNOne\). Then
   \[
-    \sum_{k = m}^{n} a_k = \sum_{k = m + p}^{n + p} a_{k - p}.
+    \sum_{m+p}^{n+p}(a)=\sum_m^n(k\map a(k+p)).
   \]
 \end{prop}
 
 \begin{prop}[Splitting of Summation]{summation-split}
   Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, p, n \in \NNOne\) with \(m \leq p \leq n\). Then
   \[
-    \sum_{k = m}^{n} a_k = \sum_{k = m}^{p} a_k + \sum_{k = p + 1}^{n} a_k.
+    \sum_m^n(a)=\sum_m^p(a)+\sum_{p+1}^n(a).
   \]
 \end{prop}
 
 \begin{prop}[Multiplicativity of Product]{product-multiplicativity}
   Let \(F\) be a \xref[field]{def:field}, \(a, b : \NNOne \to F\), and \(m, n \in \NNOne\). Then
   \[
-    \prod_{k = m}^{n} (a_k \cdot b_k) = \left(\prod_{k = m}^{n} a_k\right) \cdot \left(\prod_{k = m}^{n} b_k\right).
+    \prod_m^n(k\map a(k)\cdot b(k))
+    =\left(\prod_m^n(a)\right)\cdot\left(\prod_m^n(b)\right).
   \]
 \end{prop}
 
 \begin{prop}[Index Shift for Product]{product-shift}
   Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, n, p \in \NNOne\) with \(m + p, n + p \in \NNOne\). Then
   \[
-    \prod_{k = m}^{n} a_k = \prod_{k = m + p}^{n + p} a_{k - p}.
+    \prod_{m+p}^{n+p}(a)=\prod_m^n(k\map a(k+p)).
   \]
 \end{prop}
 
 \begin{prop}[Splitting of Product]{product-split}
   Let \(F\) be a \xref[field]{def:field}, \(a : \NNOne \to F\), and \(m, p, n \in \NNOne\) with \(m \leq p \leq n\). Then
   \[
-    \prod_{k = m}^{n} a_k = \left(\prod_{k = m}^{p} a_k\right) \cdot \left(\prod_{k = p + 1}^{n} a_k\right).
+    \prod_m^n(a)=\left(\prod_m^p(a)\right)\cdot\left(\prod_{p+1}^n(a)\right).
   \]
 \end{prop}
 
@@ -422,28 +471,34 @@ For \(a,b\in F\), define
 \end{dfn}
 
 \begin{dfn}[Indexed Intersection]{indexed-intersection}
-  Let \(I\) be a nonempty index type and let
+  Let \(I\) be a nonempty index type, and write \(\mathbf{Set}\) for the
+  type of sets. The \emph{indexed intersection} is the function
   \[
-    A:I\to\mathbf{Set}
+    \idxinter : (I\to\mathbf{Set})\to\mathbf{Set}
+    \defeq A\map\{x\mid\forall i\in I,\,x\in A(i)\}.
   \]
-  be an \xref[indexed family]{def:indexed-family} of sets. The
-  \emph{indexed intersection} is characterized by
-  \[
-    x\in\bigcap_{i:I}A_i
-    \iff
-    \forall i:I,\quad x\in A_i.
-  \]
-  In particular, for \(a,b\in\NN\) with \(a\leq b\),
-  \[
-    \bigcap_{n=a}^{b}A_n
-    \equiv
-    \bigcap_{n\in\{m\in\NN:a\leq m\leq b\}}A_n,
-    \qquad
-    \bigcap_{n=0}^{\infty}A_n
-    \equiv
-    \bigcap_{n:\NN}A_n.
-  \]
+  Its input \(A\) is an \xref[indexed family]{def:indexed-family} of sets.
 \end{dfn}
+
+\begin{conv}[Indexed Intersection Notation]{indexed-intersection-notation}
+  For the \xref[indexed intersection function]{def:indexed-intersection},
+  we write
+  \[
+    \bigcap(A)\defeq\idxinter(A).
+  \]
+  The domain of \(A\) determines all the indices included.
+  For a sequence \(A:\NN\to\mathbf{Set}\) and \(m,n\in\NN\) with
+  \(m\leq n\), let \(J=\{k\in\NN\mid m\leq k\leq n\}\). We also write
+  \[
+    \bigcap_m^n(A)\defeq\idxinter((k:J)\map A(k)).
+  \]
+  Thus the bounds are inclusive. For example,
+  \[
+    \bigcap_1^3(A)=A(1)\cap A(2)\cap A(3).
+  \]
+  The same bounded notation applies when the sequence starts at \(1\),
+  provided \(m\geq1\).
+\end{conv}
 
 \begin{dfn}[Union]{union}
   For sets \(A\) and \(B\),
@@ -453,29 +508,34 @@ For \(a,b\in F\), define
 \end{dfn}
 
 \begin{dfn}[Indexed Union]{indexed-union}
-  Let \(I\) be an index type and let
+  Let \(I\) be an index type. The
+  \emph{indexed union} is the function
   \[
-    A:I\to\mathbf{Set}
+    \idxunion : (I\to\mathbf{Set})\to\mathbf{Set}
+    \defeq A\map\{x\mid\exists i\in I,\,x\in A(i)\}.
   \]
-  be an \xref[indexed family]{def:indexed-family} of sets. The
-  \emph{indexed union} is characterized by
-  \[
-    x\in\bigcup_{i:I}A_i
-    \iff
-    \exists i:I,\quad x\in A_i.
-  \]
-  In particular, for \(a,b\in\NN\) with \(a\leq b\),
-  \[
-    \bigcup_{n=a}^{b}A_n
-    \equiv
-    \bigcup_{n\in\{m\in\NN:a\leq m\leq b\}}A_n,
-    \qquad
-    \bigcup_{n=0}^{\infty}A_n
-    \equiv
-    \bigcup_{n:\NN}A_n.
-  \]
-  If \(I\) is empty, then \(\bigcup_{i:I}A_i=\emptyset\).
+  Its input \(A\) is an \xref[indexed family]{def:indexed-family} of sets.
+  If \(I\) is empty, then \(\idxunion(A)=\emptyset\).
 \end{dfn}
+
+\begin{conv}[Indexed Union Notation]{indexed-union-notation}
+  For the \xref[indexed union function]{def:indexed-union}, we write
+  \[
+    \bigcup(A)\defeq\idxunion(A).
+  \]
+  The domain of \(A\) determines all the indices included.
+  For a sequence \(A:\NN\to\mathbf{Set}\) and \(m,n\in\NN\) with
+  \(m\leq n\), let \(J=\{k\in\NN\mid m\leq k\leq n\}\). We also write
+  \[
+    \bigcup_m^n(A)\defeq\idxunion((k:J)\map A(k)).
+  \]
+  Thus the bounds are inclusive. For example,
+  \[
+    \bigcup_1^3(A)=A(1)\cup A(2)\cup A(3).
+  \]
+  The same bounded notation applies when the sequence starts at \(1\),
+  provided \(m\geq1\).
+\end{conv}
 
 \begin{dfn}[Complement]{complement}
   Given a universal set \(U\) and \(A\subseteq U\), the complement of \(A\)
@@ -513,28 +573,35 @@ For \(a,b\in F\), define
     \quad\text{and}\quad
     (A\cup B)^c=A^c\cap B^c.
   \]
-  Also, 
+  For an \xref[indexed family]{def:indexed-family}
+  \(A:I\to\mathbf{Set}\) with \(I\) nonempty and \(A(i)\subseteq U\)
+  for every \(i\in I\), also
   \[
-    \left(\bigcap_{n=1}^{\infty} A_n\right)^c = \bigcup_{n=1}^{\infty} (A_n)^c \quad \text{and} \quad \left(\bigcup_{n=1}^{\infty} A_n\right)^c = \bigcap_{n=1}^{\infty} (A_n)^c 
+    \left(\bigcap(A)\right)^c=\bigcup(i\map A(i)^c),
+    \qquad
+    \left(\bigcup(A)\right)^c=\bigcap(i\map A(i)^c).
   \]
 \end{theorem}
 
-\begin{eg}[Nested Sequence]{nested-sequence} 
-Let $A_n = \{n, n+1, n+2, \dots\}, n \in \NNOne$ 
-
-ie, $A_1 = \{1, 2, 3, \dots\}, A_5 = \{5, 6, 7, \dots\}$ 
-
-Trivially we can get $A_1 \subset A_2 \subset \dots $. This is called a nested sequence. 
-
-Where 
-\[
-\bigcup^{\infty}_{n=1} A_n = A_1 \quad \bigcap^{\infty}_{n=1} = \emptyset 
-\] 
-
-The intersection is $\emptyset$ due to if a number, let's say for any natural number $p$ is in the set, then $A_{p+1}$ does not include that number. 
-
-So in the universe $\NN$, 
-\[\forall p \notin \bigcap^{\infty}_{n=1} \implies \bigcap^{\infty}_{n=1} = \emptyset \] 
+\begin{eg}[Nested Sequence]{nested-sequence}
+  Let
+  \[
+    A:\NNOne\to\mathbf{Set}
+    \defeq n\map\{k\in\NNOne\mid n\leq k\}.
+  \]
+  For example, \(\term{A}{1}=\{1,2,3,\ldots\}\) and
+  \(\term{A}{5}=\{5,6,7,\ldots\}\). Since
+  \(A(1)\supset A(2)\supset\cdots\), this is a
+  \xref[nested sequence of sets]{lec02::def:nested-sequence-of-sets}.
+  Moreover,
+  \[
+    \bigcup(A)=A(1)=\NNOne,
+    \qquad
+    \bigcap(A)=\emptyset.
+  \]
+  The union equals \(A(1)\) because every \(A(n)\) is contained in
+  \(A(1)\). The intersection is empty because each \(p\in\NNOne\)
+  is excluded by \(A(p+1)\).
 \end{eg}
 
 \section{Mapping} 

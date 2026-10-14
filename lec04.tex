@@ -11,25 +11,25 @@
 \section{Subsequence}
 
 \begin{dfn}[Subsequence]{subsequence}
-If a sequence $n: \NNOne \to \NNOne$ is \xref[strictly increasing]{lec03::def:strictly-increasing-sequence}, then the sequence $b: \NNOne \to F = a(n(k))$ is called a \emph{subsequence} of $a: \NNOne \to F$.
+If a sequence $n: \NNOne \to \NNOne$ is \xref[strictly increasing]{lec03::def:strictly-increasing-sequence}, then the sequence $b: \NNOne \to F = a(n(k))$ is called a \emph{subsequence} of $a: \NNOne \to F$
 \end{dfn}
 
 \begin{thm}[Subsequence Index Grows]{subsequence-index-grows}
-If $b: \NNOne \to F = a(n(k))$ is a subsequence of $a: \NNOne \to F$, then $\forall k \in \NNOne, n(k) \geq k$.
+If $b: \NNOne \to F = a(n(k))$ is a subsequence of $a: \NNOne \to F$, then $\forall k \in \NNOne, n(k) \geq k$
 \end{thm}
 
 \begin{proof}
-Since $n: \NNOne \to \NNOne$ is strictly increasing, we have $n(1) < n(2) < n(3) < \cdots$.
+Since $n: \NNOne \to \NNOne$ is strictly increasing, we have $n(1) < n(2) < n(3) < \cdots$
 
-Notice that $n(1) \geq 1$, since $n(1) \in \NNOne$.
+Notice that $n(1) \geq 1$, since $n(1) \in \NNOne$
 
-Also, if $n(k) \geq k$, then $n(k + 1) > n(k) \geq k$, so $n(k + 1) \geq k + 1$.
+Also, if $n(k) \geq k$, then $n(k + 1) > n(k) \geq k$, so $n(k + 1) \geq k + 1$
 
-By induction, we have $\forall k \in \NNOne, n(k) \geq k$.
+By induction, we have $\forall k \in \NNOne, n(k) \geq k$
 \end{proof}
 
 \begin{thm}[Subsequence of a Subsequence]{subsequence-of-subsequence}
-A subsequence of a subsequence is still a subsequence of the original sequence.
+A subsequence of a subsequence is still a subsequence of the original sequence
 \end{thm}
 
 \begin{rem}[Intuition: Picking Forward]{subsequence-intuition}
@@ -37,7 +37,7 @@ A subsequence can be understand as picking element from a sequence, however duri
 \end{rem}
 
 \begin{thm}[Limit of a Convergent Subsequence]{convergent-subsequence-limit}
-The limit of a subsequence is the same as the limit of the original sequence.
+The limit of a subsequence is the same as the limit of the original sequence
 \end{thm}
 
 \begin{proof}
@@ -45,7 +45,7 @@ The limit of a subsequence is the same as the limit of the original sequence.
 \end{proof}
 
 \begin{cor}[Diverges via Two Limits]{divergence-via-subsequences}
-If a sequence have two subsequences with different limits, then the sequence diverges.
+If a sequence have two subsequences with different limits, then the sequence diverges
 \end{cor}
 
 \begin{proof}
@@ -55,7 +55,7 @@ If a sequence have two subsequences with different limits, then the sequence div
 \section{Bolzano-Weierstrass Theorem}
 
 \begin{thm}[Bolzano-Weierstrass Theorem]{bw}
-  Every \xref[bounded sequence]{lec03::def:bounded-sequence} $a: \NNOne \to F$ where $F$ is a \xref[complete ordered field]{lec01::def:complete-ordered-field} has a convergent subsequence.
+  Every \xref[bounded sequence]{lec03::def:bounded-sequence} $a: \NNOne \to F$ where $F$ is a \xref[complete ordered field]{lec01::def:complete-ordered-field} has a convergent subsequence
 \end{thm}
 
 \begin{proof}
@@ -70,7 +70,7 @@ $a: \NNOne \to F$ is a \emph{Cauchy sequence} if
 \end{dfn}
 
 \begin{thm}[Cauchy Criterion]{cauchy-criterion}
-If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then $a: \NNOne \to F$ is a Cauchy sequence if and only if it converges.
+If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then $a: \NNOne \to F$ is a Cauchy sequence if and only if it converges
 \end{thm}
 
 \begin{proof}
@@ -78,7 +78,7 @@ If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then
 \end{proof}
 
 \begin{thm}[Cauchy Implies Bounded]{cauchy-bounded}
-\xref[Cauchy sequence]{def:cauchy-sequence} are \xref[bounded]{lec03::def:bounded-sequence}.
+\xref[Cauchy sequence]{def:cauchy-sequence} are \xref[bounded]{lec03::def:bounded-sequence}
 \end{thm}
 
 \begin{proof}
@@ -96,7 +96,7 @@ If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then
   \[
     \mathrm{series}(a)(1) := a(1),
     \qquad
-    \mathrm{series}(a)(n + 1) := \mathrm{series}(a)(n) + a(n + 1).
+    \mathrm{series}(a)(n + 1) := \mathrm{series}(a)(n) + a(n + 1)
   \]
 \end{dfn}
 
@@ -105,17 +105,17 @@ If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then
   \[
     \mathrm{series}(a) : \NNOne \to F,
   \]
-  obtained by applying the \xref[series operator]{def:series-operator} to $a$. Its $n$-th term is the partial sum $\sum_{1}^{n} a$.
+  obtained by applying the \xref[series operator]{def:series-operator} to $a$. Its $n$-th term is the partial sum $\sum_{1}^{n} a$
 \end{dfn} 
 
 \begin{dfn}[Convergent Series]{convergent-series}
-  Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$. The \xref[series of $a$]{def:series} is \emph{convergent} if $\mathrm{series}(a)$ is a \xref[convergent sequence]{lec03::def:convergent-sequence}.
+  Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$. The \xref[series of $a$]{def:series} is \emph{convergent} if $\mathrm{series}(a)$ is a \xref[convergent sequence]{lec03::def:convergent-sequence}
 \end{dfn}
 
 \begin{dfn}[Infinite Summation]{infinite-series}
   Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$ with a \xref[convergent series]{def:convergent-series}. The \emph{infinite summation} of $a$ is
   \[
-    \infsum a := \seqlim(\mathrm{series}(a)).
+    \infsum a := \seqlim(\mathrm{series}(a))
   \]
 \end{dfn} 
 
@@ -124,12 +124,12 @@ If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then
   \[
     \infsum (a + b) = \infsum a + \infsum b,
     \qquad
-    \infsum (\lambda a) = \lambda \infsum a.
+    \infsum (\lambda a) = \lambda \infsum a
   \]
 \end{thm} 
 
 \begin{thm}
-A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered field]{lec01::def:complete-ordered-field} converges only if $a$ converges to $0$.
+A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered field]{lec01::def:complete-ordered-field} converges only if $a$ converges to $0$
 \end{thm}
 
 \begin{proof}
@@ -140,19 +140,19 @@ A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered f
 \section{Comparison Test for Sequence}
 
 \begin{lem}[Series with Non-Negative Terms is Increasing]{series-nonneg-increasing}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and $a : \NNOne \to F$ with $a(n) \geq 0$ for all $n \in \NNOne$. Then $\mathrm{series}(a)$ is an \xref[increasing sequence]{lec03::def:increasing-sequence}.
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and $a : \NNOne \to F$ with $a(n) \geq 0$ for all $n \in \NNOne$. Then $\mathrm{series}(a)$ is an \xref[increasing sequence]{lec03::def:increasing-sequence}
 \end{lem}
 
 \begin{lem}[Series with Positive Terms is Strictly Increasing]{series-positive-strictly-increasing}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and $a : \NNOne \to F$ with $a(n) > 0$ for all $n \in \NNOne$. Then $\mathrm{series}(a)$ is a \xref[strictly increasing sequence]{lec03::def:strictly-increasing-sequence}.
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and $a : \NNOne \to F$ with $a(n) > 0$ for all $n \in \NNOne$. Then $\mathrm{series}(a)$ is a \xref[strictly increasing sequence]{lec03::def:strictly-increasing-sequence}
 \end{lem}
 
 \begin{cor}[Comparison Test for Series]{comparison-test}
-  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, $a, b : \NNOne \to F$ with $0 \leq a_n \leq b_n$ for all $n \in \NNOne$. If the \xref[series of $b$]{def:series} is \xref[convergent]{def:convergent-series}, then the series of $a$ is convergent and $\infsum a \leq \infsum b$. Follows by applying \xref{lec03::thm:monotone-comparison-increasing} to the partial sum sequences $\mathrm{series}(a)$ and $\mathrm{series}(b)$, both of which are increasing by \xref{lem:series-nonneg-increasing}.
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, $a, b : \NNOne \to F$ with $0 \leq a_n \leq b_n$ for all $n \in \NNOne$. If the \xref[series of $b$]{def:series} is \xref[convergent]{def:convergent-series}, then the series of $a$ is convergent and $\infsum a \leq \infsum b$. Follows by applying \xref{lec03::thm:monotone-comparison-increasing} to the partial sum sequences $\mathrm{series}(a)$ and $\mathrm{series}(b)$, both of which are increasing by \xref{lem:series-nonneg-increasing}
 \end{cor}
 
 \begin{thm}[Absolute Convergence Implies Convergence]{absolute-convergence}
-  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field} and $a : \NNOne \to F$. If the series of $|a|$ (where $|a|(n) := \abs{a(n)}$) is \xref[convergent]{def:convergent-series}, then the \xref[series of $a$]{def:series} is convergent.
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field} and $a : \NNOne \to F$. If the series of $|a|$ (where $|a|(n) := \abs{a(n)}$) is \xref[convergent]{def:convergent-series}, then the \xref[series of $a$]{def:series} is convergent
 \end{thm}
 
 \begin{proof}
@@ -162,15 +162,15 @@ A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered f
 \begin{rem}[Two Methods for Checking Series Convergence]{two-methods-series}
   Depending on the sign structure of the terms of $a$:
   \begin{itemize}[nosep]
-    \item \emph{Single-sign} (all $a(n) \geq 0$ or all $a(n) \leq 0$): apply the \xref[Comparison Test for Series]{cor:comparison-test} directly. Monotonicity of $\mathrm{series}(a)$ comes from \xref{lem:series-nonneg-increasing} (or the sign-flipped version).
-    \item \emph{Mixed-sign}: apply \xref[Absolute Convergence]{thm:absolute-convergence} first, reducing the question to $\mathrm{series}(|a|)$ (non-negative), where the Comparison Test applies.
+    \item \emph{Single-sign} (all $a(n) \geq 0$ or all $a(n) \leq 0$): apply the \xref[Comparison Test for Series]{cor:comparison-test} directly. Monotonicity of $\mathrm{series}(a)$ comes from \xref{lem:series-nonneg-increasing} (or the sign-flipped version)
+    \item \emph{Mixed-sign}: apply \xref[Absolute Convergence]{thm:absolute-convergence} first, reducing the question to $\mathrm{series}(|a|)$ (non-negative), where the Comparison Test applies
   \end{itemize}
 \end{rem} 
 
 \section{Special Series}
 
 \begin{thm}[Harmonic Series Diverges]{harmonic-series-diverges}
-  The \xref[series of the harmonic sequence]{def:series} $a(n) := 1/n$ is divergent.
+  The \xref[series of the harmonic sequence]{def:series} $a(n) := 1/n$ is divergent
 \end{thm}
 
 \begin{proof}
@@ -178,7 +178,7 @@ A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered f
 \end{proof}
 
 \begin{thm}[Reciprocal Squares Series Converges]{reciprocal-squares-converges}
-  The \xref[series of]{def:series} $a(n) := 1/n^2$ is \xref[convergent]{def:convergent-series}.
+  The \xref[series of]{def:series} $a(n) := 1/n^2$ is \xref[convergent]{def:convergent-series}
 \end{thm}
 
 \begin{proof}

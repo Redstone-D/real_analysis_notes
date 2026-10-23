@@ -12,6 +12,7 @@
 
 \begin{dfn}[Cardinality]{cardinality}
   The \emph{cardinality} of a set \(A\), denoted by \(\card{A}\), is the number of elements in \(A\)
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\card{A}}}}
 \end{dfn}
 
 \begin{dfn}[Cardinal Inequality]{cardinal-inequality}
@@ -37,6 +38,7 @@
   \[
     A\equinum B\iff\card{A}=\card{B}
   \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{A\equinum B}}}
 \end{dfn}
 
 \begin{thm}[Bijection Characterization]{bijection-cardinality}
@@ -106,10 +108,13 @@ For infinite sets, the cardinality maybe still the same even if we remove some (
 \section{Power Sets} 
 
 \begin{dfn}[Power Set]{power-set}
-  The \emph{power set} of a set \(A\), denoted by \(\PowerSet(A)\), is the set of all subsets of \(A\):
+  The \emph{power-set constructor} assigns to each set its set of all subsets
   \[
-    \PowerSet(A)=\{B:B\subseteq A\}
-  \] 
+    \PowerSet:\Type\to\Type
+    \defeq A\map\{B\mid B\subseteq A\}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\PowerSet(A)}}}
+  \par\noindent{\footnotesize\texttt{LaTeX: \detokenize{\Type}}}
 \end{dfn}
 
 \begin{example}
@@ -181,6 +186,7 @@ Both possible cases lead to a contradiction. Therefore, the assumed surjective f
   \[
     f\map\left(C\map\{f(x):x\in C\}\right)
   \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\img{f}(C)}}}
 \end{dfn}
 
 \begin{cor}[Image of a Subset]{image-of-subset}
@@ -212,6 +218,7 @@ Both possible cases lead to a contradiction. Therefore, the assumed surjective f
   \[
     f\map\left(D\map\{x\in A:f(x)\in D\}\right)
   \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\preimg{f}(D)}}}
 \end{dfn}
 
 \begin{cor}[Preimage of a Subset]{preimage-of-subset}
@@ -298,94 +305,109 @@ If $f: A \to B$ is a bijection mapping, then
 \section{Nested Sequence of Sets} 
 
 \begin{dfn}[Nested Sequence of Sets]{nested-sequence-of-sets}
-  A sequence of sets \((A_n)_{n\in\NN}\) is \emph{nested} if
+  Let \(X\) be a set and let \(I=\NN\) or \(I=\NNOne\).
+  A \xref[sequence]{lec01::def:sequence} of subsets
+  \(A:I\to\PowerSet(X)\) is \emph{nested} if
   \[
-    \forall n\in\NN,\quad A_{n+1}\subseteq A_n
-  \] 
+    \forall n\in I,\quad A(n+1)\subseteq A(n)
+  \]
+\end{dfn}
+
+\begin{dfn}[Set of Nested Sequences]{nested-sequences-set}
+  For a set \(X\) and \(I=\NN\) or \(I=\NNOne\), the set of
+  \xref[nested sequences]{def:nested-sequence-of-sets} of subsets of
+  \(X\) is
+  \[
+    \Nested[I](X)\defeq
+    \left\{A:I\to\PowerSet(X)\;\middle|\;
+      \forall n\in I,\ A(n+1)\subseteq A(n)\right\}
+  \]
+  The default index set is \(I=\NN\)
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\Nested(X)}}}
+  \par\noindent{\footnotesize\texttt{LaTeX: \detokenize{\Nested[\NNOne](X)}}}
 \end{dfn}
 
 \begin{thm}[Nested Sequence Containment]{nested-sequence-containment}
-  Let \((A_n)_{n\in\NN}\) be a
-  \xref[nested sequence of sets]{def:nested-sequence-of-sets}. Then
+  Let \(I=\NN\) or \(I=\NNOne\), and let \(A:\Nested[I](X)\).
+  Then
   \[
-    \forall p,q\in\NN,\qquad
-    p\leq q\implies A_q\subseteq A_p
+    \forall p,q\in I,\qquad
+    p\leq q\implies A(q)\subseteq A(p)
   \]
 \end{thm}
 
 \begin{proof}
-  Fix $p$ as any arbitrary natural number. Given that $p \leq q$, it means that $\exists r \in \NN$ such that $q = p + r$
-
-  If $r = 0$, then $q = p$ and $A_q = A_p$, which directly implies that $A_q \subseteq A_p$
-
-  If for $r - 1$, if $A_{p} \subseteq A_{p + r - 1}$. We can conclude since $A_{p + r} \subseteq A_{p + r - 1}$, we can conclude that $A_{p + r} \subseteq A_{p + r - 1} \subseteq A_p$, ie $A_{p + r} \subseteq A_p$
-
-  By \xref[Natural Number Induction]{lec01::thm:natural-number-induction}, we can conclude that $\forall r \in \NN, A_{p + r} \subseteq A_p$. Since $q = p + r$, we can conclude that $\forall p,q \in \NN, p \leq q \implies A_q \subseteq A_p$
+  Fix \(p\in I\). We prove \(A(p+r)\subseteq A(p)\) for
+  \(r\in\NN\) by
+  \xref[induction]{lec01::thm:natural-number-induction}.
+  The case \(r=0\) is immediate. If it holds for \(r\), nesting gives
+  \[
+    A(p+r+1)\subseteq A(p+r)\subseteq A(p)
+  \]
+  For \(q\geq p\), take \(r=q-p\in\NN\) to obtain the result
 \end{proof}
 
 \begin{thm}[Finite Nested Intersection Property]{finite-nested-intersection}
-  Let \((A_n)_{n\in\NNOne}\) be a sequence of finite, nonempty sets satisfying
+  \leavevmode\par
+  Let \(A:\Nested[\NNOne](X)\), and assume every \(A(n)\)
+  is finite and nonempty. Then
   \[
-    \forall n\in\NNOne,\quad A_{n+1}\subseteq A_n.
-  \]
-  Then
-  \[
-    \emptyset\neq\bigcap_{n\in\NNOne}A_n\subseteq A_1
+    \emptyset\neq\bigcap(A)\subseteq A(1)
   \] 
 \end{thm}
 
 \begin{proof}
 According to the definition of \xref{lec01::def:indexed-intersection}, we want to show that 
-\[\exists x, \forall n\in\NNOne, x \in A_n\] 
+\[\exists x\in X,\,\forall n\in\NNOne,\ x\in A(n)\]
 
-Given that $\forall n \in \NNOne, \card{(A_n)} \in \NNOne$ and $\card{(A_1)} \geq \card{(A_2)} \geq \cdots \geq \card{(A_n)} \geq \cdots$ 
-
-We define a sequence of natural numbers $(b_n)_{n\in\NNOne}$ such that $b_n = \card{(A_n)} - \card{(A_{n+1})}$
+Given that \(\forall n\in\NNOne,\ \card{A(n)}\in\NNOne\) and
+\(\card{A(1)}\geq\card{A(2)}\geq\cdots\), define
+\[
+  b:\NNOne\to\NN\defeq n\map\card{A(n)}-\card{A(n+1)}
+\]
 
 For all \(m,n\in\NNOne\) with \(m\leq n\),
 \begin{align*}
-\sum_{k=m}^{n}b_k
-  &= (\card{A_m}-\card{A_{m+1}})
-     +(\card{A_{m+1}}-\card{A_{m+2}})+\cdots
-     +(\card{A_n}-\card{A_{n+1}}) \\
-  &= \card{A_m}-\card{A_{n+1}} 
+\sum_m^n(b)
+  &= (\card{A(m)}-\card{A(m+1)})+\cdots
+     +(\card{A(n)}-\card{A(n+1)}) \\
+  &= \card{A(m)}-\card{A(n+1)}
 \end{align*}
-Since \(A_{n+1}\neq\emptyset\), we have \(\card{A_{n+1}}\geq1\). Taking \(m=1\),
+Since \(A(n+1)\neq\emptyset\), we have \(\card{A(n+1)}\geq1\).
+Taking \(m=1\),
 \[
 \forall n\in\NNOne,\quad
-\sum_{k=1}^{n}b_k
-=\card{A_1}-\card{A_{n+1}}
-\leq\card{A_1}-1
+\sum_1^n(b)=\card{A(1)}-\card{A(n+1)}\leq\card{A(1)}-1
 \]
 
-Since every \(b_n\) is a nonnegative integer, only finitely many \(b_n\) can be positive. Hence, 
+Since every \(b(n)\) is a nonnegative integer, only finitely many
+\(b(n)\) can be positive. Hence
 \[
-\exists N_0\in\NNOne,\, \forall n\geq N_0,\, b_n=0
+\exists N_0\in\NNOne,\,\forall n\in\NNOne,\,n\geq N_0\implies b(n)=0
 \]
 
 For every \(n\geq N_0\),
 \[
-b_n=0\implies\card{A_n}=\card{A_{n+1}}.
+b(n)=0\implies\card{A(n)}=\card{A(n+1)}
 \]
-Since \(A_{n+1}\subseteq A_n\) and \(A_n\) is finite,
-\xref[Lemma~\ref*{lem:finite-subset-equal-cardinality}]
-{lem:finite-subset-equal-cardinality} implies that \(A_{n+1}=A_n\).
+Since \(A(n+1)\subseteq A(n)\) and \(A(n)\) is finite,
+\xref[finite subsets of equal cardinality]{lem:finite-subset-equal-cardinality}
+gives \(A(n+1)=A(n)\).
 Hence
 \[
-\forall n\geq N_0,\quad A_n=A_{N_0}
+\forall n\in\NNOne,\quad n\geq N_0\implies A(n)=A(N_0)
 \]
 
-If \(n<N_0\), then \(A_{N_0}\subseteq A_n\) by
-\xref[Theorem~\ref*{thm:nested-sequence-containment}]
-{thm:nested-sequence-containment}. Therefore \(A_{N_0}\subseteq A_n\) for every
-\(n\in\NNOne\), and thus
+If \(n<N_0\), then \(A(N_0)\subseteq A(n)\) by
+\xref[nested sequence containment]{thm:nested-sequence-containment}.
+Therefore \(A(N_0)\subseteq A(n)\) for every \(n\in\NNOne\), and thus
 \[
-A_{N_0}\subseteq\bigcap_{n\in\NNOne}A_n.
+A(N_0)\subseteq\bigcap(A)
 \]
-The reverse inclusion holds because \(A_{N_0}\) is one of the sets in the
+The reverse inclusion holds because \(A(N_0)\) is one of the sets in the
 intersection. Consequently,
 \[
-\bigcap_{n\in\NNOne}A_n=A_{N_0},
+\bigcap(A)=A(N_0)
 \]
 which is finite and nonempty
 \end{proof} 
@@ -393,24 +415,25 @@ which is finite and nonempty
 \begin{rem}[Finiteness is Essential]{finite-nested-intersection-finiteness}
   The conclusion can fail when the sets are infinite. For example, let
   \[
-    A_n=\{m\in\NNOne:m\geq n\},\qquad n\in\NNOne.
+    A:\Nested[\NNOne](\NNOne)\defeq
+    n\map\{m\in\NNOne\mid m\geq n\}
   \]
-  Every \(A_n\) is infinite and nonempty, and
+  Every \(A(n)\) is infinite and nonempty, and
   \[
-    A_1\supseteq A_2\supseteq A_3\supseteq\cdots,
+    A(1)\supseteq A(2)\supseteq A(3)\supseteq\cdots,
     \qquad
-    \bigcap_{n\in\NNOne}A_n=\emptyset
+    \bigcap(A)=\emptyset
   \]
 \end{rem}
 
 \begin{proof}
   For each \(n\in\NNOne\), choose \(x=n\). Then
   \[
-    \forall n\in\NNOne,\quad \exists x\in\NNOne:\ x\in A_n.
+    \forall n\in\NNOne,\quad \exists x\in\NNOne:\ x\in A(n)
   \]
-  For each \(x\in\NNOne\), choose \(n=x+1\). Then \(x\notin A_n\), so
+  For each \(x\in\NNOne\), choose \(n=x+1\). Then \(x\notin A(n)\), so
   \[
-    \nexists x\in\NNOne,\quad \forall n\in\NNOne:\ x\in A_n
+    \nexists x\in\NNOne,\quad \forall n\in\NNOne:\ x\in A(n)
   \]
 \end{proof}
 
@@ -466,93 +489,62 @@ which is finite and nonempty
 \end{proof}
 
 \begin{lem}[Endpoint Order of Nested Closed Intervals]{nested-interval-endpoint-order}
-  Let \(I_k=[a_k,b_k]\) be a nested sequence of closed intervals in the
-  same totally ordered set. Then
+  Let \(X\) be a totally ordered set, let \(I:\Nested(X)\), and let
+  \(a,b:\NN\to X\) satisfy \(I(k)=[a(k),b(k)]\) for every
+  \(k\in\NN\). Then
   \[
     n\leq m
     \implies
-    a_n\leq a_m\leq b_m\leq b_n
+    a(n)\leq a(m)\leq b(m)\leq b(n)
   \]
 \end{lem}
 
 \begin{proof}
-\todo
+  For \(n\leq m\), \xref[nested sequence containment]{thm:nested-sequence-containment}
+  gives \(I(m)\subseteq I(n)\). Applying
+  \xref[endpoint order for contained closed intervals]{lem:contained-interval-endpoints}
+  gives the inequalities
 \end{proof}
 
 \begin{thm}[Nested Intervals Property (NIP)]{nip}
   Let \(F\) be a
   \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let
-  \(I_n=[a_n,b_n]\subseteq F\) be a sequence of
-  \xref[closed]{def:closed-interval} intervals.
+  \(I:\Nested(F)\) with \(I(n)=[a(n),b(n)]\), where
+  \(a,b:\NN\to F\), be a nested sequence of
+  \xref[closed intervals]{def:closed-interval}. Then
   \[
-    I_0\supseteq I_1\supseteq I_2\supseteq\cdots
-    \implies
-    \bigcap_{n=0}^{\infty} I_n\neq\emptyset
+    \bigcap(I)\neq\emptyset
   \]
 \end{thm}
 
 \begin{proof}
-Let \(A=\{a_n:n\in\NN\}\). The nesting hypothesis gives
-\[
-  \forall n\in\NN,\quad I_{n+1}\subseteq I_n
-\]
-
-By
-\xref[Theorem~\ref*{thm:nested-sequence-containment}]{thm:nested-sequence-containment},
-\[
-  \forall p,q\in\NN,\quad
-  p\leq q\implies I_q\subseteq I_p
-\]
-
-By \xref[comparability in a total order]{lec01::def:total-order},
-\(\forall n,m\in\NN,\ (n\leq m)\lor(m\leq n)\). Hence
-\xref{lem:contained-interval-endpoints} gives
-\[
-  \begin{aligned}
-    n\leq m &\implies I_m\subseteq I_n
-      \implies a_n\leq a_m\leq b_m,\\
-    m\leq n &\implies I_n\subseteq I_m
-      \implies a_n\leq b_n\leq b_m,
-  \end{aligned}
-\]
-so
-\[
-  \forall n,m\in\NN,\quad a_n\leq b_m
-\] 
-
-Consequently,
-\[
-  a_0\in A,\, 
-  \forall n\in\NN,\ a_n\leq b_0
-  \implies
-  A\neq\emptyset\ \land A\text{ is bounded above}.
-\]
-By the \xref[completeness of \(F\)]{lec01::def:complete-ordered-field}, choose
-\(\alpha=\sup A\). The
-\xref[definition of supremum]{lec01::def:supremum} gives
-\[
-  \forall n,m\in\NN,\quad
-  a_n\leq\alpha\leq b_m.
-\]
-Hence, by the
-\xref[definitions of a closed interval]{def:closed-interval} and
-\xref[indexed intersection]{lec01::def:indexed-intersection},
-\[
-  \left(\forall n\in\NN,\quad a_n\leq\alpha\leq b_n\right)
-  \implies
-  \left(\forall n\in\NN,\quad \alpha\in I_n\right)
-  \iff
-  \alpha\in\bigcap_{n=0}^{\infty}I_n.
-\]
-Therefore \(\bigcap_{n=0}^{\infty}I_n\neq\emptyset\)
+  Let \(A=\{a(n):n\in\NN\}\). For any \(n,m\in\NN\), either
+  \(n\leq m\) or \(m\leq n\). By
+  \xref[endpoint order for nested intervals]{lem:nested-interval-endpoint-order},
+  respectively,
+  \[
+    a(n)\leq a(m)\leq b(m)
+    \quad\text{or}\quad
+    a(n)\leq b(n)\leq b(m)
+  \]
+  Thus every \(b(m)\) is an upper bound for \(A\). Since
+  \(a(0)\in A\), the set \(A\) is nonempty and bounded above.
+  By \xref[completeness]{lec01::def:complete-ordered-field}, let
+  \(\alpha=\sup(A)\). The
+  \xref[definition of supremum]{lec01::def:supremum} gives
+  \[
+    \forall n\in\NN,\quad a(n)\leq\alpha\leq b(n)
+  \]
+  Therefore \(\alpha\in I(n)\) for every \(n\in\NN\), so
+  \(\alpha\in\bigcap(I)\) by
+  \xref[indexed intersection]{lec01::def:indexed-intersection}
 \end{proof}
 
 \begin{cor}[Nested Intervals Property in \(\RR\)]{nip-real-numbers}
-  Let \(I_n=[a_n,b_n]\subseteq\RR\) be a sequence of closed intervals. Then
+  Let \(I:\Nested(\RR)\) with \(I(n)=[a(n),b(n)]\), where
+  \(a,b:\NN\to\RR\). Then
   \[
-    I_0\supseteq I_1\supseteq I_2\supseteq\cdots
-    \implies
-    \bigcap_{n=0}^{\infty}I_n\neq\emptyset
+    \bigcap(I)\neq\emptyset
   \]
 \end{cor}
 
@@ -564,17 +556,45 @@ Therefore \(\bigcap_{n=0}^{\infty}I_n\neq\emptyset\)
 \end{proof}
 
 \begin{rem}[Intervals can be Infinitely Small]{inf-small-intervals}
-If a size of the interval is infinitely small, ie \(I=[a,b]\),
-\(\forall\varepsilon>0,\,
-b-a<\varepsilon\), this means that the interval is equivalent to a single point, ie $a = b$
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}
+  and let \(a,b\in F\) with \(a\leq b\). If
+  \(\forall\varepsilon\in\apos{F},\ b-a<\varepsilon\), then \(a=b\)
 \end{rem} 
 
 \begin{dfn}[Neighbourhood]{neighbourhood}
-  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}. For \(x\in F\) and \(\varepsilon\in F\) with \(\varepsilon>0\), the \emph{neighbourhood} of \(x\) with radius \(\varepsilon\) is the \xref[open interval]{def:open-interval}
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}.
+  The \emph{neighbourhood generator} is
   \[
-    V_{\varepsilon}(x) := (x-\varepsilon,\, x+\varepsilon)
+    \nbhd:\apos{F}\to\bigl(F\to\PowerSet(F)\bigr)
+    \defeq\varepsilon\map x\map(x-\varepsilon,\,x+\varepsilon)
   \]
+  For each fixed radius \(\varepsilon\in \apos{F}\), the
+  \emph{neighbourhood function} is
+  \[
+    \nbhd(\varepsilon):F\to\PowerSet(F)
+  \]
+  It sends \(x\) to the \xref[open interval]{def:open-interval}
+  \((x-\varepsilon,x+\varepsilon)\)
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\nbhd(\varepsilon)}}}
+  \par\noindent{\footnotesize\texttt{LaTeX: \detokenize{\nbhd(\varepsilon)(x)}}}
 \end{dfn}
+
+\begin{conv}[Neighbourhood Notation]{neighbourhood-notation}
+  For the \xref[neighbourhood generator]{def:neighbourhood} and a fixed
+  \(\varepsilon\in \apos{F}\), write
+  \[
+    \neighbourhoodFamily{\varepsilon}:F\to\PowerSet(F)
+    \defeq\nbhd(\varepsilon)
+  \]
+  Then
+  \[
+    \neighbourhood{\varepsilon}{x}
+    \defeq\nbhd(\varepsilon)(x)
+    =(x-\varepsilon,\,x+\varepsilon)
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\neighbourhoodFamily{\varepsilon}}}}
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\neighbourhood{\varepsilon}{x}}}}
+\end{conv}
 
 \section{Decimal Expansion} 
 
@@ -618,7 +638,7 @@ According to the \xref[Nested Interval Theorem]{thm:nip}, after reindexing,
 
 Also, notice that $I_n = [s_n, s_n + 10^{-n}]$, $s_n + 10^{-n} - s_n = 10^{-n}$. According to the \xref[Remark]{rem:inf-small-intervals}, we can conclude:
 \[
-\forall\varepsilon>0,\ \exists n\in\NNOne:\,
+\forall\varepsilon\in\apos{\RR},\ \exists n\in\NNOne:\,
 I_n=[s_n,s_n+10^{-n}]
 \,\text{and}\,
 (s_n+10^{-n})-s_n=10^{-n}<\varepsilon \implies \exists!x\in\bigcap_{n\in\NNOne}I_n
@@ -660,7 +680,7 @@ Assume for the sake of contradiction that $\NN$ is bounded above in $\RR$
 Since \(0\in\NN\), we have \(\NN\neq\emptyset\). By the \xref[Axiom of Completeness]{lec01::axm:aoc}, $\NN$ has a supremum, denoted as $\alpha = \sup \NN$
 
 By the definition of \xref[epsilon criteria]{lec01::prop:epsilon-supremum}, we have: 
-\[\forall x \in \NN, x \leq \alpha, \quad \forall \varepsilon > 0, \exists x \in \NN, \alpha - \varepsilon < x \] 
+\[\forall x \in \NN, x \leq \alpha, \quad \forall \varepsilon\in\apos{\RR}, \exists x \in \NN, \alpha - \varepsilon < x \]
 
 Taking \(\varepsilon=1\), we obtain
 \[\exists n\in\NN:\quad \alpha-1<n\implies\alpha<n+1\]
@@ -671,7 +691,7 @@ Therefore, $\NN$ is not bounded above in $\RR$
 \end{proof}
 
 \begin{thm}[Archimedean Property (Reciprocal Form)]{archimedean-reciprocal-form}
-\[\forall y > 0, \, \exists n \in \NNOne, \, 1/n < y \]
+\[\forall y\in\apos{\RR}, \, \exists n \in \NNOne, \, 1/n < y \]
 \end{thm}
 
 \begin{proof}
@@ -701,7 +721,7 @@ Let $m = \floor{na}$, so that
   m \leq na < m + 1
 \)
 
-Set $r := (m + 1)/n \in \QQ$
+Set $r \defeq (m + 1)/n \in \QQ$
 
 Notice that 
 \[na < m + 1 \implies \frac{na}{n} < \frac{m + 1}{n} \implies a < r\]

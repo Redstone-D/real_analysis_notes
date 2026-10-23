@@ -4,23 +4,37 @@ Cross-project conventions for mathematical notes written in this style. Rules
 that are specific to one course, generic LaTeX layout, or already covered by
 the Academy Notes Toolchain are intentionally omitted
 
-## 1. Function definitions (Lean 4 / type-theoretic style)
+Keep course notes focused on their mathematical subject. Put explanations
+of type theory, universes, carriers, subtypes, and proof-carrying data in
+separate foundational notes; keep function signatures and notation concise
 
-Format: `name : type \defeq term` on one line (if it fits)
+## 1. Function definitions
+
+Two forms of function definition are accepted:
+
+- **Explicit:** write `name : domain \to codomain \defeq input \map output`
+  on one line if it fits; a recursive rule is also allowed
+- **Implicit:** put the signature inline in the introductory prose and give
+  one displayed characterization, such as `f(x)=y \iff R(x,y)`
+
+Check well-definedness: an explicit rule must give an output in the codomain
+and any recursion must terminate; an implicit characterization must determine
+exactly one output for every input
+
+Keep fixed parameters in the prose, use upright names such as `\mathrm{abs}`,
+and group multiple inputs into a product when clearer
 
 ```latex
-\mathrm{abs} : F \to F \defeq a \map
-\begin{cases}
-  a,  & a \geq 0, \\
-  -a, & a < 0
-\end{cases}
+\mathrm{sq} : F\to F \defeq x\map x^2
 ```
 
-- Use `\map` for the rule (function-object style)
-- **Multi-argument** functions may use the **product type** if clearer:
-  `f : A \times B \to C,\; (a, b) \map \ldots`
-- Usually no currying unless partial application is actually used
-- Function identity is `\mathrm{name}` (upright): `\mathrm{abs}`, `\mathrm{dist}`, `\mathrm{nbhd}`
+```latex
+The function \(f:A\to B\) is characterized, for \(x\in A\) and
+\(y\in B\), by
+\[
+  f(x)=y \iff R(x,y)
+\]
+```
 
 ## 2. Syntactic sugar lives in `\conv`, not `\dfn`
 
@@ -65,7 +79,7 @@ Applied uniformly to `\seqlim`, `\sup`, `\inf`, and any future partial operators
 
 ## 5. Quantifier style
 
-- Restricted type goes **inside** the type: `\forall \varepsilon \in F_{>0}`
+- Restricted type goes **inside** the type: `\forall \varepsilon \in \apos{F}`
   (not `\forall \varepsilon \in F, \varepsilon > 0`)
 - Dependent bounds **stay separate**: `\forall n \in \NN_1,\, n \geq N`
   (not folded into type)
@@ -84,7 +98,23 @@ Applied uniformly to `\seqlim`, `\sup`, `\inf`, and any future partial operators
   text: `\xref[definition of convergent sequence]{def:convergent-sequence}`,
   not `\xref[Dfn 1.1]{...}`
 
-## 7. Macros for linked notation
+A short well-definedness proof may follow the definition directly. Use a
+separate named theorem when the result needs independent citation or serves
+several definitions, without repeating its statement in the definition
+
+## 7. Types and constructors
+
+`\Type` renders `\mathbb{T}`, the type of ordinary types.
+`\Type[2]` renders `\mathbb{T}_2`, which classifies constructor types;
+`\Type[3]` is the next level, and so on
+
+For example, a type constructor `A` has the classification chain
+
+```latex
+A : (\Type\to\Type) : \Type[2] : \Type[3]
+```
+
+## 8. Macros for linked notation
 
 Live in the per-project notation package (e.g., `real-analysis-notations.sty`)
 
@@ -118,7 +148,19 @@ Pattern: a `\xxxRef` providecommand pointing at the target semantic ID, plus a
 Operator macros use `\mathop{...}` for correct spacing (as with `\sup`,
 `\seqlim`), so subscripts and spacing match the native `\lim`-style operators
 
-## 8. Juxtaposition
+When introducing linked notation, a function, or syntactic sugar, add a
+small monospace line showing a directly usable LaTeX call in the rendered
+PDF. Put it at the end of the owning definition or convention, and include
+arguments and optional parameters where relevant
+
+```latex
+\par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\Nested[\NNOne](X)}}}
+```
+
+The example must use the actual exported macro, including its braces and
+parentheses, rather than raw notation that would omit its link
+
+## 9. Juxtaposition
 
 **Multiplication should use an explicit operator:**
 
@@ -140,7 +182,7 @@ Operator macros use `\mathop{...}` for correct spacing (as with `\sup`,
   function and argument are visually distinct: `f\,x`, not `fx`. The thin space
   `\,` prevents the two symbols from being read as one token
 
-## 9. Paragraph endings
+## 10. Paragraph endings
 
 - Omit the sentence-ending period (`.`) at the end of a paragraph
 - This also applies to punctuation after a displayed formula that ends the paragraph

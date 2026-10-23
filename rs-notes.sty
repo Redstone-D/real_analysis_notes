@@ -25,3 +25,10 @@
 % Short alias for the mapsto arrow. Preserves the "maps to" semantic reading
 % while reducing keystrokes in function definitions like `a \map a^2`.
 \newcommand*{\map}{\mapsto}
+
+% Provisional universe notation, owed by the separate type-theory notes.
+% \Type abbreviates the first level; \Type[n] displays an explicit level.
+% Keep the marker until the owning foundational definition can be linked.
+\NewDocumentCommand{\Type}{o}{%
+  \ensuremath{\missingprereq{\mathbb{T}\IfValueT{#1}{_{#1}}}}%
+}

@@ -14,3 +14,6 @@
 .vscode/
 /textbook/
 /homework/
+# Local type-theory reading companion and its generated PDF
+/type-theory-orders.tex
+/latex_target/type-theory-orders.pdf

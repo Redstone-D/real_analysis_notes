@@ -65,8 +65,9 @@ If a sequence have two subsequences with different limits, then the sequence div
 \section{Cauchy Criterion}
 
 \begin{dfn}[Cauchy Sequence]{cauchy-sequence}
+Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}.
 $a: \NNOne \to F$ is a \emph{Cauchy sequence} if
-\[\forall \varepsilon > 0, \, \exists N \in \NNOne, \, \forall n, m \in \NNOne \, n > N \text{ and } m > N \implies \dist{a_n}{a_m} < \varepsilon \]
+\[\forall \varepsilon\in\apos{F}, \, \exists N \in \NNOne, \, \forall n, m \in \NNOne \, n > N \text{ and } m > N \implies \dist{a_n}{a_m} < \varepsilon \]
 \end{dfn}
 
 \begin{thm}[Cauchy Criterion]{cauchy-criterion}
@@ -94,9 +95,9 @@ If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then
   \]
   is defined recursively by
   \[
-    \mathrm{series}(a)(1) := a(1),
+    \mathrm{series}(a)(1) \defeq a(1),
     \qquad
-    \mathrm{series}(a)(n + 1) := \mathrm{series}(a)(n) + a(n + 1)
+    \mathrm{series}(a)(n + 1) \defeq \mathrm{series}(a)(n) + a(n + 1)
   \]
 \end{dfn}
 
@@ -115,8 +116,9 @@ If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then
 \begin{dfn}[Infinite Summation]{infinite-series}
   Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$ with a \xref[convergent series]{def:convergent-series}. The \emph{infinite summation} of $a$ is
   \[
-    \infsum a := \seqlim(\mathrm{series}(a))
+    \infsum a \defeq \seqlim(\mathrm{series}(a))
   \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\infsum(a)}}}
 \end{dfn} 
 
 \begin{thm}[Linearity of Infinite Summation]{linearity-of-infinite-summation}
@@ -152,7 +154,7 @@ A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered f
 \end{cor}
 
 \begin{thm}[Absolute Convergence Implies Convergence]{absolute-convergence}
-  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field} and $a : \NNOne \to F$. If the series of $|a|$ (where $|a|(n) := \abs{a(n)}$) is \xref[convergent]{def:convergent-series}, then the \xref[series of $a$]{def:series} is convergent
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field} and $a : \NNOne \to F$. If the series of $|a|$ (where $|a|(n) \defeq \abs{a(n)}$) is \xref[convergent]{def:convergent-series}, then the \xref[series of $a$]{def:series} is convergent
 \end{thm}
 
 \begin{proof}
@@ -170,7 +172,7 @@ A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered f
 \section{Special Series}
 
 \begin{thm}[Harmonic Series Diverges]{harmonic-series-diverges}
-  The \xref[series of the harmonic sequence]{def:series} $a(n) := 1/n$ is divergent
+  The \xref[series of the harmonic sequence]{def:series} $a(n) \defeq 1/n$ is divergent
 \end{thm}
 
 \begin{proof}
@@ -178,7 +180,7 @@ A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered f
 \end{proof}
 
 \begin{thm}[Reciprocal Squares Series Converges]{reciprocal-squares-converges}
-  The \xref[series of]{def:series} $a(n) := 1/n^2$ is \xref[convergent]{def:convergent-series}
+  The \xref[series of]{def:series} $a(n) \defeq 1/n^2$ is \xref[convergent]{def:convergent-series}
 \end{thm}
 
 \begin{proof}

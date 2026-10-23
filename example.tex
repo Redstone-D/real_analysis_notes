@@ -47,7 +47,8 @@ index is required
 
 \section*{Function Definition Style}
 
-Functions are defined in Lean-4 style: name, then type, then body, joined by \(\defeq\). Multi-argument functions use the product type
+Give the function name, its domain and codomain, and its rule, joined by
+\(\defeq\). Multiple inputs may be grouped into a pair
 
 \begin{enumerate}[label=\textbf{Example \arabic*.},leftmargin=*]
   \item Simple inline function:
@@ -55,12 +56,12 @@ Functions are defined in Lean-4 style: name, then type, then body, joined by \(\
     f : \RR \to \RR \defeq x \map x^2
   \]
 
-  \item Multi-argument function via product type:
+  \item Function taking a pair:
   \[
     g : \RR \times \RR \to \RR \defeq (x, y) \map x + y
   \]
 
-  \item Identity function (parametric type):
+  \item Identity function:
   \[
     \mathrm{id} : A \to A \defeq x \map x
   \]
@@ -75,12 +76,12 @@ Functions are defined in Lean-4 style: name, then type, then body, joined by \(\
     \end{cases}
   \]
 
-  \item Restricted codomain (positive outputs only):
+  \item Restricted codomain (nonnegative outputs):
   \[
-    \mathrm{sq} : \RR \to \RR_{\geq 0} \defeq x \map x^2
+    \mathrm{sq} : \RR \to \agez{\RR} \defeq x \map x^2
   \]
 
-  \item Partial operator (subset-type domain):
+  \item Function with a restricted domain:
   \[
     \mathrm{half} : \{n \in \ZZ \mid n \text{ even}\} \to \ZZ
     \defeq n \map n / 2

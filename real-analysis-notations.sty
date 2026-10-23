@@ -19,11 +19,17 @@
 \providecommand*{\absoluteValueRef}{real-analysis::lec01::conv:absolute-value-notation}
 \providecommand*{\distanceRef}{real-analysis::lec01::def:distance}
 \providecommand*{\floorRef}{real-analysis::lec01::def:floor}
+\providecommand*{\floorNotationRef}{real-analysis::lec01::conv:floor-notation}
 \providecommand*{\ceilRef}{real-analysis::lec01::def:ceiling}
 \providecommand*{\neighbourhoodRef}{real-analysis::lec02::def:neighbourhood}
+\providecommand*{\neighbourhoodNotationRef}{real-analysis::lec02::conv:neighbourhood-notation}
+\providecommand*{\signSubsetsRef}{real-analysis::lec01::conv:sign-subsets}
 \providecommand*{\binaryMaxRef}{real-analysis::lec01::def:binary-max}
 \providecommand*{\binaryMinRef}{real-analysis::lec01::def:binary-min}
 \providecommand*{\seqLimitRef}{real-analysis::lec03::def:limit-op}
+\providecommand*{\nestedSequencesRef}{real-analysis::lec02::def:nested-sequences-set}
+\providecommand*{\convergentSequencesRef}{real-analysis::lec03::def:convergent-sequences-set}
+\providecommand*{\boundedSequencesRef}{real-analysis::lec03::def:bounded-sequences-set}
 \providecommand*{\finiteSumRef}{real-analysis::lec01::def:finite-summation}
 \providecommand*{\finiteProductRef}{real-analysis::lec01::def:finite-product}
 \providecommand*{\termNotationRef}{real-analysis::lec01::conv:term-notation}
@@ -48,25 +54,39 @@
 \newcommand*{\PowerSet}{\xref[\mathcal{P}]{\powerSetRef}}
 \newcommand*{\img}[1]{{#1}^{\xref[\mathrm{img}]{\imageRef}}}
 \newcommand*{\preimg}[1]{{#1}^{\xref[\mathrm{preimg}]{\preimageRef}}}
-\newcommand*{\abs}[1]{\xref[\lvert#1\rvert]{\absoluteValueRef}}
+\newcommand*{\abs}[1]{\mathopen{\xref[\lvert]{\absoluteValueRef}}#1\mathclose{\rvert}}
 \newcommand*{\dist}[2]{\xref[d(#1, #2)]{\distanceRef}}
-\newcommand*{\floor}[1]{\xref[\lfloor #1 \rfloor]{\floorRef}}
+\newcommand*{\floorfn}{\mathop{\xref[\mathrm{floor}]{\floorRef}}\nolimits}
+\newcommand*{\floor}[1]{\xref[\lfloor #1 \rfloor]{\floorNotationRef}}
 \newcommand*{\ceil}[1]{\xref[\lceil #1 \rceil]{\ceilRef}}
-\newcommand*{\neighbourhood}[2]{\xref[V_{#1}(#2)]{\neighbourhoodRef}}
+\newcommand*{\nbhd}{\mathop{\xref[\mathrm{nbhd}]{\neighbourhoodRef}}\nolimits}
+\newcommand*{\neighbourhoodFamily}[1]{%
+  \mathord{\xref[V]{\neighbourhoodNotationRef}}_{#1}%
+}
+\newcommand*{\neighbourhood}[2]{\neighbourhoodFamily{#1}(#2)}
 \newcommand*{\seqlim}{\mathop{\xref[\mathrm{lim}]{\seqLimitRef}}}
+% The optional index domain keeps both zero-based and positive-indexed
+% nested families explicit; parentheses and the carrier stay outside links.
+\newcommand*{\Nested}[1][\NN]{%
+  \mathop{\xref[\mathrm{Nested}]{\nestedSequencesRef}}\nolimits_{#1}%
+}
+\newcommand*{\Conv}{\mathop{\xref[\mathrm{Conv}]{\convergentSequencesRef}}\nolimits}
+\newcommand*{\Bdd}{\mathop{\xref[\mathrm{Bdd}]{\boundedSequencesRef}}\nolimits}
 \newcommand*{\term}[2]{{#1}_{\xref[#2]{\termNotationRef}}}
 \newcommand*{\finsum}{\mathop{\xref[\mathrm{sum}]{\finiteSumRef}}\nolimits}
 \newcommand*{\finprod}{\mathop{\xref[\mathrm{prod}]{\finiteProductRef}}\nolimits}
 \newcommand*{\idxinter}{\mathop{\xref[\mathrm{inter}]{\indexedIntersectionRef}}\nolimits}
 \newcommand*{\idxunion}{\mathop{\xref[\mathrm{union}]{\indexedUnionRef}}\nolimits}
 
-% Signed-subset placeholder notation. Rendered in purple via \missingprereq to
-% flag that the convention block defining these subsets has not yet been
-% written. Replace \missingprereq with a proper \xref once the def exists.
-\newcommand*{\apos}[1]{\missingprereq{#1^{+}}}
-\newcommand*{\aneg}[1]{\missingprereq{#1^{-}}}
-\newcommand*{\agtz}[1]{\missingprereq{#1^{>0}}}
-\newcommand*{\altz}[1]{\missingprereq{#1^{<0}}}
+% Sign-restricted subsets. In this course + and - are strict aliases.
+% Link only the restriction so a carrier such as \RR can retain its own link.
+\newcommand*{\apos}[1]{{#1}_{\xref[+]{\signSubsetsRef}}}
+\newcommand*{\aneg}[1]{{#1}_{\xref[-]{\signSubsetsRef}}}
+% Compatibility names render the same chosen strict-sign notation.
+\newcommand*{\agtz}[1]{\apos{#1}}
+\newcommand*{\altz}[1]{\aneg{#1}}
+\newcommand*{\agez}[1]{{#1}_{\xref[\geq0]{\signSubsetsRef}}}
+\newcommand*{\alez}[1]{{#1}_{\xref[\leq0]{\signSubsetsRef}}}
 
 % Preserve the standard unlinked operators for exceptional contexts.
 \let\raPlainSup\sup

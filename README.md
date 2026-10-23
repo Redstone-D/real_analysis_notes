@@ -1,6 +1,4 @@
-# Real Analysis
-
-LaTeX source and published PDFs for AMA3707 Real Analysis.
+# Real Analysis 
 
 ## Compile
 

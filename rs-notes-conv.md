@@ -175,10 +175,8 @@ parentheses, rather than raw notation that would omit its link
 
 - `f(x)`, `d(x, y)`, `\seqlim(a)` — preferred form, matches analysis and type
   theory textbook conventions
-- Bare juxtaposition for application (e.g., `fx`, or `gf` for composition
-  `g \circ f`) is tolerated where context is unambiguous and the convention
-  matches related areas (type theory, abstract algebra)
-- When juxtaposing without parens, **always insert a small separator** so the
+- Application without parentheses is tolerated where context is unambiguous
+- When applying without parens, **always insert a small separator** so the
   function and argument are visually distinct: `f\,x`, not `fx`. The thin space
   `\,` prevents the two symbols from being read as one token
 

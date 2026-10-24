@@ -4,664 +4,162 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Lecture 3: Limit of Sequence}\\[0.25em]
+  {\LARGE\bfseries Lecture 3: Metric Spaces and Topology}\\[0.25em]
   {\large Mathematical Analysis}\\[0.15em]
 \end{center}
 
-\section{Convergent Sequences} 
+\section{Metric Spaces}
 
-\begin{dfn}[Convergent Sequence]{convergent-sequence}
-  A sequence $a: \NNOne \to F$, where $F$ is a \xref[ordered field]{lec01::def:ordered-field}, is said to be \emph{convergent} if
+The four \emph{metric axioms} are the following requirements on a function
+\(d:X\times X\to\RR\), where \(X\) is a set
+
+\begin{axm}[Nonnegativity]{metric-nonnegativity}
   \[
-    \exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon
+    \forall x,y\in X,\quad d(x,y)\geq0
   \]
+\end{axm}
+
+\begin{axm}[Identity of Indiscernibles]{metric-separation}
+  \[
+    \forall x,y\in X,\quad d(x,y)=0\iff x=y
+  \]
+\end{axm}
+
+\begin{axm}[Symmetry]{metric-symmetry}
+  \[
+    \forall x,y\in X,\quad d(x,y)=d(y,x)
+  \]
+\end{axm}
+
+\begin{axm}[Triangle Inequality]{metric-triangle-inequality}
+  \[
+    \forall x,y,z\in X,\quad d(x,z)\leq d(x,y)+d(y,z)
+  \]
+\end{axm}
+
+\begin{dfn}[Metric]{metric}
+  Let \(X\) be a set. A \emph{metric}, or \emph{distance function}, on
+  \(X\) is a function \(d:X\times X\to\RR\) satisfying
+  \xref[nonnegativity]{axm:metric-nonnegativity},
+  \xref[identity of indiscernibles]{axm:metric-separation},
+  \xref[symmetry]{axm:metric-symmetry}, and
+  \xref[the triangle inequality]{axm:metric-triangle-inequality}
 \end{dfn}
 
-\begin{rem}[The $\varepsilon$-$N$ Challenge]{epsilon-n-challenge}
-A value $\ell$ passes the $\varepsilon$-$N$ challenge if for any proposed $\varepsilon > 0$, there exists an index $N \in \NNOne$ such that for all $n \in \NNOne$ with $n \geq N$, $\dist{a_n}{\ell} < \varepsilon$
-\end{rem}
-
-\begin{rem}
-In the \xref[The $\varepsilon$-$N$ Challenge]{rem:epsilon-n-challenge}, the value of $N$ may depend on the choice of $\varepsilon$. And the value $N$ may be not unique (ie, $N' > N$ also works)
-\end{rem}
-
-\begin{thm}[Uniqueness of Limit]{limit-uniqueness}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, $a : \NNOne \to F$, and $\ell_1, \ell_2 \in F$. Then
-  \[
-    \bigl(\forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell_1} < \varepsilon\bigr)
-  \]\[
-    \land
-  \]\[
-    \bigl(\forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell_2} < \varepsilon\bigr)
-  \]\[
-    \implies \ell_1 = \ell_2
-  \]
-\end{thm}
-
-\begin{proof}
-Assume for contradiction that $\ell_1 \neq \ell_2$. Set
-\[
-  \varepsilon = \frac{\dist{\ell_1}{\ell_2}}{2}.
-\]
-Since $\ell_1 \neq \ell_2$, we have $\varepsilon > 0$
-
-By the hypothesis for $\ell_1$, there exists $N_1 \in \NNOne$ such that for all $n \geq N_1$, $\dist{a_n}{\ell_1} < \varepsilon$. Similarly, there exists $N_2 \in \NNOne$ such that for all $n \geq N_2$, $\dist{a_n}{\ell_2} < \varepsilon$
-
-Let $N = \max(N_1, N_2)$. For any $n \geq N$, both hypotheses hold:
-\[
-  \dist{a_n}{\ell_1} < \varepsilon \quad\text{and}\quad \dist{a_n}{\ell_2} < \varepsilon
-\]
-
-By the \xref[triangle inequality for distance]{lec01::lem:triangle-inequality-distance} applied via the intermediate point $a_n$,
-\[
-  \dist{\ell_1}{\ell_2} \leq \dist{\ell_1}{a_n} + \dist{a_n}{\ell_2} = \dist{a_n}{\ell_1} + \dist{a_n}{\ell_2},
-\]
-where the last equality uses \xref[symmetry of distance]{lec01::lem:distance-symmetry}. Combining,
-\[
-  \dist{\ell_1}{\ell_2} \leq \dist{a_n}{\ell_1} + \dist{a_n}{\ell_2} < 2\varepsilon = \dist{\ell_1}{\ell_2},
-\]
-a contradiction. Hence $\ell_1 = \ell_2$
-\end{proof}
-
-\begin{rem}[Compact Form Using $\exists!$]{limit-uniqueness-compact}
-\missingprereq{Combined with the existence from the \xref[definition of convergent sequence]{def:convergent-sequence}, this theorem states: if $a$ is convergent, then there exists a unique such $\ell$:
-\[
-  \exists! \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon.
-\]
-Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be formally introduced in \texttt{lec01} as a FOL convention before being used}
-\end{rem}
-
-\section{Convergence Challenge Functions}
-
-\begin{dfn}[Convergence Challenge Function]{convergence-challenge-function}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. A function $g : F \to F$ is a \emph{convergence challenge function} if it satisfies two conditions:
-  \begin{itemize}[nosep]
-    \item \emph{Positivity on positives}: $\forall \gamma \in \apos{F},\, g(\gamma) > 0$
-    \item \emph{Arbitrarily small values}: $\forall \delta \in \apos{F},\, \exists \gamma \in \apos{F},\, g(\gamma) < \delta$
-  \end{itemize}
+\begin{dfn}[Metric Space]{metric-space}
+  A \emph{metric space} is a pair \((X,d)\), where \(X\) is a set and
+  \(d\) is a \xref[metric]{def:metric} on \(X\)
 \end{dfn}
 
-\begin{rem}[Intuition: Covering Arbitrarily Small Positives]{challenge-intuition}
-\end{rem}
+\section{Distance on an Ordered Field}
 
-\begin{thm}[Convergence Challenge Replacement]{convergence-challenge-replacement}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, $a : \NNOne \to F$, and let $g$ be a \xref[convergence challenge function]{def:convergence-challenge-function}. Then
+\begin{dfn}[Distance]{distance}
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}. For \(x, y \in F\), the \emph{distance} between \(x\) and \(y\) is
   \[
-    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon\bigr)
-  \]\[
-    \iff
-  \]\[
-    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < g(\varepsilon)\bigr)
+    d(x, y) \defeq \abs{x - y}
   \]
-\end{thm}
-
-\begin{proof}
-  Fix the witness $\ell \in F$ in either direction
-
-  \noindent\textbf{($\Rightarrow$)} For $\varepsilon > 0$, the positivity-on-positives condition gives $g(\varepsilon) > 0$. Apply the \xref[definition of convergent sequence]{def:convergent-sequence} at the challenge $g(\varepsilon)$
-
-  \noindent\textbf{($\Leftarrow$)} For $\varepsilon > 0$, the \xref[challenge-function property of $g$]{def:convergence-challenge-function} gives $\gamma > 0$ with $g(\gamma) < \varepsilon$. The hypothesis at $\gamma$ gives $N$ such that
-  \[
-    \dist{a_n}{\ell} < g(\gamma) < \varepsilon \quad \text{for all } n \geq N
-  \]
-\end{proof}
-
-\begin{lem}[Restricting to Small Tolerances]{restricting-to-small-tolerances}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and fix
-  $r\in\apos{F}$. The function
-  \[
-    g:F\to F\defeq\gamma\map\min(\gamma,r/2)
-  \]
-  is a \xref[convergence challenge function]{def:convergence-challenge-function}
-\end{lem}
-
-\begin{proof}
-  For every $\gamma>0$, $0<g(\gamma)\leq r/2<r$.
-  For every $\delta>0$, choose $\gamma\defeq\delta/2>0$; then
-  $g(\gamma)\leq\delta/2<\delta$
-\end{proof}
-
-\begin{rem}[Restricting the Tolerance]{restricting-the-tolerance}
-  Since $0<g(\gamma)<r$ for $\gamma>0$,
-  \xref[challenge replacement]{thm:convergence-challenge-replacement} lets us
-  check $\forall\,0<\varepsilon<r$ instead of $\forall\varepsilon>0$,
-  for any fixed $r>0$, eg, $\forall\,0<\varepsilon<1$
-\end{rem}
-
-\begin{lem}[Linear Scaling]{linear-is-challenge}
-  For any $c \in F$ with $c > 0$, the function $g(\gamma) = c\gamma$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
-\end{lem}
-
-\begin{proof}
-  We verify both conditions
-
-  \noindent\emph{Positivity on positives.} For any $\gamma \in F$ with $\gamma > 0$, both $c > 0$ and $\gamma > 0$, so $g(\gamma) = c\gamma > 0$
-
-  \noindent\emph{Arbitrarily small values.} Fix any $\delta \in F$ with $\delta > 0$. We seek $\gamma \in F$ with $\gamma > 0$ and $g(\gamma) < \delta$
-
-  Take $\gamma \defeq \delta / (c + 1)$, which is derived in \xref{rem:linear-scaling-witness-derivation}. Since $\delta > 0$ and $c + 1 > 0$ (because $c > 0$), we have $\gamma > 0$
-
-  Now $g(\gamma) = c\gamma = c\delta / (c + 1)$. Since $c < c + 1$, we have $c / (c + 1) < 1$, hence $c\delta / (c + 1) < \delta$
-\end{proof}
-
-\begin{rem}[Deriving the Witness for Linear Scaling]{linear-scaling-witness-derivation}
-  To find the witness $\gamma$ used in the proof of \xref{lem:linear-is-challenge}, we start from the target inequality $g(\gamma) < \delta$ and manipulate it to isolate $\gamma$:
-  \[
-    g(\gamma) < \delta
-    \iff c\gamma < \delta
-    \iff \gamma < \frac{\delta}{c}.
-  \]
-  Any $\gamma$ in the open interval $\left(0, \tfrac{\delta}{c}\right)$ will therefore satisfy $g(\gamma) < \delta$. To pick a concrete such $\gamma$, we use the fact that $c + 1 > c$, which gives
-  \[
-    \frac{\delta}{c + 1} < \frac{\delta}{c}.
-  \]
-  Hence we may take $\gamma \defeq \delta / (c + 1)$ as the witness
-\end{rem}
-
-\begin{rem}[Why $c \leq 0$ is Excluded]{linear-scaling-cnonpos}
-  If $c \leq 0$, then for any $\gamma \in F$ with $\gamma > 0$, $g(\gamma) = c\gamma \leq 0$. This violates the positivity-on-positives condition, so $g$ is not a \xref[convergence challenge function]{def:convergence-challenge-function}
-\end{rem}
-
-\begin{lem}[Power]{power-is-challenge}
-  For any positive integer $k$, the function $g(\gamma) = \gamma^k$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
-\end{lem}
-
-\begin{proof}
-  Both conditions follow by \xref[induction on $k$]{lec01::thm:natural-number-induction}. Positivity: $\gamma^k > 0$ for $\gamma > 0$. For arbitrarily small values, take $\gamma \defeq \min(\delta / 2,\, 1 / 2)$, so $\gamma > 0$ and $\gamma \leq 1$; induction gives $\gamma^k \leq \gamma \leq \delta / 2 < \delta$
-\end{proof}
-
-\begin{lem}[Summation]{sum-is-challenge}
-  Let $f, g$ be \xref[convergence challenge functions]{def:convergence-challenge-function}, and suppose both are monotone increasing (i.e.\ $x \leq y \implies f(x) \leq f(y)$, and similarly for $g$). Then $f + g$, defined by $(f + g)(\gamma) \defeq f(\gamma) + g(\gamma)$, is a \xref[convergence challenge function]{def:convergence-challenge-function}
-\end{lem}
-
-\begin{proof}
-  Positivity is immediate from $f(\gamma), g(\gamma) > 0$. For $\delta > 0$, pick $\gamma_1, \gamma_2 > 0$ with $f(\gamma_1), g(\gamma_2) < \delta / 2$; set $\gamma \defeq \min(\gamma_1, \gamma_2)$. Monotonicity gives $(f + g)(\gamma) \leq f(\gamma_1) + g(\gamma_2) < \delta$
-\end{proof}
-
-\begin{lem}[Composition]{challenge-composition}
-  Let $f, g$ be \xref[convergence challenge functions]{def:convergence-challenge-function}, and suppose $f$ is monotone increasing (i.e.\ $x \leq y \implies f(x) \leq f(y)$). Then $f \circ g$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
-\end{lem}
-
-\begin{proof}
-  Positivity: $f(g(\gamma)) > 0$ since $g(\gamma) > 0$ and $f$ preserves positivity. For $\delta > 0$, pick $\eta > 0$ with $f(\eta) < \delta$, then $\gamma > 0$ with $g(\gamma) < \eta$. Monotonicity of $f$ gives $(f \circ g)(\gamma) \leq f(\eta) < \delta$
-\end{proof}
-
-\begin{thm}[Closed Form of Convergence]{convergence-closed-form}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, let $a : \NNOne \to F$. Then
-  \[
-    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon\bigr)
-  \]\[
-    \iff
-  \]\[
-    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} \leq \varepsilon\bigr)
-  \]
-\end{thm}
-
-\begin{proof}
-  \noindent\textbf{($\Rightarrow$)} If $\dist{a_n}{\ell} < \varepsilon$, then $\dist{a_n}{\ell} \leq \varepsilon$
-
-  \noindent\textbf{($\Leftarrow$)} By \xref{lem:linear-is-challenge} with $c = 2$, $g(\varepsilon) = 2\varepsilon$ is a \xref[convergence challenge function]{def:convergence-challenge-function}. From the closed-form hypothesis, for every $\varepsilon > 0$ there exists $N$ with $\dist{a_n}{\ell} \leq \varepsilon$ for all $n \geq N$. Since $\varepsilon > 0 \implies \varepsilon < 2\varepsilon$, we obtain $\dist{a_n}{\ell} \leq \varepsilon < 2\varepsilon$, hence
-  \[
-    \exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < 2\varepsilon. \tag{$\ast$}
-  \]
-  For any $\varepsilon > 0$, applying $(\ast)$ at $\varepsilon / 2 > 0$ gives $N$ such that $\dist{a_n}{\ell} < 2 \cdot (\varepsilon / 2) = \varepsilon$ for all $n \geq N$
-\end{proof}
-
-\section{Limit of a Sequence}
-
-\begin{dfn}[Limit of a Sequence]{limit}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. We say the sequence $a: \NNOne \to F$ \emph{has a limit of} $\ell \in F$ if
-  \[
-    \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon
-  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\dist{x}{y}}}}
 \end{dfn}
 
-\redirect[Converges To]{def}{converges-to}{def:limit}
-
-\begin{dfn}[Set of Convergent Sequences]{convergent-sequences-set}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. The \emph{set of convergent sequences in $F$} is
+\begin{lem}[Symmetry of Distance]{distance-symmetry}
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}. For all \(x, y \in F\),
   \[
-    \Conv(F) \defeq \{a : \NNOne \to F \mid a \text{ is \xref[convergent]{def:convergent-sequence}}\}
-  \]
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\Conv(F)}}}
-\end{dfn}
-
-\begin{dfn}[Limit Operator]{limit-op}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. The \emph{limit operator} is the function
-  \[
-    \seqlim : \Conv(F) \to F \defeq a \map \text{the unique } \ell \in F \text{ such that } a \xref[\text{has a limit of}]{def:limit} \ell
-  \]
-  We write
-  \[
-    \seqlim(a) = \ell
-  \]
-  The input is the whole sequence, rather than an individual term
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\seqlim(a)}}}
-\end{dfn}
-
-\redirect[Limit of a Sequence]{def}{limit-of-sequence}{def:limit-op}
-
-\begin{rem}[Well-Definedness of the Limit]{limit-well-defined}
-  The function $\seqlim$ in \xref{def:limit-op} is well-defined for two reasons:
-  \begin{itemize}[nosep]
-    \item \emph{Every input has an output}: for every $a \in \Conv(F)$, the \xref[definition of convergent sequence]{def:convergent-sequence} guarantees some $\ell \in F$ with $a \xref[\text{has a limit of}]{def:limit} \ell$
-    \item \emph{Every input has exactly one output}: by \xref{thm:limit-uniqueness}, this $\ell$ is unique
-  \end{itemize}
-\end{rem} 
-
-\begin{thm}[Addition of the Limit]{limit-addition}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \Conv(F)$. Then
-  \[
-    \seqlim(n\map\term{a}{n}+\term{b}{n}) = \seqlim(a)+\seqlim(b)
-  \] 
-\end{thm}
-
-\begin{proof}
-We want to prove
-\[
-  \begin{gathered}
-    \forall\varepsilon\in \apos{F},\,\exists N\in\NNOne,\,
-    \forall n\in\NNOne,\,n\geq N\implies\\
-    \abs{\term{a}{n}+\term{b}{n}-\seqlim(a)-\seqlim(b)}<\varepsilon
-  \end{gathered}
-\]
-
-According to the \xref[definition of a limit]{def:limit}, for every
-\(\varepsilon\in \apos{F}\), there exist \(N_a,N_b\in\NNOne\) such that,
-setting \(N_M\defeq\max(N_a,N_b)\), both estimates hold for \(n\geq N_M\):
-\[
-  \abs{\term{a}{n}-\seqlim(a)}<\varepsilon
-  \quad\land\quad
-  \abs{\term{b}{n}-\seqlim(b)}<\varepsilon
-\]
-Therefore, by the \xref[triangle inequality for distance]{lec01::lem:triangle-inequality-distance},
-\[
-  \begin{aligned}
-    \abs{\term{a}{n}+\term{b}{n}-\seqlim(a)-\seqlim(b)}
-    &\leq\abs{\term{a}{n}-\seqlim(a)}
-      +\abs{\term{b}{n}-\seqlim(b)}\\
-    &<\varepsilon+\varepsilon=2\cdot\varepsilon
-  \end{aligned}
-\]
-
-Notice that
-\[
-  g:F\to F\defeq\varepsilon\map2\cdot\varepsilon
-\]
-is a \xref[convergence challenge function]{def:convergence-challenge-function}
-by \xref[linear scaling]{lem:linear-is-challenge}. Hence the
-\xref[challenge replacement theorem]{thm:convergence-challenge-replacement} gives
-\[
-  \seqlim(n\map\term{a}{n}+\term{b}{n})=\seqlim(a)+\seqlim(b)
-\]
-\end{proof}
-
-\begin{thm}[Multiplication of the Limit]{limit-multiplication}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \Conv(F)$. Then
-  \[
-    \seqlim(n\map\term{a}{n}\cdot\term{b}{n})=\seqlim(a)\cdot\seqlim(b)
-  \]
-\end{thm}
-
-\begin{proof}
-For \(n\map\term{a}{n}\cdot\term{b}{n}\), we want to show that
-\(\seqlim(a)\cdot\seqlim(b)\) is its limit, ie,
-\[
-  \begin{gathered}
-    \forall\varepsilon\in \apos{F},\,\exists N\in\NNOne,\,
-    \forall n\in\NNOne,\,n\geq N\implies\\
-    \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}<\varepsilon
-  \end{gathered}
-\]
-
-According to the \xref[definition of a limit]{def:limit}, for every
-\(\varepsilon\in \apos{F}\), there exist \(N_a,N_b\in\NNOne\) such that
-\[
-  \begin{aligned}
-    n\geq N_a&\implies\abs{\term{a}{n}-\seqlim(a)}<\varepsilon,\\
-    n\geq N_b&\implies\abs{\term{b}{n}-\seqlim(b)}<\varepsilon
-  \end{aligned}
-\]
-Let \(N_M\defeq\max(N_a,N_b)\). Then, for every \(n\geq N_M\), both
-inequalities hold
-
-Adding and subtracting \(\seqlim(a)\cdot\term{b}{n}\), we have
-\[
-  \begin{aligned}
-    &\abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}\\
-    &\quad=\abs{\term{a}{n}\cdot\term{b}{n}
-      -\seqlim(a)\cdot\term{b}{n}
-      +\seqlim(a)\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}\\
-    &\quad\leq\abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\term{b}{n}}
-      +\abs{\seqlim(a)\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}\\
-    &\quad=\abs{\term{b}{n}}\cdot\abs{\term{a}{n}-\seqlim(a)}
-      +\abs{\seqlim(a)}\cdot\abs{\term{b}{n}-\seqlim(b)}
-  \end{aligned}
-\]
-The inequality uses the
-\xref[triangle inequality for distance]{lec01::lem:triangle-inequality-distance}
-
-Therefore, when \(n\geq N_M\),
-\[
-  \begin{aligned}
-    \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}
-    &\leq\abs{\term{b}{n}}\cdot\varepsilon+\abs{\seqlim(a)}\cdot\varepsilon\\
-    &=\varepsilon\cdot\bigl(\abs{\term{b}{n}}+\abs{\seqlim(a)}\bigr)
-  \end{aligned}
-\]
-
-Since all \xref[convergent sequences are bounded]{thm:convergent-sequences-are-bounded},
-choose a strict bound \(M'\in F\) such that
-\(\forall n\in\NNOne,\,\abs{\term{b}{n}}<M'\), and let
-\(M\defeq\max(M',1)\). This bound is independent of \(\varepsilon\).
-Hence \(M\geq1\) and
-\[
-  \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}
-  <\varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
-\]
-
-Notice that
-\[
-  g:F\to F\defeq\varepsilon\map
-    \varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
-\]
-is a \xref[convergence challenge function]{def:convergence-challenge-function}
-by \xref[linear scaling]{lem:linear-is-challenge}, since
-\(M+\abs{\seqlim(a)}>0\). We have shown that
-\[
-  \begin{gathered}
-    \forall\varepsilon\in \apos{F},\,\exists N_M\in\NNOne,\,
-    \forall n\in\NNOne,\,n\geq N_M\implies\\
-    \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}
-      <\varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
-  \end{gathered}
-\]
-Therefore, by the
-\xref[challenge replacement theorem]{thm:convergence-challenge-replacement},
-\[
-  \seqlim(n\map\term{a}{n}\cdot\term{b}{n})=\seqlim(a)\cdot\seqlim(b)
-\]
-\end{proof}
-
-\begin{thm}[Scalar Multiplication of the Limit]{limit-scalar-multiplication}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, let $a \in \Conv(F)$, and let $c \in F$. Then
-  \[
-    \seqlim(n\map c\cdot\term{a}{n})=c\cdot\seqlim(a)
-  \]
-\end{thm}
-
-\begin{proof}
-Define the constant sequence
-\[
-  p:\NNOne\to F\defeq n\map c
-\]
-For every \(\varepsilon\in \apos{F}\) and every \(n\in\NNOne\),
-\[
-  \abs{\term{p}{n}-c}=0<\varepsilon
-\]
-Hence \(p\in\Conv(F)\)
-and \(\seqlim(p)=c\)
-
-By the definition of \(p\),
-\[
-  \forall n\in\NNOne,\quad c\cdot\term{a}{n}=\term{p}{n}\cdot\term{a}{n}
-\]
-By \xref[multiplication of limits]{thm:limit-multiplication}, the sequence
-\(n\map\term{p}{n}\cdot\term{a}{n}\) is convergent, and
-\[
-  \begin{aligned}
-    \seqlim(n\map c\cdot\term{a}{n})
-    &=\seqlim(n\map\term{p}{n}\cdot\term{a}{n})\\
-    &=\seqlim(p)\cdot\seqlim(a)\\
-    &=c\cdot\seqlim(a)
-  \end{aligned}
-\]
-\end{proof}
-
-\begin{thm}[Linearity of the Limit]{limit-linearity}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, let $a, b \in \Conv(F)$, and let $c,d\in F$. Then
-  \[
-    \seqlim(n\map c\cdot\term{a}{n}+d\cdot\term{b}{n})
-      =c\cdot\seqlim(a)+d\cdot\seqlim(b)
-  \]
-\end{thm}
-
-\begin{proof}
-This follows from \xref[addition of limits]{thm:limit-addition} and
-\xref[scalar multiplication of limits]{thm:limit-scalar-multiplication}
-\end{proof}
-
-\begin{lem}[Reciprocal of the Limit]{limit-reciprocal}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let
-  $b\in\Conv(F)$ with $\forall n\in\NNOne,\,\term{b}{n}\neq0$
-  and $\seqlim(b)\neq0$. Then
-  \[
-    \seqlim\left(n\map\frac{1}{\term{b}{n}}\right)
-      =\frac{1}{\seqlim(b)}
+    \dist{x}{y} = \dist{y}{x}
   \]
 \end{lem}
 
 \begin{proof}
-Define
-\[
-  p:\NNOne\to F\defeq n\map\frac{1}{\term{b}{n}}
-\]
-We check whether $1/\seqlim(b)$ is a limit of $p$
+  By \xref[definition]{def:distance}, \(\dist{x}{y} = \abs{x - y}\) and \(\dist{y}{x} = \abs{y - x} = \abs{-(x - y)}\). It suffices to show \(\abs{-(x - y)} = \abs{x - y}\); we split on the sign of \(x - y\)
 
-Set $M\defeq\abs{\seqlim(b)}/2>0$.
-Fix $\varepsilon\in\apos{F}$ and choose $N_b\in\NNOne$ from the
-\xref[convergence of $b$]{def:convergent-sequence} so that
-$n\geq N_b\implies\abs{\term{b}{n}-\seqlim(b)}<\min(\varepsilon,M)$
+  Case 1: \(x - y \geq 0\). Then \(\abs{x - y} = x - y\). Also \(-(x - y) \leq 0\), so \(\abs{-(x - y)} = -(-(x - y)) = x - y = \abs{x - y}\)
 
-For $n\geq N_b$,
-\[
-  \begin{aligned}
-    \abs{\term{p}{n}-\frac{1}{\seqlim(b)}}
-      &=\abs{\frac{1}{\term{b}{n}}-\frac{1}{\seqlim(b)}}\\
-      &=\abs{\frac{\seqlim(b)-\term{b}{n}}
-        {\term{b}{n}\cdot\seqlim(b)}}\\
-      &=\frac{\abs{\seqlim(b)-\term{b}{n}}}
-        {\abs{\term{b}{n}\cdot\seqlim(b)}}
-  \end{aligned}
-\]
-By the \xref[triangle inequality]{lec01::lem:triangle-inequality-distance},
-\[
-  \abs{\seqlim(b)}
-  \leq\abs{\seqlim(b)-\term{b}{n}}+\abs{\term{b}{n}}
-  <M+\abs{\term{b}{n}}
-\]
-Since $\abs{\seqlim(b)}=2\cdot M$, we have $\abs{\term{b}{n}}>M$, so
-\[
-  \abs{\term{b}{n}\cdot\seqlim(b)}>M\cdot\abs{\seqlim(b)},
-  \qquad
-  \abs{\seqlim(b)-\term{b}{n}}<\varepsilon
-\]
-Therefore,
-\[
-  \frac{\abs{\seqlim(b)-\term{b}{n}}}
-    {\abs{\term{b}{n}\cdot\seqlim(b)}}
-  <\frac{\varepsilon}{M\cdot\abs{\seqlim(b)}}
-\]
-Since $M\cdot\abs{\seqlim(b)}>0$, the function
-\[
-  g:F\to F\defeq\varepsilon\map
-    \frac{\varepsilon}{M\cdot\abs{\seqlim(b)}}
-\]
-is a \xref[convergence challenge function]{def:convergence-challenge-function}
-by \xref[linear scaling]{lem:linear-is-challenge}. Hence
-\[
-  \forall\varepsilon\in\apos{F},\,\exists N_b\in\NNOne,\,
-  \forall n\in\NNOne,\,n\geq N_b\implies
-  \abs{\term{p}{n}-\frac{1}{\seqlim(b)}}<g(\varepsilon)
-\]
-By \xref[challenge replacement]{thm:convergence-challenge-replacement},
-$p\in\Conv(F)$ and
-\[
-  \seqlim(p)=\frac{1}{\seqlim(b)}
-\]
+  Case 2: \(x - y < 0\). Then \(\abs{x - y} = -(x - y)\). Also \(-(x - y) > 0\), so \(\abs{-(x - y)} = -(x - y) = \abs{x - y}\)
 \end{proof}
 
-\begin{thm}[Division of the Limit]{limit-division}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \Conv(F)$ with $\forall n \in \NNOne, \term{b}{n} \neq 0$ and $\seqlim(b) \neq 0$. Then
+\begin{lem}[Triangle Inequality for Distance]{triangle-inequality-distance}
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}. For all \(x, y, z \in F\),
   \[
-    \seqlim\left(n\map\frac{\term{a}{n}}{\term{b}{n}}\right) = \frac{\seqlim(a)}{\seqlim(b)}
-  \] 
-\end{thm}
-
-\begin{thm}[Order Preservation of Limits]{limit-order-preservation}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \Conv(F)$ with $\forall n \in \NNOne,\, \term{a}{n} \leq \term{b}{n}$. Then
-  \[
-    \seqlim(a) \leq \seqlim(b)
+    \dist{x}{z} \leq \dist{x}{y} + \dist{y}{z}
   \]
-\end{thm}
-
-\section{Bounded Sequences}
-
-\begin{dfn}[Bounded Sequence]{bounded-sequence}
-  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}.
-  A sequence \(a:\NNOne\to F\) is \emph{bounded} if
-  \[
-    \exists M\in F,\,\forall n\in\NNOne,\quad\dist{a(n)}{0}\leq M
-  \]
-\end{dfn} 
-
-\begin{dfn}[Set of Bounded Sequences]{bounded-sequences-set}
-  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}.
-  The set of bounded sequences in \(F\) is
-  \[
-    \Bdd(F)\defeq
-    \{a:\NNOne\to F\mid
-      a\text{ is \xref[bounded]{def:bounded-sequence}}\}
-  \]
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\Bdd(F)}}}
-\end{dfn}
-
-\begin{thm}[Convergent Sequences are Bounded]
-  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}
-  and let \(a:\Conv(F)\). Then \(a\) is
-  \xref[bounded]{def:bounded-sequence}, so \(a\in\Bdd(F)\)
-\end{thm}
+\end{lem}
 
 \begin{proof}
-Suppose the convergent sequence $a$, $\seqlim a = \ell$
+  Let \(a = x - y\) and \(b = y - z\). Then \(x - z = a + b\), so \(\dist{x}{z} = \abs{a + b}\).
+  We split on the sign of \(a + b\)
 
-Take $\varepsilon = 1$, then there exists $N \in \NNOne$ such that for all $n \in \NNOne$ with $n > N$, $\dist{a_n}{\ell} < 1$
+  Case 1: \(a + b \geq 0\). Then \(\abs{a + b} = a + b\). Since \(a \leq \abs{a}\) and \(b \leq \abs{b}\),
+  \[
+    \abs{a + b} = a + b \leq \abs{a} + \abs{b} = \dist{x}{y} + \dist{y}{z}
+  \]
 
-According to the \xref[triangle inequality]{lec01::lem:triangle-inequality-distance} for distance, and $\dist{a_n}{\ell} < 1$, we have
-\[\dist{0}{a_n} \leq \dist{0}{\ell} + \dist{\ell}{a_n} < \dist{0}{\ell} + 1\] 
+  Case 2: \(a + b < 0\). Then \(\abs{a + b} = -(a + b) = -a - b\). Since \(-a \leq \abs{a}\) and \(-b \leq \abs{b}\),
+  \[
+    \abs{a + b} = -a - b \leq \abs{a} + \abs{b} = \dist{x}{y} + \dist{y}{z}
+  \]
+\end{proof}
 
-Which means for all $n \in \NNOne$ with $n > N$, $\dist{0}{a_n} < \dist{0}{\ell} + 1$
-
-And for $n \in \NNOne$ with $n \leq N$, we have $\dist{0}{a_n} \leq \max\{\dist{0}{a_1}, \dist{0}{a_2}, ..., \dist{0}{a_N}\}$
-
-So, we can take $M = \max\{\max\{\dist{0}{a_1}, \dist{0}{a_2}, ..., \dist{0}{a_N}\}, \dist{0}{\ell} + 1\}$. Hence $M$ exists for all convergent sequences $a$
-\end{proof} 
-
-\begin{rem}
-Although Convergent $\implies$ Bounded, the converse is not true. A bounded sequence may not be convergent
-
-For example, the sequence $a_n = (-1)^n$ is bounded (since $\dist{a_n}{0} = 1$ for all $n$), but not convergent
-\end{rem}
-
-\section{Monotone Convergence Theorem} 
-
-\begin{dfn}[Increasing Sequence]{increasing-sequence}
-  A sequence $a: \NNOne \to F$ is said to be \emph{increasing} if
-  \[\forall n \in \NNOne, \term{a}{n} \leq \term{a}{n+1}\]
-\end{dfn}
-
-\begin{dfn}[Strictly Increasing Sequence]{strictly-increasing-sequence}
-  A sequence $a: \NNOne \to F$ is said to be \emph{strictly increasing} if
-  \[\forall n \in \NNOne, \term{a}{n} < \term{a}{n+1}\]
-\end{dfn} 
-
-\begin{dfn}[Decreasing Sequence]{decreasing-sequence}
-  A sequence $a: \NNOne \to F$ is said to be \emph{decreasing} if
-  \[\forall n \in \NNOne, \term{a}{n} \geq \term{a}{n+1}\]
-\end{dfn}
-
-\begin{dfn}[Strictly Decreasing Sequence]{strictly-decreasing-sequence}
-  A sequence $a: \NNOne \to F$ is said to be \emph{strictly decreasing} if
-  \[\forall n \in \NNOne, \term{a}{n} > \term{a}{n+1}\]
-\end{dfn}
-
-\begin{lem}[Strictly Increasing Extends to All Indices]{strictly-increasing-extends}
-  Let $a: \NNOne \to F$ be \xref[strictly increasing]{def:strictly-increasing-sequence}. Then $\forall n, m \in \NNOne,\, n > m \implies \term{a}{n} > \term{a}{m}$
-\end{lem}
-
-\begin{lem}[Increasing Extends to All Indices]{increasing-extends}
-  Let $a: \NNOne \to F$ be \xref[increasing]{def:increasing-sequence}. Then $\forall n, m \in \NNOne,\, n \geq m \implies \term{a}{n} \geq \term{a}{m}$
-\end{lem}
-
-\begin{lem}[Strictly Decreasing Extends to All Indices]{strictly-decreasing-extends}
-  Let $a: \NNOne \to F$ be \xref[strictly decreasing]{def:strictly-decreasing-sequence}. Then $\forall n, m \in \NNOne,\, n > m \implies \term{a}{n} < \term{a}{m}$
-\end{lem}
-
-\begin{lem}[Decreasing Extends to All Indices]{decreasing-extends}
-  Let $a: \NNOne \to F$ be \xref[decreasing]{def:decreasing-sequence}. Then $\forall n, m \in \NNOne,\, n \geq m \implies \term{a}{n} \leq \term{a}{m}$
-\end{lem}
-
-\begin{dfn}[Monotone Sequence]{monotone-sequence}
-  A sequence $a: \NNOne \to F$ is said to be \emph{monotone} if it is either \xref[increasing]{def:increasing-sequence} or \xref[decreasing]{def:decreasing-sequence}
-\end{dfn} 
-
-\begin{thm}[Monotone Convergence Theorem]{mct}
+\begin{cor}[Metric on a Complete Ordered Field]{complete-ordered-field-metric}
   Let \(F\) be a \xref[complete ordered field]{lec01::def:complete-ordered-field},
-  and let \(a:\Bdd(F)\) be a \xref[monotone sequence]{def:monotone-sequence}.
-  Then \(a\) is \xref[convergent]{def:convergent-sequence}
-\end{thm}
+  and let \(d\) be the \xref[absolute-value distance]{def:distance} on \(F\).
+  Under \xref[the identification with the reals]{lec01::rem:complete-field-identification},
+  \((F,d)\) is a \xref[metric space]{def:metric-space}
+\end{cor}
 
 \begin{proof}
-Suppose $a$ is a \xref[bounded sequence]{def:bounded-sequence} in $F$ and \xref[increasing sequence]{def:increasing-sequence}, which means exist $x = \sup\{\term{a}{n}:n\in\NNOne\}$ (by the \xref[Axiom of Completeness]{lec01::axm:aoc}, applied to the nonempty set $\{\term{a}{n} : n \in \NNOne\}$ bounded above in $F$), and $\forall n, m \in \NNOne, \, n \leq m \implies \term{a}{n} \leq \term{a}{m} $
-
-According to the \xref[$\varepsilon$ criterion for supremum]{lec01::prop:epsilon-supremum}, $\forall n \in \NNOne, \, \term{a}{n} \leq x $ and $\forall \varepsilon \in \apos{F}, \, \exists N \in \NNOne, \, \term{a}{N} > x - \varepsilon$
-
-Adding the increasing property, ie \[N \leq n \implies \term{a}{N} \leq \term{a}{n} \leq x \implies (\term{a}{N} > x - \varepsilon \implies \term{a}{n} \geq \term{a}{N} > x - \varepsilon)\]
-
-We can have \[\forall \varepsilon \in \apos{F}, \, \exists N \in \NNOne, \, \forall n \in \NNOne \geq N, \, \term{a}{n} > x - \varepsilon\]
-
-Also, \[\term{a}{n} \leq x \, \land\, \varepsilon > 0 \implies \term{a}{n} < x + \varepsilon \]
-\[\term{a}{n} > x - \varepsilon \, \land\,  \term{a}{n} < x + \varepsilon \implies x - \varepsilon < \term{a}{n} < x + \varepsilon \implies \dist{\term{a}{n}}{x} < \varepsilon\]
-Notice that such $x$ is the \xref[supremum]{lec01::def:supremum} of the upper bounded sequence $a$, it exists. 
-\[\exists x \in F, \, \forall \varepsilon \in \apos{F}, \, \exists N \in \NNOne, \, \forall n \in \NNOne \geq N, \, \dist{\term{a}{n}}{x} < \varepsilon\]
-
-Which means it is a convergent sequence and its limit is $x$
-
-If instead $a$ is \xref[decreasing]{def:decreasing-sequence}, the same argument applies with $x \defeq \inf\{\term{a}{n}:n\in\NNOne\}$ (which exists by the \xref[Axiom of Completeness]{lec01::axm:aoc}, since $\{\term{a}{n} : n \in \NNOne\}$ is nonempty and bounded below), using the dual $\varepsilon$-criterion for the infimum
-\end{proof}
-
-\section{Comparison of Sequences}
-
-\begin{thm}[Comparison for Monotone Sequences]{monotone-comparison-increasing}
-  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let $s,t : \NNOne \to F$ be \xref[increasing]{def:increasing-sequence} with $\term{s}{n} \leq \term{t}{n}$ for all $n \in \NNOne$. If $t$ is \xref[convergent]{def:convergent-sequence}, then
+  Under this identification, the distance is real-valued. By
+  \xref[the definition of absolute value]{lec01::def:absolute-value},
   \[
-    s \text{ is convergent and }\seqlim(s) \leq \seqlim(t)
+    \dist{x}{y}=\abs{x-y}\geq0,
+    \qquad
+    \dist{x}{y}=0\iff x-y=0\iff x=y
   \]
-\end{thm}
-
-\begin{proof}
-\todo
+  \xref[Symmetry]{lem:distance-symmetry} and
+  \xref[the triangle inequality]{lem:triangle-inequality-distance}
+  give the remaining two \xref[metric axioms]{def:metric}
 \end{proof}
 
-\begin{thm}[Comparison for Decreasing Sequences]{monotone-comparison-decreasing}
-  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let $s,t : \NNOne \to F$ be \xref[decreasing]{def:decreasing-sequence} with $\term{s}{n} \leq \term{t}{n}$ for all $n \in \NNOne$. If $s$ is \xref[convergent]{def:convergent-sequence}, then
+\begin{lem}[\(\varepsilon\)-Criterion for Equality]{epsilon-equality}
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}. For \(a, b \in F\),
   \[
-    t \text{ is convergent and }\seqlim(s) \leq \seqlim(t)
+    a=b
+    \iff
+    \forall \varepsilon \in \apos{F},\, \abs{a-b}<\varepsilon
   \]
-\end{thm}
+\end{lem}
 
-\begin{proof}
-Apply \xref{thm:monotone-comparison-increasing} to the increasing sequences $n\map-\term{t}{n}$ and $n\map-\term{s}{n}$
+\begin{proof}In order to proof \xref[lem:epsilon-equality]{lem:epsilon-equality}, we need to prove both directions
+
+\noindent\textbf{(a)}: $a=b \implies \forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon$
+
+Suppose \(a=b\). Then \(\abs{a-b}=0\). For any \(\varepsilon>0\), we have \(\abs{a-b}=0<\varepsilon\)
+
+\noindent\textbf{(b)}: $\forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon \implies a=b$
+
+Assume \(a \neq b\)
+
+Then, this means that \[\exists \varepsilon_0\in\apos{F}, \abs{a - b} = \varepsilon_0 \]
+
+Taking \(\varepsilon=\varepsilon_0\) gives \(\varepsilon_0=\abs{a-b}<\varepsilon_0\), a contradiction
+
+So, we have \(\forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon \implies \lnot a \neq b\)
+
+Since $\lnot a \neq b \iff a = b$, So, $\forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon \implies a=b$
+
+Therefore, both implications hold, and hence proven
 \end{proof}
 
-\section{Squeeze Theorem}
+\section{Open Balls}
 
-\begin{thm}[Squeeze Theorem]{squeeze-theorem}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, x, b : \NNOne \to F$ with $\term{a}{n} \leq \term{x}{n} \leq \term{b}{n}$ for all $n \in \NNOne$. If $a$ and $b$ are \xref[convergent]{def:convergent-sequence} with $\seqlim(a) = \seqlim(b) = L$, then $x$ is convergent and $\seqlim(x) = L$
-\end{thm}
+\section{Open and Closed Sets}
 
-\begin{proof}
-\todo
-\end{proof}
+\section{Topological Spaces}
+
+\section{Neighbourhoods}
+
+\section{Compact Sets}
+
+\section{Heine-Borel Theorem}
+
+\section{Cantor Sets}
 
 \end{document}

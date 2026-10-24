@@ -17,7 +17,7 @@
 \providecommand*{\imageRef}{real-analysis::lec02::def:image}
 \providecommand*{\preimageRef}{real-analysis::lec02::def:pre-image}
 \providecommand*{\absoluteValueRef}{real-analysis::lec01::conv:absolute-value-notation}
-\providecommand*{\distanceRef}{real-analysis::lec01::def:distance}
+\providecommand*{\distanceRef}{real-analysis::lec03::def:distance}
 \providecommand*{\floorRef}{real-analysis::lec01::def:floor}
 \providecommand*{\floorNotationRef}{real-analysis::lec01::conv:floor-notation}
 \providecommand*{\ceilRef}{real-analysis::lec01::def:ceiling}
@@ -26,10 +26,10 @@
 \providecommand*{\signSubsetsRef}{real-analysis::lec01::conv:sign-subsets}
 \providecommand*{\binaryMaxRef}{real-analysis::lec01::def:binary-max}
 \providecommand*{\binaryMinRef}{real-analysis::lec01::def:binary-min}
-\providecommand*{\seqLimitRef}{real-analysis::lec03::def:limit-op}
+\providecommand*{\seqLimitRef}{real-analysis::lec04::def:limit-op}
 \providecommand*{\nestedSequencesRef}{real-analysis::lec02::def:nested-sequences-set}
-\providecommand*{\convergentSequencesRef}{real-analysis::lec03::def:convergent-sequences-set}
-\providecommand*{\boundedSequencesRef}{real-analysis::lec03::def:bounded-sequences-set}
+\providecommand*{\convergentSequencesRef}{real-analysis::lec04::def:convergent-sequences-set}
+\providecommand*{\boundedSequencesRef}{real-analysis::lec04::def:bounded-sequences-set}
 \providecommand*{\finiteSumRef}{real-analysis::lec01::def:finite-summation}
 \providecommand*{\finiteProductRef}{real-analysis::lec01::def:finite-product}
 \providecommand*{\termNotationRef}{real-analysis::lec01::conv:term-notation}
@@ -39,8 +39,8 @@
 \providecommand*{\indexedUnionRef}{real-analysis::lec01::def:indexed-union}
 \providecommand*{\indexedIntersectionNotationRef}{real-analysis::lec01::conv:indexed-intersection-notation}
 \providecommand*{\indexedUnionNotationRef}{real-analysis::lec01::conv:indexed-union-notation}
-\providecommand*{\infiniteSumRef}{real-analysis::lec04::def:infinite-series}
-\providecommand*{\infiniteProductRef}{real-analysis::lec04::def:infinite-product}
+\providecommand*{\infiniteSumRef}{real-analysis::lec05::def:infinite-series}
+\providecommand*{\infiniteProductRef}{real-analysis::lec05::def:infinite-product}
 
 % Linked number-set notation.
 \newcommand*{\NN}{\xref[\mathbb{N}]{\naturalNumbersRef}}
@@ -54,7 +54,7 @@
 \newcommand*{\PowerSet}{\xref[\mathcal{P}]{\powerSetRef}}
 \newcommand*{\img}[1]{{#1}^{\xref[\mathrm{img}]{\imageRef}}}
 \newcommand*{\preimg}[1]{{#1}^{\xref[\mathrm{preimg}]{\preimageRef}}}
-\newcommand*{\abs}[1]{\mathopen{\xref[\lvert]{\absoluteValueRef}}#1\mathclose{\rvert}}
+\newcommand*{\abs}[1]{\mathopen{\xref[\lvert]{\absoluteValueRef}}#1\mathclose{\xref[\rvert]{\absoluteValueRef}}}
 \newcommand*{\dist}[2]{\xref[d(#1, #2)]{\distanceRef}}
 \newcommand*{\floorfn}{\mathop{\xref[\mathrm{floor}]{\floorRef}}\nolimits}
 \newcommand*{\floor}[1]{\xref[\lfloor #1 \rfloor]{\floorNotationRef}}

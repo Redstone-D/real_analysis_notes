@@ -755,15 +755,19 @@ A set $A$ is called \emph{countable} if it is either finite or \xref[countably i
 \end{dfn}
 
 \begin{thm}[Countability of the Rationals]{rationals-natural-equinum}
-  $\QQ \equinum \NN$. Arrange the positive rationals in the Calkin--Wilf tree,
-  where each $a/b$ has children $a/(a+b)$ and $(a+b)/b$, and read it
-  level by level:
+  $\QQ \equinum \NN$
+\end{thm}
+
+\begin{proof}
+  List the positive rationals in the following pattern, starting from
+  $1/1$ and replacing each $a/b$ by $a/(a+b)$ followed by $(a+b)/b$
+  to form the next row:
   \[
     \frac11;\qquad
     \frac12,\frac21;\qquad
     \frac13,\frac32,\frac23,\frac31;\qquad \ldots
   \]
-  Thus the levels contain $1,2,4,\ldots$ elements. Let
+  Read row by row; the rows contain $1,2,4,\ldots$ elements. Let
   $r_1,r_2,\ldots$ be this enumeration. Since every positive rational occurs
   exactly once, a witness $f:\NN\to\QQ$ is
   \[
@@ -774,10 +778,13 @@ A set $A$ is called \emph{countable} if it is either finite or \xref[countably i
       -r_{n/2}, & n\text{ is even and }n>0
     \end{cases}
   \]
-\end{thm}
+\end{proof}
 
 \begin{thm}[Equinumerosity of Intervals]{interval-equinum}
-Every \xref[interval]{def:interval} which is not a single point is equinumerous to another \xref[interval]{def:interval} which is not a single point
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}, and let
+  \(a,b,c,d\in F\) satisfy \(a<b\) and \(c<d\). Then the
+  \xref[open intervals]{def:open-interval} \((a,b)\) and \((c,d)\) are
+  \xref[equinumerous]{def:same-cardinality}
 \end{thm} 
 
 \begin{proof}

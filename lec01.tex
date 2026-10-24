@@ -766,80 +766,13 @@ Let \(\mathbb B\defeq\{\mathrm{tt},\mathrm{ff}\}\) denote the set of Boolean val
 
 \section{Distance}
 
-\begin{dfn}[Distance]{distance}
-  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For \(x, y \in F\), the \emph{distance} between \(x\) and \(y\) is
-  \[
-    d(x, y) \defeq \abs{x - y}
-  \]
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\dist{x}{y}}}}
-\end{dfn}
+\redirect[Distance]{def}{distance}{lec03::def:distance}
 
-\begin{lem}[Symmetry of Distance]{distance-symmetry}
-  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For all \(x, y \in F\),
-  \[
-    \dist{x}{y} = \dist{y}{x}
-  \]
-\end{lem}
+\redirect[Symmetry of Distance]{lem}{distance-symmetry}{lec03::lem:distance-symmetry}
 
-\begin{proof}
-  By \xref[definition]{def:distance}, \(\dist{x}{y} = \abs{x - y}\) and \(\dist{y}{x} = \abs{y - x} = \abs{-(x - y)}\). It suffices to show \(\abs{-(x - y)} = \abs{x - y}\); we split on the sign of \(x - y\)
+\redirect[Triangle Inequality for Distance]{lem}{triangle-inequality-distance}{lec03::lem:triangle-inequality-distance}
 
-  Case 1: \(x - y \geq 0\). Then \(\abs{x - y} = x - y\). Also \(-(x - y) \leq 0\), so \(\abs{-(x - y)} = -(-(x - y)) = x - y = \abs{x - y}\)
-
-  Case 2: \(x - y < 0\). Then \(\abs{x - y} = -(x - y)\). Also \(-(x - y) > 0\), so \(\abs{-(x - y)} = -(x - y) = \abs{x - y}\)
-\end{proof}
-
-\begin{lem}[Triangle Inequality for Distance]{triangle-inequality-distance}
-  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For all \(x, y, z \in F\),
-  \[
-    \dist{x}{z} \leq \dist{x}{y} + \dist{y}{z}
-  \]
-\end{lem}
-
-\begin{proof}
-  Let \(a = x - y\) and \(b = y - z\). Then \(x - z = a + b\), so \(\dist{x}{z} = \abs{a + b}\).
-  We split on the sign of \(a + b\)
-
-  Case 1: \(a + b \geq 0\). Then \(\abs{a + b} = a + b\). Since \(a \leq \abs{a}\) and \(b \leq \abs{b}\),
-  \[
-    \abs{a + b} = a + b \leq \abs{a} + \abs{b} = \dist{x}{y} + \dist{y}{z}
-  \]
-
-  Case 2: \(a + b < 0\). Then \(\abs{a + b} = -(a + b) = -a - b\). Since \(-a \leq \abs{a}\) and \(-b \leq \abs{b}\),
-  \[
-    \abs{a + b} = -a - b \leq \abs{a} + \abs{b} = \dist{x}{y} + \dist{y}{z}
-  \]
-\end{proof}
-
-\begin{lem}[\(\varepsilon\)-Criterion for Equality]{epsilon-equality}
-  Let \(F\) be an \xref[ordered field]{def:ordered-field}. For \(a, b \in F\),
-  \[
-    a=b
-    \iff
-    \forall \varepsilon \in \apos{F},\, \abs{a-b}<\varepsilon
-  \]
-\end{lem}
-
-\begin{proof}In order to proof \xref[lem:epsilon-equality]{lem:epsilon-equality}, we need to prove both directions
-
-\noindent\textbf{(a)}: $a=b \implies \forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon$
-
-Suppose \(a=b\). Then \(\abs{a-b}=0\). For any \(\varepsilon>0\), we have \(\abs{a-b}=0<\varepsilon\)
-
-\noindent\textbf{(b)}: $\forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon \implies a=b$
-
-Assume \(a \neq b\)
-
-Then, this means that \[\exists \varepsilon_0\in\apos{F}, \abs{a - b} = \varepsilon_0 \]
-
-Taking \(\varepsilon=\varepsilon_0\) gives \(\varepsilon_0=\abs{a-b}<\varepsilon_0\), a contradiction
-
-So, we have \(\forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon \implies \lnot a \neq b\)
-
-Since $\lnot a \neq b \iff a = b$, So, $\forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon \implies a=b$
-
-Therefore, both implications hold, and hence proven
-\end{proof} 
+\redirect[\(\varepsilon\)-Criterion for Equality]{lem}{epsilon-equality}{lec03::lem:epsilon-equality}
 
 \section{Bounds} 
 
@@ -1025,6 +958,14 @@ Just now discussed the four ordered structures, each strictly extends the previo
 Every nonempty set \(A\subseteq\RR\) that is \xref[bounded above]{def:bounded-above} has a 
 \xref[least upper bound]{def:supremum} in \(\RR\) 
 \end{axm}
+
+\begin{rem}[Identification with the Reals]{complete-field-identification}
+  Every \xref[complete ordered field]{def:complete-ordered-field} \(F\)
+  is \emph{structurally equivalent} to \(\RR\): there is a unique
+  bijection \(F\to\RR\) preserving addition, multiplication, and order.
+  Whenever \(F\) is complete, we identify it with \(\RR\) through
+  this correspondence
+\end{rem}
 
 \begin{lem}[Supremum--Infimum Equivalence]{supremum-infimum-equivalence}
   Let \(F\) be an ordered field. The following statements are equivalent:

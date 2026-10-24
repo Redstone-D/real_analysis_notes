@@ -4,183 +4,688 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Lecture 4: Series}\\[0.25em]
+  {\LARGE\bfseries Lecture 4: Limit of Sequence}\\[0.25em]
   {\large Mathematical Analysis}\\[0.15em]
 \end{center}
 
-\section{Subsequence}
+\section{Convergent Sequences} 
 
-\begin{dfn}[Subsequence]{subsequence}
-If a sequence $n: \NNOne \to \NNOne$ is \xref[strictly increasing]{lec03::def:strictly-increasing-sequence}, then the sequence $b:\NNOne\to F\defeq k\map a(n(k))$ is called a \emph{subsequence} of $a: \NNOne \to F$
+\begin{dfn}[Convergent Sequence]{convergent-sequence}
+  A sequence $a: \NNOne \to F$, where $F$ is a \xref[ordered field]{lec01::def:ordered-field}, is said to be \emph{convergent} if
+  \[
+    \exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon
+  \]
 \end{dfn}
 
-\begin{thm}[Subsequence Index Grows]{subsequence-index-grows}
-If $b:\NNOne\to F\defeq k\map a(n(k))$ is a subsequence of $a: \NNOne \to F$, then $\forall k \in \NNOne, n(k) \geq k$
-\end{thm}
-
-\begin{proof}
-Since $n: \NNOne \to \NNOne$ is strictly increasing, we have $n(1) < n(2) < n(3) < \cdots$
-
-Notice that $n(1) \geq 1$, since $n(1) \in \NNOne$
-
-Also, if $n(k) \geq k$, then $n(k + 1) > n(k) \geq k$, so $n(k + 1) \geq k + 1$
-
-By induction, we have $\forall k \in \NNOne, n(k) \geq k$
-\end{proof}
-
-\begin{thm}[Subsequence of a Subsequence]{subsequence-of-subsequence}
-A subsequence of a subsequence is still a subsequence of the original sequence
-\end{thm}
-
-\begin{rem}[Intuition: Picking Forward]{subsequence-intuition}
-A subsequence can be understand as picking element from a sequence, however during picking we can only go forward, cannot go back to pick an element or pick an element twice
+\begin{rem}[The $\varepsilon$-$N$ Challenge]{epsilon-n-challenge}
+A value $\ell$ passes the $\varepsilon$-$N$ challenge if for any proposed $\varepsilon > 0$, there exists an index $N \in \NNOne$ such that for all $n \in \NNOne$ with $n \geq N$, $\dist{a_n}{\ell} < \varepsilon$
 \end{rem}
 
-\begin{thm}[Limit of a Convergent Subsequence]{convergent-subsequence-limit}
-The limit of a subsequence is the same as the limit of the original sequence
+\begin{rem}
+In the \xref[The $\varepsilon$-$N$ Challenge]{rem:epsilon-n-challenge}, the value of $N$ may depend on the choice of $\varepsilon$. And the value $N$ may be not unique (ie, $N' > N$ also works)
+\end{rem}
+
+\begin{thm}[Uniqueness of Limit]{limit-uniqueness}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, $a : \NNOne \to F$, and $\ell_1, \ell_2 \in F$. Then
+  \[
+    \bigl(\forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell_1} < \varepsilon\bigr)
+  \]\[
+    \land
+  \]\[
+    \bigl(\forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell_2} < \varepsilon\bigr)
+  \]\[
+    \implies \ell_1 = \ell_2
+  \]
 \end{thm}
 
 \begin{proof}
-\todo
+Assume for contradiction that $\ell_1 \neq \ell_2$. Set
+\[
+  \varepsilon = \frac{\dist{\ell_1}{\ell_2}}{2}.
+\]
+Since $\ell_1 \neq \ell_2$, we have $\varepsilon > 0$
+
+By the hypothesis for $\ell_1$, there exists $N_1 \in \NNOne$ such that for all $n \geq N_1$, $\dist{a_n}{\ell_1} < \varepsilon$. Similarly, there exists $N_2 \in \NNOne$ such that for all $n \geq N_2$, $\dist{a_n}{\ell_2} < \varepsilon$
+
+Let $N = \max(N_1, N_2)$. For any $n \geq N$, both hypotheses hold:
+\[
+  \dist{a_n}{\ell_1} < \varepsilon \quad\text{and}\quad \dist{a_n}{\ell_2} < \varepsilon
+\]
+
+By the \xref[triangle inequality for distance]{lec03::lem:triangle-inequality-distance} applied via the intermediate point $a_n$,
+\[
+  \dist{\ell_1}{\ell_2} \leq \dist{\ell_1}{a_n} + \dist{a_n}{\ell_2} = \dist{a_n}{\ell_1} + \dist{a_n}{\ell_2},
+\]
+where the last equality uses \xref[symmetry of distance]{lec03::lem:distance-symmetry}. Combining,
+\[
+  \dist{\ell_1}{\ell_2} \leq \dist{a_n}{\ell_1} + \dist{a_n}{\ell_2} < 2\varepsilon = \dist{\ell_1}{\ell_2},
+\]
+a contradiction. Hence $\ell_1 = \ell_2$
 \end{proof}
 
-\begin{cor}[Diverges via Two Limits]{divergence-via-subsequences}
-If a sequence have two subsequences with different limits, then the sequence diverges
-\end{cor}
+\begin{rem}[Compact Form Using $\exists!$]{limit-uniqueness-compact}
+\missingprereq{Combined with the existence from the \xref[definition of convergent sequence]{def:convergent-sequence}, this theorem states: if $a$ is convergent, then there exists a unique such $\ell$:
+\[
+  \exists! \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon.
+\]
+Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be formally introduced in \texttt{lec01} as a FOL convention before being used}
+\end{rem}
 
-\begin{proof}
-\todo
-\end{proof}
+\section{Convergence Challenge Functions}
 
-\section{Bolzano-Weierstrass Theorem}
-
-\begin{thm}[Bolzano-Weierstrass Theorem]{bw}
-  Every \xref[bounded sequence]{lec03::def:bounded-sequence} $a: \NNOne \to F$ where $F$ is a \xref[complete ordered field]{lec01::def:complete-ordered-field} has a convergent subsequence
-\end{thm}
-
-\begin{proof}
-\todo
-\end{proof}
-
-\section{Cauchy Criterion}
-
-\begin{dfn}[Cauchy Sequence]{cauchy-sequence}
-Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}.
-$a: \NNOne \to F$ is a \emph{Cauchy sequence} if
-\[\forall \varepsilon\in\apos{F}, \, \exists N \in \NNOne, \, \forall n, m \in \NNOne \, n > N \text{ and } m > N \implies \dist{a_n}{a_m} < \varepsilon \]
-\end{dfn}
-
-\begin{thm}[Cauchy Criterion]{cauchy-criterion}
-If $F$ is \xref[complete ordered field]{lec01::def:complete-ordered-field}, then $a: \NNOne \to F$ is a Cauchy sequence if and only if it converges
-\end{thm}
-
-\begin{proof}
-\todo
-\end{proof}
-
-\begin{thm}[Cauchy Implies Bounded]{cauchy-bounded}
-\xref[Cauchy sequence]{def:cauchy-sequence} are \xref[bounded]{lec03::def:bounded-sequence}
-\end{thm}
-
-\begin{proof}
-\todo
-\end{proof} 
-
-\section{Series}
-
-\begin{dfn}[Series Operator]{series-operator}
-  Let $F$ be a \xref[field]{lec01::def:field}. The \emph{series operator}
-  \[
-    \mathrm{series} : (\NNOne \to F) \to (\NNOne \to F)
-  \]
-  is defined recursively by
-  \[
-    \mathrm{series}(a)(1) \defeq a(1),
-    \qquad
-    \mathrm{series}(a)(n + 1) \defeq \mathrm{series}(a)(n) + a(n + 1)
-  \]
-\end{dfn}
-
-\begin{dfn}[Series]{series}
-  Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$. The \emph{series of $a$} is the sequence
-  \[
-    \mathrm{series}(a) : \NNOne \to F,
-  \]
-  obtained by applying the \xref[series operator]{def:series-operator} to $a$. Its $n$-th term is the partial sum $\sum_{1}^{n} a$
-\end{dfn} 
-
-\begin{dfn}[Convergent Series]{convergent-series}
-  Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$. The \xref[series of $a$]{def:series} is \emph{convergent} if $\mathrm{series}(a)$ is a \xref[convergent sequence]{lec03::def:convergent-sequence}
-\end{dfn}
-
-\begin{dfn}[Infinite Summation]{infinite-series}
-  Let $F$ be a \xref[field]{lec01::def:field} and $a : \NNOne \to F$ with a \xref[convergent series]{def:convergent-series}. The \emph{infinite summation} of $a$ is
-  \[
-    \infsum a \defeq \seqlim(\mathrm{series}(a))
-  \]
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\infsum(a)}}}
-\end{dfn} 
-
-\begin{thm}[Linearity of Infinite Summation]{linearity-of-infinite-summation}
-  Let $F$ be a \xref[field]{lec01::def:field} and $a, b : \NNOne \to F$ with convergent series. Then
-  \[
-    \infsum (a + b) = \infsum a + \infsum b,
-    \qquad
-    \infsum (\lambda a) = \lambda \infsum a
-  \]
-\end{thm} 
-
-\begin{thm}
-A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered field]{lec01::def:complete-ordered-field} converges only if $a$ converges to $0$
-\end{thm}
-
-\begin{proof}
-  \todo
-  (Use cauchy criterion to prove this theorem)
-\end{proof} 
-
-\section{Comparison Test for Sequence}
-
-\begin{lem}[Series with Non-Negative Terms is Increasing]{series-nonneg-increasing}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and $a : \NNOne \to F$ with $a(n) \geq 0$ for all $n \in \NNOne$. Then $\mathrm{series}(a)$ is an \xref[increasing sequence]{lec03::def:increasing-sequence}
-\end{lem}
-
-\begin{lem}[Series with Positive Terms is Strictly Increasing]{series-positive-strictly-increasing}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and $a : \NNOne \to F$ with $a(n) > 0$ for all $n \in \NNOne$. Then $\mathrm{series}(a)$ is a \xref[strictly increasing sequence]{lec03::def:strictly-increasing-sequence}
-\end{lem}
-
-\begin{cor}[Comparison Test for Series]{comparison-test}
-  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, $a, b : \NNOne \to F$ with $0 \leq a_n \leq b_n$ for all $n \in \NNOne$. If the \xref[series of $b$]{def:series} is \xref[convergent]{def:convergent-series}, then the series of $a$ is convergent and $\infsum a \leq \infsum b$. Follows by applying \xref{lec03::thm:monotone-comparison-increasing} to the partial sum sequences $\mathrm{series}(a)$ and $\mathrm{series}(b)$, both of which are increasing by \xref{lem:series-nonneg-increasing}
-\end{cor}
-
-\begin{thm}[Absolute Convergence Implies Convergence]{absolute-convergence}
-  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field} and $a : \NNOne \to F$. If the series of $|a|$ (where $|a|(n) \defeq \abs{a(n)}$) is \xref[convergent]{def:convergent-series}, then the \xref[series of $a$]{def:series} is convergent
-\end{thm}
-
-\begin{proof}
-\todo
-\end{proof}
-
-\begin{rem}[Two Methods for Checking Series Convergence]{two-methods-series}
-  Depending on the sign structure of the terms of $a$:
+\begin{dfn}[Convergence Challenge Function]{convergence-challenge-function}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. A function $g : F \to F$ is a \emph{convergence challenge function} if it satisfies two conditions:
   \begin{itemize}[nosep]
-    \item \emph{Single-sign} (all $a(n) \geq 0$ or all $a(n) \leq 0$): apply the \xref[Comparison Test for Series]{cor:comparison-test} directly. Monotonicity of $\mathrm{series}(a)$ comes from \xref{lem:series-nonneg-increasing} (or the sign-flipped version)
-    \item \emph{Mixed-sign}: apply \xref[Absolute Convergence]{thm:absolute-convergence} first, reducing the question to $\mathrm{series}(|a|)$ (non-negative), where the Comparison Test applies
+    \item \emph{Positivity on positives}: $\forall \gamma \in \apos{F},\, g(\gamma) > 0$
+    \item \emph{Arbitrarily small values}: $\forall \delta \in \apos{F},\, \exists \gamma \in \apos{F},\, g(\gamma) < \delta$
+  \end{itemize}
+\end{dfn}
+
+\begin{rem}[Intuition: Covering Arbitrarily Small Positives]{challenge-intuition}
+\end{rem}
+
+\begin{thm}[Convergence Challenge Replacement]{convergence-challenge-replacement}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, $a : \NNOne \to F$, and let $g$ be a \xref[convergence challenge function]{def:convergence-challenge-function}. Then
+  \[
+    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon\bigr)
+  \]\[
+    \iff
+  \]\[
+    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < g(\varepsilon)\bigr)
+  \]
+\end{thm}
+
+\begin{proof}
+  Fix the witness $\ell \in F$ in either direction
+
+  \noindent\textbf{($\Rightarrow$)} For $\varepsilon > 0$, the positivity-on-positives condition gives $g(\varepsilon) > 0$. Apply the \xref[definition of convergent sequence]{def:convergent-sequence} at the challenge $g(\varepsilon)$
+
+  \noindent\textbf{($\Leftarrow$)} For $\varepsilon > 0$, the \xref[challenge-function property of $g$]{def:convergence-challenge-function} gives $\gamma > 0$ with $g(\gamma) < \varepsilon$. The hypothesis at $\gamma$ gives $N$ such that
+  \[
+    \dist{a_n}{\ell} < g(\gamma) < \varepsilon \quad \text{for all } n \geq N
+  \]
+\end{proof}
+
+\begin{lem}[Restricting to Small Tolerances]{restricting-to-small-tolerances}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and fix
+  $r\in\apos{F}$. The function
+  \[
+    g:F\to F\defeq\gamma\map\min(\gamma,r/2)
+  \]
+  is a \xref[convergence challenge function]{def:convergence-challenge-function}
+\end{lem}
+
+\begin{proof}
+  For every $\gamma>0$, $0<g(\gamma)\leq r/2<r$.
+  For every $\delta>0$, choose $\gamma\defeq\delta/2>0$; then
+  $g(\gamma)\leq\delta/2<\delta$
+\end{proof}
+
+\begin{rem}[Restricting the Tolerance]{restricting-the-tolerance}
+  Since $0<g(\gamma)<r$ for $\gamma>0$,
+  \xref[challenge replacement]{thm:convergence-challenge-replacement} lets us
+  check $\forall\,0<\varepsilon<r$ instead of $\forall\varepsilon>0$,
+  for any fixed $r>0$, eg, $\forall\,0<\varepsilon<1$
+\end{rem}
+
+\begin{lem}[Linear Scaling]{linear-is-challenge}
+  For any $c \in F$ with $c > 0$, the function $g(\gamma) = c\gamma$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
+\end{lem}
+
+\begin{proof}
+  We verify both conditions
+
+  \noindent\emph{Positivity on positives.} For any $\gamma \in F$ with $\gamma > 0$, both $c > 0$ and $\gamma > 0$, so $g(\gamma) = c\gamma > 0$
+
+  \noindent\emph{Arbitrarily small values.} Fix any $\delta \in F$ with $\delta > 0$. We seek $\gamma \in F$ with $\gamma > 0$ and $g(\gamma) < \delta$
+
+  Take $\gamma \defeq \delta / (c + 1)$, which is derived in \xref{rem:linear-scaling-witness-derivation}. Since $\delta > 0$ and $c + 1 > 0$ (because $c > 0$), we have $\gamma > 0$
+
+  Now $g(\gamma) = c\gamma = c\delta / (c + 1)$. Since $c < c + 1$, we have $c / (c + 1) < 1$, hence $c\delta / (c + 1) < \delta$
+\end{proof}
+
+\begin{rem}[Deriving the Witness for Linear Scaling]{linear-scaling-witness-derivation}
+  To find the witness $\gamma$ used in the proof of \xref{lem:linear-is-challenge}, we start from the target inequality $g(\gamma) < \delta$ and manipulate it to isolate $\gamma$:
+  \[
+    g(\gamma) < \delta
+    \iff c\gamma < \delta
+    \iff \gamma < \frac{\delta}{c}.
+  \]
+  Any $\gamma$ in the open interval $\left(0, \tfrac{\delta}{c}\right)$ will therefore satisfy $g(\gamma) < \delta$. To pick a concrete such $\gamma$, we use the fact that $c + 1 > c$, which gives
+  \[
+    \frac{\delta}{c + 1} < \frac{\delta}{c}.
+  \]
+  Hence we may take $\gamma \defeq \delta / (c + 1)$ as the witness
+\end{rem}
+
+\begin{rem}[Why $c \leq 0$ is Excluded]{linear-scaling-cnonpos}
+  If $c \leq 0$, then for any $\gamma \in F$ with $\gamma > 0$, $g(\gamma) = c\gamma \leq 0$. This violates the positivity-on-positives condition, so $g$ is not a \xref[convergence challenge function]{def:convergence-challenge-function}
+\end{rem}
+
+\begin{lem}[Power]{power-is-challenge}
+  For any positive integer $k$, the function $g(\gamma) = \gamma^k$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
+\end{lem}
+
+\begin{proof}
+  Both conditions follow by \xref[induction on $k$]{lec01::thm:natural-number-induction}. Positivity: $\gamma^k > 0$ for $\gamma > 0$. For arbitrarily small values, take $\gamma \defeq \min(\delta / 2,\, 1 / 2)$, so $\gamma > 0$ and $\gamma \leq 1$; induction gives $\gamma^k \leq \gamma \leq \delta / 2 < \delta$
+\end{proof}
+
+\begin{lem}[Summation]{sum-is-challenge}
+  Let $f, g$ be \xref[convergence challenge functions]{def:convergence-challenge-function}, and suppose both are monotone increasing (i.e.\ $x \leq y \implies f(x) \leq f(y)$, and similarly for $g$). Then $f + g$, defined by $(f + g)(\gamma) \defeq f(\gamma) + g(\gamma)$, is a \xref[convergence challenge function]{def:convergence-challenge-function}
+\end{lem}
+
+\begin{proof}
+  Positivity is immediate from $f(\gamma), g(\gamma) > 0$. For $\delta > 0$, pick $\gamma_1, \gamma_2 > 0$ with $f(\gamma_1), g(\gamma_2) < \delta / 2$; set $\gamma \defeq \min(\gamma_1, \gamma_2)$. Monotonicity gives $(f + g)(\gamma) \leq f(\gamma_1) + g(\gamma_2) < \delta$
+\end{proof}
+
+\begin{lem}[Composition]{challenge-composition}
+  Let $f, g$ be \xref[convergence challenge functions]{def:convergence-challenge-function}, and suppose $f$ is monotone increasing (i.e.\ $x \leq y \implies f(x) \leq f(y)$). Then $f \circ g$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
+\end{lem}
+
+\begin{proof}
+  Positivity: $f(g(\gamma)) > 0$ since $g(\gamma) > 0$ and $f$ preserves positivity. For $\delta > 0$, pick $\eta > 0$ with $f(\eta) < \delta$, then $\gamma > 0$ with $g(\gamma) < \eta$. Monotonicity of $f$ gives $(f \circ g)(\gamma) \leq f(\eta) < \delta$
+\end{proof}
+
+\begin{thm}[Closed Form of Convergence]{convergence-closed-form}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, let $a : \NNOne \to F$. Then
+  \[
+    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon\bigr)
+  \]\[
+    \iff
+  \]\[
+    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} \leq \varepsilon\bigr)
+  \]
+\end{thm}
+
+\begin{proof}
+  \noindent\textbf{($\Rightarrow$)} If $\dist{a_n}{\ell} < \varepsilon$, then $\dist{a_n}{\ell} \leq \varepsilon$
+
+  \noindent\textbf{($\Leftarrow$)} By \xref{lem:linear-is-challenge} with $c = 2$, $g(\varepsilon) = 2\varepsilon$ is a \xref[convergence challenge function]{def:convergence-challenge-function}. From the closed-form hypothesis, for every $\varepsilon > 0$ there exists $N$ with $\dist{a_n}{\ell} \leq \varepsilon$ for all $n \geq N$. Since $\varepsilon > 0 \implies \varepsilon < 2\varepsilon$, we obtain $\dist{a_n}{\ell} \leq \varepsilon < 2\varepsilon$, hence
+  \[
+    \exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < 2\varepsilon. \tag{$\ast$}
+  \]
+  For any $\varepsilon > 0$, applying $(\ast)$ at $\varepsilon / 2 > 0$ gives $N$ such that $\dist{a_n}{\ell} < 2 \cdot (\varepsilon / 2) = \varepsilon$ for all $n \geq N$
+\end{proof}
+
+\section{Limit of a Sequence}
+
+\begin{dfn}[Limit of a Sequence]{limit}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. We say the sequence $a: \NNOne \to F$ \emph{has a limit of} $\ell \in F$ if
+  \[
+    \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon
+  \]
+\end{dfn}
+
+\redirect[Converges To]{def}{converges-to}{def:limit}
+
+\begin{dfn}[Set of Convergent Sequences]{convergent-sequences-set}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. The \emph{set of convergent sequences in $F$} is
+  \[
+    \Conv(F) \defeq \{a : \NNOne \to F \mid a \text{ is \xref[convergent]{def:convergent-sequence}}\}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\Conv(F)}}}
+\end{dfn}
+
+\begin{dfn}[Limit Operator]{limit-op}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. The \emph{limit operator} is the function
+  \[
+    \seqlim : \Conv(F) \to F \defeq a \map \text{the unique } \ell \in F \text{ such that } a \xref[\text{has a limit of}]{def:limit} \ell
+  \]
+  We write
+  \[
+    \seqlim(a) = \ell
+  \]
+  The input is the whole sequence, rather than an individual term
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\seqlim(a)}}}
+\end{dfn}
+
+\redirect[Limit of a Sequence]{def}{limit-of-sequence}{def:limit-op}
+
+\begin{rem}[Well-Definedness of the Limit]{limit-well-defined}
+  The function $\seqlim$ in \xref{def:limit-op} is well-defined for two reasons:
+  \begin{itemize}[nosep]
+    \item \emph{Every input has an output}: for every $a \in \Conv(F)$, the \xref[definition of convergent sequence]{def:convergent-sequence} guarantees some $\ell \in F$ with $a \xref[\text{has a limit of}]{def:limit} \ell$
+    \item \emph{Every input has exactly one output}: by \xref{thm:limit-uniqueness}, this $\ell$ is unique
   \end{itemize}
 \end{rem} 
 
-\section{Special Series}
+\begin{thm}[Addition of the Limit]{limit-addition}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \Conv(F)$. Then
+  \[
+    \seqlim(n\map\term{a}{n}+\term{b}{n}) = \seqlim(a)+\seqlim(b)
+  \] 
+\end{thm}
 
-\begin{thm}[Harmonic Series Diverges]{harmonic-series-diverges}
-  The \xref[series of the harmonic sequence]{def:series} $a(n) \defeq 1/n$ is divergent
+\begin{proof}
+We want to prove
+\[
+  \begin{gathered}
+    \forall\varepsilon\in \apos{F},\,\exists N\in\NNOne,\,
+    \forall n\in\NNOne,\,n\geq N\implies\\
+    \abs{\term{a}{n}+\term{b}{n}-\seqlim(a)-\seqlim(b)}<\varepsilon
+  \end{gathered}
+\]
+
+According to the \xref[definition of a limit]{def:limit}, for every
+\(\varepsilon\in \apos{F}\), there exist \(N_a,N_b\in\NNOne\) such that,
+setting \(N_M\defeq\max(N_a,N_b)\), both estimates hold for \(n\geq N_M\):
+\[
+  \abs{\term{a}{n}-\seqlim(a)}<\varepsilon
+  \quad\land\quad
+  \abs{\term{b}{n}-\seqlim(b)}<\varepsilon
+\]
+Therefore, by the \xref[triangle inequality for distance]{lec03::lem:triangle-inequality-distance},
+\[
+  \begin{aligned}
+    \abs{\term{a}{n}+\term{b}{n}-\seqlim(a)-\seqlim(b)}
+    &\leq\abs{\term{a}{n}-\seqlim(a)}
+      +\abs{\term{b}{n}-\seqlim(b)}\\
+    &<\varepsilon+\varepsilon=2\cdot\varepsilon
+  \end{aligned}
+\]
+
+Notice that
+\[
+  g:F\to F\defeq\varepsilon\map2\cdot\varepsilon
+\]
+is a \xref[convergence challenge function]{def:convergence-challenge-function}
+by \xref[linear scaling]{lem:linear-is-challenge}. Hence the
+\xref[challenge replacement theorem]{thm:convergence-challenge-replacement} gives
+\[
+  \seqlim(n\map\term{a}{n}+\term{b}{n})=\seqlim(a)+\seqlim(b)
+\]
+\end{proof}
+
+\begin{thm}[Multiplication of the Limit]{limit-multiplication}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \Conv(F)$. Then
+  \[
+    \seqlim(n\map\term{a}{n}\cdot\term{b}{n})=\seqlim(a)\cdot\seqlim(b)
+  \]
+\end{thm}
+
+\begin{proof}
+For \(n\map\term{a}{n}\cdot\term{b}{n}\), we want to show that
+\(\seqlim(a)\cdot\seqlim(b)\) is its limit, ie,
+\[
+  \begin{gathered}
+    \forall\varepsilon\in \apos{F},\,\exists N\in\NNOne,\,
+    \forall n\in\NNOne,\,n\geq N\implies\\
+    \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}<\varepsilon
+  \end{gathered}
+\]
+
+According to the \xref[definition of a limit]{def:limit}, for every
+\(\varepsilon\in \apos{F}\), there exist \(N_a,N_b\in\NNOne\) such that
+\[
+  \begin{aligned}
+    n\geq N_a&\implies\abs{\term{a}{n}-\seqlim(a)}<\varepsilon,\\
+    n\geq N_b&\implies\abs{\term{b}{n}-\seqlim(b)}<\varepsilon
+  \end{aligned}
+\]
+Let \(N_M\defeq\max(N_a,N_b)\). Then, for every \(n\geq N_M\), both
+inequalities hold
+
+Adding and subtracting \(\seqlim(a)\cdot\term{b}{n}\), we have
+\[
+  \begin{aligned}
+    &\abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}\\
+    &\quad=\abs{\term{a}{n}\cdot\term{b}{n}
+      -\seqlim(a)\cdot\term{b}{n}
+      +\seqlim(a)\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}\\
+    &\quad\leq\abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\term{b}{n}}
+      +\abs{\seqlim(a)\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}\\
+    &\quad=\abs{\term{b}{n}}\cdot\abs{\term{a}{n}-\seqlim(a)}
+      +\abs{\seqlim(a)}\cdot\abs{\term{b}{n}-\seqlim(b)}
+  \end{aligned}
+\]
+The inequality uses the
+\xref[triangle inequality for distance]{lec03::lem:triangle-inequality-distance}
+
+Therefore, when \(n\geq N_M\),
+\[
+  \begin{aligned}
+    \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}
+    &\leq\abs{\term{b}{n}}\cdot\varepsilon+\abs{\seqlim(a)}\cdot\varepsilon\\
+    &=\varepsilon\cdot\bigl(\abs{\term{b}{n}}+\abs{\seqlim(a)}\bigr)
+  \end{aligned}
+\]
+
+Since all \xref[convergent sequences are bounded]{thm:convergent-sequences-are-bounded},
+choose a strict bound \(M'\in F\) such that
+\(\forall n\in\NNOne,\,\abs{\term{b}{n}}<M'\), and let
+\(M\defeq\max(M',1)\). This bound is independent of \(\varepsilon\).
+Hence \(M\geq1\) and
+\[
+  \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}
+  <\varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
+\]
+
+Notice that
+\[
+  g:F\to F\defeq\varepsilon\map
+    \varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
+\]
+is a \xref[convergence challenge function]{def:convergence-challenge-function}
+by \xref[linear scaling]{lem:linear-is-challenge}, since
+\(M+\abs{\seqlim(a)}>0\). We have shown that
+\[
+  \begin{gathered}
+    \forall\varepsilon\in \apos{F},\,\exists N_M\in\NNOne,\,
+    \forall n\in\NNOne,\,n\geq N_M\implies\\
+    \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}
+      <\varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
+  \end{gathered}
+\]
+Therefore, by the
+\xref[challenge replacement theorem]{thm:convergence-challenge-replacement},
+\[
+  \seqlim(n\map\term{a}{n}\cdot\term{b}{n})=\seqlim(a)\cdot\seqlim(b)
+\]
+\end{proof}
+
+\begin{thm}[Scalar Multiplication of the Limit]{limit-scalar-multiplication}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, let $a \in \Conv(F)$, and let $c \in F$. Then
+  \[
+    \seqlim(n\map c\cdot\term{a}{n})=c\cdot\seqlim(a)
+  \]
+\end{thm}
+
+\begin{proof}
+Define the constant sequence
+\[
+  p:\NNOne\to F\defeq n\map c
+\]
+For every \(\varepsilon\in \apos{F}\) and every \(n\in\NNOne\),
+\[
+  \abs{\term{p}{n}-c}=0<\varepsilon
+\]
+Hence \(p\in\Conv(F)\)
+and \(\seqlim(p)=c\)
+
+By the definition of \(p\),
+\[
+  \forall n\in\NNOne,\quad c\cdot\term{a}{n}=\term{p}{n}\cdot\term{a}{n}
+\]
+By \xref[multiplication of limits]{thm:limit-multiplication}, the sequence
+\(n\map\term{p}{n}\cdot\term{a}{n}\) is convergent, and
+\[
+  \begin{aligned}
+    \seqlim(n\map c\cdot\term{a}{n})
+    &=\seqlim(n\map\term{p}{n}\cdot\term{a}{n})\\
+    &=\seqlim(p)\cdot\seqlim(a)\\
+    &=c\cdot\seqlim(a)
+  \end{aligned}
+\]
+\end{proof}
+
+\begin{thm}[Linearity of the Limit]{limit-linearity}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, let $a, b \in \Conv(F)$, and let $c,d\in F$. Then
+  \[
+    \seqlim(n\map c\cdot\term{a}{n}+d\cdot\term{b}{n})
+      =c\cdot\seqlim(a)+d\cdot\seqlim(b)
+  \]
+\end{thm}
+
+\begin{proof}
+This follows from \xref[addition of limits]{thm:limit-addition} and
+\xref[scalar multiplication of limits]{thm:limit-scalar-multiplication}
+\end{proof}
+
+\begin{lem}[Reciprocal of the Limit]{limit-reciprocal}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let
+  $b\in\Conv(F)$ with $\forall n\in\NNOne,\,\term{b}{n}\neq0$
+  and $\seqlim(b)\neq0$. Then
+  \[
+    \seqlim\left(n\map\frac{1}{\term{b}{n}}\right)
+      =\frac{1}{\seqlim(b)}
+  \]
+\end{lem}
+
+\begin{proof}
+Define
+\[
+  p:\NNOne\to F\defeq n\map\frac{1}{\term{b}{n}}
+\]
+We check whether $1/\seqlim(b)$ is a limit of $p$
+
+For $n\in\NNOne$,
+\[
+  \begin{aligned}
+    \abs{\term{p}{n}-\frac{1}{\seqlim(b)}}
+      &=\abs{\frac{1}{\term{b}{n}}-\frac{1}{\seqlim(b)}}\\
+      &=\abs{\frac{\seqlim(b)-\term{b}{n}}
+        {\term{b}{n}\cdot\seqlim(b)}}\\
+      &=\frac{\abs{\seqlim(b)-\term{b}{n}}}
+        {\abs{\term{b}{n}\cdot\seqlim(b)}}
+  \end{aligned}
+\]
+To bound the denominator below, set $M\defeq\abs{\seqlim(b)}/2>0$.
+By the \xref[convergence of $b$]{def:convergent-sequence}, choose
+$N_0\in\NNOne$ such that
+$n\geq N_0\implies\abs{\term{b}{n}-\seqlim(b)}<M$.
+For $n\geq N_0$, the
+\xref[triangle inequality]{lec03::lem:triangle-inequality-distance} gives
+\[
+  \abs{\seqlim(b)}
+  \leq\abs{\seqlim(b)-\term{b}{n}}+\abs{\term{b}{n}}
+  <M+\abs{\term{b}{n}}
+\]
+Since $\abs{\seqlim(b)}=2\cdot M$, we have $\abs{\term{b}{n}}>M$.
+So
+\[
+  \exists M\in\apos{F},\,\exists N_0\in\NNOne,\,
+  \forall n\in\NNOne,\,n\geq N_0\implies\abs{\term{b}{n}}>M
+\]
+
+Fix $\varepsilon\in\apos{F}$ and choose $N_b\in\NNOne$ so that
+$n\geq N_b\implies\abs{\term{b}{n}-\seqlim(b)}<\varepsilon$.
+Set $N\defeq\max(N_0,N_b)$. For $n\geq N$,
+\[
+  \abs{\term{b}{n}\cdot\seqlim(b)}>M\cdot\abs{\seqlim(b)},
+  \qquad
+  \abs{\seqlim(b)-\term{b}{n}}<\varepsilon
+\]
+Therefore,
+\[
+  \frac{\abs{\seqlim(b)-\term{b}{n}}}
+    {\abs{\term{b}{n}\cdot\seqlim(b)}}
+  <\frac{\varepsilon}{M\cdot\abs{\seqlim(b)}}
+\]
+Since $M\cdot\abs{\seqlim(b)}>0$, the function
+\[
+  g:F\to F\defeq\varepsilon\map
+    \frac{\varepsilon}{M\cdot\abs{\seqlim(b)}}
+\]
+is a \xref[convergence challenge function]{def:convergence-challenge-function}
+by \xref[linear scaling]{lem:linear-is-challenge}. Hence
+\[
+  \forall\varepsilon\in\apos{F},\,\exists N\in\NNOne,\,
+  \forall n\in\NNOne,\,n\geq N\implies
+  \abs{\term{p}{n}-\frac{1}{\seqlim(b)}}<g(\varepsilon)
+\]
+By \xref[challenge replacement]{thm:convergence-challenge-replacement},
+$p\in\Conv(F)$ and
+\[
+  \seqlim(p)=\frac{1}{\seqlim(b)}
+\]
+\end{proof}
+
+\begin{thm}[Division of the Limit]{limit-division}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \Conv(F)$ with $\forall n \in \NNOne, \term{b}{n} \neq 0$ and $\seqlim(b) \neq 0$. Then
+  \[
+    \seqlim\left(n\map\frac{\term{a}{n}}{\term{b}{n}}\right) = \frac{\seqlim(a)}{\seqlim(b)}
+  \] 
+\end{thm}
+
+\begin{proof}
+Define
+\[
+  p:\NNOne\to F\defeq n\map\frac{1}{\term{b}{n}}
+\]
+By the \xref[reciprocal lemma]{lem:limit-reciprocal},
+$p\in\Conv(F)$ and $\seqlim(p)=1/\seqlim(b)$.
+Since $\term{a}{n}/\term{b}{n}=\term{a}{n}\cdot\term{p}{n}$ for every $n\in\NNOne$,
+\xref[multiplication of limits]{thm:limit-multiplication} gives
+\[
+  \begin{aligned}
+    \seqlim\left(n\map\frac{\term{a}{n}}{\term{b}{n}}\right)
+      &=\seqlim(n\map\term{a}{n}\cdot\term{p}{n})\\
+      &=\seqlim(a)\cdot\seqlim(p)\\
+      &=\frac{\seqlim(a)}{\seqlim(b)}
+  \end{aligned}
+\]
+\end{proof}
+
+\begin{thm}[Order Preservation of Limits]{limit-order-preservation}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, b \in \Conv(F)$ with $\forall n \in \NNOne,\, \term{a}{n} \leq \term{b}{n}$. Then
+  \[
+    \seqlim(a) \leq \seqlim(b)
+  \]
+\end{thm}
+
+\section{Bounded Sequences}
+
+\begin{dfn}[Bounded Sequence]{bounded-sequence}
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}.
+  A sequence \(a:\NNOne\to F\) is \emph{bounded} if
+  \[
+    \exists M\in F,\,\forall n\in\NNOne,\quad\dist{a(n)}{0}\leq M
+  \]
+\end{dfn} 
+
+\begin{dfn}[Set of Bounded Sequences]{bounded-sequences-set}
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}.
+  The set of bounded sequences in \(F\) is
+  \[
+    \Bdd(F)\defeq
+    \{a:\NNOne\to F\mid
+      a\text{ is \xref[bounded]{def:bounded-sequence}}\}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\Bdd(F)}}}
+\end{dfn}
+
+\begin{thm}[Convergent Sequences are Bounded]
+  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}
+  and let \(a:\Conv(F)\). Then \(a\) is
+  \xref[bounded]{def:bounded-sequence}, so \(a\in\Bdd(F)\)
+\end{thm}
+
+\begin{proof}
+Suppose the convergent sequence $a$, $\seqlim a = \ell$
+
+Take $\varepsilon = 1$, then there exists $N \in \NNOne$ such that for all $n \in \NNOne$ with $n > N$, $\dist{a_n}{\ell} < 1$
+
+According to the \xref[triangle inequality]{lec03::lem:triangle-inequality-distance} for distance, and $\dist{a_n}{\ell} < 1$, we have
+\[\dist{0}{a_n} \leq \dist{0}{\ell} + \dist{\ell}{a_n} < \dist{0}{\ell} + 1\] 
+
+Which means for all $n \in \NNOne$ with $n > N$, $\dist{0}{a_n} < \dist{0}{\ell} + 1$
+
+And for $n \in \NNOne$ with $n \leq N$, we have $\dist{0}{a_n} \leq \max\{\dist{0}{a_1}, \dist{0}{a_2}, ..., \dist{0}{a_N}\}$
+
+So, we can take $M = \max\{\max\{\dist{0}{a_1}, \dist{0}{a_2}, ..., \dist{0}{a_N}\}, \dist{0}{\ell} + 1\}$. Hence $M$ exists for all convergent sequences $a$
+\end{proof} 
+
+\begin{rem}
+Although Convergent $\implies$ Bounded, the converse is not true. A bounded sequence may not be convergent
+
+For example, the sequence $a_n = (-1)^n$ is bounded (since $\dist{a_n}{0} = 1$ for all $n$), but not convergent
+\end{rem}
+
+\section{Monotone Convergence Theorem} 
+
+\begin{dfn}[Increasing Sequence]{increasing-sequence}
+  A sequence $a: \NNOne \to F$ is said to be \emph{increasing} if
+  \[\forall n \in \NNOne, \term{a}{n} \leq \term{a}{n+1}\]
+\end{dfn}
+
+\begin{dfn}[Strictly Increasing Sequence]{strictly-increasing-sequence}
+  A sequence $a: \NNOne \to F$ is said to be \emph{strictly increasing} if
+  \[\forall n \in \NNOne, \term{a}{n} < \term{a}{n+1}\]
+\end{dfn} 
+
+\begin{dfn}[Decreasing Sequence]{decreasing-sequence}
+  A sequence $a: \NNOne \to F$ is said to be \emph{decreasing} if
+  \[\forall n \in \NNOne, \term{a}{n} \geq \term{a}{n+1}\]
+\end{dfn}
+
+\begin{dfn}[Strictly Decreasing Sequence]{strictly-decreasing-sequence}
+  A sequence $a: \NNOne \to F$ is said to be \emph{strictly decreasing} if
+  \[\forall n \in \NNOne, \term{a}{n} > \term{a}{n+1}\]
+\end{dfn}
+
+\begin{lem}[Strictly Increasing Extends to All Indices]{strictly-increasing-extends}
+  Let $a: \NNOne \to F$ be \xref[strictly increasing]{def:strictly-increasing-sequence}. Then $\forall n, m \in \NNOne,\, n > m \implies \term{a}{n} > \term{a}{m}$
+\end{lem}
+
+\begin{lem}[Increasing Extends to All Indices]{increasing-extends}
+  Let $a: \NNOne \to F$ be \xref[increasing]{def:increasing-sequence}. Then $\forall n, m \in \NNOne,\, n \geq m \implies \term{a}{n} \geq \term{a}{m}$
+\end{lem}
+
+\begin{lem}[Strictly Decreasing Extends to All Indices]{strictly-decreasing-extends}
+  Let $a: \NNOne \to F$ be \xref[strictly decreasing]{def:strictly-decreasing-sequence}. Then $\forall n, m \in \NNOne,\, n > m \implies \term{a}{n} < \term{a}{m}$
+\end{lem}
+
+\begin{lem}[Decreasing Extends to All Indices]{decreasing-extends}
+  Let $a: \NNOne \to F$ be \xref[decreasing]{def:decreasing-sequence}. Then $\forall n, m \in \NNOne,\, n \geq m \implies \term{a}{n} \leq \term{a}{m}$
+\end{lem}
+
+\begin{dfn}[Monotone Sequence]{monotone-sequence}
+  A sequence $a: \NNOne \to F$ is said to be \emph{monotone} if it is either \xref[increasing]{def:increasing-sequence} or \xref[decreasing]{def:decreasing-sequence}
+\end{dfn} 
+
+\begin{thm}[Monotone Convergence Theorem]{mct}
+  Let \(F\) be a \xref[complete ordered field]{lec01::def:complete-ordered-field},
+  and let \(a:\Bdd(F)\) be a \xref[monotone sequence]{def:monotone-sequence}.
+  Then \(a\) is \xref[convergent]{def:convergent-sequence}
+\end{thm}
+
+\begin{proof}
+Suppose $a$ is a \xref[bounded sequence]{def:bounded-sequence} in $F$ and \xref[increasing sequence]{def:increasing-sequence}, which means exist $x = \sup\{\term{a}{n}:n\in\NNOne\}$ (by the \xref[Axiom of Completeness]{lec01::axm:aoc}, applied to the nonempty set $\{\term{a}{n} : n \in \NNOne\}$ bounded above in $F$), and $\forall n, m \in \NNOne, \, n \leq m \implies \term{a}{n} \leq \term{a}{m} $
+
+According to the \xref[$\varepsilon$ criterion for supremum]{lec01::prop:epsilon-supremum}, $\forall n \in \NNOne, \, \term{a}{n} \leq x $ and $\forall \varepsilon \in \apos{F}, \, \exists N \in \NNOne, \, \term{a}{N} > x - \varepsilon$
+
+Adding the increasing property, ie \[N \leq n \implies \term{a}{N} \leq \term{a}{n} \leq x \implies (\term{a}{N} > x - \varepsilon \implies \term{a}{n} \geq \term{a}{N} > x - \varepsilon)\]
+
+We can have \[\forall \varepsilon \in \apos{F}, \, \exists N \in \NNOne, \, \forall n \in \NNOne \geq N, \, \term{a}{n} > x - \varepsilon\]
+
+Also, \[\term{a}{n} \leq x \, \land\, \varepsilon > 0 \implies \term{a}{n} < x + \varepsilon \]
+\[\term{a}{n} > x - \varepsilon \, \land\,  \term{a}{n} < x + \varepsilon \implies x - \varepsilon < \term{a}{n} < x + \varepsilon \implies \dist{\term{a}{n}}{x} < \varepsilon\]
+Notice that such $x$ is the \xref[supremum]{lec01::def:supremum} of the upper bounded sequence $a$, it exists. 
+\[\exists x \in F, \, \forall \varepsilon \in \apos{F}, \, \exists N \in \NNOne, \, \forall n \in \NNOne \geq N, \, \dist{\term{a}{n}}{x} < \varepsilon\]
+
+Which means it is a convergent sequence and its limit is $x$
+
+If instead $a$ is \xref[decreasing]{def:decreasing-sequence}, the same argument applies with $x \defeq \inf\{\term{a}{n}:n\in\NNOne\}$ (which exists by the \xref[Axiom of Completeness]{lec01::axm:aoc}, since $\{\term{a}{n} : n \in \NNOne\}$ is nonempty and bounded below), using the dual $\varepsilon$-criterion for the infimum
+\end{proof}
+
+\section{Comparison of Sequences}
+
+\begin{thm}[Comparison for Monotone Sequences]{monotone-comparison-increasing}
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let $s,t : \NNOne \to F$ be \xref[increasing]{def:increasing-sequence} with $\term{s}{n} \leq \term{t}{n}$ for all $n \in \NNOne$. If $t$ is \xref[convergent]{def:convergent-sequence}, then
+  \[
+    s \text{ is convergent and }\seqlim(s) \leq \seqlim(t)
+  \]
 \end{thm}
 
 \begin{proof}
 \todo
 \end{proof}
 
-\begin{thm}[Reciprocal Squares Series Converges]{reciprocal-squares-converges}
-  The \xref[series of]{def:series} $a(n) \defeq 1/n^2$ is \xref[convergent]{def:convergent-series}
+\begin{thm}[Comparison for Decreasing Sequences]{monotone-comparison-decreasing}
+  Let $F$ be a \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let $s,t : \NNOne \to F$ be \xref[decreasing]{def:decreasing-sequence} with $\term{s}{n} \leq \term{t}{n}$ for all $n \in \NNOne$. If $s$ is \xref[convergent]{def:convergent-sequence}, then
+  \[
+    t \text{ is convergent and }\seqlim(s) \leq \seqlim(t)
+  \]
+\end{thm}
+
+\begin{proof}
+Apply \xref{thm:monotone-comparison-increasing} to the increasing sequences $n\map-\term{t}{n}$ and $n\map-\term{s}{n}$
+\end{proof}
+
+\section{Squeeze Theorem}
+
+\begin{thm}[Squeeze Theorem]{squeeze-theorem}
+  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, and let $a, x, b : \NNOne \to F$ with $\term{a}{n} \leq \term{x}{n} \leq \term{b}{n}$ for all $n \in \NNOne$. If $a$ and $b$ are \xref[convergent]{def:convergent-sequence} with $\seqlim(a) = \seqlim(b) = L$, then $x$ is convergent and $\seqlim(x) = L$
 \end{thm}
 
 \begin{proof}

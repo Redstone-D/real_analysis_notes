@@ -74,10 +74,10 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \section{Convergence Challenge Functions}
 
 \begin{dfn}[Convergence Challenge Function]{convergence-challenge-function}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}. A function $g : F \to F$ is a \emph{convergence challenge function} if it satisfies two conditions:
+  A function $g : \RR \to \RR$ is a \emph{convergence challenge function} if it satisfies two conditions:
   \begin{itemize}[nosep]
-    \item \emph{Positivity on positives}: $\forall \gamma \in \apos{F},\, g(\gamma) > 0$
-    \item \emph{Arbitrarily small values}: $\forall \delta \in \apos{F},\, \exists \gamma \in \apos{F},\, g(\gamma) < \delta$
+    \item \emph{Positivity on positives}: $\forall \gamma \in \apos{\RR},\, g(\gamma) > 0$
+    \item \emph{Arbitrarily small values}: $\forall \delta \in \apos{\RR},\, \exists \gamma \in \apos{\RR},\, g(\gamma) < \delta$
   \end{itemize}
 \end{dfn}
 
@@ -85,32 +85,34 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \end{rem}
 
 \begin{thm}[Convergence Challenge Replacement]{convergence-challenge-replacement}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field}, $a : \NNOne \to F$, and let $g$ be a \xref[convergence challenge function]{def:convergence-challenge-function}. Then
+  Let \(g\) be a
+  \xref[convergence challenge function]{def:convergence-challenge-function},
+  and let \(a:\NNOne\to X\) be a sequence in a
+  \xref[metric space]{lec03::def:metric-space} \((X,d)\). Then
   \[
-    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < \varepsilon\bigr)
+    \bigl(\exists \ell \in X,\, \forall \varepsilon \in \apos{\RR},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, d(\term{a}{n},\ell) < \varepsilon\bigr)
   \]\[
     \iff
   \]\[
-    \bigl(\exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < g(\varepsilon)\bigr)
+    \bigl(\exists \ell \in X,\, \forall \varepsilon \in \apos{\RR},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, d(\term{a}{n},\ell) < g(\varepsilon)\bigr)
   \]
 \end{thm}
 
 \begin{proof}
-  Fix the witness $\ell \in F$ in either direction
+  Fix the witness $\ell \in X$ in either direction
 
-  \noindent\textbf{($\Rightarrow$)} For $\varepsilon > 0$, the positivity-on-positives condition gives $g(\varepsilon) > 0$. Apply the \xref[definition of convergent sequence]{def:convergent-sequence} at the challenge $g(\varepsilon)$
+  \noindent\textbf{($\Rightarrow$)} For $\varepsilon > 0$, the positivity-on-positives condition gives $g(\varepsilon) > 0$. Apply the left-hand condition at the tolerance $g(\varepsilon)$
 
   \noindent\textbf{($\Leftarrow$)} For $\varepsilon > 0$, the \xref[challenge-function property of $g$]{def:convergence-challenge-function} gives $\gamma > 0$ with $g(\gamma) < \varepsilon$. The hypothesis at $\gamma$ gives $N$ such that
   \[
-    \dist{a_n}{\ell} < g(\gamma) < \varepsilon \quad \text{for all } n \geq N
+    d(\term{a}{n},\ell) < g(\gamma) < \varepsilon \quad \text{for all } n \geq N
   \]
 \end{proof}
 
 \begin{lem}[Restricting to Small Tolerances]{restricting-to-small-tolerances}
-  Let $F$ be an \xref[ordered field]{lec01::def:ordered-field} and fix
-  $r\in\apos{F}$. The function
+  Fix $r\in\apos{\RR}$. The function
   \[
-    g:F\to F\defeq\gamma\map\min(\gamma,r/2)
+    g:\RR\to\RR\defeq\gamma\map\min(\gamma,r/2)
   \]
   is a \xref[convergence challenge function]{def:convergence-challenge-function}
 \end{lem}
@@ -129,26 +131,26 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \end{rem}
 
 \begin{lem}[Linear Scaling]{linear-is-challenge}
-  For any $c \in F$ with $c > 0$, the function $g(\gamma) = c\gamma$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
+  For any $c \in \RR$ with $c > 0$, the function $g:\RR\to\RR\defeq\gamma\map c\cdot\gamma$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
 \end{lem}
 
 \begin{proof}
   We verify both conditions
 
-  \noindent\emph{Positivity on positives.} For any $\gamma \in F$ with $\gamma > 0$, both $c > 0$ and $\gamma > 0$, so $g(\gamma) = c\gamma > 0$
+  \noindent\emph{Positivity on positives.} For any $\gamma \in \RR$ with $\gamma > 0$, both $c > 0$ and $\gamma > 0$, so $g(\gamma) = c\cdot\gamma > 0$
 
-  \noindent\emph{Arbitrarily small values.} Fix any $\delta \in F$ with $\delta > 0$. We seek $\gamma \in F$ with $\gamma > 0$ and $g(\gamma) < \delta$
+  \noindent\emph{Arbitrarily small values.} Fix any $\delta \in \RR$ with $\delta > 0$. We seek $\gamma \in \RR$ with $\gamma > 0$ and $g(\gamma) < \delta$
 
   Take $\gamma \defeq \delta / (c + 1)$, which is derived in \xref{rem:linear-scaling-witness-derivation}. Since $\delta > 0$ and $c + 1 > 0$ (because $c > 0$), we have $\gamma > 0$
 
-  Now $g(\gamma) = c\gamma = c\delta / (c + 1)$. Since $c < c + 1$, we have $c / (c + 1) < 1$, hence $c\delta / (c + 1) < \delta$
+  Now $g(\gamma) = c\cdot\gamma = c\cdot\delta / (c + 1)$. Since $c < c + 1$, we have $c / (c + 1) < 1$, hence $c\cdot\delta / (c + 1) < \delta$
 \end{proof}
 
 \begin{rem}[Deriving the Witness for Linear Scaling]{linear-scaling-witness-derivation}
   To find the witness $\gamma$ used in the proof of \xref{lem:linear-is-challenge}, we start from the target inequality $g(\gamma) < \delta$ and manipulate it to isolate $\gamma$:
   \[
     g(\gamma) < \delta
-    \iff c\gamma < \delta
+    \iff c\cdot\gamma < \delta
     \iff \gamma < \frac{\delta}{c}.
   \]
   Any $\gamma$ in the open interval $\left(0, \tfrac{\delta}{c}\right)$ will therefore satisfy $g(\gamma) < \delta$. To pick a concrete such $\gamma$, we use the fact that $c + 1 > c$, which gives
@@ -159,11 +161,11 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \end{rem}
 
 \begin{rem}[Why $c \leq 0$ is Excluded]{linear-scaling-cnonpos}
-  If $c \leq 0$, then for any $\gamma \in F$ with $\gamma > 0$, $g(\gamma) = c\gamma \leq 0$. This violates the positivity-on-positives condition, so $g$ is not a \xref[convergence challenge function]{def:convergence-challenge-function}
+  If $c \leq 0$, then for any $\gamma \in \RR$ with $\gamma > 0$, $g(\gamma) = c\cdot\gamma \leq 0$. This violates the positivity-on-positives condition, so $g$ is not a \xref[convergence challenge function]{def:convergence-challenge-function}
 \end{rem}
 
 \begin{lem}[Power]{power-is-challenge}
-  For any positive integer $k$, the function $g(\gamma) = \gamma^k$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
+  For any positive integer $k$, the function $g:\RR\to\RR\defeq\gamma\map\gamma^k$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
 \end{lem}
 
 \begin{proof}
@@ -200,11 +202,12 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \begin{proof}
   \noindent\textbf{($\Rightarrow$)} If $\dist{a_n}{\ell} < \varepsilon$, then $\dist{a_n}{\ell} \leq \varepsilon$
 
-  \noindent\textbf{($\Leftarrow$)} By \xref{lem:linear-is-challenge} with $c = 2$, $g(\varepsilon) = 2\varepsilon$ is a \xref[convergence challenge function]{def:convergence-challenge-function}. From the closed-form hypothesis, for every $\varepsilon > 0$ there exists $N$ with $\dist{a_n}{\ell} \leq \varepsilon$ for all $n \geq N$. Since $\varepsilon > 0 \implies \varepsilon < 2\varepsilon$, we obtain $\dist{a_n}{\ell} \leq \varepsilon < 2\varepsilon$, hence
+  \noindent\textbf{($\Leftarrow$)} Fix the witness \(\ell\in F\).
+  For any \(\varepsilon\in\apos{F}\), apply the right-hand condition at
+  \(\varepsilon/2>0\) to obtain \(N\in\NNOne\) such that
   \[
-    \exists \ell \in F,\, \forall \varepsilon \in \apos{F},\, \exists N \in \NNOne,\, \forall n \in \NNOne,\, n \geq N,\, \dist{a_n}{\ell} < 2\varepsilon. \tag{$\ast$}
+    n\geq N\implies\dist{a_n}{\ell}\leq\varepsilon/2<\varepsilon
   \]
-  For any $\varepsilon > 0$, applying $(\ast)$ at $\varepsilon / 2 > 0$ gives $N$ such that $\dist{a_n}{\ell} < 2 \cdot (\varepsilon / 2) = \varepsilon$ for all $n \geq N$
 \end{proof}
 
 \section{Limit of a Sequence}
@@ -284,13 +287,9 @@ Therefore, by the \xref[triangle inequality for distance]{lec03::lem:triangle-in
   \end{aligned}
 \]
 
-Notice that
-\[
-  g:F\to F\defeq\varepsilon\map2\cdot\varepsilon
-\]
-is a \xref[convergence challenge function]{def:convergence-challenge-function}
-by \xref[linear scaling]{lem:linear-is-challenge}. Hence the
-\xref[challenge replacement theorem]{thm:convergence-challenge-replacement} gives
+For any \(\delta\in\apos{F}\), apply the preceding estimate with
+\(\varepsilon=\delta/2>0\). The error is then less than
+\(2\cdot(\delta/2)=\delta\), so
 \[
   \seqlim(n\map\term{a}{n}+\term{b}{n})=\seqlim(a)+\seqlim(b)
 \]
@@ -360,24 +359,12 @@ Hence \(M\geq1\) and
   <\varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
 \]
 
-Notice that
+For any \(\delta\in\apos{F}\), apply the preceding estimate with
 \[
-  g:F\to F\defeq\varepsilon\map
-    \varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
+  \varepsilon=\frac{\delta}{M+\abs{\seqlim(a)}}>0
 \]
-is a \xref[convergence challenge function]{def:convergence-challenge-function}
-by \xref[linear scaling]{lem:linear-is-challenge}, since
-\(M+\abs{\seqlim(a)}>0\). We have shown that
-\[
-  \begin{gathered}
-    \forall\varepsilon\in \apos{F},\,\exists N_M\in\NNOne,\,
-    \forall n\in\NNOne,\,n\geq N_M\implies\\
-    \abs{\term{a}{n}\cdot\term{b}{n}-\seqlim(a)\cdot\seqlim(b)}
-      <\varepsilon\cdot\bigl(M+\abs{\seqlim(a)}\bigr)
-  \end{gathered}
-\]
-Therefore, by the
-\xref[challenge replacement theorem]{thm:convergence-challenge-replacement},
+Since \(M\) is independent of the tolerance, the error is then less than
+\(\delta\). Therefore,
 \[
   \seqlim(n\map\term{a}{n}\cdot\term{b}{n})=\seqlim(a)\cdot\seqlim(b)
 \]
@@ -491,20 +478,11 @@ Therefore,
     {\abs{\term{b}{n}\cdot\seqlim(b)}}
   <\frac{\varepsilon}{M\cdot\abs{\seqlim(b)}}
 \]
-Since $M\cdot\abs{\seqlim(b)}>0$, the function
+For any \(\delta\in\apos{F}\), apply this estimate with
 \[
-  g:F\to F\defeq\varepsilon\map
-    \frac{\varepsilon}{M\cdot\abs{\seqlim(b)}}
+  \varepsilon=\delta\cdot M\cdot\abs{\seqlim(b)}>0
 \]
-is a \xref[convergence challenge function]{def:convergence-challenge-function}
-by \xref[linear scaling]{lem:linear-is-challenge}. Hence
-\[
-  \forall\varepsilon\in\apos{F},\,\exists N\in\NNOne,\,
-  \forall n\in\NNOne,\,n\geq N\implies
-  \abs{\term{p}{n}-\frac{1}{\seqlim(b)}}<g(\varepsilon)
-\]
-By \xref[challenge replacement]{thm:convergence-challenge-replacement},
-$p\in\Conv(F)$ and
+The error is then less than \(\delta\), so \(p\in\Conv(F)\) and
 \[
   \seqlim(p)=\frac{1}{\seqlim(b)}
 \]
@@ -542,6 +520,23 @@ Since $\term{a}{n}/\term{b}{n}=\term{a}{n}\cdot\term{p}{n}$ for every $n\in\NNOn
     \seqlim(a) \leq \seqlim(b)
   \]
 \end{thm}
+
+\begin{thm}[Sequence Characterization of Limit Points]{limit-point-sequence}
+  Let \((X,d)\) be a \xref[metric space]{lec03::def:metric-space},
+  let \(A\subseteq X\), and let \(x\in X\).
+  The point \(x\) is a \xref[limit point]{lec03::def:limit-points} of \(A\)
+  if and only if there exists a sequence \(a:\NNOne\to A\setminus\{x\}\)
+  converging to \(x\), meaning
+  \[
+    \forall\varepsilon\in\apos{\RR},\,\exists N\in\NNOne,\,
+    \forall n\in\NNOne,\quad
+    n\geq N\implies d(\term{a}{n},x)<\varepsilon
+  \]
+\end{thm}
+
+\begin{proof}
+  According to definition of limit, \(x\) is a limit 
+\end{proof}
 
 \section{Bounded Sequences}
 

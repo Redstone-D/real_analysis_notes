@@ -91,6 +91,14 @@
   \]
 \end{dfn}
 
+\begin{dfn}[Bounded Set in a Metric Space]{metric-bounded-set}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
+  A subset \(S\subseteq X\) is \emph{bounded} if
+  \[
+    \exists M\in\apos{\RR},\,\forall x,y\in S,\quad d(x,y)<M
+  \]
+\end{dfn}
+
 \begin{conv}[Radius Neighbourhood Notation]{radius-neighbourhood-notation}
   In a \xref[metric space]{def:metric-space} \((X,d)\), some texts call
   the \xref[open ball]{def:open-balls} \(\ball{r}{x}\), with
@@ -322,7 +330,20 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{thm} 
 
 \begin{proof}
-  \todo[Apply the three metric-space lemmas to verify the topology axioms]
+  By definition, \(\mathcal T_d\subseteq\PowerSet(X)\).
+  The lemmas on \xref[the empty set and the whole space]{lem:metric-empty-and-whole-open},
+  \xref[finite intersections]{lem:metric-finite-intersections}, and
+  \xref[arbitrary unions]{lem:metric-arbitrary-unions} give
+  \[
+    \emptyset,X\in\mathcal T_d,
+    \qquad
+    U,V\in\mathcal T_d\implies U\cap V\in\mathcal T_d,
+    \qquad
+    U:I\to\mathcal T_d\implies\bigcup_I U\in\mathcal T_d
+  \]
+  Thus \(\mathcal T_d\) satisfies the three
+  \xref[topology axioms]{def:topology}, so \((X,\mathcal T_d)\)
+  is a \xref[topological space]{def:topological-space}
 \end{proof}
 
 \section{Open and Closed Sets}
@@ -335,15 +356,414 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
   A set $C \subseteq X$ is \emph{closed} in a topological space $(X, \mathcal{T})$ if its complement $X \setminus C$ is open, i.e., $X \setminus C \in \mathcal{T}$. 
 \end{dfn}
 
-\begin{dfn}[Limit Points] 
-A \emph{limit point} $x: X$ of a set $U \subseteq X$ is a point that 
-\[\forall \varepsilon \in \apos{\RR}, \, \ball{\varepsilon}{x} \cap U \neq \emptyset\] 
+\begin{cor}[Arbitrary Unions of Open Sets]{open-arbitrary-unions}
+  Let \((X,\mathcal T)\) be a
+  \xref[topological space]{def:topological-space}, and let
+  \(U:I\to\PowerSet(X)\). If every \(U(i)\) is
+  \xref[open]{def:open-sets}, then
+  \[
+    \bigcup(U)\in\mathcal T
+  \]
+\end{cor}
+
+\begin{proof}
+  Each \(U(i)\in\mathcal T\) by the definition of an open set, so
+  \xref[the arbitrary-union axiom]{axm:topology-arbitrary-unions}
+  gives \(\bigcup(U)\in\mathcal T\)
+\end{proof}
+
+\begin{cor}[Finite Intersections of Open Sets]{open-finite-intersections}
+  Let \((X,\mathcal T)\) be a
+  \xref[topological space]{def:topological-space}, and let
+  \(U:I\to\PowerSet(X)\), where \(I\) is finite and nonempty.
+  If every \(U(i)\) is \xref[open]{def:open-sets}, then
+  \[
+    \bigcap(U)\in\mathcal T
+  \]
+\end{cor}
+
+\begin{proof}
+  A single member belongs to \(\mathcal T\). Applying
+  \xref[the intersection axiom]{axm:topology-finite-intersections}
+  repeatedly proves the claim by induction on the number of sets
+\end{proof}
+
+\begin{cor}[Arbitrary Intersections of Closed Sets]{closed-arbitrary-intersections}
+  In a \xref[topological space]{def:topological-space}
+  \((X,\mathcal T)\), let
+  \(C:I\to\PowerSet(X)\), where \(I\) is nonempty.
+  If every \(C(i)\) is \xref[closed]{def:closed-sets}, then
+  \(\bigcap(C)\) is closed
+\end{cor}
+
+\begin{proof}
+  Each \(X\setminus C(i)\) is open by the definition of a closed set.
+  By \xref[De Morgan's laws]{lec01::thm:de-morgan-laws} and
+  \xref[the open-union corollary]{cor:open-arbitrary-unions},
+  \[
+    X\setminus\bigcap(C)
+    =\bigcup(i\map X\setminus C(i))\in\mathcal T
+  \]
+  Thus \(\bigcap(C)\) is closed
+\end{proof}
+
+\begin{cor}[Finite Unions of Closed Sets]{closed-finite-unions}
+  Let \((X,\mathcal T)\) be a
+  \xref[topological space]{def:topological-space}, and let
+  \(C:I\to\PowerSet(X)\), where \(I\) is finite.
+  If every \(C(i)\) is \xref[closed]{def:closed-sets}, then
+  \(\bigcup(C)\) is closed
+\end{cor}
+
+\begin{proof}
+  If \(I\) is empty, then \(\bigcup(C)=\emptyset\) is closed since
+  \(X\in\mathcal T\). Otherwise, each \(X\setminus C(i)\) is open.
+  By \xref[De Morgan's laws]{lec01::thm:de-morgan-laws} and
+  \xref[the open-intersection corollary]{cor:open-finite-intersections},
+  \[
+    X\setminus\bigcup(C)
+    =\bigcap(i\map X\setminus C(i))\in\mathcal T
+  \]
+  Thus \(\bigcup(C)\) is closed
+\end{proof}
+
+\begin{prop}[Open Balls are Open]{metric-open-balls-open}
+  In a \xref[metric space]{def:metric-space} \((X,d)\), every
+  \xref[open ball]{def:open-balls} is \xref[open]{def:open-sets} in the
+  \xref[induced topology]{def:induced-topology}
+\end{prop}
+
+\begin{proof}
+  Let \(z\in\ball{r}{x}\), and choose \(s=r-d(x,z)>0\).
+  For \(y\in\ball{s}{z}\), the
+  \xref[triangle inequality]{axm:metric-triangle-inequality} gives
+  \[
+    d(x,y)\leq d(x,z)+d(z,y)<d(x,z)+s=r
+  \]
+  Thus \(\ball{s}{z}\subseteq\ball{r}{x}\), so \(\ball{r}{x}\) is open
+\end{proof}
+
+\section{Limit Points and Isolated Points} 
+
+\begin{dfn}[Limit Points]{limit-points}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
+  A \emph{limit point} \(x\in X\) of a set \(U\subseteq X\) is a point such that
+  \[
+    \forall\varepsilon\in\apos{\RR},\quad
+    \ball{\varepsilon}{x}\cap\bigl(U\setminus\{x\}\bigr)\neq\emptyset
+  \]
 \end{dfn}
+
+\redirect[Sequence Characterization of Limit Points]{thm}{limit-point-sequence}{lec04::thm:limit-point-sequence}
 
 \section{Compact Sets}
 
+\begin{dfn}[Cover]{cover}
+  Let \(X\) be a set and \(S\subseteq X\).
+  A \emph{cover} of \(S\) is a family \(U:I\to\PowerSet(X)\) such that
+  \[
+    S\subseteq\bigcup_I U
+  \]
+\end{dfn}
+
+\begin{dfn}[Finite Cover]{finite-cover}
+  A \xref[cover]{def:cover} \(U:I\to\PowerSet(X)\) of \(S\subseteq X\)
+  is \emph{finite} if its index set \(I\) is finite, equivalently,
+  \[
+    \card{I}<\card{\NN}
+  \]
+\end{dfn}
+
+\begin{dfn}[Open Cover]{open-cover}
+  Let \((X,\mathcal T)\) be a
+  \xref[topological space]{def:topological-space}, and let \(S\subseteq X\).
+  A \xref[cover]{def:cover} \(U:I\to\PowerSet(X)\) of \(S\) is an
+  \emph{open cover} if
+  \[
+    \forall i\in I,\quad U(i)\in\mathcal T
+  \]
+\end{dfn}
+
+\begin{dfn}[Subcover]{subcover}
+  Let \(U:I\to\PowerSet(X)\) be a \xref[cover]{def:cover} of
+  \(S\subseteq X\). A \emph{subcover} of \(U\) is a cover
+  \(V:J\to\PowerSet(X)\) of \(S\) such that
+  \[
+    \forall j\in J,\,\exists i\in I,\quad V(j)=U(i)
+  \]
+  The subcover is \emph{finite} if \(V\) is a
+  \xref[finite cover]{def:finite-cover}
+\end{dfn}
+
+\begin{dfn}[Compact Set]{compact-set}
+  Let \((X,\mathcal T)\) be a
+  \xref[topological space]{def:topological-space}.
+  A subset \(S\subseteq X\) is \emph{compact} if every
+  \xref[open cover]{def:open-cover} of \(S\) has a finite
+  \xref[subcover]{def:subcover}
+\end{dfn}
+
+\section{The Usual Metric and Topology on \texorpdfstring{\(\RR\)}{R}}
+
+\begin{dfn}[Usual Topology on the Real Line]{usual-topology-real}
+  Equip \(\RR\) with the
+  \xref[absolute-value distance]{def:distance}, which is a
+  \xref[metric]{cor:complete-ordered-field-metric}:
+  \[
+    \dist{x}{y}=\abs{x-y},\qquad x,y\in\RR
+  \]
+
+  The \emph{usual topology} on \(\RR\) is the
+  \xref[topology induced]{def:induced-topology} by the absolute-value metric
+  \(d\). In this section, balls and open sets in \(\RR\) refer to this
+  metric and topology
+\end{dfn}
+
+\begin{prop}[Open Balls on the Real Line]{real-open-balls}
+  For \(x\in\RR\) and \(r\in\apos{\RR}\), the
+  \xref[open ball]{def:open-balls} is the
+  \xref[open interval]{lec02::def:open-interval}
+  \[
+    \ball{r}{x}=(x-r,x+r)
+  \]
+\end{prop}
+
+\begin{proof}
+  For \(y\in\RR\),
+  \[
+    y\in\ball{r}{x}
+    \iff\abs{x-y}<r
+    \iff x-r<y<x+r
+    \iff y\in(x-r,x+r)
+  \]
+\end{proof}
+
+\begin{cor}[Open Intervals are Open]{real-open-intervals}
+  For \(a,b\in\RR\) with \(a<b\), the
+  \xref[open interval]{lec02::def:open-interval} \((a,b)\) is
+  \xref[open]{def:open-sets} in the
+  \xref[usual topology]{def:usual-topology-real}
+\end{cor}
+
+\begin{proof}
+  For each \(x\in(a,b)\), we can choose a ball centred at \(x\)
+  with radius \(r=\min(x-a,b-x)>0\). Then
+  \[
+    \ball{r}{x}=(x-r,x+r)\subseteq(a,b)
+  \]
+  Thus every point of \((a,b)\) has a ball contained in \((a,b)\),
+  so \((a,b)\) is open by the
+  \xref[definition of the induced topology]{def:induced-topology}
+\end{proof}
+
+\begin{prop}[Open Sets as Unions of Open Intervals]{real-open-sets-intervals}
+  A set \(U\subseteq\RR\) is \xref[open]{def:open-sets} in the
+  \xref[usual topology]{def:usual-topology-real} if and only if it is a
+  union of \xref[open intervals]{lec02::def:open-interval}
+\end{prop}
+
+\begin{proof}
+  \noindent\textbf{(\(\Rightarrow\))}
+  Suppose \(U\) is open. Let
+  \[
+    I\defeq\{(x,r)\in U\times\apos{\RR}:\ball{r}{x}\subseteq U\},
+    \qquad
+    J:I\to\PowerSet(\RR)\defeq(x,r)\map(x-r,x+r)
+  \]
+  Every \(J(x,r)=\ball{r}{x}\) is contained in \(U\), and each
+  \(x\in U\) belongs to one such interval by the definition of
+  \(\mathcal T_d\). Hence \(U=\bigcup(J)\)
+
+  \noindent\textbf{(\(\Leftarrow\))}
+  Each \xref[open interval is open]{cor:real-open-intervals}, and
+  \xref[arbitrary unions of open sets are open]{cor:open-arbitrary-unions}
+\end{proof}
+
+\begin{prop}[Closed Intervals are Closed]{real-closed-intervals}
+  For \(a,b\in\RR\) with \(a\leq b\), the
+  \xref[closed interval]{lec02::def:closed-interval} \([a,b]\) is
+  \xref[closed]{def:closed-sets} in the
+  \xref[usual topology]{def:usual-topology-real}
+\end{prop}
+
+\begin{proof}
+  Let \(x\in\RR\setminus[a,b]\). If \(x<a\), choose \(r=a-x>0\);
+  if \(x>b\), choose \(r=x-b>0\). In either case, the ball centred at
+  \(x\) satisfies
+  \[
+    \ball{r}{x}=(x-r,x+r)\subseteq\RR\setminus[a,b]
+  \]
+  Thus \(\RR\setminus[a,b]\) is open, so \([a,b]\) is closed by the
+  \xref[definition of a closed set]{def:closed-sets}
+\end{proof}
+
 \section{Heine-Borel Theorem}
 
+\begin{lem}[Compact Sets are Bounded]{compact-implies-bounded}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
+  Every \xref[compact]{def:compact-set} subset \(S\subseteq X\),
+  in the \xref[induced topology]{def:induced-topology}, is
+  \xref[bounded]{def:metric-bounded-set}
+\end{lem}
+
+\begin{proof}
+  The empty set is bounded, so suppose \(S\neq\emptyset\) and choose
+  \(x_0\in S\). The family
+  \[
+    U:\apos{\RR}\to\PowerSet(X)\defeq r\map\ball{r}{x_0}
+  \]
+  is an \xref[open cover]{def:open-cover} of \(S\):
+  \xref[each ball is open]{prop:metric-open-balls-open}, and each
+  \(x\in S\) belongs to \(\ball{d(x_0,x)+1}{x_0}\).
+  Compactness gives a finite subcover. Let \(R>0\) be the largest
+  of its finitely many radii; then \(S\subseteq\ball{R}{x_0}\).
+  For all \(x,y\in S\),
+  \[
+    d(x,y)\leq d(x,x_0)+d(x_0,y)<2\cdot R
+  \]
+  Hence \(S\) is bounded
+\end{proof}
+
+\begin{lem}[Compact Sets are Closed]{compact-implies-closed}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
+  Every \xref[compact]{def:compact-set} subset \(S\subseteq X\),
+  in the \xref[induced topology]{def:induced-topology}, is
+  \xref[closed]{def:closed-sets}
+\end{lem}
+
+\begin{proof}
+  The empty set is closed, so suppose \(S\neq\emptyset\).
+  Fix \(x\in X\setminus S\). For each \(y\in S\), let
+  \(r_y=d(x,y)/2>0\). The balls \(\ball{r_y}{y}\) form an
+  \xref[open cover]{def:open-cover} of \(S\), so finitely many,
+  centred at \(y_1,\ldots,y_k\), cover \(S\).
+  Let \(r>0\) be the smallest of their radii.
+  If \(z\in\ball{r}{x}\cap\ball{r_{y_j}}{y_j}\), then
+  \[
+    d(x,y_j)\leq d(x,z)+d(z,y_j)
+    <r+r_{y_j}\leq2\cdot r_{y_j}=d(x,y_j)
+  \]
+  a contradiction. Thus \(\ball{r}{x}\subseteq X\setminus S\).
+  Since \(x\) was arbitrary, \(X\setminus S\) is open, so \(S\) is closed
+\end{proof}
+
+\begin{lem}[Closed and Bounded Sets are Compact]{real-closed-bounded-compact}
+  Every subset \(S\subseteq\RR\) that is
+  \xref[closed]{def:closed-sets} in the
+  \xref[usual topology]{def:usual-topology-real} and
+  \xref[bounded]{lec01::def:bounded-set} is
+  \xref[compact]{def:compact-set}
+\end{lem}
+
+\begin{proof}
+  The empty set is compact, so suppose \(S\neq\emptyset\).
+  Choose \(a<b\) with \(S\subseteq[a,b]\), and let \(U\) be any
+  \xref[open cover]{def:open-cover} of \(S\). Add the open set
+  \(\RR\setminus S\) to obtain an open cover \(\mathcal V\) of \([a,b]\).
+  Define
+  \[
+    E\defeq\{t\in[a,b]:[a,t]\text{ has a finite subcover from }\mathcal V\}
+  \]
+  Since one member covers \(a\), we have \(a\in E\), and \(b\) is an
+  upper bound. By \xref[completeness]{lec01::axm:aoc}, let \(c=\sup(E)\)
+
+  Choose \(V\) from \(\mathcal V\) containing \(c\), and choose
+  \(\delta>0\) with \((c-\delta,c+\delta)\subseteq V\).
+  By \xref[the supremum criterion]{lec01::prop:epsilon-supremum},
+  choose \(t\in E\) with \(c-\delta/2<t\leq c\).
+  A finite cover of \([a,t]\), together with \(V\), covers
+  \[
+    [a,\min(b,c+\delta/2)]
+  \]
+  If \(c<b\), this gives an element of \(E\) greater than \(c\),
+  contradicting its definition. Hence \(c=b\), and the same finite
+  collection covers \([a,b]\). Discarding \(\RR\setminus S\), if present,
+  leaves a finite subcover of \(S\) from \(U\). Thus \(S\) is compact
+\end{proof}
+
+\begin{thm}[Heine-Borel Theorem]{heine-borel}
+  A subset \(S\subseteq\RR\) is \xref[compact]{def:compact-set} in the
+  \xref[usual topology]{def:usual-topology-real} if and only if it is
+  \xref[closed]{def:closed-sets} and \xref[bounded]{lec01::def:bounded-set}
+\end{thm} 
+
+\begin{proof}
+  A compact set is \xref[closed]{lem:compact-implies-closed} and
+  \xref[metrically bounded]{lem:compact-implies-bounded}.
+  For a nonempty such set, fix \(x_0\in S\) and \(M>0\) with
+  \(\abs{x-y}<M\) for all \(x,y\in S\). Then
+  \(S\subseteq[x_0-M,x_0+M]\), so it is bounded in the order sense as well;
+  the empty set is also bounded.
+  The converse is \xref[the preceding lemma]{lem:real-closed-bounded-compact}
+\end{proof} 
+
 \section{Cantor Sets}
+
+\begin{dfn}[Cantor Stages]{cantor-stages}
+  The function \(A:\NN\to\PowerSet(\RR)\) is defined recursively by
+  \[
+    A(0)\defeq[0,1],
+    \qquad
+    A(n+1)\defeq
+    \left\{\frac{x}{3}:x\in A(n)\right\}
+    \cup
+    \left\{\frac{x+2}{3}:x\in A(n)\right\}
+  \]
+  Each stage removes the open middle third of every remaining interval,
+  keeping its endpoints
+\end{dfn}
+
+\begin{eg}[The First Cantor Stages]{cantor-first-stages}
+  \[
+    \begin{aligned}
+      A(1)&=[0,\tfrac13]\cup[\tfrac23,1]\\
+      A(2)&=[0,\tfrac19]\cup[\tfrac29,\tfrac13]
+             \cup[\tfrac23,\tfrac79]\cup[\tfrac89,1]
+    \end{aligned}
+  \]
+\end{eg}
+
+\begin{dfn}[Middle-Third Cantor Set]{cantor-set}
+  The \emph{middle-third Cantor set} is the intersection of all
+  \xref[Cantor stages]{def:cantor-stages}:
+  \[
+    \mathcal C\defeq\bigcap(A)
+  \]
+  Thus \(x\in\mathcal C\) if and only if \(x\) belongs to every \(A(n)\)
+\end{dfn}
+
+\begin{prop}[Properties of the Cantor Stages]{cantor-stage-properties}
+  For each \(n\in\NN\), the stage \(A(n)\) is a union of \(2^n\)
+  disjoint \xref[closed intervals]{lec02::def:closed-interval} of length
+  \(3^{-n}\). Moreover,
+  \[
+    \{0,1\}\subseteq A(n+1)\subseteq A(n)\subseteq[0,1]
+  \]
+\end{prop}
+
+\begin{proof}
+  The interval statement follows by induction: \(A(0)=[0,1]\), and the
+  recurrence makes two copies of each interval, each scaled by \(1/3\).
+  The left copy lies in \([0,1/3]\) and the right copy in \([2/3,1]\),
+  so the intervals remain disjoint.
+  Also \(A(1)\subseteq A(0)\), and the recurrence preserves inclusion,
+  which proves nesting by induction. The points \(0\) and \(1\) belong
+  to every stage, again by induction
+\end{proof}
+
+\begin{cor}[The Cantor Set is Compact]{cantor-compact}
+  The \xref[Cantor set]{def:cantor-set} is a nonempty
+  \xref[compact]{def:compact-set} subset of \(\RR\)
+\end{cor}
+
+\begin{proof}
+  Every \(A(n)\) is closed, since
+  \xref[closed intervals are closed]{prop:real-closed-intervals} and
+  \xref[finite unions of closed sets are closed]{cor:closed-finite-unions}.
+  Hence \(\mathcal C=\bigcap(A)\) is closed by
+  \xref[closure under intersections]{cor:closed-arbitrary-intersections}.
+  Since \(\{0,1\}\subseteq\mathcal C\subseteq[0,1]\), it is nonempty
+  and bounded, so \xref[Heine--Borel]{thm:heine-borel} gives compactness
+\end{proof}
 
 \end{document}

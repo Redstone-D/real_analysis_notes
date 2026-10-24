@@ -561,41 +561,6 @@ which is finite and nonempty
   \(\forall\varepsilon\in\apos{F},\ b-a<\varepsilon\), then \(a=b\)
 \end{rem} 
 
-\begin{dfn}[Neighbourhood]{neighbourhood}
-  Let \(F\) be an \xref[ordered field]{lec01::def:ordered-field}.
-  The \emph{neighbourhood generator} is
-  \[
-    \nbhd:\apos{F}\to\bigl(F\to\PowerSet(F)\bigr)
-    \defeq\varepsilon\map x\map(x-\varepsilon,\,x+\varepsilon)
-  \]
-  For each fixed radius \(\varepsilon\in \apos{F}\), the
-  \emph{neighbourhood function} is
-  \[
-    \nbhd(\varepsilon):F\to\PowerSet(F)
-  \]
-  It sends \(x\) to the \xref[open interval]{def:open-interval}
-  \((x-\varepsilon,x+\varepsilon)\)
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\nbhd(\varepsilon)}}}
-  \par\noindent{\footnotesize\texttt{LaTeX: \detokenize{\nbhd(\varepsilon)(x)}}}
-\end{dfn}
-
-\begin{conv}[Neighbourhood Notation]{neighbourhood-notation}
-  For the \xref[neighbourhood generator]{def:neighbourhood} and a fixed
-  \(\varepsilon\in \apos{F}\), write
-  \[
-    \neighbourhoodFamily{\varepsilon}:F\to\PowerSet(F)
-    \defeq\nbhd(\varepsilon)
-  \]
-  Then
-  \[
-    \neighbourhood{\varepsilon}{x}
-    \defeq\nbhd(\varepsilon)(x)
-    =(x-\varepsilon,\,x+\varepsilon)
-  \]
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\neighbourhoodFamily{\varepsilon}}}}
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\neighbourhood{\varepsilon}{x}}}}
-\end{conv}
-
 \section{Decimal Expansion} 
 
 \begin{thm}[Decimal Expansion]{decimal-representation}

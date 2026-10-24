@@ -10,41 +10,43 @@
 
 \section{Metric Spaces}
 
-The four \emph{metric axioms} are the following requirements on a function
-\(d:X\times X\to\RR\), where \(X\) is a set
+\begin{dfn}[Metric]{metric}
+  Let \(X\) be a set. A \emph{metric}, or \emph{distance function}, on
+  \(X\) is a function \(d:X\times X\to\RR\) satisfying the following
+  four axioms:
+  \xref[nonnegativity]{axm:metric-nonnegativity},
+  \xref[identity of indiscernibles]{axm:metric-separation},
+  \xref[symmetry]{axm:metric-symmetry}, and
+  \xref[the triangle inequality]{axm:metric-triangle-inequality}
+\end{dfn}
 
 \begin{axm}[Nonnegativity]{metric-nonnegativity}
+  If \(d\) is a metric on \(X\), then
   \[
     \forall x,y\in X,\quad d(x,y)\geq0
   \]
 \end{axm}
 
 \begin{axm}[Identity of Indiscernibles]{metric-separation}
+  If \(d\) is a metric on \(X\), then
   \[
     \forall x,y\in X,\quad d(x,y)=0\iff x=y
   \]
 \end{axm}
 
 \begin{axm}[Symmetry]{metric-symmetry}
+  If \(d\) is a metric on \(X\), then
   \[
     \forall x,y\in X,\quad d(x,y)=d(y,x)
   \]
 \end{axm}
 
 \begin{axm}[Triangle Inequality]{metric-triangle-inequality}
+  If \(d\) is a metric on \(X\), then
   \[
     \forall x,y,z\in X,\quad d(x,z)\leq d(x,y)+d(y,z)
   \]
 \end{axm}
-
-\begin{dfn}[Metric]{metric}
-  Let \(X\) be a set. A \emph{metric}, or \emph{distance function}, on
-  \(X\) is a function \(d:X\times X\to\RR\) satisfying
-  \xref[nonnegativity]{axm:metric-nonnegativity},
-  \xref[identity of indiscernibles]{axm:metric-separation},
-  \xref[symmetry]{axm:metric-symmetry}, and
-  \xref[the triangle inequality]{axm:metric-triangle-inequality}
-\end{dfn}
 
 \begin{dfn}[Metric Space]{metric-space}
   A \emph{metric space} is a pair \((X,d)\), where \(X\) is a set and
@@ -127,7 +129,7 @@ The four \emph{metric axioms} are the following requirements on a function
   \]
 \end{lem}
 
-\begin{proof}In order to proof \xref[lem:epsilon-equality]{lem:epsilon-equality}, we need to prove both directions
+\begin{proof}In order to proof \xref[Epsilon Equality Lemma]{lem:epsilon-equality}, we need to prove both directions
 
 \noindent\textbf{(a)}: $a=b \implies \forall \varepsilon\in\apos{F}, \abs{a-b}<\varepsilon$
 
@@ -148,13 +150,98 @@ Since $\lnot a \neq b \iff a = b$, So, $\forall \varepsilon\in\apos{F}, \abs{a-b
 Therefore, both implications hold, and hence proven
 \end{proof}
 
-\section{Open Balls}
+\section{Open Balls and Neighbourhoods}
+
+\begin{dfn}[Open Balls]{open-balls}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
+  The \emph{open-ball generator} is
+  \[
+    \OpenBall:\apos{\RR}\to\bigl(X\to\PowerSet(X)\bigr)
+    \defeq r\map x\map\{y\in X:d(x,y)<r\}
+  \]
+  For \(r\in\apos{\RR}\) and \(x\in X\),
+  \(\OpenBall(r)(x)\) is the \emph{open ball centred at \(x\)
+  with radius \(r\)}
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\OpenBall(r)(x)}}}
+\end{dfn}
+
+\begin{rem}[Open Ball Intuition]{open-ball-intuition}
+  An \xref[open ball]{def:open-balls} in a
+  \xref[metric space]{def:metric-space} \((X,d)\), centred at
+  \(x\in X\) with positive radius \(r\), is the collection of all
+  elements of \(X\) whose distance from \(x\) is less than \(r\)
+\end{rem}
+
+\begin{conv}[Open Ball Notation]{open-ball-notation}
+  For the \xref[open-ball generator]{def:open-balls}, write
+  \[
+    \ball{r}{x}\defeq\OpenBall(r)(x)
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\ball{r}{x}}}}
+\end{conv}
+
+\begin{dfn}[Neighbourhood]{neighbourhood}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, and let
+  \(x\in X\). A set \(U\subseteq X\) is a \emph{neighbourhood of \(x\)} if
+  \[
+    \exists r\in\apos{\RR},\quad\ball{r}{x}\subseteq U
+  \]
+\end{dfn}
+
+\begin{conv}[Radius Neighbourhood Notation]{radius-neighbourhood-notation}
+  In a \xref[metric space]{def:metric-space} \((X,d)\), some texts call
+  the \xref[open ball]{def:open-balls} \(\ball{r}{x}\), with
+  \(r\in\apos{\RR}\) and \(x\in X\), the
+  \emph{\(r\)-neighbourhood of \(x\)} and write
+  \[
+    V_r(x)\defeq\ball{r}{x}
+  \]
+\end{conv}
+
+\section{Topological Spaces} 
+
+\begin{dfn}[Topology]
+  Let $X$ be a set. A \emph{topology} on $X$, called $\mathcal{T}$, is a subset of $\PowerSet{X}$ satisfying
+  \xref[containment of the empty set and the whole set]{axm:topology-empty-and-whole},
+  \xref[closure under finite intersections]{axm:topology-finite-intersections}, and
+  \xref[closure under arbitrary unions]{axm:topology-arbitrary-unions}
+\end{dfn}
+
+\begin{axm}{topology-empty-and-whole}
+If $\mathcal T$ is a topology on $X$, then
+\[\emptyset, X \in \mathcal T\]
+\end{axm}
+
+\begin{axm}{topology-finite-intersections}
+If $U, V \in \mathcal T$, then 
+\[U \cap V \in \mathcal T\] 
+\end{axm}
+
+\begin{axm}{topology-arbitrary-unions}
+If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then 
+\[\bigcup_{I} U \in \mathcal T\] 
+\end{axm}
+
+\begin{dfn}[Topological Spaces]{topological-space}
+  A \emph{topological space} is a pair \((X,\mathcal T)\), where \(X\) is a set and
+  \(\mathcal T\) is a \xref[topology]{def:topology} on \(X\)
+\end{dfn} 
+
+\begin{dfn}[Induced Topology]{induced-topology}
+  Let $(X, d)$ be a metric space, where we define a \emph{induced topology} $\mathcal T_d$ induced by $d$ ;s 
+  \[\mathcal T_d = {U | \forall x \in U \exists r, \, B_r(x) \subset U}\]
+
+\end{dfn} 
+
+\begin{thm}[Induced Topology is a Topology]
+
+\end{thm} 
+
+\begin{proof}
+
+\end{proof}
 
 \section{Open and Closed Sets}
-
-\section{Topological Spaces}
-
-\section{Neighbourhoods}
 
 \section{Compact Sets}
 

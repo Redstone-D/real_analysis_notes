@@ -18,11 +18,11 @@
 \providecommand*{\preimageRef}{real-analysis::lec02::def:pre-image}
 \providecommand*{\absoluteValueRef}{real-analysis::lec01::conv:absolute-value-notation}
 \providecommand*{\distanceRef}{real-analysis::lec03::def:distance}
+\providecommand*{\openBallRef}{real-analysis::lec03::def:open-balls}
+\providecommand*{\openBallNotationRef}{real-analysis::lec03::conv:open-ball-notation}
 \providecommand*{\floorRef}{real-analysis::lec01::def:floor}
 \providecommand*{\floorNotationRef}{real-analysis::lec01::conv:floor-notation}
 \providecommand*{\ceilRef}{real-analysis::lec01::def:ceiling}
-\providecommand*{\neighbourhoodRef}{real-analysis::lec02::def:neighbourhood}
-\providecommand*{\neighbourhoodNotationRef}{real-analysis::lec02::conv:neighbourhood-notation}
 \providecommand*{\signSubsetsRef}{real-analysis::lec01::conv:sign-subsets}
 \providecommand*{\binaryMaxRef}{real-analysis::lec01::def:binary-max}
 \providecommand*{\binaryMinRef}{real-analysis::lec01::def:binary-min}
@@ -56,14 +56,11 @@
 \newcommand*{\preimg}[1]{{#1}^{\xref[\mathrm{preimg}]{\preimageRef}}}
 \newcommand*{\abs}[1]{\mathopen{\xref[\lvert]{\absoluteValueRef}}#1\mathclose{\xref[\rvert]{\absoluteValueRef}}}
 \newcommand*{\dist}[2]{\xref[d(#1, #2)]{\distanceRef}}
+\newcommand*{\OpenBall}{\mathop{\xref[\mathrm{OpenBall}]{\openBallRef}}\nolimits}
+\newcommand*{\ball}[2]{\mathord{\xref[B]{\openBallNotationRef}}_{#1}(#2)}
 \newcommand*{\floorfn}{\mathop{\xref[\mathrm{floor}]{\floorRef}}\nolimits}
 \newcommand*{\floor}[1]{\xref[\lfloor #1 \rfloor]{\floorNotationRef}}
 \newcommand*{\ceil}[1]{\xref[\lceil #1 \rceil]{\ceilRef}}
-\newcommand*{\nbhd}{\mathop{\xref[\mathrm{nbhd}]{\neighbourhoodRef}}\nolimits}
-\newcommand*{\neighbourhoodFamily}[1]{%
-  \mathord{\xref[V]{\neighbourhoodNotationRef}}_{#1}%
-}
-\newcommand*{\neighbourhood}[2]{\neighbourhoodFamily{#1}(#2)}
 \newcommand*{\seqlim}{\mathop{\xref[\mathrm{lim}]{\seqLimitRef}}}
 % The optional index domain keeps both zero-based and positive-indexed
 % nested families explicit; parentheses and the carrier stay outside links.

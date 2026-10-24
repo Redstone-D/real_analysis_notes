@@ -53,6 +53,129 @@
   \(d\) is a \xref[metric]{def:metric} on \(X\)
 \end{dfn}
 
+\section{Open Balls and Neighbourhoods}
+
+\begin{dfn}[Open Balls]{open-balls}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
+  The \emph{open-ball generator} is
+  \[
+    \OpenBall:\apos{\RR}\to\bigl(X\to\PowerSet(X)\bigr)
+    \defeq r\map x\map\{y\in X:d(x,y)<r\}
+  \]
+  For \(r\in\apos{\RR}\) and \(x\in X\),
+  \(\OpenBall(r)(x)\) is the \emph{open ball centred at \(x\)
+  with radius \(r\)}
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\OpenBall(r)(x)}}}
+\end{dfn}
+
+\begin{rem}[Open Ball Intuition]{open-ball-intuition}
+  An \xref[open ball]{def:open-balls} in a
+  \xref[metric space]{def:metric-space} \((X,d)\), centred at
+  \(x\in X\) with positive radius \(r\), is the collection of all
+  elements of \(X\) whose distance from \(x\) is less than \(r\)
+\end{rem}
+
+\begin{conv}[Open Ball Notation]{open-ball-notation}
+  For the \xref[open-ball generator]{def:open-balls}, write
+  \[
+    \ball{r}{x}\defeq\OpenBall(r)(x)
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\ball{r}{x}}}}
+\end{conv}
+
+\begin{dfn}[Neighbourhood]{neighbourhood}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, and let
+  \(x\in X\). A set \(U\subseteq X\) is a \emph{neighbourhood of \(x\)} if
+  \[
+    \exists r\in\apos{\RR},\quad\ball{r}{x}\subseteq U
+  \]
+\end{dfn}
+
+\begin{conv}[Radius Neighbourhood Notation]{radius-neighbourhood-notation}
+  In a \xref[metric space]{def:metric-space} \((X,d)\), some texts call
+  the \xref[open ball]{def:open-balls} \(\ball{r}{x}\), with
+  \(r\in\apos{\RR}\) and \(x\in X\), the
+  \emph{\(r\)-neighbourhood of \(x\)} and write
+  \[
+    V_r(x)\defeq\ball{r}{x}
+  \]
+\end{conv}
+
+\begin{lem}[The Empty Set and the Whole Space]{metric-empty-and-whole-open}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}. Then
+  \[
+    \forall U\in\{\emptyset,X\},\,\forall x\in U,\,
+    \exists r\in\apos{\RR},\quad
+    \ball{r}{x}\subseteq U
+  \]
+\end{lem}
+
+\begin{proof}
+  \noindent\textbf{Case \(U=X\):} For every \(x\in X\), choose
+  \(r=1\). By definition, \(\ball{1}{x}\subseteq X\)
+
+  \noindent\textbf{Case \(U=\emptyset\):} There is no
+  \(x\in\emptyset\), so the universally quantified condition holds
+  vacuously
+
+  The empty-set case does not require finding a ball contained in
+  \(\emptyset\), since there is no centre to consider
+\end{proof}
+
+\begin{lem}[Finite Intersections]{metric-finite-intersections}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, and let
+  \(U,V\subseteq X\) satisfy
+  \[
+    \begin{aligned}
+      &\forall x\in U,\,\exists r\in\apos{\RR},\quad
+        \ball{r}{x}\subseteq U\\
+      &\forall x\in V,\,\exists r\in\apos{\RR},\quad
+        \ball{r}{x}\subseteq V
+    \end{aligned}
+  \]
+  Then
+  \[
+    \forall x\in U\cap V,\,\exists r\in\apos{\RR},\quad
+    \ball{r}{x}\subseteq U\cap V
+  \]
+\end{lem}
+
+\begin{proof}
+  Let \(x\in U\cap V\). By the assumptions, choose
+  \(r_U,r_V\in\apos{\RR}\) such that
+  \(\ball{r_U}{x}\subseteq U\) and \(\ball{r_V}{x}\subseteq V\).
+  Let \(r=\min(r_U,r_V)>0\). Then
+  \[
+    \ball{r}{x}\subseteq\ball{r_U}{x}\subseteq U,
+    \qquad
+    \ball{r}{x}\subseteq\ball{r_V}{x}\subseteq V
+  \]
+  Therefore, \(\ball{r}{x}\subseteq U\cap V\)
+\end{proof}
+
+\begin{lem}[Arbitrary Unions]{metric-arbitrary-unions}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, and let
+  \(U:I\to\PowerSet(X)\) satisfy
+  \[
+    \forall i\in I,\,\forall x\in U(i),\,
+    \exists r\in\apos{\RR},\quad
+    \ball{r}{x}\subseteq U(i)
+  \]
+  Then
+  \[
+    \forall x\in\bigcup_I U,\,\exists r\in\apos{\RR},\quad
+    \ball{r}{x}\subseteq\bigcup_I U
+  \]
+\end{lem}
+
+\begin{proof}
+  Let \(x\in\bigcup_I U\). Choose \(i\in I\) with \(x\in U(i)\).
+  By the assumption, choose \(r\in\apos{\RR}\) such that
+  \[
+    \ball{r}{x}\subseteq U(i)\subseteq\bigcup_I U
+  \]
+\end{proof}
+
 \section{Distance on an Ordered Field}
 
 \begin{dfn}[Distance]{distance}
@@ -150,54 +273,6 @@ Since $\lnot a \neq b \iff a = b$, So, $\forall \varepsilon\in\apos{F}, \abs{a-b
 Therefore, both implications hold, and hence proven
 \end{proof}
 
-\section{Open Balls and Neighbourhoods}
-
-\begin{dfn}[Open Balls]{open-balls}
-  Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
-  The \emph{open-ball generator} is
-  \[
-    \OpenBall:\apos{\RR}\to\bigl(X\to\PowerSet(X)\bigr)
-    \defeq r\map x\map\{y\in X:d(x,y)<r\}
-  \]
-  For \(r\in\apos{\RR}\) and \(x\in X\),
-  \(\OpenBall(r)(x)\) is the \emph{open ball centred at \(x\)
-  with radius \(r\)}
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\OpenBall(r)(x)}}}
-\end{dfn}
-
-\begin{rem}[Open Ball Intuition]{open-ball-intuition}
-  An \xref[open ball]{def:open-balls} in a
-  \xref[metric space]{def:metric-space} \((X,d)\), centred at
-  \(x\in X\) with positive radius \(r\), is the collection of all
-  elements of \(X\) whose distance from \(x\) is less than \(r\)
-\end{rem}
-
-\begin{conv}[Open Ball Notation]{open-ball-notation}
-  For the \xref[open-ball generator]{def:open-balls}, write
-  \[
-    \ball{r}{x}\defeq\OpenBall(r)(x)
-  \]
-  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\ball{r}{x}}}}
-\end{conv}
-
-\begin{dfn}[Neighbourhood]{neighbourhood}
-  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, and let
-  \(x\in X\). A set \(U\subseteq X\) is a \emph{neighbourhood of \(x\)} if
-  \[
-    \exists r\in\apos{\RR},\quad\ball{r}{x}\subseteq U
-  \]
-\end{dfn}
-
-\begin{conv}[Radius Neighbourhood Notation]{radius-neighbourhood-notation}
-  In a \xref[metric space]{def:metric-space} \((X,d)\), some texts call
-  the \xref[open ball]{def:open-balls} \(\ball{r}{x}\), with
-  \(r\in\apos{\RR}\) and \(x\in X\), the
-  \emph{\(r\)-neighbourhood of \(x\)} and write
-  \[
-    V_r(x)\defeq\ball{r}{x}
-  \]
-\end{conv}
-
 \section{Topological Spaces} 
 
 \begin{dfn}[Topology]
@@ -229,19 +304,41 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 
 \begin{dfn}[Induced Topology]{induced-topology}
   Let $(X, d)$ be a metric space, where we define a \emph{induced topology} $\mathcal T_d$ induced by $d$ ;s 
-  \[\mathcal T_d = {U | \forall x \in U \exists r, \, B_r(x) \subset U}\]
+  \[
+    \mathcal T_d\defeq
+    \left\{U\in\PowerSet(X)\;\middle|\;
+      \forall x\in U,\,\exists r\in\apos{\RR},\,
+      \ball{r}{x}\subseteq U\right\}
+  \]
 
 \end{dfn} 
 
 \begin{thm}[Induced Topology is a Topology]
-
+  \[
+    (X,d)\text{ is a metric space}
+    \implies
+    (X,\mathcal T_d)\text{ is a topological space}
+  \]
 \end{thm} 
 
 \begin{proof}
-
+  \todo[Apply the three metric-space lemmas to verify the topology axioms]
 \end{proof}
 
 \section{Open and Closed Sets}
+
+\begin{dfn}[Open Sets]
+  A set $U \subseteq X$ is \emph{open} in a topological space $(X, \mathcal{T})$ if $U \in \mathcal{T}$. 
+\end{dfn}
+
+\begin{dfn}[Closed Sets]
+  A set $C \subseteq X$ is \emph{closed} in a topological space $(X, \mathcal{T})$ if its complement $X \setminus C$ is open, i.e., $X \setminus C \in \mathcal{T}$. 
+\end{dfn}
+
+\begin{dfn}[Limit Points] 
+A \emph{limit point} $x: X$ of a set $U \subseteq X$ is a point that 
+\[\forall \varepsilon \in \apos{\RR}, \, \ball{\varepsilon}{x} \cap U \neq \emptyset\] 
+\end{dfn}
 
 \section{Compact Sets}
 

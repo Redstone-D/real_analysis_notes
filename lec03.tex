@@ -607,21 +607,23 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{lem}
 
 \begin{proof}
-  The empty set is bounded, so suppose \(S\neq\emptyset\) and choose
-  \(x_0\in S\). The family
-  \[
-    U:\apos{\RR}\to\PowerSet(X)\defeq r\map\ball{r}{x_0}
-  \]
-  is an \xref[open cover]{def:open-cover} of \(S\):
-  \xref[each ball is open]{prop:metric-open-balls-open}, and each
-  \(x\in S\) belongs to \(\ball{d(x_0,x)+1}{x_0}\).
-  Compactness gives a finite subcover. Let \(R>0\) be the largest
-  of its finitely many radii; then \(S\subseteq\ball{R}{x_0}\).
-  For all \(x,y\in S\),
-  \[
-    d(x,y)\leq d(x,x_0)+d(x_0,y)<2\cdot R
-  \]
-  Hence \(S\) is bounded
+  \todo
+%
+%  The empty set is bounded, so suppose \(S\neq\emptyset\) and choose
+%  \(x_0\in S\). The family
+%  \[
+%    U:\apos{\RR}\to\PowerSet(X)\defeq r\map\ball{r}{x_0}
+%  \]
+%  is an \xref[open cover]{def:open-cover} of \(S\):
+%  \xref[each ball is open]{prop:metric-open-balls-open}, and each
+%  \(x\in S\) belongs to \(\ball{d(x_0,x)+1}{x_0}\).
+%  Compactness gives a finite subcover. Let \(R>0\) be the largest
+%  of its finitely many radii; then \(S\subseteq\ball{R}{x_0}\).
+%  For all \(x,y\in S\),
+%  \[
+%    d(x,y)\leq d(x,x_0)+d(x_0,y)<2\cdot R
+%  \]
+%  Hence \(S\) is bounded
 \end{proof}
 
 \begin{lem}[Compact Sets are Closed]{compact-implies-closed}
@@ -632,19 +634,21 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{lem}
 
 \begin{proof}
-  The empty set is closed, so suppose \(S\neq\emptyset\).
-  Fix \(x\in X\setminus S\). For each \(y\in S\), let
-  \(r_y=d(x,y)/2>0\). The balls \(\ball{r_y}{y}\) form an
-  \xref[open cover]{def:open-cover} of \(S\), so finitely many,
-  centred at \(y_1,\ldots,y_k\), cover \(S\).
-  Let \(r>0\) be the smallest of their radii.
-  If \(z\in\ball{r}{x}\cap\ball{r_{y_j}}{y_j}\), then
-  \[
-    d(x,y_j)\leq d(x,z)+d(z,y_j)
-    <r+r_{y_j}\leq2\cdot r_{y_j}=d(x,y_j)
-  \]
-  a contradiction. Thus \(\ball{r}{x}\subseteq X\setminus S\).
-  Since \(x\) was arbitrary, \(X\setminus S\) is open, so \(S\) is closed
+  \todo
+%
+%  The empty set is closed, so suppose \(S\neq\emptyset\).
+%  Fix \(x\in X\setminus S\). For each \(y\in S\), let
+%  \(r_y=d(x,y)/2>0\). The balls \(\ball{r_y}{y}\) form an
+%  \xref[open cover]{def:open-cover} of \(S\), so finitely many,
+%  centred at \(y_1,\ldots,y_k\), cover \(S\).
+%  Let \(r>0\) be the smallest of their radii.
+%  If \(z\in\ball{r}{x}\cap\ball{r_{y_j}}{y_j}\), then
+%  \[
+%    d(x,y_j)\leq d(x,z)+d(z,y_j)
+%    <r+r_{y_j}\leq2\cdot r_{y_j}=d(x,y_j)
+%  \]
+%  a contradiction. Thus \(\ball{r}{x}\subseteq X\setminus S\).
+%  Since \(x\) was arbitrary, \(X\setminus S\) is open, so \(S\) is closed
 \end{proof}
 
 \begin{lem}[Closed and Bounded Sets are Compact]{real-closed-bounded-compact}
@@ -656,29 +660,31 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{lem}
 
 \begin{proof}
-  The empty set is compact, so suppose \(S\neq\emptyset\).
-  Choose \(a<b\) with \(S\subseteq[a,b]\), and let \(U\) be any
-  \xref[open cover]{def:open-cover} of \(S\). Add the open set
-  \(\RR\setminus S\) to obtain an open cover \(\mathcal V\) of \([a,b]\).
-  Define
-  \[
-    E\defeq\{t\in[a,b]:[a,t]\text{ has a finite subcover from }\mathcal V\}
-  \]
-  Since one member covers \(a\), we have \(a\in E\), and \(b\) is an
-  upper bound. By \xref[completeness]{lec01::axm:aoc}, let \(c=\sup(E)\)
-
-  Choose \(V\) from \(\mathcal V\) containing \(c\), and choose
-  \(\delta>0\) with \((c-\delta,c+\delta)\subseteq V\).
-  By \xref[the supremum criterion]{lec01::prop:epsilon-supremum},
-  choose \(t\in E\) with \(c-\delta/2<t\leq c\).
-  A finite cover of \([a,t]\), together with \(V\), covers
-  \[
-    [a,\min(b,c+\delta/2)]
-  \]
-  If \(c<b\), this gives an element of \(E\) greater than \(c\),
-  contradicting its definition. Hence \(c=b\), and the same finite
-  collection covers \([a,b]\). Discarding \(\RR\setminus S\), if present,
-  leaves a finite subcover of \(S\) from \(U\). Thus \(S\) is compact
+  \todo
+%
+%  The empty set is compact, so suppose \(S\neq\emptyset\).
+%  Choose \(a<b\) with \(S\subseteq[a,b]\), and let \(U\) be any
+%  \xref[open cover]{def:open-cover} of \(S\). Add the open set
+%  \(\RR\setminus S\) to obtain an open cover \(\mathcal V\) of \([a,b]\).
+%  Define
+%  \[
+%    E\defeq\{t\in[a,b]:[a,t]\text{ has a finite subcover from }\mathcal V\}
+%  \]
+%  Since one member covers \(a\), we have \(a\in E\), and \(b\) is an
+%  upper bound. By \xref[completeness]{lec01::axm:aoc}, let \(c=\sup(E)\)
+%
+%  Choose \(V\) from \(\mathcal V\) containing \(c\), and choose
+%  \(\delta>0\) with \((c-\delta,c+\delta)\subseteq V\).
+%  By \xref[the supremum criterion]{lec01::prop:epsilon-supremum},
+%  choose \(t\in E\) with \(c-\delta/2<t\leq c\).
+%  A finite cover of \([a,t]\), together with \(V\), covers
+%  \[
+%    [a,\min(b,c+\delta/2)]
+%  \]
+%  If \(c<b\), this gives an element of \(E\) greater than \(c\),
+%  contradicting its definition. Hence \(c=b\), and the same finite
+%  collection covers \([a,b]\). Discarding \(\RR\setminus S\), if present,
+%  leaves a finite subcover of \(S\) from \(U\). Thus \(S\) is compact
 \end{proof}
 
 \begin{thm}[Heine-Borel Theorem]{heine-borel}
@@ -688,13 +694,15 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{thm} 
 
 \begin{proof}
-  A compact set is \xref[closed]{lem:compact-implies-closed} and
-  \xref[metrically bounded]{lem:compact-implies-bounded}.
-  For a nonempty such set, fix \(x_0\in S\) and \(M>0\) with
-  \(\abs{x-y}<M\) for all \(x,y\in S\). Then
-  \(S\subseteq[x_0-M,x_0+M]\), so it is bounded in the order sense as well;
-  the empty set is also bounded.
-  The converse is \xref[the preceding lemma]{lem:real-closed-bounded-compact}
+  \todo
+%
+%  A compact set is \xref[closed]{lem:compact-implies-closed} and
+%  \xref[metrically bounded]{lem:compact-implies-bounded}.
+%  For a nonempty such set, fix \(x_0\in S\) and \(M>0\) with
+%  \(\abs{x-y}<M\) for all \(x,y\in S\). Then
+%  \(S\subseteq[x_0-M,x_0+M]\), so it is bounded in the order sense as well;
+%  the empty set is also bounded.
+%  The converse is \xref[the preceding lemma]{lem:real-closed-bounded-compact}
 \end{proof} 
 
 \section{Cantor Sets}
@@ -742,13 +750,25 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{prop}
 
 \begin{proof}
-  The interval statement follows by induction: \(A(0)=[0,1]\), and the
-  recurrence makes two copies of each interval, each scaled by \(1/3\).
-  The left copy lies in \([0,1/3]\) and the right copy in \([2/3,1]\),
-  so the intervals remain disjoint.
-  Also \(A(1)\subseteq A(0)\), and the recurrence preserves inclusion,
-  which proves nesting by induction. The points \(0\) and \(1\) belong
-  to every stage, again by induction
+  \todo
+%
+%  The interval statement follows by induction: \(A(0)=[0,1]\), and the
+%  recurrence makes two copies of each interval, each scaled by \(1/3\).
+%  The left copy lies in \([0,1/3]\) and the right copy in \([2/3,1]\),
+%  so the intervals remain disjoint.
+%  Also \(A(1)\subseteq A(0)\), and the recurrence preserves inclusion,
+%  which proves nesting by induction. The points \(0\) and \(1\) belong
+%  to every stage, again by induction
+\end{proof}
+
+\begin{thm}[The Cantor Set is Closed]{cantor-closed}
+  The \xref[Cantor set]{def:cantor-set} \(\mathcal C\) is
+  \xref[closed]{def:closed-sets} in \(\RR\) with the
+  \xref[usual topology]{def:usual-topology-real}
+\end{thm}
+
+\begin{proof}
+  \todo
 \end{proof}
 
 \begin{cor}[The Cantor Set is Compact]{cantor-compact}
@@ -757,13 +777,15 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{cor}
 
 \begin{proof}
-  Every \(A(n)\) is closed, since
-  \xref[closed intervals are closed]{prop:real-closed-intervals} and
-  \xref[finite unions of closed sets are closed]{cor:closed-finite-unions}.
-  Hence \(\mathcal C=\bigcap(A)\) is closed by
-  \xref[closure under intersections]{cor:closed-arbitrary-intersections}.
-  Since \(\{0,1\}\subseteq\mathcal C\subseteq[0,1]\), it is nonempty
-  and bounded, so \xref[Heine--Borel]{thm:heine-borel} gives compactness
+  \todo
+%
+%  Every \(A(n)\) is closed, since
+%  \xref[closed intervals are closed]{prop:real-closed-intervals} and
+%  \xref[finite unions of closed sets are closed]{cor:closed-finite-unions}.
+%  Hence \(\mathcal C=\bigcap(A)\) is closed by
+%  \xref[closure under intersections]{cor:closed-arbitrary-intersections}.
+%  Since \(\{0,1\}\subseteq\mathcal C\subseteq[0,1]\), it is nonempty
+%  and bounded, so \xref[Heine--Borel]{thm:heine-borel} gives compactness
 \end{proof}
 
 \end{document}

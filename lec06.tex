@@ -4,14 +4,226 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Lecture 6: Limit of Functions}\\[0.25em]
+  {\LARGE\bfseries Lecture 6: Limit of Functions and Proving Limits Systematically}\\[0.25em]
   {\large Mathematical Analysis}\\[0.15em]
 \end{center} 
 
 \section{Limit of Functions} 
 
-\begin{dfn}[Limit of Functions]  
+\begin{dfn}[Existence of a Limit at a Point]{limit-of-functions}
   Under metric space \((A, d_A)\) and \((B, d_B)\), let \(f:A\to B\) be a function. Let $c$ be a limit point of \(A\). 
+
+  If there exists a point \(\ell \in B\) such that \[\forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_A(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\] then we say that \(f\) has a limit at \(c\)
 \end{dfn}
+
+\begin{thm}[Uniqueness of a Function Limit]{function-limit-uniqueness}
+  If a function $f$ has a limit at a point \(c\), then the limit is unique, ie
+  \[\exists \ell : B, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_A(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\]
+  \[\iff\]
+  \[\exists! \ell : B, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_A(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\]
+\end{thm}
+
+\begin{proof}
+  \todo[Prove uniqueness using the limit-point assumption and the triangle inequality]
+\end{proof}
+
+\begin{rem}[Board Comparison]{sequence-function-limit-challenges}
+  For a sequence \(a:\NNOne\to X\) in a
+  \xref[metric space]{lec03::def:metric-space} \((X,d)\) and a function
+  \(f:A\to B\), compare the two challenges
+  \begin{center}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{@{}lcc@{}}
+      / & \textbf{Sequence} & \textbf{Function} \\
+      \hline
+      Arbitrary tolerance
+        & \(\forall\varepsilon\in\apos{\RR}\)
+        & \(\forall\varepsilon\in\apos{\RR}\) \\
+      Restrictor
+        & \(\exists N\in\NNOne\)
+        & \(\exists\delta\in\apos{\RR}\) \\
+      Input restriction
+        & \(n\geq N\)
+        & \(0<d_A(x,c)<\delta\) \\
+      Output requirement
+        & \(d(a(n),\ell)<\varepsilon\)
+        & \(d_B(f(x),\ell)<\varepsilon\) \\
+    \end{tabular}
+  \end{center}
+  The output requirement must hold for every \(n\in\NNOne\) or
+  \(x\in A\) satisfying its input restriction
+
+  \begin{enumerate}[nosep]
+    \item \(\varepsilon\) is arbitrary small
+    \item \(\delta\) and \(N\) is used to restrict \(x\)
+      st \(x\) is close enough to the limit
+    \item \(\delta\) and \(N\) are all depends on \(\varepsilon\)
+  \end{enumerate}
+\end{rem}
+
+\begin{conv}[The \(\varepsilon\)--\(\delta\) Challenge]{epsilon-delta-challenge}
+  A value \(\ell\in B\) passes the
+  \emph{\(\varepsilon\)--\(\delta\) challenge} for \(f\) at \(c\) if,
+  for any proposed \(\varepsilon>0\), there exists a radius \(\delta>0\)
+  such that for all \(x\in A\) with \(0<d_A(x,c)<\delta\),
+  \(d_B(f(x),\ell)<\varepsilon\)
+\end{conv}
+
+\begin{thm}[Function Limit Challenge Replacement]{function-limit-challenge-replacement}
+  Let \((A,d_A)\) and \((B,d_B)\) be
+  \xref[metric spaces]{lec03::def:metric-space}, let \(f:A\to B\),
+  let \(c\in A\) be a \xref[limit point]{lec03::def:limit-points} of \(A\),
+  and fix \(\ell\in B\). Let \(g\) be a
+  \xref[convergence challenge function]{lec04::def:convergence-challenge-function}.
+  With balls taken in \((A,d_A)\),
+  \[
+    \begin{gathered}
+      \bigl(\forall\varepsilon\in\apos{\RR},\,
+      \exists\delta\in\apos{\RR},\,
+      \forall x\in\ball{\delta}{c}\setminus\{c\},\quad
+      d_B(f(x),\ell)<\varepsilon\bigr)\\
+      \iff\\
+      \bigl(\forall\varepsilon\in\apos{\RR},\,
+      \exists\delta\in\apos{\RR},\,
+      \forall x\in\ball{\delta}{c}\setminus\{c\},\quad
+      d_B(f(x),\ell)<g(\varepsilon)\bigr)
+    \end{gathered}
+  \]
+\end{thm}
+
+\begin{proof}
+  \todo[Prove both directions using positivity and arbitrarily small values of the challenge function]
+\end{proof}
+
+\begin{cor}[Error-Bound Criterion]{function-limit-error-bound}
+  Let \((A,d_A)\) and \((B,d_B)\) be
+  \xref[metric spaces]{lec03::def:metric-space}, let \(f:A\to B\),
+  let \(c\in A\) be a \xref[limit point]{lec03::def:limit-points} of \(A\),
+  and fix \(\ell\in B\). Let \(g\) be a
+  \xref[convergence challenge function]{lec04::def:convergence-challenge-function},
+  and let \(\rho:\apos{\RR}\to\apos{\RR}\). If, with balls taken in
+  \((A,d_A)\),
+  \[
+    \forall t\in\apos{\RR},\quad
+    \forall x\in\ball{\rho(t)}{c}\setminus\{c\},\quad
+    d_B(f(x),\ell)\leq g(t)
+  \]
+  then \(\ell\) passes the
+  \xref[\(\varepsilon\)--\(\delta\) challenge]{conv:epsilon-delta-challenge}
+  for \(f\) at \(c\)
+\end{cor}
+
+\begin{proof}
+  \todo[Choose a parameter with a sufficiently small error bound, then use its positive radius]
+\end{proof}
+
+\begin{cor}[Sequence Error-Bound Criterion]{sequence-limit-error-bound}
+  \todo[State the sequence criterion using a natural-number threshold M(t) and a challenge-function error bound g(t)]
+\end{cor}
+
+\begin{proof}
+  \todo[Prove the sequence criterion by choosing a sufficiently small error bound and using the corresponding threshold]
+\end{proof}
+
+\begin{rem}[Using the Ball Radius as the Parameter]{ball-radius-parameter}
+  In the \xref[error-bound criterion]{cor:function-limit-error-bound},
+  taking \(\rho(t)=t\) lets us write \(\ball{t}{c}\) directly.
+  Naming this parameter \(\varepsilon\) gives the sufficient condition
+  \[
+    \forall\varepsilon\in\apos{\RR},\quad
+    \forall x\in\ball{\varepsilon}{c}\setminus\{c\},\quad
+    d_B(f(x),\ell)\leq g(\varepsilon)
+  \]
+  Here \(\varepsilon\) is the input-radius parameter, and
+  \(g(\varepsilon)\) is the output-error bound. A local restriction
+  such as an input radius at most \(1\) can instead be included by taking
+  \(\rho(t)=\min(t,1)\)
+\end{rem}
+
+\begin{rem}[A Systematic Method for Proving Limits]{systematic-limit-method}
+  \todo[Summarize the shared procedure: choose a candidate limit, derive an error bound, verify the challenge function, and supply the corresponding radius or threshold]
+\end{rem}
+
+\section{Function Limit Operator}
+
+\begin{dfn}[Limit of a Function at a Point]{function-limit-relation}
+  \todo[Specify the ambient metric space and function domain, then define what it means for f to have limit ell at c]
+\end{dfn}
+
+\begin{dfn}[Domain of the Function Limit Operator]{function-limit-domain}
+  \todo[Define the restricted set of pairs (f,c), where c is a limit point of the domain and f has a limit at c]
+\end{dfn}
+
+\begin{dfn}[Function Limit Operator]{function-limit-op}
+  \todo[Give the operator's signature on the restricted pair domain and characterize its output using the limit relation]
+\end{dfn}
+
+\begin{conv}[Function Limit Notation]{function-limit-notation}
+  \todo[Relate the usual function-limit notation to the operator applied to (f,c)]
+\end{conv}
+
+\begin{rem}[Well-Definedness of the Function Limit]{function-limit-well-defined}
+  \todo[Explain existence from the domain restriction and uniqueness from the uniqueness theorem]
+\end{rem}
+
+\section{One-Sided Limits}
+
+\begin{dfn}[Right-Hand Limit]{right-hand-limit}
+  \todo[Specify the real domain and right-hand accumulation assumption, then give the limit condition for inputs approaching c from the right]
+\end{dfn}
+
+\begin{dfn}[Left-Hand Limit]{left-hand-limit}
+  \todo[Specify the real domain and left-hand accumulation assumption, then give the limit condition for inputs approaching c from the left]
+\end{dfn}
+
+\begin{conv}[One-Sided Limit Notation]{one-sided-limit-notation}
+  \todo[Introduce the notation for right-hand and left-hand limits]
+\end{conv}
+
+\begin{thm}[Uniqueness of One-Sided Limits]{one-sided-limit-uniqueness}
+  \todo[State uniqueness under the corresponding one-sided accumulation assumption]
+\end{thm}
+
+\begin{proof}
+  \todo[Adapt the uniqueness argument to the one-sided input restriction]
+\end{proof}
+
+\begin{thm}[Two-Sided and One-Sided Limits]{two-sided-one-sided-limits}
+  \todo[State when a two-sided limit is equivalent to equal right-hand and left-hand limits, including the required domain assumptions]
+\end{thm}
+
+\begin{proof}
+  \todo[Prove both directions]
+\end{proof}
+
+\begin{rem}[Error Bounds for One-Sided Limits]{one-sided-error-bounds}
+  \todo[Adapt the shared error-bound method to the right-hand and left-hand input regions]
+\end{rem}
+
+\section{Limits at Infinity}
+
+\begin{dfn}[Limit at Positive Infinity]{limit-at-positive-infinity}
+  \todo[Assume the real domain is unbounded above and define a finite output limit as the input tends to positive infinity]
+\end{dfn}
+
+\begin{dfn}[Limit at Negative Infinity]{limit-at-negative-infinity}
+  \todo[Assume the real domain is unbounded below and define a finite output limit as the input tends to negative infinity]
+\end{dfn}
+
+\begin{conv}[Limit Notation at Infinity]{limit-at-infinity-notation}
+  \todo[Introduce the notation for limits as the input tends to positive or negative infinity]
+\end{conv}
+
+\begin{thm}[Uniqueness of Limits at Infinity]{limit-at-infinity-uniqueness}
+  \todo[State uniqueness under the corresponding unbounded-domain assumption]
+\end{thm}
+
+\begin{proof}
+  \todo[Adapt the uniqueness argument using the corresponding input tail]
+\end{proof}
+
+\begin{rem}[Error Bounds for Limits at Infinity]{infinity-error-bounds}
+  \todo[Adapt the shared error-bound method using a real input threshold M(t)]
+\end{rem}
 
 \end{document}

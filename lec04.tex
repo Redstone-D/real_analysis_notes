@@ -109,6 +109,27 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
   \]
 \end{proof}
 
+\begin{cor}[Equality via Challenge Functions]{equality-challenge-replacement}
+  Let \(g\) be a
+  \xref[convergence challenge function]{def:convergence-challenge-function},
+  and let \(x,y\in X\) in a
+  \xref[metric space]{lec03::def:metric-space} \((X,d)\). Then
+  \[
+    x=y\iff\forall\varepsilon\in\apos{\RR},\quad d(x,y)<g(\varepsilon)
+  \]
+\end{cor}
+
+\begin{proof}
+  \noindent\textbf{(\(\Rightarrow\))}
+  If \(x=y\), then \(d(x,y)=0<g(\varepsilon)\) for every
+  \(\varepsilon>0\)
+
+  \noindent\textbf{(\(\Leftarrow\))}
+  If \(x\neq y\), then \(d(x,y)>0\). The challenge-function property
+  gives \(\gamma>0\) with \(g(\gamma)<d(x,y)\), contradicting
+  \(d(x,y)<g(\gamma)\). Hence \(x=y\)
+\end{proof}
+
 \begin{lem}[Restricting to Small Tolerances]{restricting-to-small-tolerances}
   Fix $r\in\apos{\RR}$. The function
   \[

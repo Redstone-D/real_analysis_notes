@@ -52,6 +52,24 @@ If a sequence have two subsequences with different limits, then the sequence div
 \todo
 \end{proof}
 
+\begin{thm}[Sequential Compactness]{sequential-compactness}
+  Let \((X,d)\) be a \xref[metric space]{lec03::def:metric-space}.
+  A subset \(K\subseteq X\) is \xref[compact]{lec03::def:compact-set}
+  in the \xref[induced topology]{lec03::def:induced-topology}
+  if and only if every sequence \(a:\NNOne\to K\) has a
+  \xref[subsequence]{def:subsequence} \(b:\NNOne\to K\) and a point
+  \(\ell\in K\) such that
+  \[
+    \forall\varepsilon\in\apos{\RR},\,\exists N\in\NNOne,\,
+    \forall k\in\NNOne,\quad
+    k\geq N\implies d(\term{b}{k},\ell)<\varepsilon
+  \]
+\end{thm}
+
+\begin{proof}
+  \todo[Proof]
+\end{proof}
+
 \section{Bolzano-Weierstrass Theorem}
 
 \begin{thm}[Bolzano-Weierstrass Theorem]{bw}
@@ -158,33 +176,163 @@ A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered f
 \end{thm}
 
 \begin{proof}
-\todo
+  Since \(0\leq a(n)+\abs{a(n)}\leq2\abs{a(n)}\), the
+  \xref[comparison test]{cor:comparison-test} gives convergence of the
+  series of \(n\map a(n)+\abs{a(n)}\), and subtracting the convergent
+  series of \(n\map\abs{a(n)}\) gives convergence of the series of \(a\)
+  by \xref[linearity]{thm:linearity-of-infinite-summation}
+\end{proof}
+
+\begin{thm}[Convergence of Nonnegative Series]{nonnegative-series-criterion}
+  Let \(F\) be a
+  \xref[complete ordered field]{lec01::def:complete-ordered-field}, and let
+  \(a:\NNOne\to F\) satisfy \(a(n)\geq0\) for every \(n\in\NNOne\).
+  
+  The \xref[series of \(a\)]{def:series} is
+  \xref[convergent]{def:convergent-series} if and only if \(P\) is
+  \xref[bounded above]{lec01::def:bounded-above} in \(F\).
+  In that case,
+  \[
+    \infsum(a)=\sup(P), \quad P\defeq\left\{\sum_1^n(a):n\in\NNOne\right\}
+  \]
+\end{thm}
+
+\begin{proof}
+
+  Suppose \(P\) is bounded above and \(\mathrm{series}(a)\) converges.
+  Write \(M=\sup(P)\) and \(L=\seqlim(\mathrm{series}(a))\).
+  According to the
+  \xref[\(\varepsilon\)-criterion for the supremum]{lec01::prop:epsilon-supremum},
+  \[
+    \forall\varepsilon_1\in\apos{F},\,\exists s\in P,\quad
+    \abs{M-s}<\varepsilon_1
+  \]
+  According to the \xref[definition of a limit]{lec04::def:limit},
+  \[
+    \forall\varepsilon_2\in\apos{F},\,\exists N\in\NNOne,\,
+    \forall n\in\NNOne,\quad
+    n\geq N\implies\abs{\mathrm{series}(a)(n)-L}<\varepsilon_2
+  \]
+  Fix arbitrary \(\varepsilon_1,\varepsilon_2\in\apos{F}\) and
+  corresponding witnesses \(s,N\), and let
+  \(\varepsilon=\max(\varepsilon_1,\varepsilon_2)\).
+  \[\forall s \in P, \, \exists k:\NNOne, \, s=\mathrm{series}(a)(k) \]
+  Set \(n=\max(k,N)\). Since the partial sums are increasing and
+  \(M\) is an upper bound,
+  \[
+    s=\mathrm{series}(a)(k)\leq\mathrm{series}(a)(n)\leq M
+  \]
+  Hence
+  \[
+    \abs{M-\mathrm{series}(a)(n)}
+    =M-\mathrm{series}(a)(n)
+    \leq M-s<\varepsilon_1\leq\varepsilon
+  \]
+  Also \(n\geq N\), so the convergence bound applies at this same index
+
+  Thus
+  \[
+    \abs{M-\mathrm{series}(a)(n)}<\varepsilon,
+    \qquad
+    \abs{\mathrm{series}(a)(n)-L}<\varepsilon
+  \]
+  By the \xref[triangle inequality]{lec03::lem:triangle-inequality-distance},
+  \[
+    \abs{M-L}
+    \leq\abs{M-\mathrm{series}(a)(n)}
+      +\abs{\mathrm{series}(a)(n)-L}
+    <2\cdot\varepsilon
+  \]
+  The function \(g(\varepsilon)\defeq2\cdot\varepsilon\) is a
+  \xref[linear challenge function]{lec04::lem:linear-is-challenge}.
+  Taking \(\varepsilon_1=\varepsilon_2=\varepsilon\) shows that
+  \(\abs{M-L}<g(\varepsilon)\) for every \(\varepsilon\in\apos{F}\).
+  By the \xref[equality criterion with a challenge function]{lec04::cor:equality-challenge-replacement},
+  \[
+    \sup(P)=\seqlim(\mathrm{series}(a))=\infsum(a)
+  \]
 \end{proof}
 
 \begin{rem}[Two Methods for Checking Series Convergence]{two-methods-series}
   Depending on the sign structure of the terms of $a$:
   \begin{itemize}[nosep]
     \item \emph{Single-sign} (all $a(n) \geq 0$ or all $a(n) \leq 0$): apply the \xref[Comparison Test for Series]{cor:comparison-test} directly. Monotonicity of $\mathrm{series}(a)$ comes from \xref{lem:series-nonneg-increasing} (or the sign-flipped version)
-    \item \emph{Mixed-sign}: apply \xref[Absolute Convergence]{thm:absolute-convergence} first, reducing the question to $\mathrm{series}(|a|)$ (non-negative), where the Comparison Test applies
+    \item \emph{Mixed-sign}: apply \xref[Absolute Convergence]{thm:absolute-convergence} first, reducing the question to $\mathrm{series}(|a|)$ (non-negative), where the Comparison Test applies. For alternating terms, the \xref[alternating-series test]{thm:alternating-series-test} may apply even when the series of absolute values diverges
   \end{itemize}
 \end{rem} 
 
 \section{Special Series}
 
+\begin{dfn}[Harmonic Series]{harmonic-series}
+  The \emph{harmonic series} is the \xref[series]{def:series} of the sequence
+  \[
+    a:\NNOne\to\RR\defeq n\map\frac{1}{n}
+  \]
+\end{dfn}
+
 \begin{thm}[Harmonic Series Diverges]{harmonic-series-diverges}
-  The \xref[series of the harmonic sequence]{def:series} $a(n) \defeq 1/n$ is divergent
+  The \xref[harmonic series]{def:harmonic-series} is divergent
 \end{thm}
 
 \begin{proof}
 \todo
 \end{proof}
 
+\begin{dfn}[Reciprocal Squares Series]{reciprocal-squares-series}
+  The \emph{reciprocal squares series} is the \xref[series]{def:series}
+  of the sequence
+  \[
+    a:\NNOne\to\RR\defeq n\map\frac{1}{n^2}
+  \]
+\end{dfn}
+
 \begin{thm}[Reciprocal Squares Series Converges]{reciprocal-squares-converges}
-  The \xref[series of]{def:series} $a(n) \defeq 1/n^2$ is \xref[convergent]{def:convergent-series}
+  The \xref[reciprocal squares series]{def:reciprocal-squares-series} is
+  \xref[convergent]{def:convergent-series}
 \end{thm}
 
 \begin{proof}
 \todo
+\end{proof}
+
+\begin{dfn}[Alternating Series]{alternating-series}
+  Let \(b:\NNOne\to\agez{\RR}\) and \(\sigma\in\{-1,1\}\).
+  The \xref[series]{def:series} of the sequence
+  \[
+    a:\NNOne\to\RR\defeq
+    n\map\sigma\cdot(-1)^{n+1}\cdot b(n)
+  \]
+  is called an \emph{alternating series}
+\end{dfn}
+
+\begin{thm}[Alternating-Series Test]{alternating-series-test}
+  Let \(b:\Conv(\RR)\) and \(\sigma\in\{-1,1\}\). If
+  \[
+    \forall n\in\NNOne,\quad 0\leq b(n+1)\leq b(n),
+    \qquad\seqlim(b)=0
+  \]
+  then the \xref[alternating series]{def:alternating-series} of
+  \(n\map\sigma\cdot(-1)^{n+1}\cdot b(n)\) is
+  \xref[convergent]{def:convergent-series}
+\end{thm}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{eg}[Alternating Harmonic Series]{alternating-harmonic-series}
+  The \emph{alternating harmonic series} is the \xref[series]{def:series}
+  of the sequence
+  \[
+    a:\NNOne\to\RR\defeq n\map\frac{(-1)^{n+1}}{n}
+  \]
+  It is \xref[convergent]{def:convergent-series}, while the series of
+  \(n\map\abs{a(n)}\) is the
+  \xref[divergent harmonic series]{thm:harmonic-series-diverges}
+\end{eg}
+
+\begin{proof}
+  \todo
 \end{proof}
 
 \end{document}

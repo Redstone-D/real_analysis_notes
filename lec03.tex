@@ -443,7 +443,7 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
   Thus \(\ball{s}{z}\subseteq\ball{r}{x}\), so \(\ball{r}{x}\) is open
 \end{proof}
 
-\section{Limit Points and Isolated Points} 
+\section{Limit Points, Isolated Points, and Closure}
 
 \begin{dfn}[Limit Points]{limit-points}
   Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
@@ -455,6 +455,73 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{dfn}
 
 \redirect[Sequence Characterization of Limit Points]{thm}{limit-point-sequence}{lec04::thm:limit-point-sequence}
+
+\begin{dfn}[Isolated Points]{isolated-points}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
+  An \emph{isolated point} \(x\in X\) of a set \(U\subseteq X\) is a point such that
+  \[
+    \exists\varepsilon\in\apos{\RR},\quad
+    \ball{\varepsilon}{x}\cap U=\{x\}
+  \] 
+
+\end{dfn}
+
+\begin{dfn}[Closure]{closure}
+  Let \((X,\mathcal T)\) be a
+  \xref[topological space]{def:topological-space}.
+  The \emph{closure function}
+  \(\closure:\PowerSet(X)\to\PowerSet(X)\) assigns to each
+  \(A\subseteq X\) the smallest \xref[closed]{def:closed-sets} subset
+  of \(X\) containing \(A\). For \(A,C\subseteq X\),
+  \[
+    \closure(A)=C\iff
+    \begin{cases}
+      A\subseteq C,\quad C\text{ is closed}\\
+      \forall D\subseteq X,\quad
+      (A\subseteq D\text{ and }D\text{ is closed})\implies C\subseteq D
+    \end{cases}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\closure(A)}}}
+\end{dfn}
+
+\begin{proof}[Well-definedness of closure]
+  \todo
+\end{proof}
+
+\begin{conv}[Closure Notation]{closure-notation}
+  For the \xref[closure function]{def:closure}, write
+  \[
+    \cl{A}\defeq\closure(A)
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\cl{A}}}}
+\end{conv}
+
+\begin{thm}[Closure by Adjoining Limit Points]{closure-limit-points}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, and let
+  \(A\subseteq X\). With closure taken in the
+  \xref[induced topology]{def:induced-topology}, write
+  \[
+    L\defeq\{x\in X:x\text{ is a \xref[limit point]{def:limit-points} of }A\}
+  \]
+  Then
+  \[
+    \cl{A}=A\cup L,
+    \qquad
+    \{x\in X:x\text{ is a limit point of }\cl{A}\}=L
+  \]
+\end{thm}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{rem}[Adding Limit Points Once is Enough]{closure-limit-points-intuition}
+  Start with \(A\) and add all its limit points to obtain \(A\cup L\).
+  This set is already the \xref[closure]{def:closure} of \(A\), so it is
+  closed. Adding these points does not create any new limit points:
+  the set of limit points is still \(L\), and repeating the process
+  leaves \(A\cup L\) unchanged
+\end{rem}
 
 \section{Compact Sets}
 

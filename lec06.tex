@@ -24,7 +24,15 @@
 \end{thm}
 
 \begin{proof}
-  \todo[Prove uniqueness using the limit-point assumption and the triangle inequality]
+  Assume that \[\exists \ell_1, \ell_2 : B, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_A(x,c) < \delta \implies d_B(f(x),\ell_1) < \varepsilon, \, d_B(f(x),\ell_2) < \varepsilon\] where $\ell_1 \neq \ell_2$
+
+  We know that 
+  \[d_B(f(x),\ell_1) + d_B(f(x),\ell_2) < 2 \varepsilon\] 
+
+  Then, according to \xref[triangle inequality]{lec03::axm:metric-triangle-inequality}, 
+  \[d_B(f(x),\ell_1) + d_B(f(x),\ell_2) \leq d_B(\ell_1, \ell_2) < 2 \varepsilon\] 
+
+  According to \xref[epsilon criteria]{lec04::cor:equality-challenge-replacement}, \[d_B(\ell_1, \ell_2) = 0\], ie \xref[$\ell_1 = \ell_2$]{lec03::axm:metric-separation}. Contradiction. So uniqueness is proven. 
 \end{proof}
 
 \begin{rem}[Board Comparison]{sequence-function-limit-challenges}
@@ -34,7 +42,7 @@
   \begin{center}
     \renewcommand{\arraystretch}{1.25}
     \begin{tabular}{@{}lcc@{}}
-      / & \textbf{Sequence} & \textbf{Function} \\
+       & \textbf{Sequence} & \textbf{Function} \\
       \hline
       Arbitrary tolerance
         & \(\forall\varepsilon\in\apos{\RR}\)
@@ -95,76 +103,84 @@
   \todo[Prove both directions using positivity and arbitrarily small values of the challenge function]
 \end{proof}
 
-\begin{cor}[Error-Bound Criterion]{function-limit-error-bound}
-  Let \((A,d_A)\) and \((B,d_B)\) be
-  \xref[metric spaces]{lec03::def:metric-space}, let \(f:A\to B\),
-  let \(c\in A\) be a \xref[limit point]{lec03::def:limit-points} of \(A\),
-  and fix \(\ell\in B\). Let \(g\) be a
-  \xref[convergence challenge function]{lec04::def:convergence-challenge-function},
-  and let \(\rho:\apos{\RR}\to\apos{\RR}\). If, with balls taken in
-  \((A,d_A)\),
-  \[
-    \forall t\in\apos{\RR},\quad
-    \forall x\in\ball{\rho(t)}{c}\setminus\{c\},\quad
-    d_B(f(x),\ell)\leq g(t)
-  \]
-  then \(\ell\) passes the
-  \xref[\(\varepsilon\)--\(\delta\) challenge]{conv:epsilon-delta-challenge}
-  for \(f\) at \(c\)
-\end{cor}
-
-\begin{proof}
-  \todo[Choose a parameter with a sufficiently small error bound, then use its positive radius]
-\end{proof}
-
-\begin{cor}[Sequence Error-Bound Criterion]{sequence-limit-error-bound}
-  \todo[State the sequence criterion using a natural-number threshold M(t) and a challenge-function error bound g(t)]
-\end{cor}
-
-\begin{proof}
-  \todo[Prove the sequence criterion by choosing a sufficiently small error bound and using the corresponding threshold]
-\end{proof}
-
-\begin{rem}[Using the Ball Radius as the Parameter]{ball-radius-parameter}
-  In the \xref[error-bound criterion]{cor:function-limit-error-bound},
-  taking \(\rho(t)=t\) lets us write \(\ball{t}{c}\) directly.
-  Naming this parameter \(\varepsilon\) gives the sufficient condition
-  \[
-    \forall\varepsilon\in\apos{\RR},\quad
-    \forall x\in\ball{\varepsilon}{c}\setminus\{c\},\quad
-    d_B(f(x),\ell)\leq g(\varepsilon)
-  \]
-  Here \(\varepsilon\) is the input-radius parameter, and
-  \(g(\varepsilon)\) is the output-error bound. A local restriction
-  such as an input radius at most \(1\) can instead be included by taking
-  \(\rho(t)=\min(t,1)\)
-\end{rem}
-
-\begin{rem}[A Systematic Method for Proving Limits]{systematic-limit-method}
-  \todo[Summarize the shared procedure: choose a candidate limit, derive an error bound, verify the challenge function, and supply the corresponding radius or threshold]
-\end{rem}
-
 \section{Function Limit Operator}
 
 \begin{dfn}[Limit of a Function at a Point]{function-limit-relation}
-  \todo[Specify the ambient metric space and function domain, then define what it means for f to have limit ell at c]
+  Let \((X,d_X)\) and \((B,d_B)\) be
+  \xref[metric spaces]{lec03::def:metric-space}, let \(A\subseteq X\)
+  and \(f:A\to B\), and let \(c\in X\) be a
+  \xref[limit point]{lec03::def:limit-points} of \(A\).
+  We say that \(f\) \emph{has limit \(\ell\in B\) at \(c\)} if
+  \[
+    \begin{gathered}
+      \forall\varepsilon\in\apos{\RR},\quad
+      \exists\delta\in\apos{\RR},\quad\forall x\in A,\\
+      0<d_X(x,c)<\delta\implies d_B(f(x),\ell)<\varepsilon
+    \end{gathered}
+  \]
 \end{dfn}
 
-\begin{dfn}[Domain of the Function Limit Operator]{function-limit-domain}
-  \todo[Define the restricted set of pairs (f,c), where c is a limit point of the domain and f has a limit at c]
+\begin{dfn}[Limit Domain]{function-limit-domain}
+  A point in the limit domain if and only if
+  \begin{enumerate}[nosep]
+    \item \(c\) is a \xref[limit point]{lec03::def:limit-points} of the domain \(A\)
+    \item \(f\) \xref[has a limit]{def:limit-of-functions} at \(c\)
+  \end{enumerate}
+  \[
+    \LimDom:(A\to B)\to\PowerSet(X)
+  \]
+  \[
+    \LimDom(f)\defeq
+    \left\{c\in X\;\middle|\;
+      \begin{gathered}
+        \forall r\in\apos{\RR},\quad
+        \ball{r}{c}\cap\bigl(A\setminus\{c\}\bigr)\neq\emptyset\\
+        {}\land{}\\
+        \exists\ell\in B,\quad\forall\varepsilon\in\apos{\RR},\quad
+        \exists\delta\in\apos{\RR},\\
+        \forall x\in A,\quad
+        0<d_X(x,c)<\delta\implies d_B(f(x),\ell)<\varepsilon
+      \end{gathered}
+    \right\}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\LimDom(f)}}}
 \end{dfn}
+
+\begin{prop}[Well-Definedness of the Function Limit]{function-limit-well-defined}
+  With the setup of the \xref[limit relation]{def:function-limit-relation},
+  for every \(f:A\to B\) and \(c\in\LimDom(f)\), there exists a unique
+  \(\ell\in B\) such that \(f\)
+  \xref[has limit \(\ell\) at \(c\)]{def:function-limit-relation}
+\end{prop}
+
+\begin{proof}
+  \todo[Use membership in the limit domain for existence and the limit-point property with the metric axioms for uniqueness]
+\end{proof}
 
 \begin{dfn}[Function Limit Operator]{function-limit-op}
-  \todo[Give the operator's signature on the restricted pair domain and characterize its output using the limit relation]
+  \[
+    \fnlim:\Pi f:(A\to B),\quad\LimDom(f)\to B
+  \]
+  % Characterization for f:A->B, c in LimDom(f), and ell in B.
+  \[
+    \fnlim(f)(c)=\ell
+    \iff
+    \begin{gathered}
+      \forall\varepsilon\in\apos{\RR},\quad
+      \exists\delta\in\apos{\RR},\quad\forall x\in A,\\
+      0<d_X(x,c)<\delta\implies d_B(f(x),\ell)<\varepsilon
+    \end{gathered}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\fnlim(f)(c)}}}
 \end{dfn}
 
 \begin{conv}[Function Limit Notation]{function-limit-notation}
-  \todo[Relate the usual function-limit notation to the operator applied to (f,c)]
+  For the \xref[function limit operator]{def:function-limit-op}, write
+  \[
+    \fnlim_c(f)\defeq\fnlim(f)(c)
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\fnlim_c(f)}}}
 \end{conv}
-
-\begin{rem}[Well-Definedness of the Function Limit]{function-limit-well-defined}
-  \todo[Explain existence from the domain restriction and uniqueness from the uniqueness theorem]
-\end{rem}
 
 \section{One-Sided Limits}
 
@@ -224,6 +240,36 @@
 
 \begin{rem}[Error Bounds for Limits at Infinity]{infinity-error-bounds}
   \todo[Adapt the shared error-bound method using a real input threshold M(t)]
+\end{rem}
+
+\section{A Systematic Method for Proving Limits}
+
+The shared error-bound method covers finite-value limits of sequences,
+two-sided function limits, one-sided limits, and limits as the input tends
+to infinity. The input restriction changes with the approach, while the
+output tolerance is handled using
+\xref[challenge functions]{lec04::def:convergence-challenge-function}.
+Infinite output limits use arbitrarily large output thresholds instead
+
+\begin{rem}[Shared Proof Method]{systematic-limit-method}
+  \todo[Summarize the shared procedure: choose a candidate limit, derive an error bound, verify the challenge function, and supply the corresponding radius or threshold]
+\end{rem}
+
+\begin{rem}[Using the Ball Radius as the Parameter]{ball-radius-parameter}
+  In the \xref[challenge-function method]{thm:function-limit-challenge-replacement},
+  when the input-radius parameter itself supplies the witness \(\delta\),
+  the following condition suffices
+  \[
+    \forall\varepsilon\in\apos{\RR},\quad
+    \forall x\in\ball{\varepsilon}{c}\setminus\{c\},\quad
+    d_B(f(x),\ell)\leq g(\varepsilon)
+  \]
+  Here \(\varepsilon\) is the input-radius parameter, and
+  \(g(\varepsilon)\) is the output-error bound for a
+  \xref[challenge function]{lec04::def:convergence-challenge-function} \(g\).
+  A local restriction such as an input radius at most \(1\) can instead
+  be handled by choosing \(\delta=\min(\varepsilon,1)\) and verifying
+  the output bound on that smaller ball
 \end{rem}
 
 \end{document}

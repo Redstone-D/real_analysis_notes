@@ -20,6 +20,8 @@
 \providecommand*{\distanceRef}{real-analysis::lec03::def:distance}
 \providecommand*{\openBallRef}{real-analysis::lec03::def:open-balls}
 \providecommand*{\openBallNotationRef}{real-analysis::lec03::conv:open-ball-notation}
+\providecommand*{\closureRef}{real-analysis::lec03::def:closure}
+\providecommand*{\closureNotationRef}{real-analysis::lec03::conv:closure-notation}
 \providecommand*{\floorRef}{real-analysis::lec01::def:floor}
 \providecommand*{\floorNotationRef}{real-analysis::lec01::conv:floor-notation}
 \providecommand*{\ceilRef}{real-analysis::lec01::def:ceiling}
@@ -27,6 +29,8 @@
 \providecommand*{\binaryMaxRef}{real-analysis::lec01::def:binary-max}
 \providecommand*{\binaryMinRef}{real-analysis::lec01::def:binary-min}
 \providecommand*{\seqLimitRef}{real-analysis::lec04::def:limit-op}
+\providecommand*{\functionLimitDomainRef}{real-analysis::lec06::def:function-limit-domain}
+\providecommand*{\functionLimitRef}{real-analysis::lec06::def:function-limit-op}
 \providecommand*{\nestedSequencesRef}{real-analysis::lec02::def:nested-sequences-set}
 \providecommand*{\convergentSequencesRef}{real-analysis::lec04::def:convergent-sequences-set}
 \providecommand*{\boundedSequencesRef}{real-analysis::lec04::def:bounded-sequences-set}
@@ -58,10 +62,22 @@
 \newcommand*{\dist}[2]{\xref[d(#1, #2)]{\distanceRef}}
 \newcommand*{\OpenBall}{\mathop{\xref[\mathrm{OpenBall}]{\openBallRef}}\nolimits}
 \newcommand*{\ball}[2]{\mathord{\xref[B]{\openBallNotationRef}}_{#1}(#2)}
+\newcommand*{\closure}{\mathop{\xref[\mathrm{cl}]{\closureRef}}\nolimits}
+% Overlay the linked bar on a phantom copy, keeping the visible argument
+% outside its link so nested notation can retain its own references.
+\newcommand*{\cl}[1]{\mathpalette\raClosureBar{#1}}
+\newcommand*{\raClosureBar}[2]{%
+  \mathord{\ooalign{%
+    $\mathsurround=0pt#1#2$\cr
+    $\mathsurround=0pt#1\xref[\overline{\phantom{#2}}]{\closureNotationRef}$\cr
+  }}%
+}
 \newcommand*{\floorfn}{\mathop{\xref[\mathrm{floor}]{\floorRef}}\nolimits}
 \newcommand*{\floor}[1]{\xref[\lfloor #1 \rfloor]{\floorNotationRef}}
 \newcommand*{\ceil}[1]{\xref[\lceil #1 \rceil]{\ceilRef}}
 \newcommand*{\seqlim}{\mathop{\xref[\mathrm{lim}]{\seqLimitRef}}}
+\newcommand*{\LimDom}{\mathop{\xref[\mathrm{LimDom}]{\functionLimitDomainRef}}\nolimits}
+\newcommand*{\fnlim}{\mathop{\xref[\mathrm{lim}]{\functionLimitRef}}\nolimits}
 % The optional index domain keeps both zero-based and positive-indexed
 % nested families explicit; parentheses and the carrier stay outside links.
 \newcommand*{\Nested}[1][\NN]{%

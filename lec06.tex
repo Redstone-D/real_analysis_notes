@@ -11,28 +11,37 @@
 \section{Limit of Functions} 
 
 \begin{dfn}[Existence of a Limit at a Point]{limit-of-functions}
-  Under metric space \((A, d_A)\) and \((B, d_B)\), let \(f:A\to B\) be a function. Let $c$ be a limit point of \(A\). 
+  Let \((X,d_X)\) and \((B,d_B)\) be
+  \xref[metric spaces]{lec03::def:metric-space}, let \(A\subseteq X\)
+  and \(f:A\to B\), and let \(c\in X\) be a
+  \xref[limit point]{lec03::def:limit-points} of \(A\)
 
-  If there exists a point \(\ell \in B\) such that \[\forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_A(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\] then we say that \(f\) has a limit at \(c\)
+  If there exists a point \(\ell \in B\) such that \[\forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_X(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\] then we say that \(f\) has a limit at \(c\)
 \end{dfn}
 
 \begin{thm}[Uniqueness of a Function Limit]{function-limit-uniqueness}
-  If a function $f$ has a limit at a point \(c\), then the limit is unique, ie
-  \[\exists \ell : B, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_A(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\]
+  With the setup of the \xref[existence definition]{def:limit-of-functions},
+  if a function $f$ has a limit at a point \(c\), then the limit is unique, ie
+  \[\exists \ell : B, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_X(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\]
   \[\iff\]
-  \[\exists! \ell : B, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_A(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\]
+  \[\exists! \ell : B, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_X(x,c) < \delta \implies d_B(f(x),\ell) < \varepsilon\]
 \end{thm}
 
 \begin{proof}
-  Assume that \[\exists \ell_1, \ell_2 : B, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta \in \apos{\RR}, \, \forall x \in A, \, 0 < d_A(x,c) < \delta \implies d_B(f(x),\ell_1) < \varepsilon, \, d_B(f(x),\ell_2) < \varepsilon\] where $\ell_1 \neq \ell_2$
+  Assume that \[\exists \ell_1, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta_1 \in \apos{\RR}, \, \forall x \in A, \, 0 < d_X(x,c) < \delta_1 \implies d_B(f(x),\ell_1) < \varepsilon\]
+   \[\exists \ell_2, \, \forall \varepsilon \in \apos{\RR}, \, \exists \delta_2 \in \apos{\RR}, \, \forall x \in A, \, 0 < d_X(x,c) < \delta_2 \implies d_B(f(x),\ell_2) < \varepsilon\] where $\ell_1 \neq \ell_2$
+
+  Fix \(\varepsilon>0\) and choose the corresponding \(\delta_1,\delta_2\).
+  Since \(c\) is a \xref[limit point]{lec03::def:limit-points} of \(A\), choose
+  \(x\in A\cap\ball{\min(\delta_1,\delta_2)}{c}\setminus\{c\}\)
 
   We know that 
-  \[d_B(f(x),\ell_1) + d_B(f(x),\ell_2) < 2 \varepsilon\] 
+  \[\forall x \in A\cap\ball{\min(\delta_1, \delta_2)}{c}\setminus\{c\}, \, d_B(f(x),\ell_1) + d_B(f(x),\ell_2) < 2\varepsilon\]
 
   Then, according to \xref[triangle inequality]{lec03::axm:metric-triangle-inequality}, 
-  \[d_B(f(x),\ell_1) + d_B(f(x),\ell_2) \leq d_B(\ell_1, \ell_2) < 2 \varepsilon\] 
+  \[d_B(\ell_1, \ell_2) \leq d_B(f(x),\ell_1) + d_B(f(x),\ell_2) < 2 \varepsilon\]
 
-  According to \xref[epsilon criteria]{lec04::cor:equality-challenge-replacement}, \[d_B(\ell_1, \ell_2) = 0\], ie \xref[$\ell_1 = \ell_2$]{lec03::axm:metric-separation}. Contradiction. So uniqueness is proven. 
+  According to \xref[epsilon criteria]{lec04::cor:equality-challenge-replacement}, \[d_B(\ell_1, \ell_2) = 0\] ie \xref[$\ell_1 = \ell_2$]{lec03::axm:metric-separation}. Contradiction. So uniqueness is proven.
 \end{proof}
 
 \begin{rem}[Board Comparison]{sequence-function-limit-challenges}
@@ -52,7 +61,7 @@
         & \(\exists\delta\in\apos{\RR}\) \\
       Input restriction
         & \(n\geq N\)
-        & \(0<d_A(x,c)<\delta\) \\
+        & \(0<d_X(x,c)<\delta\) \\
       Output requirement
         & \(d(a(n),\ell)<\varepsilon\)
         & \(d_B(f(x),\ell)<\varepsilon\) \\
@@ -73,34 +82,35 @@
   A value \(\ell\in B\) passes the
   \emph{\(\varepsilon\)--\(\delta\) challenge} for \(f\) at \(c\) if,
   for any proposed \(\varepsilon>0\), there exists a radius \(\delta>0\)
-  such that for all \(x\in A\) with \(0<d_A(x,c)<\delta\),
+  such that for all \(x\in A\) with \(0<d_X(x,c)<\delta\),
   \(d_B(f(x),\ell)<\varepsilon\)
 \end{conv}
 
 \begin{thm}[Function Limit Challenge Replacement]{function-limit-challenge-replacement}
-  Let \((A,d_A)\) and \((B,d_B)\) be
-  \xref[metric spaces]{lec03::def:metric-space}, let \(f:A\to B\),
-  let \(c\in A\) be a \xref[limit point]{lec03::def:limit-points} of \(A\),
+  Let \((X,d_X)\) and \((B,d_B)\) be
+  \xref[metric spaces]{lec03::def:metric-space}, let \(A\subseteq X\)
+  and \(f:A\to B\),
+  let \(c\in X\) be a \xref[limit point]{lec03::def:limit-points} of \(A\),
   and fix \(\ell\in B\). Let \(g\) be a
   \xref[convergence challenge function]{lec04::def:convergence-challenge-function}.
-  With balls taken in \((A,d_A)\),
+  With balls taken in \((X,d_X)\),
   \[
     \begin{gathered}
       \bigl(\forall\varepsilon\in\apos{\RR},\,
       \exists\delta\in\apos{\RR},\,
-      \forall x\in\ball{\delta}{c}\setminus\{c\},\quad
+      \forall x\in A\cap\ball{\delta}{c}\setminus\{c\},\quad
       d_B(f(x),\ell)<\varepsilon\bigr)\\
       \iff\\
       \bigl(\forall\varepsilon\in\apos{\RR},\,
       \exists\delta\in\apos{\RR},\,
-      \forall x\in\ball{\delta}{c}\setminus\{c\},\quad
+      \forall x\in A\cap\ball{\delta}{c}\setminus\{c\},\quad
       d_B(f(x),\ell)<g(\varepsilon)\bigr)
     \end{gathered}
   \]
 \end{thm}
 
 \begin{proof}
-  \todo[Prove both directions using positivity and arbitrarily small values of the challenge function]
+  Similar to the \xref[sequence challenge-replacement proof]{lec04::thm:convergence-challenge-replacement}
 \end{proof}
 
 \section{Function Limit Operator}
@@ -154,7 +164,8 @@
 \end{prop}
 
 \begin{proof}
-  \todo[Use membership in the limit domain for existence and the limit-point property with the metric axioms for uniqueness]
+  Existence follows from the \xref[definition of the limit domain]{def:function-limit-domain}.
+  The limit is unique by the \xref[uniqueness theorem]{thm:function-limit-uniqueness}
 \end{proof}
 
 \begin{dfn}[Function Limit Operator]{function-limit-op}
@@ -180,29 +191,144 @@
     \fnlim_c(f)\defeq\fnlim(f)(c)
   \]
   \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\fnlim_c(f)}}}
-\end{conv}
+\end{conv} 
+
+\section{Properties of Function Limits} 
+
+\begin{thm}
+  If we can propose a convergence sequence $a$ which codomain is in the domain of a function $f$ exculding its $c$, where $\seqlim a = c$, then the limit of the function $f$ at $c$ is equal to the limit of the sequence $n \map f(a(n))$. 
+\[f: A \to B, \, \fnlim_c(f) = \ell \iff \forall a: \mathbb{N} \to A \setminus \{c\}, \, \seqlim a = c, \, \seqlim (n \map f(a(n))) = \ell\]
+\end{thm}
 
 \section{One-Sided Limits}
 
 \begin{dfn}[Right-Hand Limit]{right-hand-limit}
-  \todo[Specify the real domain and right-hand accumulation assumption, then give the limit condition for inputs approaching c from the right]
+  Let \(A\subseteq\RR\), let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}, and let \(f:A\to B\).
+  Let \(c\in\RR\) satisfy
+  \[
+    \forall r\in\apos{\RR},\quad\exists x\in A,\quad 0<x-c<r
+  \]
+  We say that \(f\) has \emph{right-hand limit} \(\ell\in B\) at \(c\) if
+  \[
+    \forall\varepsilon\in\apos{\RR},\,
+    \exists\delta\in\apos{\RR},\,\forall x\in A\cap(c,c+\delta),\,
+    d_B(f(x),\ell)<\varepsilon
+  \]
 \end{dfn}
 
 \begin{dfn}[Left-Hand Limit]{left-hand-limit}
-  \todo[Specify the real domain and left-hand accumulation assumption, then give the limit condition for inputs approaching c from the left]
+  Let \(A\subseteq\RR\), let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}, and let \(f:A\to B\).
+  Let \(c\in\RR\) satisfy
+  \[
+    \forall r\in\apos{\RR},\quad\exists x\in A,\quad 0<c-x<r
+  \]
+  We say that \(f\) has \emph{left-hand limit} \(\ell\in B\) at \(c\) if
+  \[
+    \forall\varepsilon\in\apos{\RR},\,
+    \exists\delta\in\aneg{\RR},\,\forall x\in A\cap(c+\delta,c),\,
+    d_B(f(x),\ell)<\varepsilon
+  \]
 \end{dfn}
 
-\begin{conv}[One-Sided Limit Notation]{one-sided-limit-notation}
-  \todo[Introduce the notation for right-hand and left-hand limits]
-\end{conv}
-
 \begin{thm}[Uniqueness of One-Sided Limits]{one-sided-limit-uniqueness}
-  \todo[State uniqueness under the corresponding one-sided accumulation assumption]
+  Under the assumptions of the \xref[right-hand]{def:right-hand-limit}
+  or \xref[left-hand]{def:left-hand-limit} definition, the corresponding
+  one-sided limit, if it exists, is unique
 \end{thm}
 
 \begin{proof}
-  \todo[Adapt the uniqueness argument to the one-sided input restriction]
+  The argument is the same as for \xref[two-sided limits]{thm:function-limit-uniqueness},
+  choosing \(x\) in the shared one-sided interval using the corresponding
+  accumulation assumption
 \end{proof}
+
+\begin{dfn}[Right-Hand Limit Domain]{right-hand-limit-domain}
+  Let \(A\subseteq\RR\) and let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}
+  \[
+    \LimDomRight:(A\to B)\to\PowerSet(\RR)
+  \]
+  \[
+    \LimDomRight(f)\defeq
+    \left\{c\in\RR\;\middle|\;
+      \begin{gathered}
+        \forall r\in\apos{\RR},\quad A\cap(c,c+r)\neq\emptyset\\
+        {}\land{}\\
+        \exists\ell\in B,\quad\forall\varepsilon\in\apos{\RR},\quad
+        \exists\delta\in\apos{\RR},\\
+        \forall x\in A\cap(c,c+\delta),\quad d_B(f(x),\ell)<\varepsilon
+      \end{gathered}
+    \right\}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\LimDomRight(f)}}}
+\end{dfn}
+
+\begin{dfn}[Left-Hand Limit Domain]{left-hand-limit-domain}
+  Let \(A\subseteq\RR\) and let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}
+  \[
+    \LimDomLeft:(A\to B)\to\PowerSet(\RR)
+  \]
+  \[
+    \LimDomLeft(f)\defeq
+    \left\{c\in\RR\;\middle|\;
+      \begin{gathered}
+        \forall r\in\apos{\RR},\quad A\cap(c-r,c)\neq\emptyset\\
+        {}\land{}\\
+        \exists\ell\in B,\quad\forall\varepsilon\in\apos{\RR},\quad
+        \exists\delta\in\aneg{\RR},\\
+        \forall x\in A\cap(c+\delta,c),\quad d_B(f(x),\ell)<\varepsilon
+      \end{gathered}
+    \right\}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\LimDomLeft(f)}}}
+\end{dfn}
+
+\begin{prop}[Well-Definedness of One-Sided Limits]{one-sided-limit-well-defined}
+  For every \(f:A\to B\) and \(c\in\LimDomRight(f)\), there is a unique
+  \xref[right-hand limit]{def:right-hand-limit} in \(B\).
+  The same holds for \(c\in\LimDomLeft(f)\) and the
+  \xref[left-hand limit]{def:left-hand-limit}
+\end{prop}
+
+\begin{proof}
+  Existence follows from the definitions of the
+  \xref[right-hand]{def:right-hand-limit-domain} and
+  \xref[left-hand]{def:left-hand-limit-domain} limit domains.
+  Uniqueness follows from the \xref[one-sided uniqueness theorem]{thm:one-sided-limit-uniqueness}
+\end{proof}
+
+\begin{dfn}[Right-Hand Limit Operator]{right-hand-limit-op}
+  The operator
+  \[
+    \rightfnlim:\Pi f:(A\to B),\quad\LimDomRight(f)\to B
+  \]
+  sends \(f\) and \(c\in\LimDomRight(f)\) to the unique
+  \xref[right-hand limit]{def:right-hand-limit} of \(f\) at \(c\)
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\rightfnlim(f)(c)}}}
+\end{dfn}
+
+\begin{dfn}[Left-Hand Limit Operator]{left-hand-limit-op}
+  The operator
+  \[
+    \leftfnlim:\Pi f:(A\to B),\quad\LimDomLeft(f)\to B
+  \]
+  sends \(f\) and \(c\in\LimDomLeft(f)\) to the unique
+  \xref[left-hand limit]{def:left-hand-limit} of \(f\) at \(c\)
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\leftfnlim(f)(c)}}}
+\end{dfn}
+
+\begin{conv}[One-Sided Limit Notation]{one-sided-limit-notation}
+  For \(c\in\LimDomRight(f)\) or \(c\in\LimDomLeft(f)\), respectively, write
+  \[
+    \poslim{c}(f)\defeq\rightfnlim(f)(c),
+    \qquad
+    \neglim{c}(f)\defeq\leftfnlim(f)(c)
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\poslim{3}(f)}, \detokenize{\neglim{3}(f)}}}
+\end{conv}
 
 \begin{thm}[Two-Sided and One-Sided Limits]{two-sided-one-sided-limits}
   \todo[State when a two-sided limit is equivalent to equal right-hand and left-hand limits, including the required domain assumptions]
@@ -261,7 +387,7 @@ Infinite output limits use arbitrarily large output thresholds instead
   the following condition suffices
   \[
     \forall\varepsilon\in\apos{\RR},\quad
-    \forall x\in\ball{\varepsilon}{c}\setminus\{c\},\quad
+    \forall x\in A\cap\ball{\varepsilon}{c}\setminus\{c\},\quad
     d_B(f(x),\ell)\leq g(\varepsilon)
   \]
   Here \(\varepsilon\) is the input-radius parameter, and

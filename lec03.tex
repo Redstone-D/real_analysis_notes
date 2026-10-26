@@ -496,6 +496,44 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
   \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\cl{A}}}}
 \end{conv}
 
+\begin{lem}[Closed Supersets Contain Limit Points]{closure-from-limit-points}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, let
+  \(A\subseteq X\), and let \(L\) be the set of
+  \xref[limit points]{def:limit-points} of \(A\).
+  Let \(D\subseteq X\) be \xref[closed]{def:closed-sets} in the
+  \xref[induced topology]{def:induced-topology}. Then
+  \[
+    A\subseteq D\implies L\subseteq D
+  \]
+\end{lem}
+
+\begin{proof}
+  Let $D$ be a \xref[closed set]{def:closed-sets} containing $A$. Which means $E \defeq X \setminus D$ is \xref[open]{def:open-sets}. 
+
+  Since $\ell \in L$ is a \xref[limit point]{def:limit-points} of $A$, we know that 
+  \[\forall \varepsilon \in \apos{\RR} , \, \ball{\varepsilon}{\ell} \cap A \setminus \{\ell\} \neq \emptyset\]. 
+  Suppose $\exists \ell \in L, \, \ell \notin D, \, \ell \notin A$. This means $\ell \in E$. 
+  
+  Since all element which is in $A$ not in $E$, and since for such $\ell$ we already said
+  \[\ball{\varepsilon}{\ell} \cap A \setminus \{\ell\} \neq \emptyset\]
+  Then, 
+  \[\forall \varepsilon \in \apos{\RR} , \, \exists \delta \in \ball{\varepsilon}{\ell} , \, \delta \in A \implies \ball{\varepsilon}{\ell} \text{ is not a subset of } E\] 
+
+  Which means that there does not exist a $r$ such that $\ball{r}{\ell} \subseteq E$, contradicts with the requirement where $E$ must be an \xref[open set]{def:induced-topology} 
+\end{proof}
+
+\begin{lem}[Adjoining Limit Points Gives a Closed Set]{adjoining-limit-points}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, let
+  \(A\subseteq X\), and let \(L\) be the set of
+  \xref[limit points]{def:limit-points} of \(A\).
+  Then \(A\cup L\) is \xref[closed]{def:closed-sets} in the
+  \xref[induced topology]{def:induced-topology}
+\end{lem}
+
+\begin{proof}
+  \todo
+\end{proof}
+
 \begin{thm}[Closure by Adjoining Limit Points]{closure-limit-points}
   Let \((X,d)\) be a \xref[metric space]{def:metric-space}, and let
   \(A\subseteq X\). With closure taken in the
@@ -505,22 +543,26 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
   \]
   Then
   \[
-    \cl{A}=A\cup L,
-    \qquad
-    \{x\in X:x\text{ is a limit point of }\cl{A}\}=L
+    \cl{A}=A\cup L
   \]
 \end{thm}
 
 \begin{proof}
-  \todo
+  By \xref[the lemma on adjoining limit points]{lem:adjoining-limit-points},
+  \(A\cup L\) is closed and contains \(A\), so the
+  \xref[definition of closure]{def:closure} gives
+  \(\cl{A}\subseteq A\cup L\).
+  Conversely, \(\cl{A}\) is a closed set containing \(A\), so
+  \xref[the closed-superset lemma]{lem:closure-from-limit-points}
+  gives \(L\subseteq\cl{A}\). Hence \(A\cup L\subseteq\cl{A}\),
+  proving equality
 \end{proof}
 
 \begin{rem}[Adding Limit Points Once is Enough]{closure-limit-points-intuition}
   Start with \(A\) and add all its limit points to obtain \(A\cup L\).
   This set is already the \xref[closure]{def:closure} of \(A\), so it is
-  closed. Adding these points does not create any new limit points:
-  the set of limit points is still \(L\), and repeating the process
-  leaves \(A\cup L\) unchanged
+  closed and contains all its own limit points. No further points need
+  to be added, so repeating the process leaves \(A\cup L\) unchanged
 \end{rem}
 
 \section{Compact Sets}

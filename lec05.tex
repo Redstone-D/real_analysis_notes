@@ -264,13 +264,40 @@ A series of a sequence $a: \NNOne \to F$ where $F$ is a \xref[complete ordered f
 \section{Grouping of Series}
 
 \begin{dfn}[Grouping Index]{grouping-index}
+  A \emph{grouping index} is a sequence \(i:\NNOne\to\NNOne\) satisfying
+  \[
+    i(1)=1,\qquad\forall n\in\NNOne,\quad i(n)<i(n+1)
+  \]
 \end{dfn}
 
 \begin{dfn}[Grouping of Series]{series-grouping}
+  Let \(F\) be a \xref[field]{lec01::def:field} and \(i\) a
+  \xref[grouping index]{def:grouping-index}. Define
+  \[
+    \mathrm{group}(i):(\NNOne\to F)\to(\NNOne\to F)
+    \defeq a\map n\map\sum_{i(n)}^{i(n+1)-1}(a)
+  \]
+  The grouped series of \(a\) is the \xref[series]{def:series} of
+  \(\mathrm{group}(i)(a)\)
 \end{dfn}
 
 \begin{lem}[Partial Sums of a Grouped Series]{grouped-partial-sums}
+  Let \(F\) be a \xref[field]{lec01::def:field}, \(i\) a
+  \xref[grouping index]{def:grouping-index}, and \(a:\NNOne\to F\).
+  Then
+  \[
+    \forall m\in\NNOne,\quad
+    \sum_1^m\bigl(\mathrm{group}(i)(a)\bigr)
+    =\sum_1^{i(m+1)-1}(a)
+  \]
 \end{lem}
+
+\begin{proof}
+  By the \xref[definition of grouping]{def:series-grouping} and repeated
+  application of \xref[splitting of summation]{lec01::prop:summation-split},
+  the first \(m\) blocks combine into the sum from \(i(1)=1\) to
+  \(i(m+1)-1\)
+\end{proof}
 
 \begin{thm}[Grouping Preserves Convergence]{grouping-preserves-convergence}
 \end{thm}

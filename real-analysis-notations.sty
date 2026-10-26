@@ -30,7 +30,12 @@
 \providecommand*{\binaryMinRef}{real-analysis::lec01::def:binary-min}
 \providecommand*{\seqLimitRef}{real-analysis::lec04::def:limit-op}
 \providecommand*{\functionLimitDomainRef}{real-analysis::lec06::def:function-limit-domain}
+\providecommand*{\rightLimitDomainRef}{real-analysis::lec06::def:right-hand-limit-domain}
+\providecommand*{\leftLimitDomainRef}{real-analysis::lec06::def:left-hand-limit-domain}
 \providecommand*{\functionLimitRef}{real-analysis::lec06::def:function-limit-op}
+\providecommand*{\rightLimitRef}{real-analysis::lec06::def:right-hand-limit-op}
+\providecommand*{\leftLimitRef}{real-analysis::lec06::def:left-hand-limit-op}
+\providecommand*{\oneSidedLimitNotationRef}{real-analysis::lec06::conv:one-sided-limit-notation}
 \providecommand*{\nestedSequencesRef}{real-analysis::lec02::def:nested-sequences-set}
 \providecommand*{\convergentSequencesRef}{real-analysis::lec04::def:convergent-sequences-set}
 \providecommand*{\boundedSequencesRef}{real-analysis::lec04::def:bounded-sequences-set}
@@ -77,7 +82,13 @@
 \newcommand*{\ceil}[1]{\xref[\lceil #1 \rceil]{\ceilRef}}
 \newcommand*{\seqlim}{\mathop{\xref[\mathrm{lim}]{\seqLimitRef}}}
 \newcommand*{\LimDom}{\mathop{\xref[\mathrm{LimDom}]{\functionLimitDomainRef}}\nolimits}
+\newcommand*{\LimDomRight}{\mathop{\xref[\mathrm{LimDom}_{+}]{\rightLimitDomainRef}}\nolimits}
+\newcommand*{\LimDomLeft}{\mathop{\xref[\mathrm{LimDom}_{-}]{\leftLimitDomainRef}}\nolimits}
 \newcommand*{\fnlim}{\mathop{\xref[\mathrm{lim}]{\functionLimitRef}}\nolimits}
+\newcommand*{\rightfnlim}{\mathop{\xref[\mathrm{lim}_{+}]{\rightLimitRef}}\nolimits}
+\newcommand*{\leftfnlim}{\mathop{\xref[\mathrm{lim}_{-}]{\leftLimitRef}}\nolimits}
+\newcommand*{\poslim}[1]{\mathop{\xref[\mathrm{lim}]{\oneSidedLimitNotationRef}}\nolimits_{#1^{+}}}
+\newcommand*{\neglim}[1]{\mathop{\xref[\mathrm{lim}]{\oneSidedLimitNotationRef}}\nolimits_{#1^{-}}}
 % The optional index domain keeps both zero-based and positive-indexed
 % nested families explicit; parentheses and the carrier stay outside links.
 \newcommand*{\Nested}[1][\NN]{%

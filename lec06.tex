@@ -196,9 +196,82 @@
 \section{Properties of Function Limits} 
 
 \begin{thm}
-  If we can propose a convergence sequence $a$ which codomain is in the domain of a function $f$ exculding its $c$, where $\seqlim a = c$, then the limit of the function $f$ at $c$ is equal to the limit of the sequence $n \map f(a(n))$. 
-\[f: A \to B, \, \fnlim_c(f) = \ell \iff \forall a: \mathbb{N} \to A \setminus \{c\}, \, \seqlim a = c, \, \seqlim (n \map f(a(n))) = \ell\]
-\end{thm}
+  Let \((X,d_X)\) and \((B,d_B)\) be \xref[metric spaces]{lec03::def:metric-space}, let
+  \(A\subseteq X\), \(f:A\to B\), \(c\in\LimDom(f)\), and \(\ell\in B\).
+  For every \xref[sequence]{lec01::def:sequence}
+  \(a:\NNOne\to A\setminus\{c\}\) \xref[converging to \(c\)]{lec04::def:limit}
+  in \(X\), the image sequence \(n\map f(a(n))\)
+  \xref[converges]{lec04::def:convergent-sequence} in \(B\), and
+  \[
+    \fnlim_c(f)=\ell\iff
+    \forall a\text{ as above},\quad\seqlim(n\map f(a(n)))=\ell
+  \]
+\end{thm} 
+
+\begin{proof}
+\todo 
+\end{proof} 
+
+\begin{cor}
+  Let \((X,d_X)\) and \((B,d_B)\) be \xref[metric spaces]{lec03::def:metric-space},
+  let \(A\subseteq X\) and \(f:A\to B\), and let \(c\in X\) be a
+  \xref[limit point]{lec03::def:limit-points} of \(A\).
+  Let \(a_1,a_2:\NNOne\to A\setminus\{c\}\).
+  Assume both image \xref[sequences]{lec01::def:sequence} \(n\map f(a_1(n))\) and \(n\map f(a_2(n))\) \xref[converge]{lec04::def:convergent-sequence}
+
+  If we can propose two \xref[convergence seqence]{lec04::def:convergent-sequence} $a_1$ and $a_2$ which \xref[codomain]{lec01::def:codomain} is in the \xref[domain]{lec01::def:domain} of a \xref[function]{lec01::def:mapping} $f$ exculding its $c$, where $\seqlim a_1 = \seqlim a_2 = c$, if 
+  \[\seqlim(n \map f(a_1(n))) \neq \seqlim(n \map f(a_2(n))) \implies \fnlim_c(f) \text{ does not exist}\]
+\end{cor} 
+
+\begin{proof}
+\todo 
+\end{proof} 
+
+\begin{cor}[Linearity of Function Limits]{function-limit-linearity}
+  Let \((X,d_X)\) be a \xref[metric space]{lec03::def:metric-space}, let \(A\subseteq X\), and let
+  \(f,g:A\to\RR\), where \(\RR\) has its \xref[usual distance]{lec03::def:distance}.
+  Suppose \(c\in\LimDom(f)\cap\LimDom(g)\), with
+  \(\fnlim_c(f)=L\) and \(\fnlim_c(g)=M\).
+  For \(\alpha,\beta\in\RR\), the following \xref[limit]{def:function-limit-relation} exists and
+  \[
+    \fnlim_c(x\map\alpha\cdot f(x)+\beta\cdot g(x))
+    =\alpha\cdot L+\beta\cdot M
+  \]
+\end{cor}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{cor}[Product of Function Limits]{function-limit-product}
+  Let \((X,d_X)\) be a \xref[metric space]{lec03::def:metric-space}, let \(A\subseteq X\), and let
+  \(f,g:A\to\RR\), where \(\RR\) has its \xref[usual distance]{lec03::def:distance}.
+  Suppose \(c\in\LimDom(f)\cap\LimDom(g)\), with
+  \(\fnlim_c(f)=L\) and \(\fnlim_c(g)=M\).
+  The following \xref[limit]{def:function-limit-relation} exists and
+  \[
+    \fnlim_c(x\map f(x)\cdot g(x))=L\cdot M
+  \]
+\end{cor}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{cor}[Quotient of Function Limits]{function-limit-quotient}
+  Let \((X,d_X)\) be a \xref[metric space]{lec03::def:metric-space}, let \(A\subseteq X\), and let
+  \(f,g:A\to\RR\), where \(\RR\) has its \xref[usual distance]{lec03::def:distance}.
+  Suppose \(c\in\LimDom(f)\cap\LimDom(g)\), with
+  \(\fnlim_c(f)=L\) and \(\fnlim_c(g)=M\).
+  If \(M\neq0\) and \(\forall x\in A,\ g(x)\neq0\), the following \xref[limit]{def:function-limit-relation} exists and
+  \[
+    \fnlim_c\left(x\map\frac{f(x)}{g(x)}\right)=\frac{L}{M}
+  \]
+\end{cor}
+
+\begin{proof}
+  \todo
+\end{proof}
 
 \section{One-Sided Limits}
 
@@ -331,11 +404,35 @@
 \end{conv}
 
 \begin{thm}[Two-Sided and One-Sided Limits]{two-sided-one-sided-limits}
-  \todo[State when a two-sided limit is equivalent to equal right-hand and left-hand limits, including the required domain assumptions]
+  Let \(A\subseteq\RR\), let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}, and let \(f:A\to B\).
+  Suppose \(c\in\RR\) is a \xref[limit point]{lec03::def:limit-points}
+  of both \(A\cap(c,\infty)\) and \(A\cap(-\infty,c)\).
+  Then \(f\) has a two-sided limit at \(c\) if and only if its
+  right-hand and left-hand limits both exist and are equal.
+  In that case,
+  \[
+    \fnlim_c(f)=\poslim{c}(f)=\neglim{c}(f)
+  \]
 \end{thm}
 
 \begin{proof}
   \todo[Prove both directions]
+\end{proof}
+
+\begin{thm}[Unequal One-Sided Limits]{unequal-one-sided-limits}
+  Let \(A\subseteq\RR\), let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}, and let \(f:A\to B\).
+  If \(c\in\LimDomRight(f)\cap\LimDomLeft(f)\) and
+  \[
+    \poslim{c}(f)\neq\neglim{c}(f)
+  \]
+  then \(f\) has no two-sided limit at \(c\), that is,
+  \(c\notin\LimDom(f)\)
+\end{thm}
+
+\begin{proof}
+  \todo[Use the equivalence between two-sided and equal one-sided limits]
 \end{proof}
 
 \begin{rem}[Error Bounds for One-Sided Limits]{one-sided-error-bounds}
@@ -345,24 +442,112 @@
 \section{Limits at Infinity}
 
 \begin{dfn}[Limit at Positive Infinity]{limit-at-positive-infinity}
-  \todo[Assume the real domain is unbounded above and define a finite output limit as the input tends to positive infinity]
+  Let \(A\subseteq\RR\), let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}, and let \(f:A\to B\).
+  Assume \(A\) is unbounded above, that is,
+  \[
+    \forall t\in\RR,\quad\exists x\in A,\quad x>t
+  \]
+  We say that \(f\) has \emph{limit \(\ell\in B\) at \(+\infty\)} if
+  \[
+    \forall\varepsilon\in\apos{\RR},\,
+    \exists n\in\RR,\,\forall x\in A,\,
+    x>n\implies d_B(f(x),\ell)<\varepsilon
+  \]
 \end{dfn}
 
 \begin{dfn}[Limit at Negative Infinity]{limit-at-negative-infinity}
-  \todo[Assume the real domain is unbounded below and define a finite output limit as the input tends to negative infinity]
+  Let \(A\subseteq\RR\), let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}, and let \(f:A\to B\).
+  Assume \(A\) is unbounded below, that is,
+  \[
+    \forall t\in\RR,\quad\exists x\in A,\quad x<t
+  \]
+  We say that \(f\) has \emph{limit \(\ell\in B\) at \(-\infty\)} if
+  \[
+    \forall\varepsilon\in\apos{\RR},\,
+    \exists n\in\RR,\,\forall x\in A,\,
+    x<n\implies d_B(f(x),\ell)<\varepsilon
+  \]
 \end{dfn}
+
+\begin{thm}[Uniqueness of Limits at Infinity]{limit-at-infinity-uniqueness}
+  Under the assumptions of the definition at
+  \xref[positive infinity]{def:limit-at-positive-infinity} or
+  \xref[negative infinity]{def:limit-at-negative-infinity}, the corresponding
+  limit, if it exists, is unique
+\end{thm}
+
+\begin{proof}
+  Suppose \(\ell_1,\ell_2\in B\) are limits in the same direction.
+  Fix \(\varepsilon>0\) and choose the corresponding thresholds \(n_1,n_2\).
+  At \(+\infty\), unboundedness above supplies \(x\in A\) with
+  \(x>\max(n_1,n_2)\); at \(-\infty\), unboundedness below supplies
+  \(x\in A\) with \(x<\min(n_1,n_2)\).
+  In either case, the \xref[triangle inequality]{lec03::axm:metric-triangle-inequality} gives
+  \[
+    d_B(\ell_1,\ell_2)
+    \leq d_B(\ell_1,f(x))+d_B(f(x),\ell_2)<2\varepsilon
+  \]
+  Since \(\varepsilon>0\) is arbitrary, the distance is zero, so
+  \(\ell_1=\ell_2\) by \xref[metric separation]{lec03::axm:metric-separation}
+\end{proof}
+
+\begin{dfn}[Positive Infinity Limit Domain]{positive-infinity-limit-domain}
+  Let \(A\subseteq\RR\) and let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}.
+  Define \(\ConvPosInf(A,B)\in\PowerSet(A\to B)\) by
+  \[
+    \ConvPosInf(A,B)\defeq
+    \left\{f:A\to B\;\middle|\;
+      \begin{gathered}
+        \forall t\in\RR,\quad\exists x\in A,\quad x>t\\
+        {}\land{}\\
+        \exists\ell\in B,\quad\forall\varepsilon\in\apos{\RR},\quad
+        \exists n\in\RR,\\
+        \forall x\in A,\quad x>n\implies d_B(f(x),\ell)<\varepsilon
+      \end{gathered}
+    \right\}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\ConvPosInf(A,B)}}}
+\end{dfn}
+
+\begin{dfn}[Negative Infinity Limit Domain]{negative-infinity-limit-domain}
+  Let \(A\subseteq\RR\) and let \((B,d_B)\) be a
+  \xref[metric space]{lec03::def:metric-space}.
+  Define \(\ConvNegInf(A,B)\in\PowerSet(A\to B)\) by
+  \[
+    \ConvNegInf(A,B)\defeq
+    \left\{f:A\to B\;\middle|\;
+      \begin{gathered}
+        \forall t\in\RR,\quad\exists x\in A,\quad x<t\\
+        {}\land{}\\
+        \exists\ell\in B,\quad\forall\varepsilon\in\apos{\RR},\quad
+        \exists n\in\RR,\\
+        \forall x\in A,\quad x<n\implies d_B(f(x),\ell)<\varepsilon
+      \end{gathered}
+    \right\}
+  \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\ConvNegInf(A,B)}}}
+\end{dfn}
+
+\begin{prop}[Well-Definedness of Limits at Infinity]{limit-at-infinity-well-defined}
+  A function \(f:A\to B\) belongs to \(\ConvPosInf(A,B)\) if and only if
+  it has a unique \xref[limit at \(+\infty\)]{def:limit-at-positive-infinity}.
+  Likewise, \(f\in\ConvNegInf(A,B)\) if and only if it has a unique
+  \xref[limit at \(-\infty\)]{def:limit-at-negative-infinity}
+\end{prop}
+
+\begin{proof}
+  Membership is equivalent to existence by the definitions of the
+  \xref[positive infinity]{def:positive-infinity-limit-domain} and
+  \xref[negative infinity]{def:negative-infinity-limit-domain} limit domains.
+  Uniqueness follows from the \xref[uniqueness theorem]{thm:limit-at-infinity-uniqueness}
+\end{proof}
 
 \begin{conv}[Limit Notation at Infinity]{limit-at-infinity-notation}
   \todo[Introduce the notation for limits as the input tends to positive or negative infinity]
 \end{conv}
-
-\begin{thm}[Uniqueness of Limits at Infinity]{limit-at-infinity-uniqueness}
-  \todo[State uniqueness under the corresponding unbounded-domain assumption]
-\end{thm}
-
-\begin{proof}
-  \todo[Adapt the uniqueness argument using the corresponding input tail]
-\end{proof}
 
 \begin{rem}[Error Bounds for Limits at Infinity]{infinity-error-bounds}
   \todo[Adapt the shared error-bound method using a real input threshold M(t)]
@@ -370,32 +555,127 @@
 
 \section{A Systematic Method for Proving Limits}
 
-The shared error-bound method covers finite-value limits of sequences,
-two-sided function limits, one-sided limits, and limits as the input tends
-to infinity. The input restriction changes with the approach, while the
-output tolerance is handled using
-\xref[challenge functions]{lec04::def:convergence-challenge-function}.
-Infinite output limits use arbitrarily large output thresholds instead
-
-\begin{rem}[Shared Proof Method]{systematic-limit-method}
-  \todo[Summarize the shared procedure: choose a candidate limit, derive an error bound, verify the challenge function, and supply the corresponding radius or threshold]
+\begin{rem}[Board Comparison]{systematic-limit-comparison}
+  \begin{center}
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{@{}lcccc@{}}
+      & \textbf{Sequence} & \textbf{Infinity} \(\boldsymbol{+\infty}\)
+        & \textbf{One-Sided} \(\boldsymbol{c^+}\) & \textbf{Function} \\
+      \hline
+      Space
+        & \((B,d_B)\)
+        & \(\substack{(\RR,d)\\(B,d_B)}\)
+        & \(\substack{(\RR,d)\\(B,d_B)}\)
+        & \(\substack{(X,d_X)\\(B,d_B)}\) \\
+      Map
+        & \(a:\NNOne\to B\)
+        & \(\substack{f:A\to B\\A\subseteq\RR}\)
+        & \(\substack{f:A\to B\\A\subseteq\RR}\)
+        & \(\substack{f:A\to B\\A\subseteq X}\) \\
+      Arbitrary tolerance
+        & \(\forall\varepsilon\in\apos{\RR}\)
+        & \(\forall\varepsilon\in\apos{\RR}\)
+        & \(\forall\varepsilon\in\apos{\RR}\)
+        & \(\forall\varepsilon\in\apos{\RR}\) \\
+      Restrictor
+        & \(\exists N\in\NNOne\)
+        & \(\exists n\in\RR\)
+        & \(\exists\delta\in\apos{\RR}\)
+        & \(\exists\delta\in\apos{\RR}\) \\
+      Input
+        & \(\forall k\in\NNOne\)
+        & \(\forall x\in A\)
+        & \(\forall x\in A\)
+        & \(\forall x\in A\) \\
+      Input restriction
+        & \(k\geq N\)
+        & \(x>n\)
+        & \(c<x<c+\delta\)
+        & \(0<d_X(x,c)<\delta\) \\
+      Output requirement
+        & \(d_B(a(k),\ell)<\varepsilon\)
+        & \(d_B(f(x),\ell)<\varepsilon\)
+        & \(d_B(f(x),\ell)<\varepsilon\)
+        & \(d_B(f(x),\ell)<\varepsilon\) \\
+    \end{tabular}
+  \end{center}
 \end{rem}
 
-\begin{rem}[Using the Ball Radius as the Parameter]{ball-radius-parameter}
-  In the \xref[challenge-function method]{thm:function-limit-challenge-replacement},
-  when the input-radius parameter itself supplies the witness \(\delta\),
-  the following condition suffices
+\begin{conv}[The Error Bound Method]{error-bound-method}
+  \todo[Write the main procedure]
+\end{conv}
+
+\begin{eg}[Sequence]{error-bound-sequence}
+  Let
   \[
-    \forall\varepsilon\in\apos{\RR},\quad
-    \forall x\in A\cap\ball{\varepsilon}{c}\setminus\{c\},\quad
-    d_B(f(x),\ell)\leq g(\varepsilon)
+    a:\NNOne\to\RR\defeq k\map\frac{1}{k}
   \]
-  Here \(\varepsilon\) is the input-radius parameter, and
-  \(g(\varepsilon)\) is the output-error bound for a
-  \xref[challenge function]{lec04::def:convergence-challenge-function} \(g\).
-  A local restriction such as an input radius at most \(1\) can instead
-  be handled by choosing \(\delta=\min(\varepsilon,1)\) and verifying
-  the output bound on that smaller ball
+  Show that \(\seqlim(a)=0\)
+\end{eg}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{eg}[Limit at Positive Infinity]{error-bound-positive-infinity}
+  Let
+  \[
+    f:\apos{\RR}\to\RR\defeq x\map\frac{1}{x}
+  \]
+  Show that \(f\) has \xref[limit \(0\) at \(+\infty\)]{def:limit-at-positive-infinity}
+\end{eg}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{eg}[Right-Hand Limit]{error-bound-right-hand-limit}
+  Let
+  \[
+    f:\agez{\RR}\to\RR\defeq x\map x^2
+  \]
+  Show that \(\poslim{0}(f)=0\)
+\end{eg}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{eg}[Two-Sided Function Limit]{error-bound-two-sided-limit}
+  Let
+  \[
+    f:\RR\setminus\{0\}\to\RR\defeq x\map\frac{x-1}{x}
+  \]
+  Show that \(\fnlim_1(f)=0\)
+\end{eg}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{rem}[Local Input Restrictions]{ball-radius-parameter}
+  \todo[Record any local input restriction needed in the preceding example]
 \end{rem}
+
+\begin{samepage}
+\begin{rem}[Comparison of the Error Bounds]{error-bound-method-comparison}
+  \begin{center}
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{@{}lcccc@{}}
+      & \textbf{Sequence} & \textbf{Infinity} \(\boldsymbol{+\infty}\)
+        & \textbf{One-Sided} \(\boldsymbol{c^+}\) & \textbf{Function} \\
+      \hline
+      Chosen restrictor
+        & \todo & \todo & \todo & \todo \\
+      Input restriction
+        & \todo & \todo & \todo & \todo \\
+      Error bound \(g(t)\)
+        & \todo & \todo & \todo & \todo \\
+    \end{tabular}
+  \end{center}
+\end{rem}
+\end{samepage}
 
 \end{document}

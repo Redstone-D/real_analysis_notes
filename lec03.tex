@@ -443,7 +443,7 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
   Thus \(\ball{s}{z}\subseteq\ball{r}{x}\), so \(\ball{r}{x}\) is open
 \end{proof}
 
-\section{Limit Points, Isolated Points, and Closure}
+\section{Limit Points and Isolated Points}
 
 \begin{dfn}[Limit Points]{limit-points}
   Let \((X,d)\) be a \xref[metric space]{def:metric-space}.
@@ -453,6 +453,27 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
     \ball{\varepsilon}{x}\cap\bigl(U\setminus\{x\}\bigr)\neq\emptyset
   \]
 \end{dfn}
+
+\begin{rem}[Limit Point Intuition]{limit-point-intuition}
+  A \xref[limit point]{def:limit-points} may lie inside or outside the set:
+  no matter how small a ball centred at it is, that ball contains a point
+  of the set different from the centre itself
+\end{rem}
+
+\begin{lem}[Balls Disjoint from a Set]{ball-disjoint-limit-points}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, let
+  \(A\subseteq X\), and let \(L\) be the set of
+  \xref[limit points]{def:limit-points} of \(A\).
+  For \(x\in X\) and \(r\in\apos{\RR}\),
+  \[
+    \ball{r}{x}\cap A=\emptyset
+    \implies\ball{r}{x}\cap L=\emptyset
+  \]
+\end{lem}
+
+\begin{proof}
+  \todo
+\end{proof}
 
 \redirect[Sequence Characterization of Limit Points]{thm}{limit-point-sequence}{lec04::thm:limit-point-sequence}
 
@@ -465,6 +486,19 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
   \] 
 
 \end{dfn}
+
+\begin{thm}[Isolated or Limit Point]{point-isolated-or-limit}
+  Let \((X,d)\) be a \xref[metric space]{def:metric-space}, let
+  \(A\subseteq X\), and let \(x\in A\).
+  Then \(x\) is either an \xref[isolated point]{def:isolated-points}
+  or a \xref[limit point]{def:limit-points} of \(A\), but not both
+\end{thm}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\section{Closure}
 
 \begin{dfn}[Closure]{closure}
   Let \((X,\mathcal T)\) be a
@@ -531,7 +565,18 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{lem}
 
 \begin{proof}
-  \todo
+  Define $C \defeq X \setminus (A \cup L)$. Choose $x \in C$. It must not be a limit point of $A$. Then, 
+  
+  By definition of limit point, we know that 
+  \[\forall x \in C, \, \exists r \in \apos{\RR}, \, \ball{r}{x} \setminus \{x\} \cap A = \emptyset\] 
+  Since $x \notin A$, simplify, 
+  \[\forall x \in C, \, \exists r \in \apos{\RR}, \, \ball{r}{x} \cap A = \emptyset\] 
+
+  By \xref[the ball lemma]{lem:ball-disjoint-limit-points},
+  \(\ball{r}{x}\cap L=\emptyset\), so \(\ball{r}{x}\subseteq C\).
+  Since \(x\in C\) was arbitrary, \(C\) is open by the
+  \xref[definition of the induced topology]{def:induced-topology}.
+  Hence \(A\cup L\) is closed
 \end{proof}
 
 \begin{thm}[Closure by Adjoining Limit Points]{closure-limit-points}

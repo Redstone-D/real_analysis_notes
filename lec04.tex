@@ -677,12 +677,18 @@ If instead $a$ is \xref[decreasing]{def:decreasing-sequence}, the same argument 
 \section{The Number \texorpdfstring{\(e\)}{e}}
 
 \begin{dfn}[Defining Sequence for \(e\)]{e-defining-sequence}
+  \[
+    u:\NNOne\to\RR\defeq n\map\left(1+\frac{1}{n}\right)^n
+  \]
 \end{dfn}
 
 \begin{thm}[Convergence of the Defining Sequence for \(e\)]{e-sequence-convergence}
 \end{thm}
 
 \begin{dfn}[The Number \(e\)]{euler-number}
+  \[
+    e:\RR\defeq\seqlim\bigl(\xref[u]{def:e-defining-sequence}\bigr)
+  \]
 \end{dfn}
 
 \section{Comparison of Sequences}

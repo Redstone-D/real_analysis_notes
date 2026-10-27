@@ -602,8 +602,17 @@
   \end{center}
 \end{rem}
 
-\begin{conv}[The Error Bound Method]{error-bound-method}
-  \todo[Write the main procedure]
+\begin{conv}[Error Bounds for Sequences]{error-bound-method}
+  Let \(a:\NNOne\to B\), where \((B,d_B)\) is a
+  \xref[metric space]{lec03::def:metric-space}, and let \(\ell\in B\).
+  Find a \xref[challenge function]{lec04::def:convergence-challenge-function}
+  \(g\) bounding the output error on a tail.
+  A direct cutoff is \(k>t\), for \(t>0\).
+  If a separate threshold is useful, choose \(\rho:\apos{\RR}\to\NNOne\) such that
+  \[
+    \forall t\in\apos{\RR},\,\forall k\in\NNOne,\quad
+    k\geq\rho(t)\implies d_B(a(k),\ell)\leq g(t)
+  \]
 \end{conv}
 
 \begin{eg}[Sequence]{error-bound-sequence}
@@ -615,8 +624,51 @@
 \end{eg}
 
 \begin{proof}
+  Assume that $n > t$, then 
+  \[\dist{a(n)}{0} = \abs{\frac{1}{n} - 0} = \frac{1}{n} < \frac{1}{t}\]
+
+  Define a challenge function 
+  \[g:\apos{\RR}\to\apos{\RR} \defeq t\map\frac{1}{t}\] 
+
+  Since there have no restriction on $t$, so we can define a threshold function
+  \[\rho = t \map g(t) \]
+
+  Then 
+  \[\forall \varepsilon, \, \forall n > \rho(\varepsilon), \, d_B(a(n), 0) \leq g(\varepsilon)\] 
+
+  Since $g$ is a challenge function, we can conclude 
+  \[\seqlim(a) = 0\] 
+\end{proof}
+
+\begin{eg}[Sequence with a Threshold Function]{error-bound-sequence-helper}
+  Let
+  \[
+    a:\NNOne\to\RR\defeq k\map\frac{1}{k^2-2}
+  \]
+  Show that \(\seqlim(a)=0\) by choosing a challenge function \(g\)
+  and a threshold function \(\rho:\apos{\RR}\to\NNOne\)
+
+  Assume that $n > t$, then 
+  \[\dist{a(n)}{0} = \abs{\frac{1}{n^2 - 2} - 0} = \frac{1}{n^2 - 2} < \frac{1}{t^2 - 2}\]
+\end{eg}
+
+\begin{proof}
   \todo
 \end{proof}
+
+\begin{conv}[Error Bounds at Infinity]{error-bound-infinity}
+  Use the setup for a \xref[limit at positive infinity]{def:limit-at-positive-infinity}.
+  Find a \xref[challenge function]{lec04::def:convergence-challenge-function}
+  \(g\) bounding the output error on a tail.
+  A direct cutoff is \(x>t\), for \(t>0\).
+  If a separate threshold is useful, choose \(\rho:\apos{\RR}\to\RR\) such that
+  \[
+    \forall t\in\apos{\RR},\,\forall x\in A,\quad
+    x>\rho(t)\implies d_B(f(x),\ell)\leq g(t)
+  \]
+  At \xref[negative infinity]{def:limit-at-negative-infinity}, use
+  \(x<\rho(t)\) instead, with direct cutoff \(x<-t\)
+\end{conv}
 
 \begin{eg}[Limit at Positive Infinity]{error-bound-positive-infinity}
   Let
@@ -630,12 +682,78 @@
   \todo
 \end{proof}
 
+\begin{eg}[Limit at Infinity with a Threshold Function]{error-bound-infinity-helper}
+  Let
+  \[
+    f:(1,\infty)\to\RR\defeq x\map\frac{1}{x-1}
+  \]
+  Show that \(f\) has \xref[limit \(0\) at \(+\infty\)]{def:limit-at-positive-infinity}
+  by choosing a challenge function \(g\) and a threshold function
+  \(\rho:\apos{\RR}\to\RR\)
+\end{eg}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{conv}[Error Bounds for One-Sided Limits]{error-bound-one-sided}
+  Use the \xref[right-hand limit]{def:right-hand-limit} setup.
+  Find a \xref[challenge function]{lec04::def:convergence-challenge-function}
+  \(g\) bounding the output error on a right-hand interval.
+  A direct radius is \(t>0\).
+  If a separate radius is useful, choose \(\rho:\apos{\RR}\to\apos{\RR}\) such that
+  \[
+    \forall t\in\apos{\RR},\,\forall x\in A\cap(c,c+\rho(t)),\quad
+    d_B(f(x),\ell)\leq g(t)
+  \]
+  For a \xref[left-hand limit]{def:left-hand-limit}, use
+  \(\rho:\apos{\RR}\to\aneg{\RR}\) and the interval
+  \((c+\rho(t),c)\), with direct offset \(-t\)
+\end{conv}
+
 \begin{eg}[Right-Hand Limit]{error-bound-right-hand-limit}
   Let
   \[
     f:\agez{\RR}\to\RR\defeq x\map x^2
   \]
   Show that \(\poslim{0}(f)=0\)
+\end{eg}
+
+\begin{proof}
+  \todo 
+\end{proof}
+
+\begin{eg}[Right-Hand Limit with a Radius Function]{error-bound-right-hand-helper}
+  Let
+  \[
+    f:(0,1)\to\RR\defeq x\map\frac{x}{1-x}
+  \]
+  Show that \(\poslim{0}(f)=0\) by choosing a challenge function \(g\)
+  and a radius function \(\rho:\apos{\RR}\to\apos{\RR}\)
+\end{eg}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{conv}[Error Bounds for Two-Sided Limits]{error-bound-two-sided}
+  Use the \xref[two-sided limit]{def:function-limit-relation} setup.
+  Find a \xref[challenge function]{lec04::def:convergence-challenge-function}
+  \(g\) bounding the output error on a punctured ball.
+  A direct radius is \(t>0\).
+  If a separate radius is useful, choose \(\rho:\apos{\RR}\to\apos{\RR}\) such that
+  \[
+    \forall t\in\apos{\RR},\,\forall x\in A,\quad
+    0<d_X(x,c)<\rho(t)\implies d_B(f(x),\ell)\leq g(t)
+  \]
+\end{conv}
+
+\begin{eg}[Two-Sided Limit with a Direct Radius]{error-bound-two-sided-direct}
+  Let
+  \[
+    f:\RR\to\RR\defeq x\map3\cdot x+1
+  \]
+  Show that \(\fnlim_2(f)=7\)
 \end{eg}
 
 \begin{proof}
@@ -647,7 +765,8 @@
   \[
     f:\RR\setminus\{0\}\to\RR\defeq x\map\frac{x-1}{x}
   \]
-  Show that \(\fnlim_1(f)=0\)
+  Show that \(\fnlim_1(f)=0\) by choosing a challenge function \(g\)
+  and a radius function \(\rho:\apos{\RR}\to\apos{\RR}\)
 \end{eg}
 
 \begin{proof}
@@ -667,11 +786,15 @@
       & \textbf{Sequence} & \textbf{Infinity} \(\boldsymbol{+\infty}\)
         & \textbf{One-Sided} \(\boldsymbol{c^+}\) & \textbf{Function} \\
       \hline
-      Chosen restrictor
+      Direct restrictor
         & \todo & \todo & \todo & \todo \\
-      Input restriction
+      Direct bound \(g(t)\)
         & \todo & \todo & \todo & \todo \\
-      Error bound \(g(t)\)
+      Helper \(\rho(t)\)
+        & \todo & \todo & \todo & \todo \\
+      Input with \(\rho(t)\)
+        & \todo & \todo & \todo & \todo \\
+      Helper bound \(g(t)\)
         & \todo & \todo & \todo & \todo \\
     \end{tabular}
   \end{center}

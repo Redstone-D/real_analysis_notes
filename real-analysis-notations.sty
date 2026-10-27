@@ -65,7 +65,15 @@
 \newcommand*{\PowerSet}{\xref[\mathcal{P}]{\powerSetRef}}
 \newcommand*{\img}[1]{{#1}^{\xref[\mathrm{img}]{\imageRef}}}
 \newcommand*{\preimg}[1]{{#1}^{\xref[\mathrm{preimg}]{\preimageRef}}}
-\newcommand*{\abs}[1]{\mathopen{\xref[\lvert]{\absoluteValueRef}}#1\mathclose{\xref[\rvert]{\absoluteValueRef}}}
+% Size each linked bar to the argument without putting the argument inside a link.
+\newcommand*{\abs}[1]{%
+  \begingroup
+  \nulldelimiterspace=0pt
+  \mathopen{\xref[\left|\vphantom{#1}\right.]{\absoluteValueRef}}%
+  #1%
+  \mathclose{\xref[\left.\vphantom{#1}\right|]{\absoluteValueRef}}%
+  \endgroup
+}
 \newcommand*{\dist}[2]{\xref[d(#1, #2)]{\distanceRef}}
 \newcommand*{\OpenBall}{\mathop{\xref[\mathrm{OpenBall}]{\openBallRef}}\nolimits}
 \newcommand*{\ball}[2]{\mathord{\xref[B]{\openBallNotationRef}}_{#1}(#2)}

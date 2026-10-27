@@ -74,7 +74,7 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \section{Convergence Challenge Functions}
 
 \begin{dfn}[Convergence Challenge Function]{convergence-challenge-function}
-  A function $g : \RR \to \RR$ is a \emph{convergence challenge function} if it satisfies two conditions:
+  A function $g : \apos{\RR} \to \apos{\RR}$ is a \emph{convergence challenge function} if it satisfies two conditions:
   \begin{itemize}[nosep]
     \item \emph{Positivity on positives}: $\forall \gamma \in \apos{\RR},\, g(\gamma) > 0$
     \item \emph{Arbitrarily small values}: $\forall \delta \in \apos{\RR},\, \exists \gamma \in \apos{\RR},\, g(\gamma) < \delta$
@@ -82,6 +82,7 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \end{dfn}
 
 \begin{rem}[Intuition: Covering Arbitrarily Small Positives]{challenge-intuition}
+  We only need arbitrarily small error bounds: a smaller bound automatically satisfies every larger tolerance
 \end{rem}
 
 \begin{thm}[Convergence Challenge Replacement]{convergence-challenge-replacement}
@@ -133,7 +134,7 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \begin{lem}[Restricting to Small Tolerances]{restricting-to-small-tolerances}
   Fix $r\in\apos{\RR}$. The function
   \[
-    g:\RR\to\RR\defeq\gamma\map\min(\gamma,r/2)
+    g:\apos{\RR}\to\apos{\RR}\defeq\gamma\map\min(\gamma,r/2)
   \]
   is a \xref[convergence challenge function]{def:convergence-challenge-function}
 \end{lem}
@@ -152,7 +153,7 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \end{rem}
 
 \begin{lem}[Linear Scaling]{linear-is-challenge}
-  For any $c \in \RR$ with $c > 0$, the function $g:\RR\to\RR\defeq\gamma\map c\cdot\gamma$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
+  For any $c \in \RR$ with $c > 0$, the function $g:\apos{\RR}\to\apos{\RR}\defeq\gamma\map c\cdot\gamma$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
 \end{lem}
 
 \begin{proof}
@@ -186,7 +187,7 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 \end{rem}
 
 \begin{lem}[Power]{power-is-challenge}
-  For any positive integer $k$, the function $g:\RR\to\RR\defeq\gamma\map\gamma^k$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
+  For any positive integer $k$, the function $g:\apos{\RR}\to\apos{\RR}\defeq\gamma\map\gamma^k$ is a \xref[convergence challenge function]{def:convergence-challenge-function}
 \end{lem}
 
 \begin{proof}
@@ -207,6 +208,16 @@ Here $\exists!$ is shorthand for ``existence and uniqueness''; it should be form
 
 \begin{proof}
   Positivity: $f(g(\gamma)) > 0$ since $g(\gamma) > 0$ and $f$ preserves positivity. For $\delta > 0$, pick $\eta > 0$ with $f(\eta) < \delta$, then $\gamma > 0$ with $g(\gamma) < \eta$. Monotonicity of $f$ gives $(f \circ g)(\gamma) \leq f(\eta) < \delta$
+\end{proof}
+
+\begin{lem}[Reciprocal]{reciprocal-is-challenge}
+  The function \(g:\apos{\RR}\to\apos{\RR}\defeq t\map1/t\) is a
+  \xref[convergence challenge function]{def:convergence-challenge-function}
+\end{lem}
+
+\begin{proof}
+  For \(t>0\), \(g(t)=1/t>0\).
+  Given \(\delta>0\), choose \(t\defeq2/\delta>0\), so \(g(t)=\delta/2<\delta\)
 \end{proof}
 
 \begin{thm}[Closed Form of Convergence]{convergence-closed-form}

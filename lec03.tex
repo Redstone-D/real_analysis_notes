@@ -472,7 +472,29 @@ If $U: I \to \mathcal T$ is a family of sets in $\mathcal T$, then
 \end{lem}
 
 \begin{proof}
-  \todo
+  If point $\ell$ is a limit point of $A$, then 
+  \[\forall \varepsilon \in \apos{\RR} , \, \ball{\varepsilon}{\ell} \cap (A \setminus \{\ell\}) \neq \emptyset \] 
+
+  Since 
+  \(\ball{r}{x} \cap A = \emptyset\), 
+  Assume such $\ell$ exist in \(\ball{r}{x}\), then $\ell \in \ball{r}{x}$, which means  
+  \[d(\ell,x) < r\] 
+
+  Then, choose $\varepsilon = r - d(\ell,x) > 0$. For any \(y\in\ball{\varepsilon}{\ell}\), the
+  \xref[triangle inequality]{axm:metric-triangle-inequality} and
+  \xref[symmetry]{axm:metric-symmetry} give
+  \[
+    d(x,y)\leq d(x,\ell)+d(\ell,y)
+    <d(\ell,x)+\varepsilon=r
+  \]
+  Thus we have
+  \(\ball{\varepsilon}{\ell} \subseteq \ball{r}{x}\) 
+
+  However we know that \(\ball{r}{x} \cap A = \emptyset\), which means
+  \(\ball{\varepsilon}{\ell} \cap A = \emptyset \) 
+
+  Which creates an contradiction. So, there does not exist a limit point $\ell$ in \(\ball{r}{x}\), which means
+  \(\ball{r}{x} \cap L = \emptyset\) 
 \end{proof}
 
 \redirect[Sequence Characterization of Limit Points]{thm}{limit-point-sequence}{lec04::thm:limit-point-sequence}

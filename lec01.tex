@@ -242,17 +242,19 @@ For \(a,b\in F\), define
 \end{dfn}
 
 \begin{dfn}[Maximum of a Set]{set-maximum}
-  Let \(X\) be equipped with a \xref[total order]{def:total-order} \(\leq\), and let \(A \subseteq X\) be nonempty. An element \(m \in A\) is a \emph{maximum of \(A\)}, written \(m = \max A\), if
+  Let \(X\) be equipped with a \xref[total order]{def:total-order} \(\leq\), and let \(A \subseteq X\) be nonempty. An element \(m \in A\) is a \emph{maximum of \(A\)}, written \(m = \setmax(A)\), if
   \[
     \forall x \in A,\, m \geq x
   \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\setmax(A)}}}
 \end{dfn}
 
 \begin{dfn}[Minimum of a Set]{set-minimum}
-  Let \(X\) be equipped with a \xref[total order]{def:total-order} \(\leq\), and let \(A \subseteq X\) be nonempty. An element \(m \in A\) is a \emph{minimum of \(A\)}, written \(m = \min A\), if
+  Let \(X\) be equipped with a \xref[total order]{def:total-order} \(\leq\), and let \(A \subseteq X\) be nonempty. An element \(m \in A\) is a \emph{minimum of \(A\)}, written \(m = \setmin(A)\), if
   \[
     \forall x \in A,\, m \leq x
   \]
+  \par\smallskip\noindent{\footnotesize\texttt{LaTeX: \detokenize{\setmin(A)}}}
 \end{dfn}
 
 \begin{prop}[Finite Nonempty Families Have a Maximum and Minimum]{finite-max-min-inductive}
@@ -923,6 +925,27 @@ In order to proof \(\varepsilon\)-Characterization of the Supremum, we need to p
 
   So there are no multiple supremum. Supremums are unique for each set
 \end{proof} 
+
+\begin{prop}[Extrema Agree with Infimum and Supremum]{extrema-and-bounds}
+  Let \(X\) be a \xref[totally ordered set]{def:total-order}, and let
+  \(S\subseteq X\) be nonempty
+  \begin{enumerate}[nosep]
+    \item If \(S\) has a \xref[minimum]{def:set-minimum}, then its
+      \xref[infimum]{def:infimum} exists and
+      \[
+        \setmin(S)=\inf(S)
+      \]
+    \item If \(S\) has a \xref[maximum]{def:set-maximum}, then its
+      \xref[supremum]{def:supremum} exists and
+      \[
+        \setmax(S)=\sup(S)
+      \]
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \todo
+\end{proof}
 
 \begin{dfn}[Bounded Set]
   A set \(A\) is \emph{bounded} in the universe $U$ if it is both \xref[bounded above]{def:bounded-above} and \xref[bounded below]{def:bounded-below}

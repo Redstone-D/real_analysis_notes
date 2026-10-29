@@ -15,26 +15,262 @@
   \[\forall \varepsilon : \apos{\RR}, \, \exists \delta : \apos{\RR} \, \forall x \in \ball{\delta}{c}, \, d_B(f(x), f(c)) < \varepsilon\]
 \end{dfn} 
 
-\begin{lemma}
+\begin{lemma}{continuity-and-function-limit}
 If a function $f$'s limit exists at a point \(c\in A\) which is \(\ell\in B\), and \(f\) is continuous at \(c\) and \(\ell = f(c)\)
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}{continuity-at-isolated-points}
 Every \xref[isolated point]{lec03::def:isolated-points} \(c\) of a set \(A\) is a continous point 
 \end{lemma}
 
-\begin{prop}
+\begin{prop}{continuity-limit-or-isolated}
 A point $c$ is continous on function $f$ if and only if either its limit exists and equals to \(f(c)\) or it is an isolated point of the domain
 \end{prop} 
 
+\begin{dfn}[Continuity on a Set]{continuous-on-set}
+A function $f$ is continuous on a set $A$ if for every point $c \in A$, $f$ is \xref[continuous at $c$]{def:function-continuity}, ie
+\[\forall c: A, \, \forall \varepsilon : \apos{\RR}, \, \exists \delta : \apos{\RR} \, \forall x \in \ball{\delta}{c}, \, d_B(f(x), f(c)) < \varepsilon\]
+\end{dfn} 
+
+\begin{remark}
+The continuity of a function is a local property, which means that it only depends on the behavior of the function in an arbitrarily small neighborhood around each point in its domain. 
+
+When we say a function is continuous on a set/domain, we mean that it is continuous at every point in that set/domain. 
+\end{remark}
+
 \section{Properties of Continuous Points} 
+
+\begin{cor}[Equivalent Criteria for Continuity]{continuity-epsilon-delta}
+  Let \((A,d_A)\) and \((B,d_B)\) be metric spaces, let \(f:A\to B\),
+  and let \(c\in A\). Each of the following conditions is equivalent to
+  \(f\) being \xref[continuous at \(c\)]{def:function-continuity}
+  \begin{enumerate}[nosep]
+    \item The distance condition
+      \[
+        \begin{gathered}
+          \forall\varepsilon\in\apos{\RR},\,\exists\delta\in\apos{\RR},\,
+          \forall x\in A,\\
+          d_A(c,x)<\delta\implies d_B(f(c),f(x))<\varepsilon
+        \end{gathered}
+      \]
+    \item The ball condition, with input balls taken in \(A\) and output balls in \(B\)
+      \[
+        \forall\varepsilon\in\apos{\RR},\,\exists\delta\in\apos{\RR},\,
+        \forall x\in\ball{\delta}{c},\quad f(x)\in\ball{\varepsilon}{f(c)}
+      \]
+  \end{enumerate}
+\end{cor}
+
+\begin{thm}{sequential-criterion-for-continuity}
+$f$ is continous at a point $c$ if and only if for a convergent sequence $a$ having a codomain $A$ 
+\[f(\seqlim(a)) = \seqlim n \map f(a(n))\]
+\end{thm}
+
+\begin{cor}{sequence-test-for-discontinuity}
+$f$ is not continous at $c$ If there exists a sequence $a$ having a codomain $A$ such that 
+\[\seqlim a = c, \, \seqlim n \map f(a(n)) \neq f(c)\]
+\end{cor}
+
+\begin{thm}{arithmetic-of-continuous-functions}
+If $f$, $g$ both continous at a point $c$, then 
+\begin{enumerate}[nosep] 
+  \item $f + g$ is continous at $c$
+  \item $kf$ is continous at $c$ for any constant $k$ 
+  \item $f \cdot g$ is continous at $c$ 
+  \item $\frac{f}{g}$ is continous at $c$ if $g(c) \neq 0$ 
+\end{enumerate}
+\end{thm} 
+
+\begin{proof}
+\todo{Move limit out and use properties of seqlim } 
+\end{proof} 
+
+\begin{thm}{continuity-of-composition}
+If $f$, $g$ both continous at a point $c$, then $f \circ g$ is continous at $c$ 
+\end{thm} 
 
 \section{Continous Functions on Compact Sets} 
 
-\section{Extreme Value Theorem} 
+\begin{thm}[Continuous Images of Compact Sets]{compact-image}
+Let \((X,d_X)\) and \((B,d_B)\) be \xref[metric spaces]{lec03::def:metric-space}.
+If $f: X \to B$ is a \xref[continuous function]{def:continuous-on-set} on a \xref[compact set]{lec03::def:compact-set} $A \subseteq X$, then $\img{f}(A)$ is compact
+\end{thm}
+
+\begin{proof}
+Define any \xref[sequence]{lec01::def:sequence} $y: \NN \to \img{f}(A)$
+
+Accordig to that we can define another sequence $x: \NN \to A$ such that $x \defeq n \map f^{-1}(y(n))$ where $f^{-1}$ is the inverse function of $f$ restricted to $\img{f}(A)$. In other words, $\forall n \in \NNOne, \, f(x(n)) = y(n)$ 
+
+By \xref[sequential compactness]{lec05::thm:sequential-compactness} of $A$,
+take a \xref[subsequence]{lec05::def:subsequence} $k\map x(n(k))$ and a
+point $a\in A$ such that $x(n(k))\to a$, where
+$n:\NNOne\to\NNOne$ is \xref[strictly increasing]{lec04::def:strictly-increasing-sequence}
+
+Given $\varepsilon\in\apos{\RR}$, \xref[continuity at $a$]{def:function-continuity}
+gives $\delta\in\apos{\RR}$ such that for every $u\in A$,
+\[
+  d_X(u,a)<\delta\implies d_B(f(u),f(a))<\varepsilon
+\]
+Since $x(n(k))\to a$, there exists $N\in\NNOne$ such that for every
+$k\in\NNOne$ with $k\geq N$, $d_X(x(n(k)),a)<\delta$. Hence
+\[
+  d_B(y(n(k)),f(a))=d_B(f(x(n(k))),f(a))<\varepsilon
+\]
+Thus $y(n(k))\to f(a)\in\img{f}(A)$. Every sequence in $\img{f}(A)$
+therefore has a subsequence converging to a point of $\img{f}(A)$, so
+\xref[sequential compactness]{lec05::thm:sequential-compactness} shows that
+$\img{f}(A)$ is compact
+\end{proof}
+
+\begin{thm}[Extreme Value Theorem]{extreme-value-theorem}
+If $K \subseteq \RR$ is nonempty and \xref[compact]{lec03::def:compact-set} and $f: K \to \RR$ is \xref[continuous]{def:continuous-on-set}, then there exist points $x_m, x_M \in K$ such that
+\[
+  f(x_m) = \setmin(\img{f}(K)) \quad \text{and} \quad f(x_M) = \setmax(\img{f}(K))
+\]
+\end{thm}
+
+\begin{proof}
+  Put \(S\defeq\img{f}(K)\). By \xref[compactness of continuous images]{thm:compact-image},
+  \(S\) is nonempty and compact. By
+  \xref[attainment of bounds on compact sets]{lec03::cor:compact-real-extrema},
+  \[
+    m\defeq\inf(S)=\setmin(S)\in S,
+    \qquad M\defeq\sup(S)=\setmax(S)\in S
+  \]
+  By the \xref[definition of image]{lec02::def:image},
+  \[
+    \exists x_m,x_M\in K,\quad f(x_m)=m,\quad f(x_M)=M
+  \]
+\end{proof}
 
 \section{Uniform Continuity} 
 
+\begin{dfn}[Uniform Continuity]{uniform-continuity}
+  Let \((X,d_X)\) and \((B,d_B)\) be
+  \xref[metric spaces]{lec03::def:metric-space}, let \(A\subseteq X\),
+  and let \(f:X\to B\). The function \(f\) is \emph{uniformly continuous}
+  on \(A\) if and only if
+  \[
+    \begin{gathered}
+      \forall\varepsilon\in\apos{\RR},\,\exists\delta\in\apos{\RR},\,
+      \forall x,y\in A,\\
+      d_X(x,y)<\delta\implies d_B(f(x),f(y))<\varepsilon
+    \end{gathered}
+  \]
+\end{dfn}
+
+\begin{thm}[Uniform Continuity Implies Continuity]{uniform-continuity-implies-continuity}
+  If \(f\) is \xref[uniformly continuous]{def:uniform-continuity} on \(A\),
+  then its restriction to \(A\) is
+  \xref[continuous]{def:continuous-on-set}
+\end{thm}
+
+\begin{rem}[Dependence of \(\delta\)]{uniform-continuity-delta-dependence}
+  For \xref[continuity on a set]{def:continuous-on-set}, \(\delta\) may
+  depend on both \(\varepsilon\) and the point \(c\): the point is fixed
+  before \(\delta\) is chosen
+
+  For \xref[uniform continuity]{def:uniform-continuity}, \(\delta\) may
+  depend on \(\varepsilon\), but must be chosen before the points.
+  \textbf{For each fixed \(\varepsilon>0\), the same \(\delta>0\) must
+  work for every pair of points in \(A\)}
+\end{rem}
+
+\begin{rem}[Board Comparison]{continuity-uniform-comparison}
+  For \(f:X\to B\) and \(A\subseteq X\), compare continuity of the
+  restriction to \(A\) with uniform continuity on \(A\)
+  \begin{center}
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.6}
+    \begin{tabular}{@{}lcc@{}}
+      & \textbf{Continuity} & \textbf{Uniform Continuity} \\
+      \hline
+      Space
+        & \(\begin{gathered}(X,d_X)\\(B,d_B)\end{gathered}\)
+        & \(\begin{gathered}(X,d_X)\\(B,d_B)\end{gathered}\) \\
+      Quantifier order
+        & \(\begin{gathered}\forall c\in A,\,\forall\varepsilon\in\apos{\RR}\\
+            \exists\delta\in\apos{\RR},\,\forall x\in A\end{gathered}\)
+        & \(\begin{gathered}\forall\varepsilon\in\apos{\RR},\,\exists\delta\in\apos{\RR}\\
+            \forall c,x\in A\end{gathered}\) \\
+      Allowed dependence
+        & \(\delta=\delta(\varepsilon,c)\)
+        & \(\delta=\delta(\varepsilon)\) \\
+      Input restriction
+        & \(d_X(x,c)<\delta\)
+        & \(d_X(x,c)<\delta\) \\
+      Output requirement
+        & \(d_B(f(x),f(c))<\varepsilon\)
+        & \(d_B(f(x),f(c))<\varepsilon\) \\
+    \end{tabular}
+  \end{center}
+\end{rem}
+
+\begin{eg}[Reciprocal Function]{reciprocal-not-uniformly-continuous}
+  The function
+  \[
+    f:(0,1)\to\RR\defeq x\map\frac{1}{x}
+  \]
+  is \xref[continuous]{def:continuous-on-set}, but not
+  \xref[uniformly continuous]{def:uniform-continuity}. Fix
+  \(\varepsilon=1\). For any \(\delta>0\), choose
+  \(0<t<\min(\delta,1/2)\) and put \(x=t\), \(y=2\cdot t\). Then
+  \(x,y\in(0,1)\), but
+  \[
+    \abs{x-y}=t<\delta,
+    \qquad \abs{f(x)-f(y)}=\frac{1}{2\cdot t}>1
+  \]
+  Thus no positive \(\delta\) works for every pair of points when
+  \(\varepsilon=1\). At each fixed point, continuity still allows a
+  positive radius depending on that point and the tolerance
+\end{eg}
+
 \section{Intermediate Value Theorem} 
+
+\begin{thm}[Intermediate Value Theorem]{ivt}
+  Let \(a,b\in\RR\) with \(a<b\), and let \(f:[a,b]\to\RR\) be
+  \xref[continuous]{def:continuous-on-set}. For every \(L\in\RR\),
+  \[
+    \bigl(f(a)<L<f(b)\text{ or }f(b)<L<f(a)\bigr)
+    \implies\exists c\in(a,b),\quad f(c)=L
+  \]
+\end{thm}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{cor}[Fixed Point Theorem for an Interval]{interval-fixed-point}
+  Let \(a,b\in\RR\) with \(a\leq b\). If \(f:[a,b]\to[a,b]\) is
+  \xref[continuous]{def:continuous-on-set}, then
+  \[
+    \exists c\in[a,b],\quad f(c)=c
+  \]
+\end{cor}
+
+\begin{proof}
+  Define $g:[a,b]\to\RR\defeq x\map f(x)-x$. Since $x \map x$ is a
+  \xref[continuous function]{def:continuous-on-set} on the
+  \xref[closed interval]{lec02::def:closed-interval} $[a,b]$, then according
+  to \xref[arithmetic of continuous functions]{thm:arithmetic-of-continuous-functions},
+  $g$ is also continuous on $[a,b]$
+
+  We want to prove that $\exists c\in[a,b],\,g(c)=0$ since
+  $g(c)=0\iff f(c)=c$
+
+  Plug in $a$ and $b$ into $g$,
+  \[g(a) = f(a) - a, \quad g(b) = f(b) - b\]
+
+  Notice that
+  \[\forall x\in[a,b],\quad f(x)\in[a,b]\]
+
+  Then, $g(a)=f(a)-a\geq0$ and $g(b)=f(b)-b\leq0$
+
+  If $g(a)=0$ or $g(b)=0$, the corresponding endpoint is a fixed point.
+  Otherwise, $a<b$ and $g(a)>0>g(b)$. According to the
+  \xref[Intermediate Value Theorem]{thm:ivt}, there exists $c\in(a,b)$
+  such that $g(c)=0$, so the fixed point exists
+\end{proof}
 
 \end{document}

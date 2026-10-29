@@ -605,14 +605,29 @@
 \begin{conv}[Error Bounds for Sequences]{error-bound-method}
   Let \(a:\NNOne\to B\), where \((B,d_B)\) is a
   \xref[metric space]{lec03::def:metric-space}, and let \(\ell\in B\).
-  Find a \xref[challenge function]{lec04::def:convergence-challenge-function}
-  \(g\) bounding the output error on a tail.
-  A direct cutoff is \(k>t\), for \(t>0\).
-  If a separate threshold is useful, choose \(\rho:\apos{\RR}\to\NNOne\) such that
-  \[
-    \forall t\in\apos{\RR},\,\forall k\in\NNOne,\quad
-    k\geq\rho(t)\implies d_B(a(k),\ell)\leq g(t)
-  \]
+  \begin{enumerate}[label=\textbf{Step \arabic*.},leftmargin=*]
+    \item Compute the \emph{error}, the distance from a term to the proposed limit:
+      \[
+        E(n)\defeq d_B(a(n),\ell)
+      \]
+    \item Find an estimate valid for every \(n\in\NNOne\):
+      \[
+        n>s\implies E(n)\leq H(s)
+      \]
+      Note any restrictions on \(s\)
+    \item Choose \(s(t)>0\) satisfying those restrictions for every \(t>0\), and set
+      \[
+        \rho(t)\defeq\floor{s(t)}+1,\qquad g(t)\defeq H(s(t))
+      \]
+      Then \(\rho:\apos{\RR}\to\NNOne\), and
+      \[
+        n\geq\rho(t)\implies n>s(t)\implies E(n)\leq g(t)
+      \]
+    \item Check that \(g\) is a
+      \xref[challenge function]{lec04::def:convergence-challenge-function}.
+      Given \(\varepsilon>0\), choose \(t>0\) with \(g(t)<\varepsilon\);
+      then \(n\geq\rho(t)\) gives \(E(n)\leq g(t)<\varepsilon\), proving convergence to \(\ell\)
+  \end{enumerate}
 \end{conv}
 
 \begin{eg}[Sequence]{error-bound-sequence}
@@ -624,20 +639,33 @@
 \end{eg}
 
 \begin{proof}
-  Assume that $n > t$, then 
-  \[\dist{a(n)}{0} = \abs{\frac{1}{n} - 0} = \frac{1}{n} < \frac{1}{t}\]
-
-  Define a challenge function 
-  \[g:\apos{\RR}\to\apos{\RR} \defeq t\map\frac{1}{t}\] 
-
-  Since there have no restriction on $t$, so we can define a threshold function
-  \[\rho = t \map g(t) \]
-
-  Then 
-  \[\forall \varepsilon, \, \forall n > \rho(\varepsilon), \, d_B(a(n), 0) \leq g(\varepsilon)\] 
-
-  Since $g$ is a challenge function, we can conclude 
-  \[\seqlim(a) = 0\] 
+  \begin{enumerate}[label=\textbf{Step \arabic*.},leftmargin=*]
+    \item The proposed limit is \(0\), so for \(n\in\NNOne\),
+      \[
+        E(n)\defeq\dist{a(n)}{0}=\abs{\frac{1}{n}-0}=\frac{1}{n}
+      \]
+    \item For \(n>s>0\),
+      \[
+        E(n)=\frac{1}{n}<\frac{1}{s}
+      \]
+      Thus take \(H(s)\defeq1/s\), with restriction \(s>0\)
+    \item Choose \(s(t)\defeq t\), and define
+      \[
+        \rho:\apos{\RR}\to\NNOne\defeq t\map\floor{t}+1,
+        \qquad
+        g:\apos{\RR}\to\apos{\RR}\defeq t\map\frac{1}{t}
+      \]
+      Then \(n\geq\rho(t)\) implies \(n>t\), so
+      \[
+        \forall t\in\apos{\RR},\,\forall n\in\NNOne,\quad
+        n\geq\rho(t)\implies E(n)<g(t)
+      \]
+    \item By the \xref[reciprocal lemma]{lec04::lem:reciprocal-is-challenge},
+      \(g\) is a challenge function, so
+      \[
+        \seqlim(a)=0
+      \]
+  \end{enumerate}
 \end{proof}
 
 \begin{eg}[Sequence with a Threshold Function]{error-bound-sequence-helper}
@@ -647,13 +675,19 @@
   \]
   Show that \(\seqlim(a)=0\) by choosing a challenge function \(g\)
   and a threshold function \(\rho:\apos{\RR}\to\NNOne\)
-
-  Assume that $n > t$, then 
-  \[\dist{a(n)}{0} = \abs{\frac{1}{n^2 - 2} - 0} = \frac{1}{n^2 - 2} < \frac{1}{t^2 - 2}\]
 \end{eg}
 
 \begin{proof}
-  \todo
+  \begin{enumerate}[label=\textbf{Step \arabic*.},leftmargin=*]
+    \item The proposed limit is \(0\), so for \(n\in\NNOne\),
+      \[
+        E(n)\defeq\dist{a(n)}{0}
+        =\abs{\frac{1}{n^2-2}-0}=\abs{\frac{1}{n^2-2}}
+      \]
+    \item \todo
+    \item \todo
+    \item \todo
+  \end{enumerate}
 \end{proof}
 
 \begin{conv}[Error Bounds at Infinity]{error-bound-infinity}

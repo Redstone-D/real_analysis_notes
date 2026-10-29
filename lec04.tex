@@ -553,6 +553,65 @@ Since $\term{a}{n}/\term{b}{n}=\term{a}{n}\cdot\term{p}{n}$ for every $n\in\NNOn
   \]
 \end{thm}
 
+\begin{lem}[Shifting a Convergent Sequence]{limit-index-shift}
+  Let \(a:\Conv(F)\), where \(F\) is an
+  \xref[ordered field]{lec01::def:ordered-field}, and let \(r\in\NN\).
+  Then \(n\map a(n+r)\) is \xref[convergent]{def:convergent-sequence}, and
+  \[
+    \seqlim(n\map a(n+r))=\seqlim(a)
+  \]
+\end{lem}
+
+\begin{proof}
+  For any \(\varepsilon>0\), choose \(N\) for \(a\).
+  If \(n\geq N\), then \(n+r\geq N\), so
+  \(\abs{a(n+r)-\seqlim(a)}<\varepsilon\)
+\end{proof}
+
+\begin{thm}[Absolute Values of Limits]{limit-absolute-value}
+  Let \(a:\Conv(F)\), where \(F\) is an
+  \xref[ordered field]{lec01::def:ordered-field}. Then
+  \[
+    \seqlim(n\map\abs{a(n)})=\abs{\seqlim(a)}
+  \]
+\end{thm}
+
+\begin{proof}
+  The triangle inequality in both directions gives
+  \[
+    \abs{\abs{a(n)}-\abs{\seqlim(a)}}
+    \leq\abs{a(n)-\seqlim(a)}
+  \]
+  Thus the same \(N\) works in the definition of the limit
+\end{proof}
+
+\begin{thm}[Maxima of Limits]{limit-maximum}
+  Let \(a,b:\Conv(F)\), where \(F\) is an
+  \xref[ordered field]{lec01::def:ordered-field}. Then
+  \[
+    \seqlim(n\map\max(a(n),b(n)))=\max(\seqlim(a),\seqlim(b))
+  \]
+\end{thm}
+
+\begin{proof}
+  Use \(\max(x,y)=(x+y+\abs{x-y})/2\),
+  \xref[linearity]{thm:limit-linearity}, and
+  \xref[the absolute-value limit rule]{thm:limit-absolute-value}
+\end{proof}
+
+\begin{cor}[Minima of Limits]{limit-minimum}
+  Under the same assumptions,
+  \[
+    \seqlim(n\map\min(a(n),b(n)))=\min(\seqlim(a),\seqlim(b))
+  \]
+\end{cor}
+
+\begin{proof}
+  Apply \xref[the maximum rule]{thm:limit-maximum} to
+  \(n\map-a(n)\) and \(n\map-b(n)\), using
+  \(\min(x,y)=-\max(-x,-y)\)
+\end{proof}
+
 \begin{thm}[Sequence Characterization of Limit Points]{limit-point-sequence}
   Let \((X,d)\) be a \xref[metric space]{lec03::def:metric-space},
   let \(A\subseteq X\), and let \(x\in X\).
